@@ -44,6 +44,38 @@
             z-index: 9998; 
             transition: all 0.6s ease; 
         }
+
+        /* Dropdown Styles */
+        .dropdown { position: relative; display: inline-block; }
+        .dropdown-content { 
+            position: absolute; 
+            top: 100%; 
+            left: 0; 
+            background: rgba(10, 10, 10, 0.95); 
+            backdrop-filter: blur(20px); 
+            border: 1px solid #333; 
+            border-radius: 8px; 
+            padding: 1rem 0; 
+            min-width: 200px; 
+            opacity: 0; 
+            visibility: hidden; 
+            transform: translateY(-10px); 
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1); 
+        }
+        .dropdown:hover .dropdown-content { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-content a { 
+            display: block; 
+            padding: 0.5rem 1.5rem; 
+            color: white; 
+            text-decoration: none; 
+            transition: all 0.3s ease; 
+            border-left: 3px solid transparent; 
+        }
+        .dropdown-content a:hover { 
+            background: rgba(255, 255, 255, 0.1); 
+            border-left: 3px solid #ff0055; 
+            padding-left: 2rem; 
+        }
     </style>
 </head>
 <body>
@@ -53,14 +85,29 @@
 
     <!-- Navigation -->
     <nav style="position: fixed; top: 0; width: 100%; padding: 2rem; z-index: 100; display: flex; justify-content: space-between; align-items: center; mix-blend-mode: difference;">
-        <div style="font-family: 'Futura', sans-serif; font-weight: 900; font-size: 1.5rem; color: white;">
-            BRADSHERMAN.DESIGN
+        <div style="font-family: 'Futura', sans-serif; font-weight: 900; font-size: 1.2rem; color: white;">
+            PORTFOLIO 2025
         </div>
-        <div style="display: flex; gap: 2rem;">
-            <a href="#work" style="color: white; text-decoration: none; font-weight: 600; position: relative;">
-                WORK
-                <span style="position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #ff0055; transition: width 0.3s;"></span>
-            </a>
+        <div style="display: flex; gap: 2rem; align-items: center;">
+            <div class="dropdown">
+                <a href="#work" style="color: white; text-decoration: none; font-weight: 600; position: relative; cursor: pointer;">
+                    WORK
+                    <span style="position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #ff0055; transition: width 0.3s;"></span>
+                </a>
+                <div class="dropdown-content">
+                    <a href="campaigns.html">Campaigns</a>
+                    <a href="typography.html">Typography</a>
+                    <a href="brands.html">Brands</a>
+                    <a href="graphics-italy-2025.html">Graphics Italy 2025</a>
+                    <a href="graphics.html">Graphics</a>
+                    <a href="websites.html">Websites</a>
+                    <a href="painting.html">Painting</a>
+                    <a href="woodworking.html">Woodworking</a>
+                    <a href="drawing.html">Drawing</a>
+                    <a href="photography.html">Photography</a>
+                    <a href="3d.html">3D</a>
+                </div>
+            </div>
             <a href="#about" style="color: white; text-decoration: none; font-weight: 600; position: relative;">
                 ABOUT
                 <span style="position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #00ffff; transition: width 0.3s;"></span>
@@ -77,18 +124,24 @@
         <!-- Animated Background -->
         <div class="animated-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(45deg, #ff0055, #00ffff, #ffaa00); opacity: 0.1; filter: blur(100px);"></div>
         
-        <!-- Interactive Slideshow -->
-        <div class="slideshow" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex;">
-            <div class="slide" style="flex: 1; background: linear-gradient(45deg, #ff0055, transparent); transform: skewX(-10deg) translateX(-100%); transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);"></div>
-            <div class="slide" style="flex: 1; background: linear-gradient(45deg, #00ffff, transparent); transform: skewX(-10deg) translateX(-100%); transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1) 0.1s;"></div>
-            <div class="slide" style="flex: 1; background: linear-gradient(45deg, #ffaa00, transparent); transform: skewX(-10deg) translateX(-100%); transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1) 0.2s;"></div>
+        <!-- Horizontal Slideshow -->
+        <div class="horizontal-slideshow" style="position: absolute; top: 0; left: 0; width: 300%; height: 100%; display: flex; transition: transform 0.1s ease-out;">
+            <div class="horizontal-slide" style="width: 33.333%; height: 100%; background: linear-gradient(45deg, #ff0055, #990033); display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: bold; color: white;">
+                IMAGE 1
+            </div>
+            <div class="horizontal-slide" style="width: 33.333%; height: 100%; background: linear-gradient(45deg, #00ffff, #0066cc); display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: bold; color: white;">
+                IMAGE 2
+            </div>
+            <div class="horizontal-slide" style="width: 33.333%; height: 100%; background: linear-gradient(45deg, #ffaa00, #cc6600); display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: bold; color: white;">
+                IMAGE 3
+            </div>
         </div>
 
         <!-- Floating Particles -->
         <div class="particles" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
 
         <!-- Main Name -->
-        <div class="name-container" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 66%; display: flex; align-items: flex-end; padding: 0 5%;">
+        <div class="name-container" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 66%; display: flex; align-items: flex-end; padding: 0 5%; pointer-events: none;">
             <h1 class="main-name" style="font-family: 'Futura', sans-serif; font-size: 18vw; font-weight: 900; color: white; line-height: 0.8; margin: 0; text-transform: uppercase; letter-spacing: -3px; transform: translateY(100px); opacity: 0; transition: all 1.5s cubic-bezier(0.23, 1, 0.32, 1);">
                 BRAD<br>SHERMAN
             </h1>
@@ -129,23 +182,53 @@
             }, 100);
         });
 
-        // Interactive Slideshow
-        document.addEventListener('mousemove', (e) => {
-            const mouseX = e.clientX / window.innerWidth;
-            const mouseY = e.clientY / window.innerHeight;
-            
-            const slides = document.querySelectorAll('.slide');
-            slides.forEach((slide, index) => {
-                const moveX = (mouseX - 0.5) * 100 * (index + 1);
-                const moveY = (mouseY - 0.5) * 50 * (index + 1);
-                slide.style.transform = `skewX(-10deg) translateX(calc(-100% + ${moveX}px)) translateY(${moveY}px)`;
-            });
+        // Horizontal Slideshow with Mouse Y Movement
+        const slideshow = document.querySelector('.horizontal-slideshow');
+        let isScrolling = false;
+        let scrollTimeout;
 
-            // Name parallax
-            const name = document.querySelector('.main-name');
-            const nameX = (mouseX - 0.5) * 20;
-            const nameY = (mouseY - 0.5) * 10;
-            name.style.transform = `translateY(0) translateX(${nameX}px) translateY(${nameY}px)`;
+        function updateSlideshowPosition(yPercent) {
+            // Map mouse Y position (0-100%) to slideshow position (0% to -66.666%)
+            const slideshowPosition = -(yPercent * 0.66666);
+            slideshow.style.transform = `translateX(${slideshowPosition}%)`;
+        }
+
+        // Desktop: Mouse move control
+        document.addEventListener('mousemove', (e) => {
+            if (window.innerWidth > 768) { // Only on desktop
+                const mouseY = e.clientY / window.innerHeight; // 0 to 1
+                updateSlideshowPosition(mouseY);
+            }
+        });
+
+        // Mobile: Scroll control
+        let touchStartY = 0;
+        let currentSlidePosition = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            if (window.innerWidth <= 768) {
+                touchStartY = e.touches[0].clientY;
+            }
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                const touchY = e.touches[0].clientY;
+                const deltaY = touchY - touchStartY;
+                const scrollPercent = Math.min(Math.max(deltaY / window.innerHeight, 0), 1);
+                updateSlideshowPosition(scrollPercent);
+            }
+        });
+
+        // Scroll detection for mobile
+        window.addEventListener('scroll', () => {
+            if (window.innerWidth <= 768) {
+                const scrollY = window.scrollY;
+                const maxScroll = 300; // Max scroll distance for full slideshow movement
+                const scrollPercent = Math.min(scrollY / maxScroll, 1);
+                updateSlideshowPosition(scrollPercent);
+            }
         });
 
         // Animate name on load
@@ -155,14 +238,6 @@
                 name.style.opacity = '1';
                 name.style.transform = 'translateY(0)';
             }, 500);
-
-            // Animate slides in
-            const slides = document.querySelectorAll('.slide');
-            slides.forEach((slide, index) => {
-                setTimeout(() => {
-                    slide.style.transform = 'skewX(-10deg) translateX(0)';
-                }, 1000 + (index * 200));
-            });
         });
 
         // Create floating particles
@@ -198,6 +273,16 @@
             });
         }
 
+        // Navigation hover effects
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                link.querySelector('span').style.width = '100%';
+            });
+            link.addEventListener('mouseleave', () => {
+                link.querySelector('span').style.width = '0';
+            });
+        });
+
         // Initialize
         createParticles();
         window.addEventListener('scroll', checkScroll);
@@ -221,12 +306,23 @@
                 100% { transform: translateY(100%); }
             }
             
-            nav a:hover span { width: 100%; }
-            
             .work-item { 
                 opacity: 0; 
                 transform: translateY(50px); 
                 transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1); 
+            }
+
+            /* Mobile responsiveness */
+            @media (max-width: 768px) {
+                nav { padding: 1rem; }
+                .main-name { font-size: 15vw; }
+                .dropdown-content { 
+                    position: fixed; 
+                    top: 80px; 
+                    left: 1rem; 
+                    right: 1rem; 
+                    min-width: auto; 
+                }
             }
         `;
         document.head.appendChild(style);
