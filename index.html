@@ -119,20 +119,20 @@
         </div>
     </nav>
 
-    <!-- Hero Section with Interactive Slideshow -->
+      <!-- Hero Section with Interactive Slideshow -->
     <section class="hero" style="height: 100vh; position: relative; overflow: hidden;">
         <!-- Animated Background -->
         <div class="animated-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(45deg, #ff0055, #00ffff, #ffaa00); opacity: 0.1; filter: blur(100px);"></div>
         
-        <!-- Horizontal Slideshow - 4 Images - NO GAPS -->
-        <div class="horizontal-slideshow" style="position: absolute; top: 0; left: 0; width: 400%; height: 100%; display: flex; transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);">
-            <div class="horizontal-slide" style="width: 25%; height: 100%; background-image: url('images_1/house.jpeg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        <!-- Horizontal Slideshow - 4 Images - ABSOLUTELY NO GAPS -->
+        <div class="horizontal-slideshow" style="position: absolute; top: 0; left: 0; width: 400vw; height: 100%; display: flex; transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);">
+            <div class="horizontal-slide" style="width: 100vw; height: 100%; background-image: url('images_1/cap.png'); background-size: cover; background-position: center; flex-shrink: 0; margin: 0; padding: 0; display: block;">
             </div>
-            <div class="horizontal-slide" style="width: 25%; height: 100%; background-image: url('images_1/cap.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+            <div class="horizontal-slide" style="width: 100vw; height: 100%; background-image: url('images_1/house.jpeg'); background-size: cover; background-position: center; flex-shrink: 0; margin: 0; padding: 0; display: block;">
             </div>
-            <div class="horizontal-slide" style="width: 25%; height: 100%; background-image: url('images_1/4.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+            <div class="horizontal-slide" style="width: 100vw; height: 100%; background-image: url('images_1/4.png'); background-size: cover; background-position: center; flex-shrink: 0; margin: 0; padding: 0; display: block;">
             </div>
-            <div class="horizontal-slide" style="width: 25%; height: 100%; background-image: url('images_1/top f.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+            <div class="horizontal-slide" style="width: 100vw; height: 100%; background-image: url('images_1/top f.png'); background-size: cover; background-position: center; flex-shrink: 0; margin: 0; padding: 0; display: block;">
             </div>
         </div>
 
@@ -144,17 +144,6 @@
             <h1 class="main-name" style="font-family: 'Futura', sans-serif; font-size: 18vw; font-weight: 900; color: white; line-height: 0.8; margin: 0; text-transform: uppercase; letter-spacing: -3px; transform: translateY(100px); opacity: 0; transition: all 1.5s cubic-bezier(0.23, 1, 0.32, 1); mix-blend-mode: difference;">
                 BRAD<br>SHERMAN
             </h1>
-        </div>
-    </section>
-
-    <!-- Work Section -->
-    <section id="work" style="min-height: 100vh; padding: 10% 5%; position: relative; background: #0a0a0a;">
-        <h2 style="font-family: 'Futura', sans-serif; font-size: 4rem; margin-bottom: 4rem; color: white; opacity: 0; transform: translateY(50px);">
-            SELECTED WORK
-        </h2>
-        
-        <div class="work-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-            <!-- Work items will be added here -->
         </div>
     </section>
 
@@ -176,12 +165,13 @@
         // Horizontal Slideshow with Mouse Y Movement - 4 Images
         const slideshow = document.querySelector('.horizontal-slideshow');
         
-        function updateSlideshowPosition(yPercent) {
-            // Map mouse Y position (0-100%) to slideshow position (0% to -300%)
-            const totalMovement = 300; // 400% width - 100% viewport = 300% movement needed
-            const slideshowPosition = -(yPercent * totalMovement * 0.25); // 4x slower (0.25 = 1/4 speed)
-            slideshow.style.transform = `translateX(${slideshowPosition}%)`;
-        }
+     function updateSlideshowPosition(yPercent) {
+    // Map mouse Y position (0-100%) to slideshow position (0% to -300vw)
+    // We have 4 images at 100vw each, so we need to move 300vw to show all images
+    const totalMovement = 300; // 400vw width - 100vw viewport = 300vw movement needed
+    const slideshowPosition = -(yPercent * totalMovement * 0.25); // 4x slower (0.25 = 1/4 speed)
+    slideshow.style.transform = `translateX(${slideshowPosition}vw)`;
+}
 
         // Desktop: Mouse move control
         document.addEventListener('mousemove', (e) => {
