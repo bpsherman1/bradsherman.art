@@ -162,6 +162,31 @@
     </section>
 
     <script>
+
+        // Force Brad Sherman text to stay inverted on mobile
+function forceInversion() {
+    if (window.innerWidth <= 768) {
+        const name = document.querySelector('.main-name');
+        // Remove any styles that might override inversion
+        name.style.color = 'transparent';
+        name.style.mixBlendMode = 'difference';
+        
+        // Continuously check and re-apply (in case something overrides it)
+        setInterval(() => {
+            if (name.style.mixBlendMode !== 'difference') {
+                name.style.mixBlendMode = 'difference';
+            }
+            if (name.style.color !== 'transparent') {
+                name.style.color = 'transparent';
+            }
+        }, 100);
+    }
+}
+
+// Run on load and resize
+window.addEventListener('load', forceInversion);
+window.addEventListener('resize', forceInversion);
+        
         // Custom Cursor - Hide on mobile
         const cursor = document.querySelector('.cursor');
         const follower = document.querySelector('.cursor-follower');
@@ -348,114 +373,109 @@
                 flex-shrink: 0;
             }
 
-            /* Hide cursor on mobile */
-            @media (max-width: 768) {
-                .cursor, .cursor-follower {
-                    display: none !important;
-                }
-            }
+           /* Mobile responsiveness - FIXED VERSION */
+@media (max-width: 768px) {
+    nav { 
+        padding: 0.5rem 1rem !important;
+    }
+    .main-name { 
+        font-size: 15vw; 
+        mix-blend-mode: difference !important; /* Force inversion to stay */
+        color: transparent !important; /* Force inversion to work */
+    }
+    
+    /* FIXED DROPDOWN - ACTUALLY BLACK */
+    .dropdown-content { 
+        position: fixed !important; 
+        top: 90px !important;
+        right: 1rem !important;
+        left: auto !important;
+        transform: translateY(-10px) !important;
+        width: 45% !important;
+        min-width: unset !important;
+        background: #000000 !important; /* SOLID BLACK - NO TRANSPARENCY */
+        border: none !important;
+        padding: 0.5rem 0 !important;
+        max-height: 60vh;
+        overflow-y: auto;
+        mix-blend-mode: normal !important; /* NO INVERTED COLORS */
+        backdrop-filter: none !important; /* NO BLUR EFFECT */
+        opacity: 0.98 !important; /* SOLID BLACK */
+    }
+    .dropdown:hover .dropdown-content {
+        transform: translateY(0) !important;
+    }
+    .dropdown-content a {
+        padding: 0.4rem 1rem !important;
+        font-size: 0.8rem !important;
+        color: #ffffff !important; /* White text */
+        text-align: right !important; /* Right aligned */
+        mix-blend-mode: normal !important; /* NO TEXT INVERTING */
+        border-left: none !important;
+        font-weight: 600 !important;
+        background: transparent !important;
+    }
+    .dropdown-content a:hover {
+        background: rgba(255, 255, 255, 0.2) !important;
+        padding-right: 1.5rem !important;
+    }
+    
+    .nav-links {
+        gap: 0.6rem !important;
+        margin-top: -5px;
+    }
+    nav a {
+        font-size: 0.8rem !important;
+    }
+    .logo {
+        font-size: 0.9rem !important;
+        margin-top: -5px;
+    }
+    
+    /* HIDE CURSOR ON MOBILE */
+    .cursor, .cursor-follower {
+        display: none !important;
+    }
+}
 
-            /* FIXED: Brad Sherman stays inverted */
-            .main-name {
-                mix-blend-mode: difference !important;
-            }
+@media (max-width: 480px) {
+    nav {
+        padding: 0.4rem 0.8rem !important;
+    }
+    nav a {
+        font-size: 0.75rem !important;
+    }
+    .logo {
+        font-size: 0.85rem !important;
+    }
+    .nav-links {
+        gap: 0.5rem !important;
+        margin-top: -8px;
+    }
+    .dropdown-content {
+        top: 85px !important;
+        width: 50% !important;
+        padding: 0.4rem 0 !important;
+    }
+    .dropdown-content a {
+        padding: 0.3rem 0.8rem !important;
+        font-size: 0.75rem !important;
+    }
+}
 
-            /* FIXED: Mobile dropdown - SOLID BLACK background */
-            @media (max-width: 768) {
-                nav { 
-                    padding: 0.5rem 1rem !important;
-                }
-                .main-name { 
-                    font-size: 15vw; 
-                    mix-blend-mode: difference !important;
-                }
-                
-                /* DROPDOWN FIXES */
-                .dropdown-content { 
-                    position: fixed !important; 
-                    top: 90px !important;
-                    right: 1rem !important;
-                    left: auto !important;
-                    transform: translateY(-10px) !important;
-                    width: 45% !important;
-                    min-width: unset !important;
-                    background: #000000 !important; /* SOLID BLACK */
-                    border: none !important;
-                    padding: 0.5rem 0 !important;
-                    max-height: 60vh;
-                    overflow-y: auto;
-                    mix-blend-mode: normal !important; /* Remove inversion from container */
-                    backdrop-filter: none !important; /* Remove blur */
-                }
-                .dropdown:hover .dropdown-content {
-                    transform: translateY(0) !important;
-                }
-                .dropdown-content a {
-                    padding: 0.4rem 1rem !important;
-                    font-size: 0.8rem !important;
-                    color: #ffffff !important; /* White text */
-                    text-align: right !important; /* Right aligned */
-                    mix-blend-mode: difference !important; /* Text gets inverted */
-                    border-left: none !important;
-                    font-weight: 600 !important;
-                    background: transparent !important;
-                }
-                .dropdown-content a:hover {
-                    background: rgba(255, 255, 255, 0.2) !important;
-                    padding-right: 1.5rem !important;
-                }
-                
-                .nav-links {
-                    gap: 0.6rem !important;
-                    margin-top: -5px;
-                }
-                nav a {
-                    font-size: 0.8rem !important;
-                }
-                .logo {
-                    font-size: 0.9rem !important;
-                    margin-top: -5px;
-                }
-            }
-
-            @media (max-width: 480px) {
-                nav {
-                    padding: 0.4rem 0.8rem !important;
-                }
-                nav a {
-                    font-size: 0.75rem !important;
-                }
-                .logo {
-                    font-size: 0.85rem !important;
-                }
-                .nav-links {
-                    gap: 0.5rem !important;
-                    margin-top: -8px;
-                }
-                .dropdown-content {
-                    top: 85px !important;
-                    width: 50% !important;
-                    padding: 0.4rem 0 !important;
-                }
-                .dropdown-content a {
-                    padding: 0.3rem 0.8rem !important;
-                    font-size: 0.75rem !important;
-                }
-            }
-
-            @media (max-width: 360px) {
-                .nav-links {
-                    gap: 0.4rem !important;
-                    margin-top: -10px;
-                }
-                nav a {
-                    font-size: 0.7rem !important;
-                }
-                .dropdown-content {
-                    top: 80px !important;
-                    width: 55% !important;
-                }
-            }
+@media (max-width: 360px) {
+    .nav-links {
+        gap: 0.4rem !important;
+        margin-top: -10px;
+    }
+    nav a {
+        font-size: 0.7rem !important;
+    }
+    .dropdown-content {
+        top: 80px !important;
+        width: 55% !important;
+    }
+}
         `;
         document.head.appendChild(style);
     </script>
