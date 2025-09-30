@@ -178,17 +178,15 @@
 
         // Horizontal Slideshow with Mouse Y Movement - 4 Images
         const slideshow = document.querySelector('.horizontal-slideshow');
-        let isDragging = false;
-        let startX = 0;
-        let currentTranslate = 0;
-        let previousTranslate = 0;
+        let touchStartX = 0;
+        let currentPosition = 0;
         
         function updateSlideshowPosition(yPercent) {
             // Map mouse Y position (0-100%) to slideshow position (0% to -300%)
             const totalMovement = 300; // 400% width - 100% viewport = 300% movement needed
             const slideshowPosition = -(yPercent * totalMovement * 0.25); // 4x slower (0.25 = 1/4 speed)
             slideshow.style.transform = `translateX(${slideshowPosition}%)`;
-            currentTranslate = slideshowPosition;
+            currentPosition = slideshowPosition;
         }
 
         // Desktop: Mouse move control
@@ -199,39 +197,43 @@
             }
         });
 
-        // Mobile: Touch swipe for slideshow
+        // Mobile: Touch swipe for slideshow - SIMPLE VERSION
+        let startX = 0;
+        let currentTranslate = 0;
+
         slideshow.addEventListener('touchstart', (e) => {
             if (window.innerWidth <= 768) {
-                isDragging = true;
                 startX = e.touches[0].clientX;
                 slideshow.style.transition = 'none';
             }
         });
 
         slideshow.addEventListener('touchmove', (e) => {
-            if (isDragging && window.innerWidth <= 768) {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
                 const currentX = e.touches[0].clientX;
                 const diff = startX - currentX;
-                const slideshowPosition = Math.min(Math.max(currentTranslate + (diff / window.innerWidth) * 100, -300), 0);
-                slideshow.style.transform = `translateX(${slideshowPosition}%)`;
+                // Move slideshow based on swipe distance
+                const newPosition = Math.min(Math.max(currentTranslate + (diff / window.innerWidth) * 100, -300), 0);
+                slideshow.style.transform = `translateX(${newPosition}%)`;
             }
         });
 
-        slideshow.addEventListener('touchend', () => {
-            if (isDragging && window.innerWidth <= 768) {
-                isDragging = false;
+        slideshow.addEventListener('touchend', (e) => {
+            if (window.innerWidth <= 768) {
                 slideshow.style.transition = 'transform 0.8s cubic-bezier(0.23, 1, 0.32, 1)';
-                currentTranslate = parseFloat(slideshow.style.transform.replace('translateX(', '').replace('%)', ''));
+                currentTranslate = parseFloat(slideshow.style.transform.replace('translateX(', '').replace('%)', '')) || 0;
             }
         });
 
         // Mobile: Scroll control - Faster than before but slower than original
         window.addEventListener('scroll', () => {
-            if (window.innerWidth <= 768 && !isDragging) {
+            if (window.innerWidth <= 768) {
                 const scrollY = window.scrollY;
                 const maxScroll = window.innerHeight * 1.5; // Scroll through 1.5x viewport height to complete slideshow (faster than 3x)
                 const scrollPercent = Math.min(scrollY / maxScroll, 1);
                 updateSlideshowPosition(scrollPercent);
+                currentTranslate = -(scrollPercent * 300 * 0.25);
             }
         });
 
@@ -344,7 +346,7 @@
             /* Mobile responsiveness */
             @media (max-width: 768px) {
                 nav { 
-                    padding: 1rem; 
+                    padding: 0.5rem 1rem !important; /* Move nav higher up */
                 }
                 .main-name { 
                     font-size: 15vw; 
@@ -352,28 +354,37 @@
                 }
                 .dropdown-content { 
                     position: fixed; 
-                    top: 70px; 
+                    top: 90px !important; /* Move dropdown further down */
                     left: 1rem; 
                     right: 1rem; 
                     min-width: auto; 
                     mix-blend-mode: difference !important;
+                    padding: 0.5rem 0 !important; /* Make dropdown smaller */
+                    max-height: 60vh; /* Limit height */
+                    overflow-y: auto; /* Make scrollable if needed */
+                }
+                .dropdown-content a {
+                    padding: 0.4rem 1rem !important; /* Smaller padding */
+                    font-size: 0.8rem !important; /* Smaller text */
                 }
                 /* Make nav text smaller and closer together on mobile */
                 .nav-links {
                     gap: 0.6rem !important;
+                    margin-top: -5px; /* Move WORK ABOUT CONTACT higher */
                 }
                 nav a {
                     font-size: 0.8rem !important;
                 }
                 .logo {
                     font-size: 0.9rem !important;
+                    margin-top: -5px; /* Move PORTFOLIO 2025 higher */
                 }
             }
 
             /* Extra small screens */
             @media (max-width: 480px) {
                 nav {
-                    padding: 0.8rem;
+                    padding: 0.4rem 0.8rem !important;
                 }
                 nav a {
                     font-size: 0.75rem !important;
@@ -383,9 +394,15 @@
                 }
                 .nav-links {
                     gap: 0.5rem !important;
+                    margin-top: -8px; /* Move even higher on small screens */
                 }
                 .dropdown-content {
-                    top: 65px;
+                    top: 85px !important;
+                    padding: 0.4rem 0 !important;
+                }
+                .dropdown-content a {
+                    padding: 0.3rem 0.8rem !important;
+                    font-size: 0.75rem !important;
                 }
             }
 
@@ -393,9 +410,13 @@
             @media (max-width: 360px) {
                 .nav-links {
                     gap: 0.4rem !important;
+                    margin-top: -10px;
                 }
                 nav a {
                     font-size: 0.7rem !important;
+                }
+                .dropdown-content {
+                    top: 80px !important;
                 }
             }
         `;
