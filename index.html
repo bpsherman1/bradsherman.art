@@ -125,7 +125,7 @@
         <div class="animated-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(45deg, #ff0055, #00ffff, #ffaa00); opacity: 0.1; filter: blur(100px);"></div>
         
         <!-- Horizontal Slideshow - 4 Images -->
-        <div class="horizontal-slideshow" style="position: absolute; top: 0; left: 0; width: 400%; height: 100%; display: flex; transition: transform 0.1s ease-out;">
+        <div class="horizontal-slideshow" style="position: absolute; top: 0; left: 0; width: 400%; height: 100%; display: flex; transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);">
             <div class="horizontal-slide" style="width: 25%; height: 100%; background-image: url('images_1/4.png'); background-size: cover; background-position: center;">
             </div>
             <div class="horizontal-slide" style="width: 25%; height: 100%; background-image: url('images_1/cap.png'); background-size: cover; background-position: center;">
@@ -141,7 +141,7 @@
 
         <!-- Main Name -->
         <div class="name-container" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 66%; display: flex; align-items: flex-end; padding: 0 5%; pointer-events: none;">
-            <h1 class="main-name" style="font-family: 'Futura', sans-serif; font-size: 18vw; font-weight: 900; color: white; line-height: 0.8; margin: 0; text-transform: uppercase; letter-spacing: -3px; transform: translateY(100px); opacity: 0; transition: all 1.5s cubic-bezier(0.23, 1, 0.32, 1);">
+            <h1 class="main-name" style="font-family: 'Futura', sans-serif; font-size: 18vw; font-weight: 900; color: white; line-height: 0.8; margin: 0; text-transform: uppercase; letter-spacing: -3px; transform: translateY(100px); opacity: 0; transition: all 1.5s cubic-bezier(0.23, 1, 0.32, 1); mix-blend-mode: difference;">
                 BRAD<br>SHERMAN
             </h1>
         </div>
@@ -177,9 +177,10 @@
         const slideshow = document.querySelector('.horizontal-slideshow');
         
         function updateSlideshowPosition(yPercent) {
-            // Map mouse Y position (0-100%) to slideshow position (0% to -75%)
-            // -75% because we have 4 images (100% - 25% = 75% max scroll)
-            const slideshowPosition = -(yPercent * 0.75);
+            // Map mouse Y position (0-100%) to slideshow position (0% to -300%)
+            // We have 4 images, so we need to move 300% to show all images
+            const totalMovement = 300; // 400% width - 100% viewport = 300% movement needed
+            const slideshowPosition = -(yPercent * totalMovement);
             slideshow.style.transform = `translateX(${slideshowPosition}%)`;
         }
 
@@ -192,23 +193,19 @@
         });
 
         // Mobile: Scroll control
-        let touchStartY = 0;
-        let currentScrollPosition = 0;
-
-        document.addEventListener('touchstart', (e) => {
-            if (window.innerWidth <= 768) {
-                touchStartY = e.touches[0].clientY;
-                currentScrollPosition = window.scrollY;
-            }
-        });
-
-        // Mobile scroll detection
         window.addEventListener('scroll', () => {
             if (window.innerWidth <= 768) {
                 const scrollY = window.scrollY;
-                const maxScroll = 500; // Increased for more slide movement
+                const maxScroll = window.innerHeight * 0.8; // Scroll through 80% of viewport height
                 const scrollPercent = Math.min(scrollY / maxScroll, 1);
                 updateSlideshowPosition(scrollPercent);
+            }
+        });
+
+        // Reset slideshow position when scrolling back to top
+        window.addEventListener('scroll', () => {
+            if (window.scrollY === 0) {
+                slideshow.style.transform = 'translateX(0%)';
             }
         });
 
