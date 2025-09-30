@@ -255,12 +255,14 @@
             }
         });
 
-        // Animate name on load
+        // Animate name on load - KEEP mix-blend-mode ALWAYS
         window.addEventListener('load', () => {
             const name = document.querySelector('.main-name');
             setTimeout(() => {
                 name.style.opacity = '1';
                 name.style.transform = 'translateY(0)';
+                // Ensure mix-blend-mode stays on
+                name.style.mixBlendMode = 'difference';
             }, 500);
         });
 
@@ -344,7 +346,7 @@
             }
 
             /* Hide cursor on mobile */
-            @media (max-width: 768px) {
+            @media (max-width: 768) {
                 .cursor, .cursor-follower {
                     display: none !important;
                 }
@@ -361,43 +363,45 @@
             }
 
             /* Mobile responsiveness */
-            @media (max-width: 768px) {
+            @media (max-width: 768) {
                 nav { 
                     padding: 0.5rem 1rem !important;
                 }
                 .main-name { 
                     font-size: 15vw; 
-                    mix-blend-mode: difference !important;
+                    mix-blend-mode: difference !important; /* Force inversion to stay */
                 }
                 .dropdown-content { 
                     position: fixed !important; 
                     top: 90px !important;
-                    left: 50% !important;
-                    transform: translateX(-50%) translateY(-10px) !important;
-                    width: 50% !important; /* Half as wide */
+                    right: 1rem !important; /* Move to right side */
+                    left: auto !important; /* Override left positioning */
+                    transform: translateY(-10px) !important;
+                    width: 45% !important; /* Less wide */
                     min-width: unset !important;
-                    background: #000 !important; /* Black background */
-                    border: 1px solid #333 !important;
+                    background: #000 !important; /* Solid black background */
+                    border: none !important; /* Remove border */
                     padding: 0.5rem 0 !important;
                     max-height: 60vh;
                     overflow-y: auto;
                     mix-blend-mode: normal !important; /* Remove inversion from container */
                 }
                 .dropdown:hover .dropdown-content {
-                    transform: translateX(-50%) translateY(0) !important;
+                    transform: translateY(0) !important;
                 }
                 .dropdown-content a {
                     padding: 0.4rem 1rem !important;
                     font-size: 0.8rem !important;
                     color: #fff !important; /* White text */
-                    text-align: center !important; /* Center text */
+                    text-align: right !important; /* Right aligned text */
                     mix-blend-mode: difference !important; /* Inverted text */
                     border-left: none !important; /* Remove left border */
                     font-weight: 600 !important;
                 }
                 .dropdown-content a:hover {
                     background: rgba(255, 255, 255, 0.2) !important;
-                    padding-left: 1rem !important; /* Keep centered on hover */
+                    padding-left: 1rem !important; /* Keep right aligned on hover */
+                    padding-right: 1.5rem !important;
                     border-left: none !important;
                 }
                 /* Make nav text smaller and closer together on mobile */
@@ -431,7 +435,7 @@
                 }
                 .dropdown-content {
                     top: 85px !important;
-                    width: 60% !important; /* Slightly wider on very small screens */
+                    width: 50% !important; /* Slightly wider on very small screens */
                     padding: 0.4rem 0 !important;
                 }
                 .dropdown-content a {
@@ -451,7 +455,7 @@
                 }
                 .dropdown-content {
                     top: 80px !important;
-                    width: 70% !important;
+                    width: 55% !important;
                 }
             }
         `;
