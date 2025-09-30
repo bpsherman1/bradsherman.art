@@ -258,8 +258,8 @@
         <!-- Floating Particles -->
         <div class="particles" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
 
-        <!-- Main Name -->
-        <div class="name-container" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 66%; display: flex; align-items: flex-end; padding: 0 5%; pointer-events: none;">
+        <!-- Main Name - Now will scroll down with the page -->
+        <div class="name-container" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 66%; display: flex; align-items: flex-end; padding: 0 5%; pointer-events: none; z-index: 50; transition: transform 0.1s ease-out;">
             <h1 class="main-name" style="font-family: 'Futura', sans-serif; font-size: 18vw; font-weight: 900; color: white; line-height: 0.8; margin: 0; text-transform: uppercase; letter-spacing: -3px; transform: translateY(100px); opacity: 0; transition: all 1.5s cubic-bezier(0.23, 1, 0.32, 1); mix-blend-mode: difference;">
                 BRAD<br>SHERMAN
             </h1>
@@ -379,6 +379,29 @@
             }
         });
 
+        // Brad Sherman scroll down animation
+        function handleBradShermanScroll() {
+            const nameContainer = document.querySelector('.name-container');
+            const name = document.querySelector('.main-name');
+            const hero = document.querySelector('.hero');
+            
+            const scrollY = window.scrollY;
+            const heroHeight = hero.offsetHeight;
+            const viewportHeight = window.innerHeight;
+            
+            // Calculate how much of the hero section we've scrolled through
+            const scrollProgress = Math.min(scrollY / (heroHeight - viewportHeight), 1);
+            
+            if (scrollY <= heroHeight - viewportHeight) {
+                // Still within hero section - move text down with scroll
+                nameContainer.style.transform = `translateY(${scrollProgress * 100}px)`;
+                name.style.mixBlendMode = 'difference';
+            } else {
+                // Past hero section - keep it at the bottom
+                nameContainer.style.transform = `translateY(100px)`;
+            }
+        }
+
         // Force Brad Sherman to stay inverted on mobile
         function forceInversion() {
             if (window.innerWidth <= 768) {
@@ -394,10 +417,14 @@
                 name.style.opacity = '1';
                 name.style.transform = 'translateY(0)';
                 forceInversion();
+                // Reset position on load
+                const nameContainer = document.querySelector('.name-container');
+                nameContainer.style.transform = 'translateY(0)';
             }, 500);
         });
 
         window.addEventListener('resize', forceInversion);
+        window.addEventListener('scroll', handleBradShermanScroll);
 
         // Create floating particles
         function createParticles() {
