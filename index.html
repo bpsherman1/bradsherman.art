@@ -90,7 +90,8 @@
             .main-name { 
                 font-size: 15vw; 
                 mix-blend-mode: difference !important;
-                
+                color: white !important;
+                text-shadow: none !important; /* Remove shadow */
             }
             
             /* FIXED DROPDOWN - SOLID BLACK BACKGROUND */
@@ -257,7 +258,7 @@
         <!-- Floating Particles -->
         <div class="particles" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
 
-        <!-- Main Name - Now will scroll from bottom to top -->
+        <!-- Main Name - Will scroll from current position to bottom of viewport -->
         <div class="name-container" style="position: fixed; bottom: 0; left: 0; width: 100%; height: 66%; display: flex; align-items: flex-end; padding: 0 5%; pointer-events: none; z-index: 50; transition: all 0.1s ease-out;">
             <h1 class="main-name" style="font-family: 'Futura', sans-serif; font-size: 18vw; font-weight: 900; color: white; line-height: 0.8; margin: 0; text-transform: uppercase; letter-spacing: -3px; transform: translateY(100px); opacity: 0; transition: all 1.5s cubic-bezier(0.23, 1, 0.32, 1); mix-blend-mode: difference;">
                 BRAD<br>SHERMAN
@@ -378,51 +379,27 @@
             }
         });
 
-        // Brad Sherman scroll animation
+        // Brad Sherman scroll animation - FIXED VERSION
         function handleBradShermanScroll() {
             const nameContainer = document.querySelector('.name-container');
             const name = document.querySelector('.main-name');
             const hero = document.querySelector('.hero');
-            const workSection = document.querySelector('#work');
             
-            const heroBottom = hero.offsetTop + hero.offsetHeight;
-            const workTop = workSection.offsetTop;
             const scrollY = window.scrollY;
+            const heroHeight = hero.offsetHeight;
+            const viewportHeight = window.innerHeight;
             
-            // Calculate how far we've scrolled through the transition zone
-            const transitionStart = heroBottom - window.innerHeight;
-            const transitionEnd = workTop;
-            const transitionDistance = transitionEnd - transitionStart;
+            // Calculate how much of the hero section we've scrolled through
+            const scrollProgress = Math.min(scrollY / (heroHeight - viewportHeight), 1);
             
-            if (scrollY < transitionStart) {
-                // At bottom of hero section
+            if (scrollY <= heroHeight - viewportHeight) {
+                // Still within hero section - move text down with scroll
                 nameContainer.style.position = 'fixed';
-                nameContainer.style.bottom = '0';
-                nameContainer.style.top = 'auto';
+                nameContainer.style.bottom = `${-scrollProgress * 66}%`; // Move from 0% to -66% (off screen)
                 name.style.mixBlendMode = 'difference';
-            } else if (scrollY > transitionEnd) {
-                // At top of work section
-                nameContainer.style.position = 'absolute';
-                nameContainer.style.top = '0';
-                nameContainer.style.bottom = 'auto';
-                nameContainer.style.paddingTop = '10%';
-                name.style.mixBlendMode = 'normal';
-                name.style.color = 'white';
             } else {
-                // During transition
-                const progress = (scrollY - transitionStart) / transitionDistance;
-                
-                nameContainer.style.position = 'fixed';
-                nameContainer.style.bottom = `${100 - (progress * 100)}%`;
-                nameContainer.style.top = 'auto';
-                
-                // Gradually change from inverted to normal
-                if (progress > 0.5) {
-                    name.style.mixBlendMode = 'normal';
-                    name.style.color = 'white';
-                } else {
-                    name.style.mixBlendMode = 'difference';
-                }
+                // Past hero section - hide the text
+                nameContainer.style.opacity = '0';
             }
         }
 
@@ -441,6 +418,10 @@
                 name.style.opacity = '1';
                 name.style.transform = 'translateY(0)';
                 forceInversion();
+                // Reset position on load
+                const nameContainer = document.querySelector('.name-container');
+                nameContainer.style.bottom = '0';
+                nameContainer.style.opacity = '1';
             }, 500);
         });
 
