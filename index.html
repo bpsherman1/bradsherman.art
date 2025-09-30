@@ -21,7 +21,7 @@
             cursor: none; 
         }
         
-        /* Custom Cursor */
+        /* Custom Cursor - Hidden on mobile */
         .cursor { 
             position: fixed; 
             width: 20px; 
@@ -131,9 +131,9 @@
         <div class="horizontal-slideshow" style="position: absolute; top: 0; left: 0; width: 400%; height: 100%; display: flex; transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);">
             <div class="horizontal-slide" style="width: 25%; height: 100%; background-image: url('images_1/cap.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
             </div>
-            <div class="horizontal-slide" style="width: 25%; height: 100%; background-image: url('images_1/4.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-            </div>
             <div class="horizontal-slide" style="width: 25%; height: 100%; background-image: url('images_1/house.jpeg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+            </div>
+            <div class="horizontal-slide" style="width: 25%; height: 100%; background-image: url('images_1/4.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
             </div>
             <div class="horizontal-slide" style="width: 25%; height: 100%; background-image: url('images_1/top f.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
             </div>
@@ -162,31 +162,40 @@
     </section>
 
     <script>
-        // Custom Cursor
+        // Custom Cursor - Hide on mobile
         const cursor = document.querySelector('.cursor');
         const follower = document.querySelector('.cursor-follower');
 
+        // Hide cursor on mobile
+        if (window.innerWidth <= 768) {
+            cursor.style.display = 'none';
+            follower.style.display = 'none';
+        }
+
         document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-            
-            setTimeout(() => {
-                follower.style.left = e.clientX - 30 + 'px';
-                follower.style.top = e.clientY - 30 + 'px';
-            }, 100);
+            if (window.innerWidth > 768) { // Only on desktop
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+                
+                setTimeout(() => {
+                    follower.style.left = e.clientX - 30 + 'px';
+                    follower.style.top = e.clientY - 30 + 'px';
+                }, 100);
+            }
         });
 
         // Horizontal Slideshow with Mouse Y Movement - 4 Images
         const slideshow = document.querySelector('.horizontal-slideshow');
         let touchStartX = 0;
-        let currentPosition = 0;
+        let currentTranslate = 0;
+        let isDragging = false;
         
         function updateSlideshowPosition(yPercent) {
             // Map mouse Y position (0-100%) to slideshow position (0% to -300%)
             const totalMovement = 300; // 400% width - 100% viewport = 300% movement needed
             const slideshowPosition = -(yPercent * totalMovement * 0.25); // 4x slower (0.25 = 1/4 speed)
             slideshow.style.transform = `translateX(${slideshowPosition}%)`;
-            currentPosition = slideshowPosition;
+            currentTranslate = slideshowPosition;
         }
 
         // Desktop: Mouse move control
@@ -197,43 +206,44 @@
             }
         });
 
-        // Mobile: Touch swipe for slideshow - SIMPLE VERSION
-        let startX = 0;
-        let currentTranslate = 0;
-
+        // Mobile: Simple touch swipe for slideshow
         slideshow.addEventListener('touchstart', (e) => {
             if (window.innerWidth <= 768) {
-                startX = e.touches[0].clientX;
+                isDragging = true;
+                touchStartX = e.touches[0].clientX;
                 slideshow.style.transition = 'none';
             }
         });
 
         slideshow.addEventListener('touchmove', (e) => {
-            if (window.innerWidth <= 768) {
+            if (isDragging && window.innerWidth <= 768) {
                 e.preventDefault();
                 const currentX = e.touches[0].clientX;
-                const diff = startX - currentX;
-                // Move slideshow based on swipe distance
-                const newPosition = Math.min(Math.max(currentTranslate + (diff / window.innerWidth) * 100, -300), 0);
+                const diff = touchStartX - currentX;
+                // Calculate new position based on swipe
+                const swipeDistance = (diff / window.innerWidth) * 300; // Full slideshow width
+                const newPosition = Math.min(Math.max(currentTranslate + swipeDistance, -300), 0);
                 slideshow.style.transform = `translateX(${newPosition}%)`;
             }
         });
 
-        slideshow.addEventListener('touchend', (e) => {
-            if (window.innerWidth <= 768) {
+        slideshow.addEventListener('touchend', () => {
+            if (isDragging && window.innerWidth <= 768) {
+                isDragging = false;
                 slideshow.style.transition = 'transform 0.8s cubic-bezier(0.23, 1, 0.32, 1)';
-                currentTranslate = parseFloat(slideshow.style.transform.replace('translateX(', '').replace('%)', '')) || 0;
+                // Update current position
+                const transformValue = slideshow.style.transform;
+                currentTranslate = parseFloat(transformValue.replace('translateX(', '').replace('%)', '')) || 0;
             }
         });
 
-        // Mobile: Scroll control - Faster than before but slower than original
+        // Mobile: Scroll control
         window.addEventListener('scroll', () => {
-            if (window.innerWidth <= 768) {
+            if (window.innerWidth <= 768 && !isDragging) {
                 const scrollY = window.scrollY;
-                const maxScroll = window.innerHeight * 1.5; // Scroll through 1.5x viewport height to complete slideshow (faster than 3x)
+                const maxScroll = window.innerHeight * 1.5;
                 const scrollPercent = Math.min(scrollY / maxScroll, 1);
                 updateSlideshowPosition(scrollPercent);
-                currentTranslate = -(scrollPercent * 300 * 0.25);
             }
         });
 
@@ -333,6 +343,13 @@
                 flex-shrink: 0;
             }
 
+            /* Hide cursor on mobile */
+            @media (max-width: 768px) {
+                .cursor, .cursor-follower {
+                    display: none !important;
+                }
+            }
+
             /* Improved Dropdown - Inverted colors and bolder text */
             .dropdown-content {
                 mix-blend-mode: difference !important;
@@ -346,38 +363,54 @@
             /* Mobile responsiveness */
             @media (max-width: 768px) {
                 nav { 
-                    padding: 0.5rem 1rem !important; /* Move nav higher up */
+                    padding: 0.5rem 1rem !important;
                 }
                 .main-name { 
                     font-size: 15vw; 
                     mix-blend-mode: difference !important;
                 }
                 .dropdown-content { 
-                    position: fixed; 
-                    top: 90px !important; /* Move dropdown further down */
-                    left: 1rem; 
-                    right: 1rem; 
-                    min-width: auto; 
-                    mix-blend-mode: difference !important;
-                    padding: 0.5rem 0 !important; /* Make dropdown smaller */
-                    max-height: 60vh; /* Limit height */
-                    overflow-y: auto; /* Make scrollable if needed */
+                    position: fixed !important; 
+                    top: 90px !important;
+                    left: 50% !important;
+                    transform: translateX(-50%) translateY(-10px) !important;
+                    width: 50% !important; /* Half as wide */
+                    min-width: unset !important;
+                    background: #000 !important; /* Black background */
+                    border: 1px solid #333 !important;
+                    padding: 0.5rem 0 !important;
+                    max-height: 60vh;
+                    overflow-y: auto;
+                    mix-blend-mode: normal !important; /* Remove inversion from container */
+                }
+                .dropdown:hover .dropdown-content {
+                    transform: translateX(-50%) translateY(0) !important;
                 }
                 .dropdown-content a {
-                    padding: 0.4rem 1rem !important; /* Smaller padding */
-                    font-size: 0.8rem !important; /* Smaller text */
+                    padding: 0.4rem 1rem !important;
+                    font-size: 0.8rem !important;
+                    color: #fff !important; /* White text */
+                    text-align: center !important; /* Center text */
+                    mix-blend-mode: difference !important; /* Inverted text */
+                    border-left: none !important; /* Remove left border */
+                    font-weight: 600 !important;
+                }
+                .dropdown-content a:hover {
+                    background: rgba(255, 255, 255, 0.2) !important;
+                    padding-left: 1rem !important; /* Keep centered on hover */
+                    border-left: none !important;
                 }
                 /* Make nav text smaller and closer together on mobile */
                 .nav-links {
                     gap: 0.6rem !important;
-                    margin-top: -5px; /* Move WORK ABOUT CONTACT higher */
+                    margin-top: -5px;
                 }
                 nav a {
                     font-size: 0.8rem !important;
                 }
                 .logo {
                     font-size: 0.9rem !important;
-                    margin-top: -5px; /* Move PORTFOLIO 2025 higher */
+                    margin-top: -5px;
                 }
             }
 
@@ -394,10 +427,11 @@
                 }
                 .nav-links {
                     gap: 0.5rem !important;
-                    margin-top: -8px; /* Move even higher on small screens */
+                    margin-top: -8px;
                 }
                 .dropdown-content {
                     top: 85px !important;
+                    width: 60% !important; /* Slightly wider on very small screens */
                     padding: 0.4rem 0 !important;
                 }
                 .dropdown-content a {
@@ -417,6 +451,7 @@
                 }
                 .dropdown-content {
                     top: 80px !important;
+                    width: 70% !important;
                 }
             }
         `;
