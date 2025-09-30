@@ -86,15 +86,15 @@
                 padding: 0.5rem 1rem !important;
             }
             
-            /* FIXED: Brad Sherman text - visible and inverted */
+            /* FIXED: Brad Sherman text - inverse color */
             .main-name { 
                 font-size: 15vw; 
                 mix-blend-mode: difference !important;
                 color: white !important;
-                text-shadow: 2px 2px 4px rgba(0,0,0,0.5) !important;
+                text-shadow: none !important; /* Remove shadow */
             }
             
-            /* FIXED DROPDOWN - ACTUALLY VISIBLE BLACK */
+            /* FIXED DROPDOWN - SOLID BLACK BACKGROUND */
             .dropdown-content { 
                 position: fixed !important; 
                 top: 90px !important;
@@ -103,12 +103,12 @@
                 transform: translateY(-10px) !important;
                 width: 45% !important;
                 min-width: unset !important;
-                background: #000000 !important;
-                border: 2px solid #333 !important;
+                background: #000000 !important; /* SOLID BLACK */
+                border: none !important; /* Remove border */
                 padding: 0.5rem 0 !important;
                 max-height: 60vh;
                 overflow-y: auto;
-                mix-blend-mode: normal !important;
+                mix-blend-mode: normal !important; /* No inversion */
                 backdrop-filter: none !important;
                 opacity: 1 !important;
                 z-index: 1000 !important;
@@ -123,7 +123,7 @@
             .dropdown-content a {
                 padding: 0.4rem 1rem !important;
                 font-size: 0.8rem !important;
-                color: #ffffff !important;
+                color: #ffffff !important; /* White text on black */
                 text-align: right !important;
                 mix-blend-mode: normal !important;
                 border-left: none !important;
@@ -379,24 +379,25 @@
             }
         });
 
-        // Ensure Brad Sherman stays inverted on mobile
+        // Force Brad Sherman to stay inverted on mobile
+        function forceInversion() {
+            if (window.innerWidth <= 768) {
+                const name = document.querySelector('.main-name');
+                name.style.mixBlendMode = 'difference';
+                name.style.color = 'white';
+            }
+        }
+
         window.addEventListener('load', () => {
             const name = document.querySelector('.main-name');
             setTimeout(() => {
                 name.style.opacity = '1';
                 name.style.transform = 'translateY(0)';
-                if (window.innerWidth <= 768) {
-                    name.style.mixBlendMode = 'difference';
-                }
+                forceInversion();
             }, 500);
         });
 
-        window.addEventListener('resize', () => {
-            if (window.innerWidth <= 768) {
-                const name = document.querySelector('.main-name');
-                name.style.mixBlendMode = 'difference';
-            }
-        });
+        window.addEventListener('resize', forceInversion);
 
         // Create floating particles
         function createParticles() {
