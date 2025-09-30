@@ -81,17 +81,17 @@
         }
 
         /* Mobile responsiveness - PROPERLY FIXED */
-       @media (max-width: 768px) {
-    nav { 
-        padding: 0.5rem 1rem !important;
-    }
-    
-    /* FIXED: Brad Sherman text - inverse color */
-    .main-name { 
-        font-size: 15vw; 
-        mix-blend-mode: difference !important;
-        color: white !important;
-    }
+        @media (max-width: 768px) {
+            nav { 
+                padding: 0.5rem 1rem !important;
+            }
+            
+            /* FIXED: Brad Sherman text - inverse color */
+            .main-name { 
+                font-size: 15vw; 
+                mix-blend-mode: difference !important;
+                color: white !important;
+            }
             
             /* FIXED DROPDOWN - SOLID BLACK BACKGROUND */
             .dropdown-content { 
@@ -277,192 +277,216 @@
     </section>
 
     <script>
-       // Custom Cursor - Hide on mobile
-const cursor = document.querySelector('.cursor');
-const follower = document.querySelector('.cursor-follower');
+        // Custom Cursor - Hide on mobile
+        const cursor = document.querySelector('.cursor');
+        const follower = document.querySelector('.cursor-follower');
 
-// Hide cursor on mobile
-if (window.innerWidth <= 768) {
-    cursor.style.display = 'none';
-    follower.style.display = 'none';
-}
+        // Hide cursor on mobile
+        if (window.innerWidth <= 768) {
+            cursor.style.display = 'none';
+            follower.style.display = 'none';
+        }
 
-document.addEventListener('mousemove', (e) => {
-    if (window.innerWidth > 768) {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
+        document.addEventListener('mousemove', (e) => {
+            if (window.innerWidth > 768) {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+                
+                setTimeout(() => {
+                    follower.style.left = e.clientX - 30 + 'px';
+                    follower.style.top = e.clientY - 30 + 'px';
+                }, 100);
+            }
+        });
+
+        // Horizontal Slideshow - FIXED SWIPE FUNCTIONALITY
+        const slideshow = document.querySelector('.horizontal-slideshow');
+        let startX = 0;
+        let currentTranslate = 0;
+        let prevTranslate = 0;
+        let isDragging = false;
         
-        setTimeout(() => {
-            follower.style.left = e.clientX - 30 + 'px';
-            follower.style.top = e.clientY - 30 + 'px';
+        // Mobile touch events for slideshow
+        slideshow.addEventListener('touchstart', touchStart);
+        slideshow.addEventListener('touchmove', touchMove);
+        slideshow.addEventListener('touchend', touchEnd);
+
+        function touchStart(e) {
+            if (window.innerWidth <= 768) {
+                isDragging = true;
+                startX = e.touches[0].clientX;
+                slideshow.style.transition = 'none';
+            }
+        }
+
+        function touchMove(e) {
+            if (isDragging && window.innerWidth <= 768) {
+                const currentX = e.touches[0].clientX;
+                const diff = startX - currentX;
+                // Move slideshow based on swipe - more responsive
+                currentTranslate = prevTranslate - (diff / window.innerWidth) * 100;
+                
+                // Limit boundaries
+                if (currentTranslate > 0) currentTranslate = 0;
+                if (currentTranslate < -300) currentTranslate = -300;
+                
+                slideshow.style.transform = `translateX(${currentTranslate}%)`;
+            }
+        }
+
+        function touchEnd() {
+            if (isDragging && window.innerWidth <= 768) {
+                isDragging = false;
+                prevTranslate = currentTranslate;
+                slideshow.style.transition = 'transform 0.3s ease-out';
+            }
+        }
+
+        // Desktop mouse control
+        function updateSlideshowPosition(yPercent) {
+            if (window.innerWidth > 768) {
+                const totalMovement = 300;
+                const slideshowPosition = -(yPercent * totalMovement * 0.25);
+                slideshow.style.transform = `translateX(${slideshowPosition}%)`;
+            }
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            if (window.innerWidth > 768) {
+                const mouseY = e.clientY / window.innerHeight;
+                updateSlideshowPosition(mouseY);
+            }
+        });
+
+        // COMPUTER scroll control for slideshow
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const maxScroll = window.innerHeight * 1.5;
+            const scrollPercent = Math.min(scrollY / maxScroll, 1);
+            const slideshowPosition = -(scrollPercent * 300 * 0.25);
+            
+            if (window.innerWidth > 768 && !isDragging) {
+                // Computer scroll
+                slideshow.style.transform = `translateX(${slideshowPosition}%)`;
+                prevTranslate = slideshowPosition;
+            } else if (window.innerWidth <= 768 && !isDragging) {
+                // Mobile scroll
+                slideshow.style.transform = `translateX(${slideshowPosition}%)`;
+                prevTranslate = slideshowPosition;
+            }
+        });
+
+        // Reset on scroll to top
+        window.addEventListener('scroll', () => {
+            if (window.scrollY === 0) {
+                slideshow.style.transform = 'translateX(0%)';
+                prevTranslate = 0;
+            }
+        });
+
+        // FIXED: Brad Sherman mobile inversion - using a different approach
+        function ensureMobileInversion() {
+            if (window.innerWidth <= 768) {
+                const name = document.querySelector('.main-name');
+                // Remove any inline styles that might override our CSS
+                name.style.removeProperty('mix-blend-mode');
+                name.style.removeProperty('color');
+            }
+        }
+
+        window.addEventListener('load', () => {
+            const name = document.querySelector('.main-name');
+            setTimeout(() => {
+                name.style.opacity = '1';
+                name.style.transform = 'translateY(0)';
+                ensureMobileInversion();
+            }, 500);
+        });
+
+        window.addEventListener('resize', ensureMobileInversion);
+
+        // Continuously check and fix mobile inversion
+        setInterval(() => {
+            if (window.innerWidth <= 768) {
+                ensureMobileInversion();
+            }
         }, 100);
-    }
-});
 
-// Horizontal Slideshow - FIXED SWIPE FUNCTIONALITY
-const slideshow = document.querySelector('.horizontal-slideshow');
-let startX = 0;
-let currentTranslate = 0;
-let prevTranslate = 0;
-let isDragging = false;
-
-// Mobile touch events for slideshow
-slideshow.addEventListener('touchstart', touchStart);
-slideshow.addEventListener('touchmove', touchMove);
-slideshow.addEventListener('touchend', touchEnd);
-
-function touchStart(e) {
-    if (window.innerWidth <= 768) {
-        isDragging = true;
-        startX = e.touches[0].clientX;
-        slideshow.style.transition = 'none';
-    }
-}
-
-function touchMove(e) {
-    if (isDragging && window.innerWidth <= 768) {
-        const currentX = e.touches[0].clientX;
-        const diff = startX - currentX;
-        // Move slideshow based on swipe - more responsive
-        currentTranslate = prevTranslate - (diff / window.innerWidth) * 100;
-        
-        // Limit boundaries
-        if (currentTranslate > 0) currentTranslate = 0;
-        if (currentTranslate < -300) currentTranslate = -300;
-        
-        slideshow.style.transform = `translateX(${currentTranslate}%)`;
-    }
-}
-
-function touchEnd() {
-    if (isDragging && window.innerWidth <= 768) {
-        isDragging = false;
-        prevTranslate = currentTranslate;
-        slideshow.style.transition = 'transform 0.3s ease-out';
-    }
-}
-
-// Desktop mouse control
-function updateSlideshowPosition(yPercent) {
-    if (window.innerWidth > 768) {
-        const totalMovement = 300;
-        const slideshowPosition = -(yPercent * totalMovement * 0.25);
-        slideshow.style.transform = `translateX(${slideshowPosition}%)`;
-    }
-}
-
-document.addEventListener('mousemove', (e) => {
-    if (window.innerWidth > 768) {
-        const mouseY = e.clientY / window.innerHeight;
-        updateSlideshowPosition(mouseY);
-    }
-});
-
-// Mobile scroll control
-window.addEventListener('scroll', () => {
-    if (window.innerWidth <= 768 && !isDragging) {
-        const scrollY = window.scrollY;
-        const maxScroll = window.innerHeight * 1.5;
-        const scrollPercent = Math.min(scrollY / maxScroll, 1);
-        const slideshowPosition = -(scrollPercent * 300 * 0.25);
-        slideshow.style.transform = `translateX(${slideshowPosition}%)`;
-        prevTranslate = slideshowPosition;
-    }
-});
-
-// Reset on scroll to top
-window.addEventListener('scroll', () => {
-    if (window.scrollY === 0) {
-        slideshow.style.transform = 'translateX(0%)';
-        prevTranslate = 0;
-    }
-});
-
-// Animate name on load - NO MORE FORCE INVERSION
-window.addEventListener('load', () => {
-    const name = document.querySelector('.main-name');
-    setTimeout(() => {
-        name.style.opacity = '1';
-        name.style.transform = 'translateY(0)';
-        // Don't touch mix-blend-mode - let CSS handle it
-    }, 500);
-});
-
-// Create floating particles
-function createParticles() {
-    const container = document.querySelector('.particles');
-    const particleCount = 50;
-    
-    for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.style.position = 'absolute';
-        particle.style.width = Math.random() * 4 + 2 + 'px';
-        particle.style.height = particle.style.width;
-        particle.style.background = ['#ff0055', '#00ffff', '#ffaa00'][Math.floor(Math.random() * 3)];
-        particle.style.borderRadius = '50%';
-        particle.style.left = Math.random() * 100 + '%';
-        particle.style.top = Math.random() * 100 + '%';
-        particle.style.opacity = Math.random() * 0.5 + 0.2;
-        particle.style.animation = `float ${Math.random() * 10 + 10}s linear infinite`;
-        
-        container.appendChild(particle);
-    }
-}
-
-// Scroll animations
-function checkScroll() {
-    const elements = document.querySelectorAll('#work h2, .work-item');
-    elements.forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight * 0.8) {
-            el.style.opacity = '1';
-            el.style.transform = 'translateY(0)';
+        // Create floating particles
+        function createParticles() {
+            const container = document.querySelector('.particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.style.position = 'absolute';
+                particle.style.width = Math.random() * 4 + 2 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.background = ['#ff0055', '#00ffff', '#ffaa00'][Math.floor(Math.random() * 3)];
+                particle.style.borderRadius = '50%';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.opacity = Math.random() * 0.5 + 0.2;
+                particle.style.animation = `float ${Math.random() * 10 + 10}s linear infinite`;
+                
+                container.appendChild(particle);
+            }
         }
-    });
-}
 
-// Navigation hover effects
-document.querySelectorAll('nav a').forEach(link => {
-    link.addEventListener('mouseenter', () => {
-        if (link.querySelector('span')) {
-            link.querySelector('span').style.width = '100%';
+        // Scroll animations
+        function checkScroll() {
+            const elements = document.querySelectorAll('#work h2, .work-item');
+            elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.8) {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }
+            });
         }
-    });
-    link.addEventListener('mouseleave', () => {
-        if (link.querySelector('span')) {
-            link.querySelector('span').style.width = '0';
-        }
-    });
-});
 
-// Initialize
-createParticles();
-window.addEventListener('scroll', checkScroll);
+        // Navigation hover effects
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                if (link.querySelector('span')) {
+                    link.querySelector('span').style.width = '100%';
+                }
+            });
+            link.addEventListener('mouseleave', () => {
+                if (link.querySelector('span')) {
+                    link.querySelector('span').style.width = '0';
+                }
+            });
+        });
 
-// Add keyframes for animations
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes float {
-        0%, 100% { transform: translateY(0) rotate(0deg); }
-        25% { transform: translateY(-20px) rotate(90deg); }
-        50% { transform: translateY(0) rotate(180deg); }
-        75% { transform: translateY(20px) rotate(270deg); }
-    }
-    
-    .work-item { 
-        opacity: 0; 
-        transform: translateY(50px); 
-        transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1); 
-    }
+        // Initialize
+        createParticles();
+        window.addEventListener('scroll', checkScroll);
 
-    .horizontal-slide {
-        background-size: cover !important;
-        background-position: center !important;
-        background-repeat: no-repeat !important;
-        flex-shrink: 0;
-    }
-`;
-document.head.appendChild(style);
+        // Add keyframes for animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float {
+                0%, 100% { transform: translateY(0) rotate(0deg); }
+                25% { transform: translateY(-20px) rotate(90deg); }
+                50% { transform: translateY(0) rotate(180deg); }
+                75% { transform: translateY(20px) rotate(270deg); }
+            }
+            
+            .work-item { 
+                opacity: 0; 
+                transform: translateY(50px); 
+                transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1); 
+            }
+
+            .horizontal-slide {
+                background-size: cover !important;
+                background-position: center !important;
+                background-repeat: no-repeat !important;
+                flex-shrink: 0;
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
