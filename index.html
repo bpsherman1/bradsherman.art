@@ -159,180 +159,180 @@
     </section>
 
     <script>
-        // Custom Cursor
-        const cursor = document.querySelector('.cursor');
-        const follower = document.querySelector('.cursor-follower');
+    // Custom Cursor
+    const cursor = document.querySelector('.cursor');
+    const follower = document.querySelector('.cursor-follower');
 
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-            
-            setTimeout(() => {
-                follower.style.left = e.clientX - 30 + 'px';
-                follower.style.top = e.clientY - 30 + 'px';
-            }, 100);
-        });
-
-        // Horizontal Slideshow with Mouse Y Movement - 4 Images
-        const slideshow = document.querySelector('.horizontal-slideshow');
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
         
-        function updateSlideshowPosition(yPercent) {
-            // Map mouse Y position (0-100%) to slideshow position (0% to -300%)
-            // We have 4 images, so we need to move 300% to show all images
-            const totalMovement = 300; // 400% width - 100% viewport = 300% movement needed
-            const slideshowPosition = -(yPercent * totalMovement);
-            slideshow.style.transform = `translateX(${slideshowPosition}%)`;
+        setTimeout(() => {
+            follower.style.left = e.clientX - 30 + 'px';
+            follower.style.top = e.clientY - 30 + 'px';
+        }, 100);
+    });
+
+    // Horizontal Slideshow with Mouse Y Movement - 4 Images
+    const slideshow = document.querySelector('.horizontal-slideshow');
+    
+    function updateSlideshowPosition(yPercent) {
+        // Map mouse Y position (0-100%) to slideshow position (0% to -300%)
+        // But now much slower - only 25% of the movement per screen height
+        const totalMovement = 300; // 400% width - 100% viewport = 300% movement needed
+        const slideshowPosition = -(yPercent * totalMovement * 0.25); // 4x slower (0.25 = 1/4 speed)
+        slideshow.style.transform = `translateX(${slideshowPosition}%)`;
+    }
+
+    // Desktop: Mouse move control
+    document.addEventListener('mousemove', (e) => {
+        if (window.innerWidth > 768) { // Only on desktop
+            const mouseY = e.clientY / window.innerHeight; // 0 to 1
+            updateSlideshowPosition(mouseY);
+        }
+    });
+
+    // Mobile: Scroll control - Much slower
+    window.addEventListener('scroll', () => {
+        if (window.innerWidth <= 768) {
+            const scrollY = window.scrollY;
+            const maxScroll = window.innerHeight * 3; // Scroll through 3x viewport height to complete slideshow
+            const scrollPercent = Math.min(scrollY / maxScroll, 1);
+            updateSlideshowPosition(scrollPercent);
+        }
+    });
+
+    // Reset slideshow position when scrolling back to top
+    window.addEventListener('scroll', () => {
+        if (window.scrollY === 0) {
+            slideshow.style.transform = 'translateX(0%)';
+        }
+    });
+
+    // Animate name on load
+    window.addEventListener('load', () => {
+        const name = document.querySelector('.main-name');
+        setTimeout(() => {
+            name.style.opacity = '1';
+            name.style.transform = 'translateY(0)';
+        }, 500);
+    });
+
+    // Create floating particles
+    function createParticles() {
+        const container = document.querySelector('.particles');
+        const particleCount = 50;
+        
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.style.position = 'absolute';
+            particle.style.width = Math.random() * 4 + 2 + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.background = ['#ff0055', '#00ffff', '#ffaa00'][Math.floor(Math.random() * 3)];
+            particle.style.borderRadius = '50%';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.opacity = Math.random() * 0.5 + 0.2;
+            particle.style.animation = `float ${Math.random() * 10 + 10}s linear infinite`;
+            
+            container.appendChild(particle);
+        }
+    }
+
+    // Scroll animations
+    function checkScroll() {
+        const elements = document.querySelectorAll('#work h2, .work-item');
+        elements.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight * 0.8) {
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            }
+        });
+    }
+
+    // Navigation hover effects
+    document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('mouseenter', () => {
+            if (link.querySelector('span')) {
+                link.querySelector('span').style.width = '100%';
+            }
+        });
+        link.addEventListener('mouseleave', () => {
+            if (link.querySelector('span')) {
+                link.querySelector('span').style.width = '0';
+            }
+        });
+    });
+
+    // Initialize
+    createParticles();
+    window.addEventListener('scroll', checkScroll);
+
+    // Add keyframes for animations
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(90deg); }
+            50% { transform: translateY(0) rotate(180deg); }
+            75% { transform: translateY(20px) rotate(270deg); }
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        
+        .work-item { 
+            opacity: 0; 
+            transform: translateY(50px); 
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1); 
         }
 
-        // Desktop: Mouse move control
-        document.addEventListener('mousemove', (e) => {
-            if (window.innerWidth > 768) { // Only on desktop
-                const mouseY = e.clientY / window.innerHeight; // 0 to 1
-                updateSlideshowPosition(mouseY);
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            nav { 
+                padding: 1rem; 
             }
-        });
-
-        // Mobile: Scroll control
-        window.addEventListener('scroll', () => {
-            if (window.innerWidth <= 768) {
-                const scrollY = window.scrollY;
-                const maxScroll = window.innerHeight * 0.8; // Scroll through 80% of viewport height
-                const scrollPercent = Math.min(scrollY / maxScroll, 1);
-                updateSlideshowPosition(scrollPercent);
+            .main-name { 
+                font-size: 15vw; 
             }
-        });
-
-        // Reset slideshow position when scrolling back to top
-        window.addEventListener('scroll', () => {
-            if (window.scrollY === 0) {
-                slideshow.style.transform = 'translateX(0%)';
+            .dropdown-content { 
+                position: fixed; 
+                top: 80px; 
+                left: 1rem; 
+                right: 1rem; 
+                min-width: auto; 
             }
-        });
-
-        // Animate name on load
-        window.addEventListener('load', () => {
-            const name = document.querySelector('.main-name');
-            setTimeout(() => {
-                name.style.opacity = '1';
-                name.style.transform = 'translateY(0)';
-            }, 500);
-        });
-
-        // Create floating particles
-        function createParticles() {
-            const container = document.querySelector('.particles');
-            const particleCount = 50;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.style.position = 'absolute';
-                particle.style.width = Math.random() * 4 + 2 + 'px';
-                particle.style.height = particle.style.width;
-                particle.style.background = ['#ff0055', '#00ffff', '#ffaa00'][Math.floor(Math.random() * 3)];
-                particle.style.borderRadius = '50%';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.opacity = Math.random() * 0.5 + 0.2;
-                particle.style.animation = `float ${Math.random() * 10 + 10}s linear infinite`;
-                
-                container.appendChild(particle);
+            /* Make nav text smaller on mobile */
+            nav div:last-child {
+                gap: 1rem;
+            }
+            nav a {
+                font-size: 0.9rem;
+            }
+            .logo {
+                font-size: 1rem;
             }
         }
 
-        // Scroll animations
-        function checkScroll() {
-            const elements = document.querySelectorAll('#work h2, .work-item');
-            elements.forEach(el => {
-                const rect = el.getBoundingClientRect();
-                if (rect.top < window.innerHeight * 0.8) {
-                    el.style.opacity = '1';
-                    el.style.transform = 'translateY(0)';
-                }
-            });
+        /* Extra small screens */
+        @media (max-width: 480px) {
+            nav {
+                padding: 0.8rem;
+            }
+            nav a {
+                font-size: 0.8rem;
+            }
+            .logo {
+                font-size: 0.9rem;
+            }
+            nav div:last-child {
+                gap: 0.8rem;
+            }
         }
-
-        // Navigation hover effects
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('mouseenter', () => {
-                if (link.querySelector('span')) {
-                    link.querySelector('span').style.width = '100%';
-                }
-            });
-            link.addEventListener('mouseleave', () => {
-                if (link.querySelector('span')) {
-                    link.querySelector('span').style.width = '0';
-                }
-            });
-        });
-
-        // Initialize
-        createParticles();
-        window.addEventListener('scroll', checkScroll);
-
-        // Add keyframes for animations
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes float {
-                0%, 100% { transform: translateY(0) rotate(0deg); }
-                25% { transform: translateY(-20px) rotate(90deg); }
-                50% { transform: translateY(0) rotate(180deg); }
-                75% { transform: translateY(20px) rotate(270deg); }
-            }
-            
-            @keyframes fadeIn {
-                to { opacity: 1; }
-            }
-            
-            .work-item { 
-                opacity: 0; 
-                transform: translateY(50px); 
-                transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1); 
-            }
-
-            /* Mobile responsiveness */
-            @media (max-width: 768px) {
-                nav { 
-                    padding: 1rem; 
-                }
-                .main-name { 
-                    font-size: 15vw; 
-                }
-                .dropdown-content { 
-                    position: fixed; 
-                    top: 80px; 
-                    left: 1rem; 
-                    right: 1rem; 
-                    min-width: auto; 
-                }
-                /* Make nav text smaller on mobile */
-                nav div:last-child {
-                    gap: 1rem;
-                }
-                nav a {
-                    font-size: 0.9rem;
-                }
-                .logo {
-                    font-size: 1rem;
-                }
-            }
-
-            /* Extra small screens */
-            @media (max-width: 480px) {
-                nav {
-                    padding: 0.8rem;
-                }
-                nav a {
-                    font-size: 0.8rem;
-                }
-                .logo {
-                    font-size: 0.9rem;
-                }
-                nav div:last-child {
-                    gap: 0.8rem;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-    </script>
+    `;
+    document.head.appendChild(style);
+</script>
 </body>
 </html>
