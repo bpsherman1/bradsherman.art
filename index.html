@@ -321,17 +321,19 @@
     }
 
     /* Mobile description - SMALLER SIZE AND ALIGNED WITH MEDIUMS TEXT */
-    .mediums-description {
+       .mediums-description {
         font-family: 'Futura', sans-serif;
         font-weight: 400;
-        font-size: 0.75rem; /* REDUCED from 1rem to 0.85rem */
+        font-size: 0.75rem;
         top: 8rem;
         left: auto;
-        right: 5rem; /* Aligned with mediums title right position */
-        max-width: 75%; /* Adjusted to match text alignment */
+        right: 1rem; /* Changed from 5rem to 1rem */
+        max-width: 75% !important; /* Force 75% width */
+        width: 75% !important; /* Add width to ensure it works */
         transform: translateX(-100vw);
         transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1);
         text-align: right;
+        margin-left: auto; /* Push to the right */
     }
 }
 
@@ -400,14 +402,16 @@
     .mediums-description {
         font-family: 'Futura', sans-serif;
         font-weight: 400;
-        font-size: 0.7rem; /* REDUCED from 0.9rem to 0.8rem */
+        font-size: 0.7rem;
         top: 8rem;
         left: auto;
-        right: 0.8rem; /* Aligned with mediums title */
-        max-width: 85%; /* Adjusted to match */
+        right: 1rem; /* Changed from 0.8rem to 1rem */
+        max-width: 75% !important;
+        width: 75% !important;
         transform: translateX(-100vw);
         transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1);
         text-align: right;
+        margin-left: auto;
     }
 }
 
@@ -433,17 +437,19 @@
         transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
-    .mediums-description {
+     .mediums-description {
         font-family: 'Futura', sans-serif;
         font-weight: 400;
-        font-size: 0.75rem; /* REDUCED from 0.8rem to 0.75rem */
+        font-size: 0.75rem;
         top: 7rem;
         left: auto;
-        right: 0.6rem; /* Aligned with mediums title */
-        max-width: 85%; /* Adjusted to match */
+        right: 0.6rem;
+        max-width: 75% !important;
+        width: 75% !important;
         transform: translateX(-100vw);
         transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1);
         text-align: right;
+        margin-left: auto;
     }
 }
     </style>
