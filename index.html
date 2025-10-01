@@ -179,6 +179,20 @@
        /* Updated Mobile responsiveness - PROPERLY FIXED */
 /* Updated Mobile responsiveness */
 @media (max-width: 768px) {
+
+  .slide-1 {
+        background-image: url('images_2/cc.png') !important;
+    }
+    .slide-2 {
+        background-image: url('images_2/mm.png') !important;
+    }
+    .slide-3 {
+        background-image: url('images_2/vv.png') !important;
+    }
+    .slide-4 {
+        background-image: url('images_2/ff.png') !important;
+    }
+    
      body {
         overflow-x: hidden !important;
         width: 100% !important;
@@ -474,33 +488,33 @@
         </div>
     </nav>
 
-    <!-- Hero Section with Interactive Slideshow -->
-    <section class="hero" style="height: 100vh; position: relative; overflow: hidden;">
-        <!-- Animated Background -->
-        <div class="animated-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(45deg, #ff0055, #00ffff, #ffaa00); opacity: 0.1; filter: blur(100px);"></div>
-        
-        <!-- Horizontal Slideshow - 4 Images - NO GAPS -->
-        <div class="horizontal-slideshow" style="position: absolute; top: 0; left: 0; width: 400%; height: 100%; display: flex; transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);">
-            <div class="horizontal-slide" style="width: 25%; height: 100%; background-image: url('images_1/cap.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-            </div>
-            <div class="horizontal-slide" style="width: 25%; height: 100%; background-image: url('images_1/4.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-            </div>
-            <div class="horizontal-slide" style="width: 25%; height: 100%; background-image: url('images_1/house.jpeg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-            </div>
-            <div class="horizontal-slide" style="width: 25%; height: 100%; background-image: url('images_1/top f.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-            </div>
+  <!-- Hero Section with Interactive Slideshow -->
+<section class="hero" style="height: 100vh; position: relative; overflow: hidden;">
+    <!-- Animated Background -->
+    <div class="animated-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(45deg, #ff0055, #00ffff, #ffaa00); opacity: 0.1; filter: blur(100px);"></div>
+    
+    <!-- Horizontal Slideshow - 4 Images - NO GAPS -->
+    <div class="horizontal-slideshow" style="position: absolute; top: 0; left: 0; width: 400%; height: 100%; display: flex; transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);">
+        <div class="horizontal-slide slide-1" style="width: 25%; height: 100%; background-image: url('images_1/cap.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
         </div>
-
-        <!-- Floating Particles -->
-        <div class="particles" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
-
-        <!-- Main Name -->
-        <div class="name-container" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 66%; display: flex; align-items: flex-end; padding: 0 5%; pointer-events: none;">
-            <h1 class="main-name" style="font-family: 'Futura', sans-serif; font-size: 18vw; font-weight: 900; color: white; line-height: 0.8; margin: 0; text-transform: uppercase; letter-spacing: -3px; transform: translateY(100px); opacity: 0; transition: all 1.5s cubic-bezier(0.23, 1, 0.32, 1); mix-blend-mode: difference;">
-                BRAD<br>SHERMAN
-            </h1>
+        <div class="horizontal-slide slide-2" style="width: 25%; height: 100%; background-image: url('images_1/4.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
         </div>
-    </section>
+        <div class="horizontal-slide slide-3" style="width: 25%; height: 100%; background-image: url('images_1/house.jpeg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        </div>
+        <div class="horizontal-slide slide-4" style="width: 25%; height: 100%; background-image: url('images_1/top f.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        </div>
+    </div>
+
+    <!-- Floating Particles -->
+    <div class="particles" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
+
+    <!-- Main Name -->
+    <div class="name-container" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 66%; display: flex; align-items: flex-end; padding: 0 5%; pointer-events: none;">
+        <h1 class="main-name" style="font-family: 'Futura', sans-serif; font-size: 18vw; font-weight: 900; color: white; line-height: 0.8; margin: 0; text-transform: uppercase; letter-spacing: -3px; transform: translateY(100px); opacity: 0; transition: all 1.5s cubic-bezier(0.23, 1, 0.32, 1); mix-blend-mode: difference;">
+            BRAD<br>SHERMAN
+        </h1>
+    </div>
+</section>
 
     <!-- Work Section - INCREASED TOP PADDING -->
     <section id="work" style="min-height: 100vh; padding: 35% 0 10% 0; position: relative; background: #0a0a0a;">
