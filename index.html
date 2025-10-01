@@ -93,6 +93,7 @@
             opacity: 0;
             transform: translateX(100vw);
             transition: all 1.8s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
         }
 
         .work-image {
@@ -104,10 +105,24 @@
             margin-bottom: 2.5rem;
             transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             cursor: pointer;
+            position: relative;
+            z-index: 1;
         }
 
-        .work-image:hover {
-            transform: scale(1.25); /* 25% scale up on hover */
+        /* Fix for z-index on hover */
+        .work-item:nth-child(1) .work-image:hover {
+            transform: scale(1.25);
+            z-index: 10; /* Left column - highest z-index */
+        }
+
+        .work-item:nth-child(2) .work-image:hover {
+            transform: scale(1.25);
+            z-index: 5; /* Middle column - medium z-index */
+        }
+
+        .work-item:nth-child(3) .work-image:hover {
+            transform: scale(1.25);
+            z-index: 1; /* Right column - lowest z-index (stays behind middle) */
         }
 
         .work-title {
@@ -227,6 +242,13 @@
             .work-image {
                 height: 250px;
                 margin-bottom: 2rem;
+            }
+
+            /* Reset z-index for mobile since columns stack vertically */
+            .work-item:nth-child(1) .work-image:hover,
+            .work-item:nth-child(2) .work-image:hover,
+            .work-item:nth-child(3) .work-image:hover {
+                z-index: 10;
             }
 
             /* Mobile MEDIUMS title */
