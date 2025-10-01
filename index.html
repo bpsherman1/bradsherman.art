@@ -207,8 +207,8 @@
     /* FIXED: Brad Sherman text - inverse color */
     .main-name { 
         font-size: 15vw; 
-        mix-blend-mode: exclusion !important;
-        /* exclusion creates similar inversion effect to difference */
+        mix-blend-mode: difference !important;
+        color: white !important;
     }
     
     /* FIXED DROPDOWN - SOLID BLACK BACKGROUND */
@@ -313,7 +313,7 @@
         top: 8rem;
         left: auto;
         right: 5rem; /* Aligned with mediums title right position */
-        max-width: 65%; /* Adjusted to match text alignment */
+        max-width: 75%; /* Adjusted to match text alignment */
         transform: translateX(-100vw);
         transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1);
         text-align: right;
@@ -389,7 +389,7 @@
         top: 8rem;
         left: auto;
         right: 0.8rem; /* Aligned with mediums title */
-        max-width: 75%; /* Adjusted to match */
+        max-width: 85%; /* Adjusted to match */
         transform: translateX(-100vw);
         transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1);
         text-align: right;
@@ -725,7 +725,14 @@
         });
 
         // FIXED: Brad Sherman mobile inversion - using a different approach
-       
+        function ensureMobileInversion() {
+            if (window.innerWidth <= 768) {
+                const name = document.querySelector('.main-name');
+                // Remove any inline styles that might override our CSS
+                name.style.removeProperty('mix-blend-mode');
+                name.style.removeProperty('color');
+            }
+        }
 
         // NEW: Scroll animation for work items - even slower and from completely off-screen
         function animateWorkItems() {
@@ -839,11 +846,11 @@ function animateMediumsText() {
             setTimeout(() => {
                 name.style.opacity = '1';
                 name.style.transform = 'translateY(0)';
-              
+                ensureMobileInversion();
             }, 500);
         });
 
-       
+        window.addEventListener('resize', ensureMobileInversion);
         
         // NEW: Add scroll event listener for work item animations
         window.addEventListener('scroll', animateWorkItems);
@@ -854,22 +861,6 @@ function animateMediumsText() {
         // NEW: Trigger animation on page load in case items are already in view
         window.addEventListener('load', animateWorkItems);
         window.addEventListener('load', animateMediumsText);
-
-function fixMobileText() {
-    if (window.innerWidth <= 768) {
-        const name = document.querySelector('.main-name');
-        // Apply mobile-specific styles
-        name.style.mixBlendMode = 'normal';
-        name.style.color = '#ffffff';
-        name.style.textShadow = '0 0 10px rgba(255, 255, 255, 0.8)';
-    }
-}
-
-// Call it on load and resize
-window.addEventListener('load', fixMobileText);
-window.addEventListener('resize', fixMobileText);
-
-        
     </script>
 </body>
 </html>
