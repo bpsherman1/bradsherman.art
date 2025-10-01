@@ -84,15 +84,15 @@
         .work-row {
             display: flex;
             width: 100%;
-            margin-bottom: 12rem; /* Increased from 8rem to 12rem for more space */
+            margin-bottom: 12rem;
             gap: 0;
         }
 
         .work-item {
             flex: 1;
-            opacity: 0; /* Changed back to 0 for animation */
-            transform: translateX(100px); /* Changed back for animation */
-            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            opacity: 0;
+            transform: translateX(100vw); /* Start completely off-screen to the right */
+            transition: all 1.2s cubic-bezier(0.23, 1, 0.32, 1); /* Slower animation */
         }
 
         .work-image {
@@ -101,14 +101,14 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            margin-bottom: 2.5rem; /* Increased from 2rem to 2.5rem */
+            margin-bottom: 2.5rem;
         }
 
         .work-title {
             font-family: 'Futura', sans-serif;
             font-size: 1.5rem;
             font-weight: 700;
-            margin-bottom: 1rem; /* Increased from 0.5rem to 1rem */
+            margin-bottom: 1rem;
             text-align: center;
         }
 
@@ -116,8 +116,21 @@
             font-size: 0.9rem;
             color: #ccc;
             text-align: center;
-            line-height: 1.6; /* Increased from 1.4 to 1.6 */
-            margin-bottom: 1rem; /* Added margin bottom */
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        /* MEDIUMS title in top left corner */
+        .mediums-title {
+            font-family: 'Futura', sans-serif;
+            font-size: 6rem; /* Bigger size */
+            font-weight: 900;
+            color: white;
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            z-index: 10;
+            mix-blend-mode: difference;
         }
 
         /* Mobile responsiveness - PROPERLY FIXED */
@@ -198,16 +211,23 @@
             /* Mobile work grid */
             .work-row {
                 flex-direction: column;
-                margin-bottom: 8rem; /* Increased from 4rem to 8rem */
+                margin-bottom: 8rem;
             }
 
             .work-item {
-                margin-bottom: 3rem; /* Increased from 2rem to 3rem */
+                margin-bottom: 3rem;
             }
 
             .work-image {
                 height: 250px;
-                margin-bottom: 2rem; /* Increased from 1.5rem to 2rem */
+                margin-bottom: 2rem;
+            }
+
+            /* Mobile MEDIUMS title */
+            .mediums-title {
+                font-size: 3rem;
+                top: 1rem;
+                left: 1rem;
             }
         }
 
@@ -242,6 +262,12 @@
             .work-title {
                 font-size: 1.2rem;
             }
+
+            .mediums-title {
+                font-size: 2.5rem;
+                top: 0.8rem;
+                left: 0.8rem;
+            }
         }
 
         @media (max-width: 360px) {
@@ -255,6 +281,12 @@
             .dropdown-content {
                 top: 80px !important;
                 width: 55% !important;
+            }
+
+            .mediums-title {
+                font-size: 2rem;
+                top: 0.6rem;
+                left: 0.6rem;
             }
         }
     </style>
@@ -330,9 +362,8 @@
 
     <!-- Work Section -->
     <section id="work" style="min-height: 100vh; padding: 10% 0; position: relative; background: #0a0a0a;">
-        <h2 style="font-family: 'Futura', sans-serif; font-size: 4rem; margin-bottom: 8rem; color: white; opacity: 1; transform: translateY(0); text-align: center;">
-            MEDIUMS
-        </h2>
+        <!-- MEDIUMS title in top left corner -->
+        <h2 class="mediums-title">MEDIUMS</h2>
         
         <!-- First Row of 3 Images -->
         <div class="work-row" style="margin-bottom: 12rem;">
@@ -529,14 +560,14 @@
             }
         }
 
-        // NEW: Scroll animation for work items
+        // NEW: Scroll animation for work items - slower and from completely off-screen
         function animateWorkItems() {
             const workItems = document.querySelectorAll('.work-item');
             const windowHeight = window.innerHeight;
             
             workItems.forEach(item => {
                 const itemTop = item.getBoundingClientRect().top;
-                const itemVisible = 150;
+                const itemVisible = 100;
                 
                 if (itemTop < windowHeight - itemVisible) {
                     item.style.opacity = '1';
