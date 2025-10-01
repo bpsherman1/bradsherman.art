@@ -84,14 +84,14 @@
         .work-row {
             display: flex;
             width: 100%;
-            margin-bottom: 8rem;
+            margin-bottom: 12rem; /* Increased from 8rem to 12rem for more space */
             gap: 0;
         }
 
         .work-item {
             flex: 1;
-            opacity: 1; /* Changed from 0 to 1 to always show content */
-            transform: translateX(0); /* Changed from translateX(100px) */
+            opacity: 0; /* Changed back to 0 for animation */
+            transform: translateX(100px); /* Changed back for animation */
             transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
@@ -101,14 +101,14 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem; /* Increased from 2rem to 2.5rem */
         }
 
         .work-title {
             font-family: 'Futura', sans-serif;
             font-size: 1.5rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem; /* Increased from 0.5rem to 1rem */
             text-align: center;
         }
 
@@ -116,7 +116,8 @@
             font-size: 0.9rem;
             color: #ccc;
             text-align: center;
-            line-height: 1.4;
+            line-height: 1.6; /* Increased from 1.4 to 1.6 */
+            margin-bottom: 1rem; /* Added margin bottom */
         }
 
         /* Mobile responsiveness - PROPERLY FIXED */
@@ -197,16 +198,16 @@
             /* Mobile work grid */
             .work-row {
                 flex-direction: column;
-                margin-bottom: 4rem;
+                margin-bottom: 8rem; /* Increased from 4rem to 8rem */
             }
 
             .work-item {
-                margin-bottom: 2rem;
+                margin-bottom: 3rem; /* Increased from 2rem to 3rem */
             }
 
             .work-image {
                 height: 250px;
-                margin-bottom: 1.5rem;
+                margin-bottom: 2rem; /* Increased from 1.5rem to 2rem */
             }
         }
 
@@ -334,7 +335,7 @@
         </h2>
         
         <!-- First Row of 3 Images -->
-        <div class="work-row" style="margin-bottom: 8rem;">
+        <div class="work-row" style="margin-bottom: 12rem;">
             <div class="work-item">
                 <div class="work-image" style="background-image: url('images_2/111.png');"></div>
                 <h3 class="work-title">Campaigns</h3>
@@ -353,7 +354,7 @@
         </div>
 
         <!-- Second Row of 3 Images -->
-        <div class="work-row" style="margin-bottom: 8rem;">
+        <div class="work-row" style="margin-bottom: 12rem;">
             <div class="work-item">
                 <div class="work-image" style="background-image: url('images_2/24.png');"></div>
                 <h3 class="work-title">Brands</h3>
@@ -372,7 +373,7 @@
         </div>
 
         <!-- Third Row of 3 Images -->
-        <div class="work-row" style="margin-bottom: 8rem;">
+        <div class="work-row" style="margin-bottom: 12rem;">
             <div class="work-item">
                 <div class="work-image" style="background-image: url('images_2/still.png');"></div>
                 <h3 class="work-title">Drawings</h3>
@@ -391,7 +392,7 @@
         </div>
 
         <!-- Fourth Row of 3 Images -->
-        <div class="work-row" style="margin-bottom: 8rem;">
+        <div class="work-row" style="margin-bottom: 12rem;">
             <div class="work-item">
                 <div class="work-image" style="background-image: url('images_2/caps.png');"></div>
                 <h3 class="work-title">Photography</h3>
@@ -528,6 +529,22 @@
             }
         }
 
+        // NEW: Scroll animation for work items
+        function animateWorkItems() {
+            const workItems = document.querySelectorAll('.work-item');
+            const windowHeight = window.innerHeight;
+            
+            workItems.forEach(item => {
+                const itemTop = item.getBoundingClientRect().top;
+                const itemVisible = 150;
+                
+                if (itemTop < windowHeight - itemVisible) {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateX(0)';
+                }
+            });
+        }
+
         // Create floating particles
         function createParticles() {
             const container = document.querySelector('.particles');
@@ -595,6 +612,12 @@
         });
 
         window.addEventListener('resize', ensureMobileInversion);
+        
+        // NEW: Add scroll event listener for work item animations
+        window.addEventListener('scroll', animateWorkItems);
+        
+        // NEW: Trigger animation on page load in case items are already in view
+        window.addEventListener('load', animateWorkItems);
     </script>
 </body>
 </html>
