@@ -80,6 +80,49 @@
             padding-left: 2rem; 
         }
 
+        /* Work Grid Styles */
+        .work-row {
+            display: flex;
+            width: 100%;
+            margin-bottom: 8rem;
+            gap: 0;
+        }
+
+        .work-item {
+            flex: 1;
+            opacity: 0;
+            transform: translateX(100px);
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .work-item:nth-child(1) { transition-delay: 0.1s; }
+        .work-item:nth-child(2) { transition-delay: 0.2s; }
+        .work-item:nth-child(3) { transition-delay: 0.3s; }
+
+        .work-image {
+            width: 100%;
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin-bottom: 1rem;
+        }
+
+        .work-title {
+            font-family: 'Futura', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .work-description {
+            font-size: 0.9rem;
+            color: #ccc;
+            text-align: center;
+            line-height: 1.4;
+        }
+
         /* Mobile responsiveness - PROPERLY FIXED */
         @media (max-width: 768px) {
             nav { 
@@ -154,6 +197,20 @@
             .cursor, .cursor-follower {
                 display: none !important;
             }
+
+            /* Mobile work grid */
+            .work-row {
+                flex-direction: column;
+                margin-bottom: 4rem;
+            }
+
+            .work-item {
+                margin-bottom: 2rem;
+            }
+
+            .work-image {
+                height: 250px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -178,6 +235,14 @@
             .dropdown-content a {
                 padding: 0.3rem 0.8rem !important;
                 font-size: 0.75rem !important;
+            }
+
+            .work-image {
+                height: 200px;
+            }
+
+            .work-title {
+                font-size: 1.2rem;
             }
         }
 
@@ -267,12 +332,65 @@
 
     <!-- Work Section -->
     <section id="work" style="min-height: 100vh; padding: 10% 5%; position: relative; background: #0a0a0a;">
-        <h2 style="font-family: 'Futura', sans-serif; font-size: 4rem; margin-bottom: 4rem; color: white; opacity: 0; transform: translateY(50px);">
+        <h2 style="font-family: 'Futura', sans-serif; font-size: 4rem; margin-bottom: 8rem; color: white; opacity: 0; transform: translateY(50px); text-align: center;">
             MEDIUMS
         </h2>
         
-        <div class="work-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-            <!-- Work items will be added here -->
+        <!-- First Row of 3 Images -->
+        <div class="work-row" style="margin-bottom: 8rem;">
+            <div class="work-item">
+                <div class="work-image" style="background-image: url('images_1/cap.png');"></div>
+                <h3 class="work-title">Digital Design</h3>
+                <p class="work-description">Interactive digital experiences and user interface design</p>
+            </div>
+            <div class="work-item">
+                <div class="work-image" style="background-image: url('images_1/4.png');"></div>
+                <h3 class="work-title">Brand Identity</h3>
+                <p class="work-description">Complete brand systems and visual identity development</p>
+            </div>
+            <div class="work-item">
+                <div class="work-image" style="background-image: url('images_1/house.jpeg');"></div>
+                <h3 class="work-title">Typography</h3>
+                <p class="work-description">Custom type design and expressive lettering work</p>
+            </div>
+        </div>
+
+        <!-- Second Row of 3 Images -->
+        <div class="work-row" style="margin-bottom: 8rem;">
+            <div class="work-item">
+                <div class="work-image" style="background-image: url('images_1/top f.png');"></div>
+                <h3 class="work-title">Print Design</h3>
+                <p class="work-description">Editorial layouts and printed material design</p>
+            </div>
+            <div class="work-item">
+                <div class="work-image" style="background-image: url('images_1/cap.png');"></div>
+                <h3 class="work-title">3D Modeling</h3>
+                <p class="work-description">Three-dimensional design and visualization</p>
+            </div>
+            <div class="work-item">
+                <div class="work-image" style="background-image: url('images_1/4.png');"></div>
+                <h3 class="work-title">Photography</h3>
+                <p class="work-description">Conceptual and commercial photography work</p>
+            </div>
+        </div>
+
+        <!-- Third Row of 3 Images -->
+        <div class="work-row" style="margin-bottom: 8rem;">
+            <div class="work-item">
+                <div class="work-image" style="background-image: url('images_1/house.jpeg');"></div>
+                <h3 class="work-title">Motion Graphics</h3>
+                <p class="work-description">Animated design and visual storytelling</p>
+            </div>
+            <div class="work-item">
+                <div class="work-image" style="background-image: url('images_1/top f.png');"></div>
+                <h3 class="work-title">Illustration</h3>
+                <p class="work-description">Digital and traditional illustration techniques</p>
+            </div>
+            <div class="work-item">
+                <div class="work-image" style="background-image: url('images_1/cap.png');"></div>
+                <h3 class="work-title">Packaging</h3>
+                <p class="work-description">Product packaging and retail design solutions</p>
+            </div>
         </div>
     </section>
 
@@ -394,6 +512,40 @@
             }
         }
 
+        // Work section scroll animation
+        function animateWorkSection() {
+            const workSection = document.querySelector('#work');
+            const workTitle = workSection.querySelector('h2');
+            const workItems = workSection.querySelectorAll('.work-item');
+            
+            const sectionTop = workSection.offsetTop;
+            const sectionHeight = workSection.offsetHeight;
+            const scrollY = window.scrollY;
+            const viewportHeight = window.innerHeight;
+            
+            // Calculate when section enters viewport
+            const sectionStart = sectionTop - viewportHeight * 0.8;
+            const sectionEnd = sectionTop + sectionHeight * 0.2;
+            
+            if (scrollY > sectionStart && scrollY < sectionEnd) {
+                const progress = Math.min((scrollY - sectionStart) / (sectionEnd - sectionStart), 1);
+                
+                // Animate title
+                if (progress > 0.1) {
+                    workTitle.style.opacity = '1';
+                    workTitle.style.transform = 'translateY(0)';
+                }
+                
+                // Animate work items with staggered delay
+                workItems.forEach((item, index) => {
+                    if (progress > 0.2 + (index * 0.1)) {
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateX(0)';
+                    }
+                });
+            }
+        }
+
         window.addEventListener('load', () => {
             const name = document.querySelector('.main-name');
             setTimeout(() => {
@@ -404,6 +556,7 @@
         });
 
         window.addEventListener('resize', ensureMobileInversion);
+        window.addEventListener('scroll', animateWorkSection);
 
         // Continuously check and fix mobile inversion
         setInterval(() => {
@@ -433,18 +586,6 @@
             }
         }
 
-        // Scroll animations
-        function checkScroll() {
-            const elements = document.querySelectorAll('#work h2, .work-item');
-            elements.forEach(el => {
-                const rect = el.getBoundingClientRect();
-                if (rect.top < window.innerHeight * 0.8) {
-                    el.style.opacity = '1';
-                    el.style.transform = 'translateY(0)';
-                }
-            });
-        }
-
         // Navigation hover effects
         document.querySelectorAll('nav a').forEach(link => {
             link.addEventListener('mouseenter', () => {
@@ -461,7 +602,6 @@
 
         // Initialize
         createParticles();
-        window.addEventListener('scroll', checkScroll);
 
         // Add keyframes for animations
         const style = document.createElement('style');
@@ -471,12 +611,6 @@
                 25% { transform: translateY(-20px) rotate(90deg); }
                 50% { transform: translateY(0) rotate(180deg); }
                 75% { transform: translateY(20px) rotate(270deg); }
-            }
-            
-            .work-item { 
-                opacity: 0; 
-                transform: translateY(50px); 
-                transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1); 
             }
 
             .horizontal-slide {
