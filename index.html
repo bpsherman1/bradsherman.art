@@ -176,113 +176,115 @@
     text-align: right; /* Right aligned text */
 }
 
-        /* Mobile responsiveness - PROPERLY FIXED */
-        @media (max-width: 768px) {
-            nav { 
-                padding: 0.5rem 1rem !important;
-            }
-            
-            /* FIXED: Brad Sherman text - inverse color */
-            .main-name { 
-                font-size: 15vw; 
-                mix-blend-mode: difference !important;
-                color: white !important;
-            }
-            
-            /* FIXED DROPDOWN - SOLID BLACK BACKGROUND */
-            .dropdown-content { 
-                position: fixed !important; 
-                top: 90px !important;
-                right: 1rem !important;
-                left: auto !important;
-                transform: translateY(-10px) !important;
-                width: 45% !important;
-                min-width: unset !important;
-                background: #000000 !important; /* SOLID BLACK */
-                border: none !important; /* Remove border */
-                padding: 0.5rem 0 !important;
-                max-height: 60vh;
-                overflow-y: auto;
-                mix-blend-mode: normal !important; /* No inversion */
-                backdrop-filter: none !important;
-                opacity: 1 !important;
-                z-index: 1000 !important;
-            }
-            
-            .dropdown:hover .dropdown-content {
-                transform: translateY(0) !important;
-                opacity: 1 !important;
-                visibility: visible !important;
-            }
-            
-            .dropdown-content a {
-                padding: 0.4rem 1rem !important;
-                font-size: 0.8rem !important;
-                color: #ffffff !important; /* White text on black */
-                text-align: right !important;
-                mix-blend-mode: normal !important;
-                border-left: none !important;
-                font-weight: 600 !important;
-                background: transparent !important;
-                display: block !important;
-            }
-            
-            .dropdown-content a:hover {
-                background: rgba(255, 255, 255, 0.2) !important;
-                padding-right: 1.5rem !important;
-            }
-            
-            .nav-links {
-                gap: 0.6rem !important;
-                margin-top: -5px;
-            }
-            
-            nav a {
-                font-size: 0.8rem !important;
-            }
-            
-            .logo {
-                font-size: 0.9rem !important;
-                margin-top: -5px;
-            }
-            
-            /* HIDE CURSOR ON MOBILE */
-            .cursor, .cursor-follower {
-                display: none !important;
-            }
+       /* Updated Mobile responsiveness - PROPERLY FIXED */
+@media (max-width: 768px) {
+    nav { 
+        padding: 0.5rem 1rem !important;
+    }
+    
+    /* FIXED: Brad Sherman text - inverse color */
+    .main-name { 
+        font-size: 15vw; 
+        mix-blend-mode: difference !important;
+        color: white !important;
+    }
+    
+    /* FIXED DROPDOWN - SOLID BLACK BACKGROUND */
+    .dropdown-content { 
+        position: fixed !important; 
+        top: 90px !important;
+        right: 1rem !important;
+        left: auto !important;
+        transform: translateY(-10px) !important;
+        width: 45% !important;
+        min-width: unset !important;
+        background: #000000 !important; /* SOLID BLACK */
+        border: none !important; /* Remove border */
+        padding: 0.5rem 0 !important;
+        max-height: 60vh;
+        overflow-y: auto;
+        mix-blend-mode: normal !important; /* No inversion */
+        backdrop-filter: none !important;
+        opacity: 1 !important;
+        z-index: 1000 !important;
+    }
+    
+    .dropdown:hover .dropdown-content {
+        transform: translateY(0) !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    
+    .dropdown-content a {
+        padding: 0.4rem 1rem !important;
+        font-size: 0.8rem !important;
+        color: #ffffff !important; /* White text on black */
+        text-align: right !important;
+        mix-blend-mode: normal !important;
+        border-left: none !important;
+        font-weight: 600 !important;
+        background: transparent !important;
+        display: block !important;
+    }
+    
+    .dropdown-content a:hover {
+        background: rgba(255, 255, 255, 0.2) !important;
+        padding-right: 1.5rem !important;
+    }
+    
+    .nav-links {
+        gap: 0.6rem !important;
+        margin-top: -5px;
+    }
+    
+    nav a {
+        font-size: 0.8rem !important;
+    }
+    
+    .logo {
+        font-size: 0.9rem !important;
+        margin-top: -5px;
+    }
+    
+    /* HIDE CURSOR ON MOBILE */
+    .cursor, .cursor-follower {
+        display: none !important;
+    }
 
-            /* Mobile work grid */
-            .work-row {
-                flex-direction: column;
-                margin-bottom: 8rem;
-            }
+    /* Mobile work grid - ADDED TOP MARGIN TO PUSH IMAGES DOWN */
+    .work-row {
+        flex-direction: column;
+        margin-bottom: 8rem;
+        margin-top: 8rem; /* ADDED: Push images down to avoid overlap */
+    }
 
-            .work-item {
-                margin-bottom: 3rem;
-            }
+    .work-item {
+        margin-bottom: 3rem;
+    }
 
-            .work-image {
-                height: 250px;
-                margin-bottom: 2rem;
-            }
+    .work-image {
+        height: 250px;
+        margin-bottom: 2rem;
+    }
 
-            /* Reset z-index for mobile since columns stack vertically */
-            .work-item:nth-child(1) .work-image:hover,
-            .work-item:nth-child(2) .work-image:hover,
-            .work-item:nth-child(3) .work-image:hover {
-                z-index: 10;
-            }
+    /* Reset z-index for mobile since columns stack vertically */
+    .work-item:nth-child(1) .work-image:hover,
+    .work-item:nth-child(2) .work-image:hover,
+    .work-item:nth-child(3) .work-image:hover {
+        z-index: 10;
+    }
 
-            /* Mobile MEDIUMS title */
-            .mediums-title {
-                font-size: 4rem;
-                top: 2rem;
-                left: 1rem;
-                transform: translateX(0); /* No animation on mobile */
-            }
+    /* Mobile MEDIUMS title - ENABLE ANIMATION */
+    .mediums-title {
+        font-size: 4rem;
+        top: 2rem;
+        left: 1rem;
+        transform: translateX(-100vw); /* ENABLE ANIMATION: Start off-screen left */
+        transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1); /* ENABLE TRANSITION */
+    }
 
-            /* Mobile description */
-            .mediums-description {
+    /* Mobile description - ENABLE ANIMATION */
+    .mediums-description {
         font-family: 'Futura', sans-serif;
         font-weight: 400;
         font-size: 1rem;
@@ -290,89 +292,98 @@
         left: auto;
         right: 1rem;
         max-width: 90%;
-        transform: translateX(0); /* No animation on mobile */
+        transform: translateX(-100vw); /* ENABLE ANIMATION: Start off-screen left */
+        transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1); /* ENABLE TRANSITION */
         text-align: right;
     }
-        }
+}
 
-        @media (max-width: 480px) {
-            nav {
-                padding: 0.4rem 0.8rem !important;
-            }
-            nav a {
-                font-size: 0.75rem !important;
-            }
-            .logo {
-                font-size: 0.85rem !important;
-            }
-            .nav-links {
-                gap: 0.5rem !important;
-                margin-top: -8px;
-            }
-            .dropdown-content {
-                top: 85px !important;
-                width: 50% !important;
-                padding: 0.4rem 0 !important;
-            }
-            .dropdown-content a {
-                padding: 0.3rem 0.8rem !important;
-                font-size: 0.75rem !important;
-            }
+@media (max-width: 480px) {
+    nav {
+        padding: 0.4rem 0.8rem !important;
+    }
+    nav a {
+        font-size: 0.75rem !important;
+    }
+    .logo {
+        font-size: 0.85rem !important;
+    }
+    .nav-links {
+        gap: 0.5rem !important;
+        margin-top: -8px;
+    }
+    .dropdown-content {
+        top: 85px !important;
+        width: 50% !important;
+        padding: 0.4rem 0 !important;
+    }
+    .dropdown-content a {
+        padding: 0.3rem 0.8rem !important;
+        font-size: 0.75rem !important;
+    }
 
-            .work-image {
-                height: 200px;
-            }
+    .work-image {
+        height: 200px;
+    }
 
-            .work-title {
-                font-size: 1.2rem;
-            }
+    .work-title {
+        font-size: 1.2rem;
+    }
 
-            .mediums-title {
-                font-size: 3rem;
-                top: 1.5rem;
-                left: 0.8rem;
-            }
+    .mediums-title {
+        font-size: 3rem;
+        top: 1.5rem;
+        left: 0.8rem;
+        transform: translateX(-100vw); /* ENABLE ANIMATION */
+        transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1); /* ENABLE TRANSITION */
+    }
 
-            .mediums-description {
+    .mediums-description {
         font-family: 'Futura', sans-serif;
         font-weight: 400;
         font-size: 0.9rem;
         top: 8rem; /* Increased from 6rem */
         left: auto;
         right: 0.8rem;
+        transform: translateX(-100vw); /* ENABLE ANIMATION */
+        transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1); /* ENABLE TRANSITION */
         text-align: right;
     }
-        }
+}
 
-        @media (max-width: 360px) {
-            .nav-links {
-                gap: 0.4rem !important;
-                margin-top: -10px;
-            }
-            nav a {
-                font-size: 0.7rem !important;
-            }
-            .dropdown-content {
-                top: 80px !important;
-                width: 55% !important;
-            }
+@media (max-width: 360px) {
+    .nav-links {
+        gap: 0.4rem !important;
+        margin-top: -10px;
+    }
+    nav a {
+        font-size: 0.7rem !important;
+    }
+    .dropdown-content {
+        top: 80px !important;
+        width: 55% !important;
+    }
 
-            .mediums-title {
-                font-size: 2.5rem;
-                top: 1.2rem;
-                left: 0.6rem;
-            }
+    .mediums-title {
+        font-size: 2.5rem;
+        top: 1.2rem;
+        left: 0.6rem;
+        transform: translateX(-100vw); /* ENABLE ANIMATION */
+        transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1); /* ENABLE TRANSITION */
+    }
 
-             .mediums-description {
+    .mediums-description {
         font-family: 'Futura', sans-serif;
         font-weight: 400;
         font-size: 0.8rem;
         top: 7rem; /* Increased from 5rem */
         left: auto;
         right: 0.6rem;
+        transform: translateX(-100vw); /* ENABLE ANIMATION */
+        transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1); /* ENABLE TRANSITION */
         text-align: right;
     }
-        }
+}
     </style>
 </head>
 <body>
@@ -694,9 +705,8 @@
 
         // NEW: Scroll animation for mediums title and description
       // NEW: Scroll animation for mediums title and description - FIXED VERSION
+// NEW: Scroll animation for mediums title and description - FIXED VERSION FOR ALL DEVICES
 function animateMediumsText() {
-    if (window.innerWidth <= 768) return; // Skip animation on mobile
-    
     const mediumsTitle = document.querySelector('.mediums-title');
     const mediumsDescription = document.querySelector('.mediums-description');
     
