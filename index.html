@@ -205,9 +205,15 @@
     }
     
     /* FIXED: Brad Sherman text - inverse color */
-    .main-name { 
+   .main-name { 
         font-size: 15vw; 
-      
+        /* Force the inversion to work reliably on mobile */
+        background: linear-gradient(45deg, #ff0055, #00ffff, #ffaa00);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        mix-blend-mode: normal !important; /* Override the difference mode */
+        filter: invert(1) hue-rotate(180deg);
     }
     
     /* FIXED DROPDOWN - SOLID BLACK BACKGROUND */
@@ -853,6 +859,22 @@ function animateMediumsText() {
         // NEW: Trigger animation on page load in case items are already in view
         window.addEventListener('load', animateWorkItems);
         window.addEventListener('load', animateMediumsText);
+
+function fixMobileText() {
+    if (window.innerWidth <= 768) {
+        const name = document.querySelector('.main-name');
+        // Apply mobile-specific styles
+        name.style.mixBlendMode = 'normal';
+        name.style.color = '#ffffff';
+        name.style.textShadow = '0 0 10px rgba(255, 255, 255, 0.8)';
+    }
+}
+
+// Call it on load and resize
+window.addEventListener('load', fixMobileText);
+window.addEventListener('resize', fixMobileText);
+
+        
     </script>
 </body>
 </html>
