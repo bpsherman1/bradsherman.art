@@ -679,40 +679,40 @@
         }
 
         // NEW: Scroll animation for mediums title and description
-        function animateMediumsText() {
-            if (window.innerWidth <= 768) return; // Skip animation on mobile
-            
-            const workSection = document.querySelector('#work');
-            const mediumsTitle = document.querySelector('.mediums-title');
-            const mediumsDescription = document.querySelector('.mediums-description');
-            
-            const sectionTop = workSection.offsetTop;
-            const sectionHeight = workSection.offsetHeight;
-            const scrollY = window.scrollY;
-            const viewportHeight = window.innerHeight;
-            
-            // Calculate scroll progress through the work section
-            const sectionStart = sectionTop - viewportHeight + 400;
-            const sectionEnd = sectionTop + sectionHeight * 0.3;
-            const scrollProgress = Math.min(Math.max((scrollY - sectionStart) / (sectionEnd - sectionStart), 0), 1);
-            
-            // Animate from left to center to right
-            if (scrollProgress > 0 && scrollProgress < 1) {
-                // Move from left (-100vw) to center (0) to right (100vw)
-                const translateX = (scrollProgress - 0.5) * 200; // -100 to 100
-                mediumsTitle.style.transform = `translateX(${translateX}vw)`;
-                mediumsDescription.style.transform = `translateX(${translateX}vw)`;
-            } else if (scrollProgress <= 0) {
-                // Start position (off-screen left)
-                mediumsTitle.style.transform = 'translateX(-100vw)';
-                mediumsDescription.style.transform = 'translateX(-100vw)';
-            } else {
-                // End position (off-screen right)
-                mediumsTitle.style.transform = 'translateX(100vw)';
-                mediumsDescription.style.transform = 'translateX(100vw)';
-            }
-        }
-
+      // NEW: Scroll animation for mediums title and description - FIXED VERSION
+function animateMediumsText() {
+    if (window.innerWidth <= 768) return; // Skip animation on mobile
+    
+    const mediumsTitle = document.querySelector('.mediums-title');
+    const mediumsDescription = document.querySelector('.mediums-description');
+    
+    const scrollY = window.scrollY;
+    const viewportHeight = window.innerHeight;
+    
+    // Start animation immediately when user starts scrolling down from hero section
+    const animationStart = viewportHeight * 0.2; // Start when 20% down the hero
+    const animationEnd = viewportHeight * 1.2; // End when 120% down from top
+    
+    // Calculate scroll progress (0 to 1)
+    const scrollProgress = Math.min(Math.max((scrollY - animationStart) / (animationEnd - animationStart), 0), 1);
+    
+    // Animate from left to center to right
+    if (scrollProgress > 0 && scrollProgress < 1) {
+        // Move from left (-100vw) to center (0) to right (100vw)
+        const translateX = (scrollProgress - 0.5) * 200; // -100 to 100
+        
+        mediumsTitle.style.transform = `translateX(${translateX}vw)`;
+        mediumsDescription.style.transform = `translateX(${translateX}vw)`;
+    } else if (scrollProgress <= 0) {
+        // Start position (off-screen left)
+        mediumsTitle.style.transform = 'translateX(-100vw)';
+        mediumsDescription.style.transform = 'translateX(-100vw)';
+    } else {
+        // End position (off-screen right)
+        mediumsTitle.style.transform = 'translateX(100vw)';
+        mediumsDescription.style.transform = 'translateX(100vw)';
+    }
+}
         // Create floating particles
         function createParticles() {
             const container = document.querySelector('.particles');
