@@ -92,7 +92,7 @@
             flex: 1;
             opacity: 0;
             transform: translateX(100vw); /* Start completely off-screen to the right */
-            transition: all 1.2s cubic-bezier(0.23, 1, 0.32, 1); /* Slower animation */
+            transition: all 1.8s cubic-bezier(0.23, 1, 0.32, 1); /* Even slower animation */
         }
 
         .work-image {
@@ -120,14 +120,14 @@
             margin-bottom: 1rem;
         }
 
-        /* MEDIUMS title in top left corner */
+        /* MEDIUMS title in top left corner - BIGGER */
         .mediums-title {
             font-family: 'Futura', sans-serif;
-            font-size: 6rem; /* Bigger size */
+            font-size: 8rem; /* Even bigger size */
             font-weight: 900;
             color: white;
             position: absolute;
-            top: 2rem;
+            top: 3rem; /* Moved down slightly */
             left: 2rem;
             z-index: 10;
             mix-blend-mode: difference;
@@ -225,8 +225,8 @@
 
             /* Mobile MEDIUMS title */
             .mediums-title {
-                font-size: 3rem;
-                top: 1rem;
+                font-size: 4rem; /* Bigger on mobile too */
+                top: 2rem; /* Moved down on mobile */
                 left: 1rem;
             }
         }
@@ -264,8 +264,8 @@
             }
 
             .mediums-title {
-                font-size: 2.5rem;
-                top: 0.8rem;
+                font-size: 3rem; /* Bigger on small mobile */
+                top: 1.5rem; /* Moved down on small mobile */
                 left: 0.8rem;
             }
         }
@@ -284,8 +284,8 @@
             }
 
             .mediums-title {
-                font-size: 2rem;
-                top: 0.6rem;
+                font-size: 2.5rem; /* Bigger on very small mobile */
+                top: 1.2rem; /* Moved down on very small mobile */
                 left: 0.6rem;
             }
         }
@@ -361,7 +361,7 @@
     </section>
 
     <!-- Work Section -->
-    <section id="work" style="min-height: 100vh; padding: 10% 0; position: relative; background: #0a0a0a;">
+    <section id="work" style="min-height: 100vh; padding: 15% 0 10% 0; position: relative; background: #0a0a0a;">
         <!-- MEDIUMS title in top left corner -->
         <h2 class="mediums-title">MEDIUMS</h2>
         
@@ -560,7 +560,7 @@
             }
         }
 
-        // NEW: Scroll animation for work items - slower and from completely off-screen
+        // NEW: Scroll animation for work items - even slower and from completely off-screen
         function animateWorkItems() {
             const workItems = document.querySelectorAll('.work-item');
             const windowHeight = window.innerHeight;
