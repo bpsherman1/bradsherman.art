@@ -692,7 +692,7 @@
             const viewportHeight = window.innerHeight;
             
             // Calculate scroll progress through the work section
-            const sectionStart = sectionTop - viewportHeight;
+            const sectionStart = sectionTop - viewportHeight + 200;
             const sectionEnd = sectionTop + sectionHeight * 0.3;
             const scrollProgress = Math.min(Math.max((scrollY - sectionStart) / (sectionEnd - sectionStart), 0), 1);
             
