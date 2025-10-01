@@ -205,15 +205,10 @@
     }
     
     /* FIXED: Brad Sherman text - inverse color */
-   .main-name { 
+    .main-name { 
         font-size: 15vw; 
-        /* Force the inversion to work reliably on mobile */
-        background: linear-gradient(45deg, #ff0055, #00ffff, #ffaa00);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-        mix-blend-mode: normal !important; /* Override the difference mode */
-        filter: invert(1) hue-rotate(180deg);
+        mix-blend-mode: exclusion !important;
+        /* exclusion creates similar inversion effect to difference */
     }
     
     /* FIXED DROPDOWN - SOLID BLACK BACKGROUND */
