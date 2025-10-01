@@ -177,6 +177,7 @@
 }
 
        /* Updated Mobile responsiveness - PROPERLY FIXED */
+/* Updated Mobile responsiveness */
 @media (max-width: 768px) {
     nav { 
         padding: 0.5rem 1rem !important;
@@ -251,11 +252,11 @@
         display: none !important;
     }
 
-    /* Mobile work grid - ADDED TOP MARGIN TO PUSH IMAGES DOWN */
+    /* Mobile work grid - INCREASED TOP MARGIN TO PUSH IMAGES DOWN FURTHER */
     .work-row {
         flex-direction: column;
         margin-bottom: 8rem;
-        margin-top: 8rem; /* ADDED: Push images down to avoid overlap */
+        margin-top: 12rem; /* INCREASED from 8rem to 12rem */
     }
 
     .work-item {
@@ -274,26 +275,26 @@
         z-index: 10;
     }
 
-    /* Mobile MEDIUMS title - ENABLE ANIMATION */
+    /* Mobile MEDIUMS title - SMALLER SIZE */
     .mediums-title {
-        font-size: 4rem;
+        font-size: 3rem; /* REDUCED from 4rem to 3rem */
         top: 2rem;
         left: 1rem;
-        transform: translateX(-100vw); /* ENABLE ANIMATION: Start off-screen left */
-        transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1); /* ENABLE TRANSITION */
+        transform: translateX(-100vw);
+        transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
-    /* Mobile description - ENABLE ANIMATION */
+    /* Mobile description - SMALLER SIZE AND ALIGNED WITH MEDIUMS TEXT */
     .mediums-description {
         font-family: 'Futura', sans-serif;
         font-weight: 400;
-        font-size: 1rem;
-        top: 10rem; /* Increased from 8rem */
+        font-size: 0.85rem; /* REDUCED from 1rem to 0.85rem */
+        top: 10rem;
         left: auto;
-        right: 1rem;
-        max-width: 90%;
-        transform: translateX(-100vw); /* ENABLE ANIMATION: Start off-screen left */
-        transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1); /* ENABLE TRANSITION */
+        right: 1rem; /* Aligned with mediums title right position */
+        max-width: 85%; /* Adjusted to match text alignment */
+        transform: translateX(-100vw);
+        transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1);
         text-align: right;
     }
 }
@@ -330,23 +331,25 @@
         font-size: 1.2rem;
     }
 
+    /* Smaller screens - EVEN SMALLER TEXT */
     .mediums-title {
-        font-size: 3rem;
+        font-size: 2.5rem; /* REDUCED from 3rem to 2.5rem */
         top: 1.5rem;
         left: 0.8rem;
-        transform: translateX(-100vw); /* ENABLE ANIMATION */
-        transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1); /* ENABLE TRANSITION */
+        transform: translateX(-100vw);
+        transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
     .mediums-description {
         font-family: 'Futura', sans-serif;
         font-weight: 400;
-        font-size: 0.9rem;
-        top: 8rem; /* Increased from 6rem */
+        font-size: 0.8rem; /* REDUCED from 0.9rem to 0.8rem */
+        top: 8rem;
         left: auto;
-        right: 0.8rem;
-        transform: translateX(-100vw); /* ENABLE ANIMATION */
-        transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1); /* ENABLE TRANSITION */
+        right: 0.8rem; /* Aligned with mediums title */
+        max-width: 85%; /* Adjusted to match */
+        transform: translateX(-100vw);
+        transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1);
         text-align: right;
     }
 }
@@ -364,23 +367,25 @@
         width: 55% !important;
     }
 
+    /* Smallest screens - SMALLEST TEXT */
     .mediums-title {
-        font-size: 2.5rem;
+        font-size: 2rem; /* REDUCED from 2.5rem to 2rem */
         top: 1.2rem;
         left: 0.6rem;
-        transform: translateX(-100vw); /* ENABLE ANIMATION */
-        transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1); /* ENABLE TRANSITION */
+        transform: translateX(-100vw);
+        transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
     .mediums-description {
         font-family: 'Futura', sans-serif;
         font-weight: 400;
-        font-size: 0.8rem;
-        top: 7rem; /* Increased from 5rem */
+        font-size: 0.75rem; /* REDUCED from 0.8rem to 0.75rem */
+        top: 7rem;
         left: auto;
-        right: 0.6rem;
-        transform: translateX(-100vw); /* ENABLE ANIMATION */
-        transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1); /* ENABLE TRANSITION */
+        right: 0.6rem; /* Aligned with mediums title */
+        max-width: 85%; /* Adjusted to match */
+        transform: translateX(-100vw);
+        transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1);
         text-align: right;
     }
 }
