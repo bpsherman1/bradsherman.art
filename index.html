@@ -90,14 +90,10 @@
 
         .work-item {
             flex: 1;
-            opacity: 0;
-            transform: translateX(100px);
+            opacity: 1; /* Changed from 0 to 1 to always show content */
+            transform: translateX(0); /* Changed from translateX(100px) */
             transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
         }
-
-        .work-item:nth-child(1) { transition-delay: 0.1s; }
-        .work-item:nth-child(2) { transition-delay: 0.2s; }
-        .work-item:nth-child(3) { transition-delay: 0.3s; }
 
         .work-image {
             width: 100%;
@@ -332,8 +328,8 @@
     </section>
 
     <!-- Work Section -->
-    <section id="work" style="min-height: 100vh; padding: 10% 5%; position: relative; background: #0a0a0a;">
-        <h2 style="font-family: 'Futura', sans-serif; font-size: 4rem; margin-bottom: 8rem; color: white; opacity: 0; transform: translateY(50px); text-align: center;">
+    <section id="work" style="min-height: 100vh; padding: 10% 0; position: relative; background: #0a0a0a;">
+        <h2 style="font-family: 'Futura', sans-serif; font-size: 4rem; margin-bottom: 8rem; color: white; opacity: 1; transform: translateY(0); text-align: center;">
             MEDIUMS
         </h2>
         
@@ -532,59 +528,6 @@
             }
         }
 
-        // Work section scroll animation
-        function animateWorkSection() {
-            const workSection = document.querySelector('#work');
-            const workTitle = workSection.querySelector('h2');
-            const workItems = workSection.querySelectorAll('.work-item');
-            
-            const sectionTop = workSection.offsetTop;
-            const sectionHeight = workSection.offsetHeight;
-            const scrollY = window.scrollY;
-            const viewportHeight = window.innerHeight;
-            
-            // Calculate when section enters viewport
-            const sectionStart = sectionTop - viewportHeight * 0.8;
-            const sectionEnd = sectionTop + sectionHeight * 0.2;
-            
-            if (scrollY > sectionStart && scrollY < sectionEnd) {
-                const progress = Math.min((scrollY - sectionStart) / (sectionEnd - sectionStart), 1);
-                
-                // Animate title
-                if (progress > 0.1) {
-                    workTitle.style.opacity = '1';
-                    workTitle.style.transform = 'translateY(0)';
-                }
-                
-                // Animate work items with staggered delay
-                workItems.forEach((item, index) => {
-                    if (progress > 0.2 + (index * 0.1)) {
-                        item.style.opacity = '1';
-                        item.style.transform = 'translateX(0)';
-                    }
-                });
-            }
-        }
-
-        window.addEventListener('load', () => {
-            const name = document.querySelector('.main-name');
-            setTimeout(() => {
-                name.style.opacity = '1';
-                name.style.transform = 'translateY(0)';
-                ensureMobileInversion();
-            }, 500);
-        });
-
-        window.addEventListener('resize', ensureMobileInversion);
-        window.addEventListener('scroll', animateWorkSection);
-
-        // Continuously check and fix mobile inversion
-        setInterval(() => {
-            if (window.innerWidth <= 768) {
-                ensureMobileInversion();
-            }
-        }, 100);
-
         // Create floating particles
         function createParticles() {
             const container = document.querySelector('.particles');
@@ -641,6 +584,17 @@
             }
         `;
         document.head.appendChild(style);
+
+        window.addEventListener('load', () => {
+            const name = document.querySelector('.main-name');
+            setTimeout(() => {
+                name.style.opacity = '1';
+                name.style.transform = 'translateY(0)';
+                ensureMobileInversion();
+            }, 500);
+        });
+
+        window.addEventListener('resize', ensureMobileInversion);
     </script>
 </body>
 </html>
