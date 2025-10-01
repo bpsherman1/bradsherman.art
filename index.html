@@ -91,17 +91,30 @@
         .work-item {
             flex: 1;
             opacity: 0;
-            transform: translateX(100vw); /* Start completely off-screen to the right */
-            transition: all 1.8s cubic-bezier(0.23, 1, 0.32, 1); /* Even slower animation */
+            transform: translateX(100vw);
+            transition: all 1.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .work-image-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            margin-bottom: 2.5rem;
+            overflow: hidden;
+            cursor: pointer;
         }
 
         .work-image {
             width: 100%;
-            height: 300px;
+            height: 100%;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            margin-bottom: 2.5rem;
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .work-image-container:hover .work-image {
+            transform: scale(1.25); /* 25% scale up on hover */
         }
 
         .work-title {
@@ -123,11 +136,11 @@
         /* MEDIUMS title in top left corner - BIGGER */
         .mediums-title {
             font-family: 'Futura', sans-serif;
-            font-size: 8rem; /* Even bigger size */
+            font-size: 8rem;
             font-weight: 900;
             color: white;
             position: absolute;
-            top: 3rem; /* Moved down slightly */
+            top: 3rem;
             left: 2rem;
             z-index: 10;
             mix-blend-mode: difference;
@@ -218,15 +231,15 @@
                 margin-bottom: 3rem;
             }
 
-            .work-image {
+            .work-image-container {
                 height: 250px;
                 margin-bottom: 2rem;
             }
 
             /* Mobile MEDIUMS title */
             .mediums-title {
-                font-size: 4rem; /* Bigger on mobile too */
-                top: 2rem; /* Moved down on mobile */
+                font-size: 4rem;
+                top: 2rem;
                 left: 1rem;
             }
         }
@@ -255,7 +268,7 @@
                 font-size: 0.75rem !important;
             }
 
-            .work-image {
+            .work-image-container {
                 height: 200px;
             }
 
@@ -264,8 +277,8 @@
             }
 
             .mediums-title {
-                font-size: 3rem; /* Bigger on small mobile */
-                top: 1.5rem; /* Moved down on small mobile */
+                font-size: 3rem;
+                top: 1.5rem;
                 left: 0.8rem;
             }
         }
@@ -284,8 +297,8 @@
             }
 
             .mediums-title {
-                font-size: 2.5rem; /* Bigger on very small mobile */
-                top: 1.2rem; /* Moved down on very small mobile */
+                font-size: 2.5rem;
+                top: 1.2rem;
                 left: 0.6rem;
             }
         }
@@ -361,24 +374,30 @@
     </section>
 
     <!-- Work Section -->
-    <section id="work" style="min-height: 100vh; padding: 15% 0 10% 0; position: relative; background: #0a0a0a;">
+    <section id="work" style="min-height: 100vh; padding: 20% 0 10% 0; position: relative; background: #0a0a0a;">
         <!-- MEDIUMS title in top left corner -->
         <h2 class="mediums-title">MEDIUMS</h2>
         
         <!-- First Row of 3 Images -->
         <div class="work-row" style="margin-bottom: 12rem;">
             <div class="work-item">
-                <div class="work-image" style="background-image: url('images_2/111.png');"></div>
+                <a href="campaigns.html" class="work-image-container">
+                    <div class="work-image" style="background-image: url('images_2/111.png');"></div>
+                </a>
                 <h3 class="work-title">Campaigns</h3>
                 <p class="work-description">Strategic marketing campaigns and visual storytelling</p>
             </div>
             <div class="work-item">
-                <div class="work-image" style="background-image: url('images_2/dsds.png');"></div>
+                <a href="typography.html" class="work-image-container">
+                    <div class="work-image" style="background-image: url('images_2/dsds.png');"></div>
+                </a>
                 <h3 class="work-title">Typography</h3>
                 <p class="work-description">Custom type design and expressive lettering work</p>
             </div>
             <div class="work-item">
-                <div class="work-image" style="background-image: url('images_2/cov.png');"></div>
+                <a href="graphics-italy-2025.html" class="work-image-container">
+                    <div class="work-image" style="background-image: url('images_2/cov.png');"></div>
+                </a>
                 <h3 class="work-title">Graphics Italy 2025</h3>
                 <p class="work-description">Italian-inspired graphic design and visual identity</p>
             </div>
@@ -387,17 +406,23 @@
         <!-- Second Row of 3 Images -->
         <div class="work-row" style="margin-bottom: 12rem;">
             <div class="work-item">
-                <div class="work-image" style="background-image: url('images_2/24.png');"></div>
+                <a href="brands.html" class="work-image-container">
+                    <div class="work-image" style="background-image: url('images_2/24.png');"></div>
+                </a>
                 <h3 class="work-title">Brands</h3>
                 <p class="work-description">Complete brand systems and visual identity development</p>
             </div>
             <div class="work-item">
-                <div class="work-image" style="background-image: url('images_2/23.png');"></div>
+                <a href="painting.html" class="work-image-container">
+                    <div class="work-image" style="background-image: url('images_2/23.png');"></div>
+                </a>
                 <h3 class="work-title">Paintings</h3>
                 <p class="work-description">Fine art paintings and creative visual expressions</p>
             </div>
             <div class="work-item">
-                <div class="work-image" style="background-image: url('images_2/211.png');"></div>
+                <a href="woodworking.html" class="work-image-container">
+                    <div class="work-image" style="background-image: url('images_2/211.png');"></div>
+                </a>
                 <h3 class="work-title">Woodworking</h3>
                 <p class="work-description">Handcrafted wood designs and functional art pieces</p>
             </div>
@@ -406,17 +431,23 @@
         <!-- Third Row of 3 Images -->
         <div class="work-row" style="margin-bottom: 12rem;">
             <div class="work-item">
-                <div class="work-image" style="background-image: url('images_2/still.png');"></div>
+                <a href="drawing.html" class="work-image-container">
+                    <div class="work-image" style="background-image: url('images_2/still.png');"></div>
+                </a>
                 <h3 class="work-title">Drawings</h3>
                 <p class="work-description">Technical and artistic drawing techniques</p>
             </div>
             <div class="work-item">
-                <div class="work-image" style="background-image: url('images_2/rap.png');"></div>
+                <a href="graphics.html" class="work-image-container">
+                    <div class="work-image" style="background-image: url('images_2/rap.png');"></div>
+                </a>
                 <h3 class="work-title">Graphics</h3>
                 <p class="work-description">Digital and print graphic design solutions</p>
             </div>
             <div class="work-item">
-                <div class="work-image" style="background-image: url('images_2/22.png');"></div>
+                <a href="websites.html" class="work-image-container">
+                    <div class="work-image" style="background-image: url('images_2/22.png');"></div>
+                </a>
                 <h3 class="work-title">Websites</h3>
                 <p class="work-description">Responsive web design and development</p>
             </div>
@@ -425,17 +456,23 @@
         <!-- Fourth Row of 3 Images -->
         <div class="work-row" style="margin-bottom: 12rem;">
             <div class="work-item">
-                <div class="work-image" style="background-image: url('images_2/caps.png');"></div>
+                <a href="photography.html" class="work-image-container">
+                    <div class="work-image" style="background-image: url('images_2/caps.png');"></div>
+                </a>
                 <h3 class="work-title">Photography</h3>
                 <p class="work-description">Conceptual and commercial photography work</p>
             </div>
             <div class="work-item">
-                <div class="work-image" style="background-image: url('images_2/3.png');"></div>
+                <a href="3d.html" class="work-image-container">
+                    <div class="work-image" style="background-image: url('images_2/3.png');"></div>
+                </a>
                 <h3 class="work-title">3D</h3>
                 <p class="work-description">Three-dimensional design and visualization</p>
             </div>
             <div class="work-item">
-                <div class="work-image" style="background-image: url('images_2/me.png');"></div>
+                <a href="#about" class="work-image-container">
+                    <div class="work-image" style="background-image: url('images_2/me.png');"></div>
+                </a>
                 <h3 class="work-title">About Me</h3>
                 <p class="work-description">Creative direction and visual strategy development</p>
             </div>
