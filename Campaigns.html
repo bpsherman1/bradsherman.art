@@ -451,20 +451,27 @@
         });
 
         // Mouse-based movement (like homepage)
-        function updateSlideshowPosition(yPercent) {
-            if (window.innerWidth > 768) {
-                const totalMovement = 300; // 300% movement for wide image
-                const slideshowPosition = -(yPercent * totalMovement * 0.25);
-                slideshow.style.transform = `translateX(${slideshowPosition}%)`;
-            }
-        }
+       // Horizontal Slideshow Scroll Control
+const slideshow = document.querySelector('.horizontal-slideshow');
 
-        document.addEventListener('mousemove', (e) => {
-            if (window.innerWidth > 768) {
-                const mouseY = e.clientY / window.innerHeight;
-                updateSlideshowPosition(mouseY);
-            }
-        });
+// Scroll-based movement ONLY
+window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const maxScroll = window.innerHeight * 1.5;
+    const scrollPercent = Math.min(scrollY / maxScroll, 1);
+    const slideshowPosition = -(scrollPercent * 200);
+    
+    if (window.innerWidth > 768) {
+        slideshow.style.transform = `translateX(${slideshowPosition}%)`;
+    }
+});
+
+// Reset on scroll to top
+window.addEventListener('scroll', () => {
+    if (window.scrollY === 0) {
+        slideshow.style.transform = 'translateX(0%)';
+    }
+});
 
         // Reset on scroll to top
         window.addEventListener('scroll', () => {
