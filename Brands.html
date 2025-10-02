@@ -13,14 +13,45 @@
             box-sizing: border-box; 
         }
         
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background: #0a0a0a; 
-            color: white; 
-            overflow-x: hidden;
-            cursor: none;
-        }
-        
+       /* White background for entire page below hero */
+body {
+    font-family: 'Inter', sans-serif; 
+    background: #ffffff; /* Change body to white */
+    color: #000000; /* Default text color black */
+    overflow-x: hidden;
+    cursor: none;
+}
+
+/* Hero section keeps dark background */
+.hero {
+    background: #0a0a0a; /* Ensure hero stays dark */
+}
+
+/* Work container inherits white background */
+.work-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 12rem 5% 10rem 5%;
+    background: #ffffff;
+    color: #000000;
+}
+
+/* Ensure text in work area is black */
+.work-info,
+.work-item-title,
+.work-item-description {
+    color: #000000;
+}
+
+.work-item-description {
+    color: #333333;
+}
+
+/* Lighter image boxes */
+.work-image {
+    background-color: #f5f5f5;
+    border: 1px solid #e0e0e0;
+}
         /* Custom Cursor */
         .cursor { 
             position: fixed; 
