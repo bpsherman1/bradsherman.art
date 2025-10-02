@@ -15,6 +15,7 @@
         
        /* White background for entire page below hero */
 /* White background for entire page below hero */
+/* Make everything after the hero white */
 body {
     font-family: 'Inter', sans-serif; 
     background: #0a0a0a; 
@@ -23,93 +24,38 @@ body {
     cursor: none;
 }
 
-/* White background starts after hero section */
-.hero ~ * {
-    background: #ffffff;
+/* The main content area after hero */
+main, .work-container, section:not(.hero) {
+    background: #ffffff !important;
+    color: #000000 !important;
+}
+
+/* Ensure all text in content area is black */
+.work-container * {
     color: #000000;
 }
 
-/* Work Container */
+.work-info,
+.work-item-title,
+.work-item-description {
+    color: #000000;
+}
+
+.work-item-description {
+    color: #333333;
+}
+
+/* Rest of your existing work container styles... */
 .work-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 12rem 5% 10rem 5%;
-    background: #ffffff; /* Ensure white background */
-}
-
-/* Black text for all content in work section */
-.work-info {
-    text-align: left;
-    margin-bottom: 10rem;
-    color: #000000; /* Black text */
-}
-
-.work-item-title {
-    font-family: 'Futura', sans-serif;
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: #000000; /* Black text */
-}
-
-.work-item-description {
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    color: #333333; /* Dark gray text */
-    line-height: 1.6;
-    max-width: 600px;
 }
 
 /* Lighter image boxes */
 .work-image {
-    width: 100%;
-    height: 700px;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    margin-bottom: 2rem;
-    border-radius: 0;
-    overflow: hidden;
-    background-color: #f5f5f5; /* Light gray boxes */
-    border: 1px solid #e0e0e0; /* Subtle border */
-}
-
-/* Make sure the shorter containers also have light background */
-.shorter-containers .work-image {
-    height: 500px;
-    background-color: #f5f5f5; /* Light gray */
-}
-
-/* Mobile responsive adjustments for white background */
-@media (max-width: 768px) {
-    .hero ~ * {
-        background: #ffffff;
-        color: #000000;
-    }
-    
-    .work-container {
-        background: #ffffff;
-    }
-    
-    .work-info {
-        color: #000000;
-    }
-    
-    .work-item-title {
-        color: #000000;
-    }
-    
-    .work-item-description {
-        color: #333333;
-    }
-    
-    .work-image {
-        background-color: #f5f5f5;
-    }
-    
-    .shorter-containers .work-image {
-        background-color: #f5f5f5;
-    }
+    background-color: #f5f5f5;
+    border: 1px solid #e0e0e0;
 }
         /* Custom Cursor */
         .cursor { 
