@@ -1,1 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typography - Brad Sherman Design</title>
+    <link href="https://fonts.googleapis.com/css2?family=Futura:wght@700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base Reset */
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: #0a0a0a; 
+            color: white; 
+            overflow-x: hidden;
+            cursor: none;
+        }
+        
+        /* Custom Cursor */
+        .cursor { 
+            position: fixed; 
+            width: 20px; 
+            height: 20px; 
+            background: #ff0055; 
+            border-radius: 50%; 
+            pointer-events: none; 
+            z-index: 9999; 
+            mix-blend-mode: difference; 
+            transition: transform 0.2s; 
+        }
+        
+        .cursor-follower { 
+            position: fixed; 
+            width: 60px; 
+            height: 60px; 
+            border: 2px solid #00ffff; 
+            border-radius: 50%; 
+            pointer-events: none; 
+            z-index: 9998; 
+            transition: all 0.6s ease; 
+        }
 
+        /* Navigation Styles */
+        nav { 
+            position: fixed; 
+            top: 0; 
+            width: 100%; 
+            padding: 2rem; 
+            z-index: 100; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            mix-blend-mode: difference;
+        }
+        
+        .nav-links { 
+            display: flex; 
+            gap: 2rem; 
+            align-items: center; 
+        }
+        
+        nav a { 
+            color: white; 
+            text-decoration: none; 
+            font-weight: 600; 
+            position: relative; 
+        }
+        
+        /* Dropdown Styles */
+        .dropdown { position: relative; display: inline-block; }
+        .dropdown-content { 
+            position: absolute; 
+            top: 35px;
+            left: 0; 
+            background: rgba(255, 255, 255, 0.95); 
+            backdrop-filter: blur(20px); 
+            border: 1px solid #fff; 
+            border-radius: 8px; 
+            padding: 1rem 0; 
+            min-width: 200px; 
+            opacity: 0; 
+            visibility: hidden; 
+            transform: translateY(-10px); 
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1); 
+            mix-blend-mode: difference;
+        }
+        .dropdown:hover .dropdown-content { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-content a { 
+            display: block; 
+            padding: 0.5rem 1.5rem; 
+            color: black; 
+            text-decoration: none; 
+            transition: all 0.3s ease; 
+            border-left: 3px solid transparent; 
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        .dropdown-content a:hover { 
+            background: rgba(0, 0, 0, 0.1); 
+            border-left: 3px solid #ff0055; 
+            padding-left: 2rem; 
+        }
+
+        /* Hero Slideshow */
+        .hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .animated-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff0055, #00ffff, #ffaa00);
+            opacity: 0.1;
+            filter: blur(100px);
+        }
+
+        /* Mobile static image - shown by default */
+        .mobile-static-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-image: url('images_2/fire.png');
+        }
+
+        .horizontal-slideshow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 400%; /* Single wide image - 400% width */
+            height: 100%;
+            display: flex;
+            transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .horizontal-slide {
+            width: 100%; /* Single image takes full width of slideshow */
+            height: 100%;
+            background-size: auto 100%; /* Stretch width automatically, maintain 100% height */
+            background-position: 0% center; /* Explicitly position at left edge */
+            background-repeat: no-repeat;
+            flex-shrink: 0;
+        }
+
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .name-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 66%;
+            display: flex;
+            align-items: flex-end;
+            padding: 0 5%;
+            pointer-events: none;
+        }
+
+        .page-title {
+            font-family: 'Futura', sans-serif;
+            font-size: 11.5vw;
+            font-weight: 900;
+            color: white;
+            line-height: 0.8;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: -3px;
+            mix-blend-mode: difference;
+            text-align: center; /* Center the text */
+            position: absolute; /* If it needs to be positioned absolutely */
+            left: 50%; /* Center horizontally */
+            bottom: 0.05rem;
+            transform: translateX(-50%); /* Adjust for true centering */
+            width: 100%; /* Ensure it takes full width for proper centering */
+        }
+
+        /* Work Grid */
+        .work-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 12rem 5% 10rem 5%;
+        }
+
+        .work-section {
+            margin-bottom: 8rem;
+        }
+
+        .single-image {
+            width: 100%;
+            margin: 0 auto 5rem auto;
+        }
+
+        .work-image {
+            width: 100%;
+            height: 700px;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin-bottom: 2rem;
+            border-radius: 0;
+            overflow: hidden;
+            background-color: #1a1a1a;
+        }
+
+        .work-info {
+            text-align: left;
+            margin-bottom: 10rem;
+        }
+
+        .work-item-title {
+            font-family: 'Futura', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .work-item-description {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            color: #ccc;
+            line-height: 1.6;
+            max-width: 600px;
+        }
+
+        /* Hide mobile image and show slideshow on desktop */
+        @media (min-width: 769px) {
+            .mobile-static-image {
+                display: none;
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .cursor, .cursor-follower {
+                display: none;
+            }
+            
+            .page-title {
+                font-size: 15vw;
+            }
+            
+            .single-image {
+                width: 90%;
+            }
+            
+            .work-image {
+                height: 300px;
+            }
+            
+            .work-item-title {
+                font-size: 1.5rem;
+            }
+            
+            nav {
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 12vw;
+            }
+            
+            .work-container {
+                padding: 6rem 5% 10rem 5%;
+            }
+            
+            .single-image {
+                width: 95%;
+            }
+            
+            .work-image {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div style="font-family: 'Futura', sans-serif; font-weight: 900; font-size: 1.2rem; color: white;">
+            <a href="index.html" style="color: white; text-decoration: none;">PORTFOLIO 2025</a>
+        </div>
+        <div class="nav-links">
+            <div class="dropdown">
+                <a href="#work" style="color: white; text-decoration: none; font-weight: 600; position: relative; cursor: pointer;">
+                    WORK
+                    <span style="position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #ff0055; transition: width 0.3s;"></span>
+                </a>
+                <div class="dropdown-content">
+                    <a href="index.html">Home</a>
+                    <a href="campaigns.html">Campaigns</a>
+                    <a href="typography.html">Typography</a>
+                    <a href="brands.html">Brands</a>
+                    <a href="graphics-italy-2025.html">Graphics Italy 2025</a>
+                    <a href="graphics.html">Graphics</a>
+                    <a href="websites.html">Websites</a>
+                    <a href="painting.html">Painting</a>
+                    <a href="woodworking.html">Woodworking</a>
+                    <a href="drawing.html">Drawing</a>
+                    <a href="photography.html">Photography</a>
+                    <a href="3d.html">3D</a>
+                </div>
+            </div>
+            <a href="index.html#contact" style="color: white; text-decoration: none; font-weight: 600; position: relative;">
+                CONTACT
+                <span style="position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #ffaa00; transition: width 0.3s;"></span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <!-- Animated Background -->
+        <div class="animated-bg"></div>
+        
+        <!-- Mobile Static Image (shown on mobile) -->
+        <div class="mobile-static-image"></div>
+        
+        <!-- Horizontal Slideshow - Single Wide Image (shown on desktop) -->
+        <div class="horizontal-slideshow">
+            <div class="horizontal-slide" style="background-image: url('images_2/camp.png');"></div>
+        </div>
+
+        <!-- Floating Particles -->
+        <div class="particles"></div>
+
+        <!-- Typography Title -->
+        <div class="name-container">
+            <h1 class="page-title">TYPOGRAPHY</h1>
+        </div>
+    </section>
+
+    <!-- Work Content -->
+    <section class="work-container">
+        <!-- Title and Description -->
+        <div class="work-info">
+            <h3 class="work-item-title">Typography Projects</h3>
+            <p class="work-item-description">
+                Exploring the art and technique of arranging type to make written language legible, 
+                readable and appealing when displayed. From custom typeface design to expressive 
+                lettering and experimental typographic compositions.
+            </p>
+        </div>
+
+        <!-- Single Image -->
+        <div class="work-section">
+            <div class="single-image">
+                <div class="work-image" style="background-image: url('images_2/cc.png');"></div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const follower = document.querySelector('.cursor-follower');
+
+        document.addEventListener('mousemove', (e) => {
+            if (window.innerWidth > 768) {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+                
+                setTimeout(() => {
+                    follower.style.left = e.clientX - 30 + 'px';
+                    follower.style.top = e.clientY - 30 + 'px';
+                }, 100);
+            }
+        });
+
+        // Horizontal Slideshow Scroll Control
+        const slideshow = document.querySelector('.horizontal-slideshow');
+
+        // Scroll-based movement ONLY for desktop
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const maxScroll = window.innerHeight * 1.5;
+            const scrollPercent = Math.min(scrollY / maxScroll, 1);
+            const slideshowPosition = -(scrollPercent * 115);
+            
+            if (window.innerWidth > 768) {
+                slideshow.style.transform = `translateX(${slideshowPosition}%)`;
+            }
+        });
+
+        // Reset on scroll to top
+        window.addEventListener('scroll', () => {
+            if (window.scrollY === 0) {
+                slideshow.style.transform = 'translateX(0%)';
+            }
+        });
+
+        // Create floating particles
+        function createParticles() {
+            const container = document.querySelector('.particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.style.position = 'absolute';
+                particle.style.width = Math.random() * 4 + 2 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.background = ['#ff0055', '#00ffff', '#ffaa00'][Math.floor(Math.random() * 3)];
+                particle.style.borderRadius = '50%';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.opacity = Math.random() * 0.5 + 0.2;
+                particle.style.animation = `float ${Math.random() * 10 + 10}s linear infinite`;
+                
+                container.appendChild(particle);
+            }
+        }
+
+        // Navigation hover effects
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                if (link.querySelector('span')) {
+                    link.querySelector('span').style.width = '100%';
+                }
+            });
+            link.addEventListener('mouseleave', () => {
+                if (link.querySelector('span')) {
+                    link.querySelector('span').style.width = '0';
+                }
+            });
+        });
+
+        // Add keyframes for animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float {
+                0%, 100% { transform: translateY(0) rotate(0deg); }
+                25% { transform: translateY(-20px) rotate(90deg); }
+                50% { transform: translateY(0) rotate(180deg); }
+                75% { transform: translateY(20px) rotate(270deg); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize
+        createParticles();
+
+        // Hide cursor on mobile
+        if (window.innerWidth <= 768) {
+            cursor.style.display = 'none';
+            follower.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
