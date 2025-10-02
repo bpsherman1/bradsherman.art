@@ -419,122 +419,99 @@
     </section>
 
     <script>
-        // Custom Cursor
-        const cursor = document.querySelector('.cursor');
-        const follower = document.querySelector('.cursor-follower');
+    // Custom Cursor
+    const cursor = document.querySelector('.cursor');
+    const follower = document.querySelector('.cursor-follower');
 
-        document.addEventListener('mousemove', (e) => {
-            if (window.innerWidth > 768) {
-                cursor.style.left = e.clientX + 'px';
-                cursor.style.top = e.clientY + 'px';
-                
-                setTimeout(() => {
-                    follower.style.left = e.clientX - 30 + 'px';
-                    follower.style.top = e.clientY - 30 + 'px';
-                }, 100);
-            }
-        });
+    document.addEventListener('mousemove', (e) => {
+        if (window.innerWidth > 768) {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                follower.style.left = e.clientX - 30 + 'px';
+                follower.style.top = e.clientY - 30 + 'px';
+            }, 100);
+        }
+    });
 
-        // Horizontal Slideshow Scroll Control
-        const slideshow = document.querySelector('.horizontal-slideshow');
+    // Horizontal Slideshow Scroll Control
+    const slideshow = document.querySelector('.horizontal-slideshow');
+
+    // Scroll-based movement ONLY
+    window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        const maxScroll = window.innerHeight * 1.5;
+        const scrollPercent = Math.min(scrollY / maxScroll, 1);
+        const slideshowPosition = -(scrollPercent * 200);
         
-        // Scroll-based movement
-        window.addEventListener('scroll', () => {
-            const scrollY = window.scrollY;
-            const maxScroll = window.innerHeight * 1.5;
-            const scrollPercent = Math.min(scrollY / maxScroll, 1);
-            const slideshowPosition = -(scrollPercent * 200); // 300% movement for wide image
-            
-            if (window.innerWidth > 768) {
-                slideshow.style.transform = `translateX(${slideshowPosition}%)`;
-            }
-        });
-
-        // Mouse-based movement (like homepage)
-       // Horizontal Slideshow Scroll Control
-const slideshow = document.querySelector('.horizontal-slideshow');
-
-// Scroll-based movement ONLY
-window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-    const maxScroll = window.innerHeight * 1.5;
-    const scrollPercent = Math.min(scrollY / maxScroll, 1);
-    const slideshowPosition = -(scrollPercent * 200);
-    
-    if (window.innerWidth > 768) {
-        slideshow.style.transform = `translateX(${slideshowPosition}%)`;
-    }
-});
-
-// Reset on scroll to top
-window.addEventListener('scroll', () => {
-    if (window.scrollY === 0) {
-        slideshow.style.transform = 'translateX(0%)';
-    }
-});
-
-        // Reset on scroll to top
-        window.addEventListener('scroll', () => {
-            if (window.scrollY === 0) {
-                slideshow.style.transform = 'translateX(0%)';
-            }
-        });
-
-        // Create floating particles
-        function createParticles() {
-            const container = document.querySelector('.particles');
-            const particleCount = 30;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.style.position = 'absolute';
-                particle.style.width = Math.random() * 4 + 2 + 'px';
-                particle.style.height = particle.style.width;
-                particle.style.background = ['#ff0055', '#00ffff', '#ffaa00'][Math.floor(Math.random() * 3)];
-                particle.style.borderRadius = '50%';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.opacity = Math.random() * 0.5 + 0.2;
-                particle.style.animation = `float ${Math.random() * 10 + 10}s linear infinite`;
-                
-                container.appendChild(particle);
-            }
+        if (window.innerWidth > 768) {
+            slideshow.style.transform = `translateX(${slideshowPosition}%)`;
         }
+    });
 
-        // Navigation hover effects
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('mouseenter', () => {
-                if (link.querySelector('span')) {
-                    link.querySelector('span').style.width = '100%';
-                }
-            });
-            link.addEventListener('mouseleave', () => {
-                if (link.querySelector('span')) {
-                    link.querySelector('span').style.width = '0';
-                }
-            });
-        });
-
-        // Add keyframes for animations
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes float {
-                0%, 100% { transform: translateY(0) rotate(0deg); }
-                25% { transform: translateY(-20px) rotate(90deg); }
-                50% { transform: translateY(0) rotate(180deg); }
-                75% { transform: translateY(20px) rotate(270deg); }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Initialize
-        createParticles();
-
-        // Hide cursor on mobile
-        if (window.innerWidth <= 768) {
-            cursor.style.display = 'none';
-            follower.style.display = 'none';
+    // Reset on scroll to top
+    window.addEventListener('scroll', () => {
+        if (window.scrollY === 0) {
+            slideshow.style.transform = 'translateX(0%)';
         }
-    </script>
+    });
+
+    // Create floating particles
+    function createParticles() {
+        const container = document.querySelector('.particles');
+        const particleCount = 30;
+        
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.style.position = 'absolute';
+            particle.style.width = Math.random() * 4 + 2 + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.background = ['#ff0055', '#00ffff', '#ffaa00'][Math.floor(Math.random() * 3)];
+            particle.style.borderRadius = '50%';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.opacity = Math.random() * 0.5 + 0.2;
+            particle.style.animation = `float ${Math.random() * 10 + 10}s linear infinite`;
+            
+            container.appendChild(particle);
+        }
+    }
+
+    // Navigation hover effects
+    document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('mouseenter', () => {
+            if (link.querySelector('span')) {
+                link.querySelector('span').style.width = '100%';
+            }
+        });
+        link.addEventListener('mouseleave', () => {
+            if (link.querySelector('span')) {
+                link.querySelector('span').style.width = '0';
+            }
+        });
+    });
+
+    // Add keyframes for animations
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(90deg); }
+            50% { transform: translateY(0) rotate(180deg); }
+            75% { transform: translateY(20px) rotate(270deg); }
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Initialize
+    createParticles();
+
+    // Hide cursor on mobile
+    if (window.innerWidth <= 768) {
+        cursor.style.display = 'none';
+        follower.style.display = 'none';
+    }
+</script>
 </body>
 </html>
