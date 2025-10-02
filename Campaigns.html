@@ -124,6 +124,19 @@
             filter: blur(100px);
         }
 
+        /* Mobile static image - shown by default */
+        .mobile-static-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-image: url('images_2/fire.png');
+        }
+
         .horizontal-slideshow {
             position: absolute;
             top: 0;
@@ -134,14 +147,14 @@
             transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-       .horizontal-slide {
-    width: 100%; /* Single image takes full width of slideshow */
-    height: 100%;
-    background-size: 100% 100%; /* Changed from cover to stretch the image */
-    background-position: center;
-    background-repeat: no-repeat;
-    flex-shrink: 0;
-}
+        .horizontal-slide {
+            width: 100%; /* Single image takes full width of slideshow */
+            height: 100%;
+            background-size: 100% 100%; /* Changed from cover to stretch the image */
+            background-position: center;
+            background-repeat: no-repeat;
+            flex-shrink: 0;
+        }
 
         .particles {
             position: absolute;
@@ -162,157 +175,166 @@
             padding: 0 5%;
             pointer-events: none;
         }
-.page-title {
-    font-family: 'Futura', sans-serif;
-    font-size: 11.5vw;
-    font-weight: 900;
-    color: white;
-    line-height: 0.8;
-    margin: 0;
-    text-transform: uppercase;
-    letter-spacing: -3px;
-    mix-blend-mode: difference;
-    text-align: center; /* Center the text */
-    position: absolute; /* If it needs to be positioned absolutely */
-    left: 50%; /* Center horizontally */
-    bottom: 0.05rem;
-    transform: translateX(-50%); /* Adjust for true centering */
-    width: 100%; /* Ensure it takes full width for proper centering */
-}
-       /* Work Grid */
-.work-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 12rem 5% 10rem 5%;
-}
 
-.work-section {
-    margin-bottom: 8rem;
-}
+        .page-title {
+            font-family: 'Futura', sans-serif;
+            font-size: 11.5vw;
+            font-weight: 900;
+            color: white;
+            line-height: 0.8;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: -3px;
+            mix-blend-mode: difference;
+            text-align: center; /* Center the text */
+            position: absolute; /* If it needs to be positioned absolutely */
+            left: 50%; /* Center horizontally */
+            bottom: 0.05rem;
+            transform: translateX(-50%); /* Adjust for true centering */
+            width: 100%; /* Ensure it takes full width for proper centering */
+        }
 
-.single-image {
-    width: 100%;
-    margin: 0 auto 5rem auto;
-}
+        /* Work Grid */
+        .work-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 12rem 5% 10rem 5%;
+        }
 
-.double-images {
-    width: 100%;
-    margin: 0 auto 5rem auto;
-    display: flex;
-    gap: 0;
-}
+        .work-section {
+            margin-bottom: 8rem;
+        }
 
-.double-images .work-image {
-    width: 50%;
-}
+        .single-image {
+            width: 100%;
+            margin: 0 auto 5rem auto;
+        }
 
-.work-image {
-    width: 100%;
-    height: 700px;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    margin-bottom: 2rem;
-    border-radius: 0;
-    overflow: hidden;
-    background-color: #1a1a1a;
-}
+        .double-images {
+            width: 100%;
+            margin: 0 auto 5rem auto;
+            display: flex;
+            gap: 0;
+        }
 
-/* Taller images for last row */
-.taller-images .work-image {
-    height: 1000px; /* Increased height for last row */
-}
+        .double-images .work-image {
+            width: 50%;
+        }
 
-.work-info {
-    text-align: left;
-    margin-bottom: 10rem;
-}
+        .work-image {
+            width: 100%;
+            height: 700px;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin-bottom: 2rem;
+            border-radius: 0;
+            overflow: hidden;
+            background-color: #1a1a1a;
+        }
 
-.work-item-title {
-    font-family: 'Futura', sans-serif;
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: white;
-}
+        /* Taller images for last row */
+        .taller-images .work-image {
+            height: 1000px; /* Increased height for last row */
+        }
 
-.work-item-description {
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    color: #ccc;
-    line-height: 1.6;
-    max-width: 600px;
-}
+        .work-info {
+            text-align: left;
+            margin-bottom: 10rem;
+        }
 
-/* Mobile Responsive */
-@media (max-width: 768px) {
-    .cursor, .cursor-follower {
-        display: none;
-    }
-    
-    .page-title {
-        font-size: 15vw;
-    }
-    
-    .single-image,
-    .double-images {
-        width: 90%;
-    }
-    
-    .double-images {
-        flex-direction: column;
-    }
-    
-    .double-images .work-image {
-        width: 100%;
-        height: 300px;
-    }
-    
-    .work-image {
-        height: 300px;
-    }
-    
-    /* Taller images mobile */
-    .taller-images .work-image {
-        height: 500px;
-    }
-    
-    .work-item-title {
-        font-size: 1.5rem;
-    }
-    
-    nav {
-        padding: 1rem;
-    }
-    
-    .nav-links {
-        gap: 1rem;
-    }
-}
+        .work-item-title {
+            font-family: 'Futura', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: white;
+        }
 
-@media (max-width: 480px) {
-    .page-title {
-        font-size: 12vw;
-    }
-    
-    .work-container {
-        padding: 6rem 5% 10rem 5%;
-    }
-    
-    .single-image,
-    .double-images {
-        width: 95%;
-    }
-    
-    .work-image {
-        height: 250px;
-    }
-    
-    /* Taller images small mobile */
-    .taller-images .work-image {
-        height: 350px;
-    }
-}
+        .work-item-description {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            color: #ccc;
+            line-height: 1.6;
+            max-width: 600px;
+        }
+
+        /* Hide mobile image and show slideshow on desktop */
+        @media (min-width: 769px) {
+            .mobile-static-image {
+                display: none;
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .cursor, .cursor-follower {
+                display: none;
+            }
+            
+            .page-title {
+                font-size: 15vw;
+            }
+            
+            .single-image,
+            .double-images {
+                width: 90%;
+            }
+            
+            .double-images {
+                flex-direction: column;
+            }
+            
+            .double-images .work-image {
+                width: 100%;
+                height: 300px;
+            }
+            
+            .work-image {
+                height: 300px;
+            }
+            
+            /* Taller images mobile */
+            .taller-images .work-image {
+                height: 500px;
+            }
+            
+            .work-item-title {
+                font-size: 1.5rem;
+            }
+            
+            nav {
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 12vw;
+            }
+            
+            .work-container {
+                padding: 6rem 5% 10rem 5%;
+            }
+            
+            .single-image,
+            .double-images {
+                width: 95%;
+            }
+            
+            .work-image {
+                height: 250px;
+            }
+            
+            /* Taller images small mobile */
+            .taller-images .work-image {
+                height: 350px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -346,8 +368,6 @@
                     <a href="3d.html">3D</a>
                 </div>
             </div>
-           
-            </a>
             <a href="index.html#contact" style="color: white; text-decoration: none; font-weight: 600; position: relative;">
                 CONTACT
                 <span style="position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #ffaa00; transition: width 0.3s;"></span>
@@ -355,12 +375,15 @@
         </div>
     </nav>
 
-    <!-- Hero Slideshow -->
+    <!-- Hero Section -->
     <section class="hero">
         <!-- Animated Background -->
         <div class="animated-bg"></div>
         
-        <!-- Horizontal Slideshow - Single Wide Image -->
+        <!-- Mobile Static Image (shown on mobile) -->
+        <div class="mobile-static-image"></div>
+        
+        <!-- Horizontal Slideshow - Single Wide Image (shown on desktop) -->
         <div class="horizontal-slideshow">
             <div class="horizontal-slide" style="background-image: url('images_2/camp.png');"></div>
         </div>
@@ -386,7 +409,7 @@
             </p>
         </div>
 
-        <!-- Single Image - 70% width -->
+        <!-- Single Image -->
         <div class="work-section">
             <div class="single-image">
                 <div class="work-image" style="background-image: url('images_2/777.png');"></div>
@@ -409,109 +432,109 @@
             </div>
         </div>
 
-        <!-- Third Row - Two Images Side by Side -->
-       <div class="work-section">
-    <div class="double-images taller-images">
-        <div class="work-image" style="background-image: url('images_2/911.png');"></div>
-        <div class="work-image" style="background-image: url('images_2/921.png');"></div>
-    </div>
-</div>
+        <!-- Third Row - Two Images Side by Side (Taller) -->
+        <div class="work-section">
+            <div class="double-images taller-images">
+                <div class="work-image" style="background-image: url('images_2/911.png');"></div>
+                <div class="work-image" style="background-image: url('images_2/921.png');"></div>
+            </div>
+        </div>
     </section>
 
     <script>
-    // Custom Cursor
-    const cursor = document.querySelector('.cursor');
-    const follower = document.querySelector('.cursor-follower');
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const follower = document.querySelector('.cursor-follower');
 
-    document.addEventListener('mousemove', (e) => {
-        if (window.innerWidth > 768) {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-            
-            setTimeout(() => {
-                follower.style.left = e.clientX - 30 + 'px';
-                follower.style.top = e.clientY - 30 + 'px';
-            }, 100);
-        }
-    });
-
-    // Horizontal Slideshow Scroll Control
-    const slideshow = document.querySelector('.horizontal-slideshow');
-
-    // Scroll-based movement ONLY
-    window.addEventListener('scroll', () => {
-        const scrollY = window.scrollY;
-        const maxScroll = window.innerHeight * 1.5;
-        const scrollPercent = Math.min(scrollY / maxScroll, 1);
-        const slideshowPosition = -(scrollPercent * 100);
-        
-        if (window.innerWidth > 768) {
-            slideshow.style.transform = `translateX(${slideshowPosition}%)`;
-        }
-    });
-
-    // Reset on scroll to top
-    window.addEventListener('scroll', () => {
-        if (window.scrollY === 0) {
-            slideshow.style.transform = 'translateX(0%)';
-        }
-    });
-
-    // Create floating particles
-    function createParticles() {
-        const container = document.querySelector('.particles');
-        const particleCount = 30;
-        
-        for (let i = 0; i < particleCount; i++) {
-            const particle = document.createElement('div');
-            particle.style.position = 'absolute';
-            particle.style.width = Math.random() * 4 + 2 + 'px';
-            particle.style.height = particle.style.width;
-            particle.style.background = ['#ff0055', '#00ffff', '#ffaa00'][Math.floor(Math.random() * 3)];
-            particle.style.borderRadius = '50%';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.top = Math.random() * 100 + '%';
-            particle.style.opacity = Math.random() * 0.5 + 0.2;
-            particle.style.animation = `float ${Math.random() * 10 + 10}s linear infinite`;
-            
-            container.appendChild(particle);
-        }
-    }
-
-    // Navigation hover effects
-    document.querySelectorAll('nav a').forEach(link => {
-        link.addEventListener('mouseenter', () => {
-            if (link.querySelector('span')) {
-                link.querySelector('span').style.width = '100%';
+        document.addEventListener('mousemove', (e) => {
+            if (window.innerWidth > 768) {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+                
+                setTimeout(() => {
+                    follower.style.left = e.clientX - 30 + 'px';
+                    follower.style.top = e.clientY - 30 + 'px';
+                }, 100);
             }
         });
-        link.addEventListener('mouseleave', () => {
-            if (link.querySelector('span')) {
-                link.querySelector('span').style.width = '0';
+
+        // Horizontal Slideshow Scroll Control
+        const slideshow = document.querySelector('.horizontal-slideshow');
+
+        // Scroll-based movement ONLY for desktop
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const maxScroll = window.innerHeight * 1.5;
+            const scrollPercent = Math.min(scrollY / maxScroll, 1);
+            const slideshowPosition = -(scrollPercent * 100);
+            
+            if (window.innerWidth > 768) {
+                slideshow.style.transform = `translateX(${slideshowPosition}%)`;
             }
         });
-    });
 
-    // Add keyframes for animations
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            25% { transform: translateY(-20px) rotate(90deg); }
-            50% { transform: translateY(0) rotate(180deg); }
-            75% { transform: translateY(20px) rotate(270deg); }
+        // Reset on scroll to top
+        window.addEventListener('scroll', () => {
+            if (window.scrollY === 0) {
+                slideshow.style.transform = 'translateX(0%)';
+            }
+        });
+
+        // Create floating particles
+        function createParticles() {
+            const container = document.querySelector('.particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.style.position = 'absolute';
+                particle.style.width = Math.random() * 4 + 2 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.background = ['#ff0055', '#00ffff', '#ffaa00'][Math.floor(Math.random() * 3)];
+                particle.style.borderRadius = '50%';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.opacity = Math.random() * 0.5 + 0.2;
+                particle.style.animation = `float ${Math.random() * 10 + 10}s linear infinite`;
+                
+                container.appendChild(particle);
+            }
         }
-    `;
-    document.head.appendChild(style);
 
-    // Initialize
-    createParticles();
+        // Navigation hover effects
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                if (link.querySelector('span')) {
+                    link.querySelector('span').style.width = '100%';
+                }
+            });
+            link.addEventListener('mouseleave', () => {
+                if (link.querySelector('span')) {
+                    link.querySelector('span').style.width = '0';
+                }
+            });
+        });
 
-    // Hide cursor on mobile
-    if (window.innerWidth <= 768) {
-        cursor.style.display = 'none';
-        follower.style.display = 'none';
-    }
-</script>
+        // Add keyframes for animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float {
+                0%, 100% { transform: translateY(0) rotate(0deg); }
+                25% { transform: translateY(-20px) rotate(90deg); }
+                50% { transform: translateY(0) rotate(180deg); }
+                75% { transform: translateY(20px) rotate(270deg); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize
+        createParticles();
+
+        // Hide cursor on mobile
+        if (window.innerWidth <= 768) {
+            cursor.style.display = 'none';
+            follower.style.display = 'none';
+        }
+    </script>
 </body>
 </html>
