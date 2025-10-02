@@ -134,14 +134,14 @@
             transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        .horizontal-slide {
-            width: 100%; /* Single image takes full width of slideshow */
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            flex-shrink: 0;
-        }
+       .horizontal-slide {
+    width: 100%; /* Single image takes full width of slideshow */
+    height: 100%;
+    background-size: 100% 100%; /* Changed from cover to stretch the image */
+    background-position: center;
+    background-repeat: no-repeat;
+    flex-shrink: 0;
+}
 
         .particles {
             position: absolute;
