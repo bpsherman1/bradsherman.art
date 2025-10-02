@@ -175,125 +175,140 @@
             mix-blend-mode: difference;
         }
 
-        /* Work Grid */
-        .work-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 12rem 5% 10rem 5%; /* Increased top padding to move content down */
-        }
+       /* Work Grid */
+.work-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 12rem 5% 10rem 5%;
+}
 
-        .work-section {
-            margin-bottom: 8rem;
-        }
+.work-section {
+    margin-bottom: 8rem;
+}
 
-        .single-image {
-            width: 100%; /* Increased to 70% width */
-            margin: 0 auto 5rem auto; /* Increased bottom margin */
-        }
+.single-image {
+    width: 100%;
+    margin: 0 auto 5rem auto;
+}
 
-        .double-images {
-            width: 100%; /* Increased to 70% width */
-            margin: 0 auto 5rem auto; /* Increased bottom margin */
-            display: flex;
-            gap: 0;
-        }
+.double-images {
+    width: 100%;
+    margin: 0 auto 5rem auto;
+    display: flex;
+    gap: 0;
+}
 
-        .double-images .work-image {
-            width: 50%;
-        }
+.double-images .work-image {
+    width: 50%;
+}
 
-        .work-image {
-            width: 100%;
-            height: 700px;
-            background-size: contain; /* Changed from cover to contain to prevent cropping */
-            background-position: center;
-            background-repeat: no-repeat;
-            margin-bottom: 2rem;
-            border-radius: 0; /* Removed rounded corners */
-            overflow: hidden;
-            background-color: #1a1a1a; /* Added background color for images with transparency */
-        }
+.work-image {
+    width: 100%;
+    height: 700px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-bottom: 2rem;
+    border-radius: 0;
+    overflow: hidden;
+    background-color: #1a1a1a;
+}
 
-        .work-info {
-            text-align: left;
-            margin-bottom: 10rem; /* Increased margin to move images further down */
-        }
+/* Taller images for last row */
+.taller-images .work-image {
+    height: 900px; /* Increased height for last row */
+}
 
-        .work-item-title {
-            font-family: 'Futura', sans-serif;
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: white;
-        }
+.work-info {
+    text-align: left;
+    margin-bottom: 10rem;
+}
 
-        .work-item-description {
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            color: #ccc;
-            line-height: 1.6;
-            max-width: 600px;
-        }
+.work-item-title {
+    font-family: 'Futura', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: white;
+}
 
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .cursor, .cursor-follower {
-                display: none;
-            }
-            
-            .page-title {
-                font-size: 15vw;
-            }
-            
-            .single-image,
-            .double-images {
-                width: 90%;
-            }
-            
-            .double-images {
-                flex-direction: column;
-            }
-            
-            .double-images .work-image {
-                width: 100%;
-                height: 300px;
-            }
-            
-            .work-image {
-                height: 300px;
-            }
-            
-            .work-item-title {
-                font-size: 1.5rem;
-            }
-            
-            nav {
-                padding: 1rem;
-            }
-            
-            .nav-links {
-                gap: 1rem;
-            }
-        }
+.work-item-description {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    color: #ccc;
+    line-height: 1.6;
+    max-width: 600px;
+}
 
-        @media (max-width: 480px) {
-            .page-title {
-                font-size: 12vw;
-            }
-            
-            .work-container {
-                padding: 6rem 5% 10rem 5%;
-            }
-            
-            .single-image,
-            .double-images {
-                width: 95%;
-            }
-            
-            .work-image {
-                height: 250px;
-            }
-        }
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .cursor, .cursor-follower {
+        display: none;
+    }
+    
+    .page-title {
+        font-size: 15vw;
+    }
+    
+    .single-image,
+    .double-images {
+        width: 90%;
+    }
+    
+    .double-images {
+        flex-direction: column;
+    }
+    
+    .double-images .work-image {
+        width: 100%;
+        height: 300px;
+    }
+    
+    .work-image {
+        height: 300px;
+    }
+    
+    /* Taller images mobile */
+    .taller-images .work-image {
+        height: 500px;
+    }
+    
+    .work-item-title {
+        font-size: 1.5rem;
+    }
+    
+    nav {
+        padding: 1rem;
+    }
+    
+    .nav-links {
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-title {
+        font-size: 12vw;
+    }
+    
+    .work-container {
+        padding: 6rem 5% 10rem 5%;
+    }
+    
+    .single-image,
+    .double-images {
+        width: 95%;
+    }
+    
+    .work-image {
+        height: 250px;
+    }
+    
+    /* Taller images small mobile */
+    .taller-images .work-image {
+        height: 350px;
+    }
+}
     </style>
 </head>
 <body>
@@ -393,12 +408,12 @@
         </div>
 
         <!-- Third Row - Two Images Side by Side -->
-        <div class="work-section">
-            <div class="double-images">
-                <div class="work-image" style="background-image: url('images_2/911.png');"></div>
-                <div class="work-image" style="background-image: url('images_2/921.png');"></div>
-            </div>
-        </div>
+       <div class="work-section">
+    <div class="double-images taller-images">
+        <div class="work-image" style="background-image: url('images_2/911.png');"></div>
+        <div class="work-image" style="background-image: url('images_2/921.png');"></div>
+    </div>
+</div>
     </section>
 
     <script>
