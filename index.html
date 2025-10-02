@@ -659,6 +659,81 @@
     </section>
 
     <script>
+
+        // Performance optimization for slideshow
+let slideshowAnimationEnabled = true;
+let slideshowInViewport = true;
+
+// Function to check if slideshow is in viewport
+function checkSlideshowViewport() {
+    const slideshow = document.querySelector('.horizontal-slideshow');
+    const rect = slideshow.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    
+    // Check if slideshow is in viewport (with some buffer)
+    slideshowInViewport = rect.top < windowHeight && rect.bottom > -windowHeight;
+    
+    // Enable/disable animation based on viewport
+    if (!slideshowInViewport && slideshowAnimationEnabled) {
+        // Disable animation when out of viewport
+        slideshowAnimationEnabled = false;
+        slideshow.style.transition = 'none';
+    } else if (slideshowInViewport && !slideshowAnimationEnabled) {
+        // Re-enable animation when back in viewport
+        slideshowAnimationEnabled = true;
+        slideshow.style.transition = 'transform 0.8s cubic-bezier(0.23, 1, 0.32, 1)';
+    }
+}
+
+// Throttled scroll handler for better performance
+let scrollTimeout;
+function throttledScrollHandler() {
+    if (!scrollTimeout) {
+        scrollTimeout = setTimeout(() => {
+            scrollTimeout = null;
+            
+            // Only update slideshow if animation is enabled
+            if (slideshowAnimationEnabled) {
+                const scrollY = window.scrollY;
+                const maxScroll = window.innerHeight * 1.5;
+                const scrollPercent = Math.min(scrollY / maxScroll, 1);
+                const slideshowPosition = -(scrollPercent * 300 * 0.25);
+                
+                if (window.innerWidth > 768 && !isDragging) {
+                    slideshow.style.transform = `translateX(${slideshowPosition}%)`;
+                    prevTranslate = slideshowPosition;
+                }
+            }
+            
+            // Check viewport status
+            checkSlideshowViewport();
+            
+        }, 16); // ~60fps
+    }
+}
+
+// Throttled mouse move handler
+let mouseMoveTimeout;
+function throttledMouseMoveHandler(e) {
+    if (!mouseMoveTimeout && window.innerWidth > 768 && slideshowAnimationEnabled) {
+        mouseMoveTimeout = setTimeout(() => {
+            mouseMoveTimeout = null;
+            const mouseY = e.clientY / window.innerHeight;
+            updateSlideshowPosition(mouseY);
+        }, 16); // ~60fps
+    }
+}
+
+// Replace your existing event listeners with these optimized versions
+window.addEventListener('scroll', throttledScrollHandler);
+document.addEventListener('mousemove', throttledMouseMoveHandler);
+
+// Initial check
+window.addEventListener('load', checkSlideshowViewport);
+window.addEventListener('resize', checkSlideshowViewport);
+
+
+        
         // Custom Cursor - Hide on mobile
         const cursor = document.querySelector('.cursor');
         const follower = document.querySelector('.cursor-follower');
@@ -693,28 +768,26 @@
         slideshow.addEventListener('touchmove', touchMove);
         slideshow.addEventListener('touchend', touchEnd);
 
-        function touchStart(e) {
-            if (window.innerWidth <= 768) {
-                isDragging = true;
-                startX = e.touches[0].clientX;
-                slideshow.style.transition = 'none';
-            }
-        }
+       function touchStart(e) {
+    if (window.innerWidth <= 768 && slideshowAnimationEnabled) {
+        isDragging = true;
+        startX = e.touches[0].clientX;
+        slideshow.style.transition = 'none';
+    }
+}
 
-        function touchMove(e) {
-            if (isDragging && window.innerWidth <= 768) {
-                const currentX = e.touches[0].clientX;
-                const diff = startX - currentX;
-                // Move slideshow based on swipe - more responsive
-                currentTranslate = prevTranslate - (diff / window.innerWidth) * 100;
-                
-                // Limit boundaries
-                if (currentTranslate > 0) currentTranslate = 0;
-                if (currentTranslate < -300) currentTranslate = -300;
-                
-                slideshow.style.transform = `translateX(${currentTranslate}%)`;
-            }
-        }
+function touchMove(e) {
+    if (isDragging && window.innerWidth <= 768 && slideshowAnimationEnabled) {
+        const currentX = e.touches[0].clientX;
+        const diff = startX - currentX;
+        currentTranslate = prevTranslate - (diff / window.innerWidth) * 100;
+        
+        if (currentTranslate > 0) currentTranslate = 0;
+        if (currentTranslate < -300) currentTranslate = -300;
+        
+        slideshow.style.transform = `translateX(${currentTranslate}%)`;
+    }
+}
 
         function touchEnd() {
             if (isDragging && window.innerWidth <= 768) {
@@ -724,14 +797,13 @@
             }
         }
 
-        // Desktop mouse control
-        function updateSlideshowPosition(yPercent) {
-            if (window.innerWidth > 768) {
-                const totalMovement = 300;
-                const slideshowPosition = -(yPercent * totalMovement * 0.25);
-                slideshow.style.transform = `translateX(${slideshowPosition}%)`;
-            }
-        }
+     function updateSlideshowPosition(yPercent) {
+    if (window.innerWidth > 768 && slideshowAnimationEnabled) {
+        const totalMovement = 300;
+        const slideshowPosition = -(yPercent * totalMovement * 0.25);
+        slideshow.style.transform = `translateX(${slideshowPosition}%)`;
+    }
+}
 
         document.addEventListener('mousemove', (e) => {
             if (window.innerWidth > 768) {
