@@ -443,7 +443,7 @@
         const scrollY = window.scrollY;
         const maxScroll = window.innerHeight * 1.5;
         const scrollPercent = Math.min(scrollY / maxScroll, 1);
-        const slideshowPosition = -(scrollPercent * 200);
+        const slideshowPosition = -(scrollPercent * 100);
         
         if (window.innerWidth > 768) {
             slideshow.style.transform = `translateX(${slideshowPosition}%)`;
