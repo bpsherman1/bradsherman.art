@@ -128,14 +128,14 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 300%; /* 3 images = 300% */
+            width: 400%; /* Single wide image - 400% width */
             height: 100%;
             display: flex;
             transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         .horizontal-slide {
-            width: 33.333%; /* 3 images = 33.333% each */
+            width: 100%; /* Single image takes full width of slideshow */
             height: 100%;
             background-size: cover;
             background-position: center;
@@ -172,7 +172,7 @@
             margin: 0;
             text-transform: uppercase;
             letter-spacing: -3px;
-            
+            mix-blend-mode: difference;
         }
 
         /* Page Description */
@@ -360,11 +360,9 @@
         <!-- Animated Background -->
         <div class="animated-bg"></div>
         
-        <!-- Horizontal Slideshow - 3 Images -->
+        <!-- Horizontal Slideshow - Single Wide Image -->
         <div class="horizontal-slideshow">
             <div class="horizontal-slide" style="background-image: url('images_2/camp.png');"></div>
-            <div class="horizontal-slide" style="background-image: url('images_2/camp.png');"></div>
-            
         </div>
 
         <!-- Floating Particles -->
@@ -453,14 +451,31 @@
         // Horizontal Slideshow Scroll Control
         const slideshow = document.querySelector('.horizontal-slideshow');
         
+        // Scroll-based movement
         window.addEventListener('scroll', () => {
             const scrollY = window.scrollY;
             const maxScroll = window.innerHeight * 1.5;
             const scrollPercent = Math.min(scrollY / maxScroll, 1);
-            const slideshowPosition = -(scrollPercent * 200 * 0.25); // 200% for 3 images
+            const slideshowPosition = -(scrollPercent * 300); // 300% movement for wide image
             
             if (window.innerWidth > 768) {
                 slideshow.style.transform = `translateX(${slideshowPosition}%)`;
+            }
+        });
+
+        // Mouse-based movement (like homepage)
+        function updateSlideshowPosition(yPercent) {
+            if (window.innerWidth > 768) {
+                const totalMovement = 300; // 300% movement for wide image
+                const slideshowPosition = -(yPercent * totalMovement * 0.25);
+                slideshow.style.transform = `translateX(${slideshowPosition}%)`;
+            }
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            if (window.innerWidth > 768) {
+                const mouseY = e.clientY / window.innerHeight;
+                updateSlideshowPosition(mouseY);
             }
         });
 
