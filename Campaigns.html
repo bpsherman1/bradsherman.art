@@ -175,26 +175,11 @@
             mix-blend-mode: difference;
         }
 
-        /* Page Description */
-        .page-description {
-            padding: 5rem 5%;
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .page-description-text {
-            font-family: 'Inter', sans-serif;
-            font-size: 1.2rem;
-            color: #ccc;
-            line-height: 1.6;
-        }
-
         /* Work Grid */
         .work-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 5% 10rem 5%;
+            padding: 5rem 5% 10rem 5%;
         }
 
         .work-section {
@@ -202,12 +187,12 @@
         }
 
         .single-image {
-            width: 75%;
+            width: 50%; /* 50% screen width */
             margin: 0 auto 3rem auto;
         }
 
         .double-images {
-            width: 75%;
+            width: 50%; /* 50% screen width to match single image */
             margin: 0 auto 3rem auto;
             display: flex;
             gap: 0;
@@ -230,6 +215,7 @@
 
         .work-info {
             text-align: left;
+            margin-bottom: 4rem;
         }
 
         .work-item-title {
@@ -256,10 +242,6 @@
             
             .page-title {
                 font-size: 15vw;
-            }
-            
-            .page-description-text {
-                font-size: 1rem;
             }
             
             .single-image,
@@ -298,8 +280,8 @@
                 font-size: 12vw;
             }
             
-            .page-description {
-                padding: 3rem 5%;
+            .work-container {
+                padding: 3rem 5% 10rem 5%;
             }
             
             .single-image,
@@ -374,59 +356,46 @@
         </div>
     </section>
 
-    <!-- Page Description -->
-    <section class="page-description">
-        <p class="page-description-text">
-            Strategic marketing campaigns and visual storytelling that captivate audiences and drive results. 
-            Each campaign is crafted with meticulous attention to detail and a deep understanding of brand narrative.
-        </p>
-    </section>
-
     <!-- Work Content -->
     <section class="work-container">
-        <!-- First Single Image -->
+        <!-- Title and Description -->
+        <div class="work-info">
+            <h3 class="work-item-title">Global Brand Launch</h3>
+            <p class="work-item-description">
+                A comprehensive international campaign launching a new lifestyle brand across multiple markets. 
+                The campaign integrated digital, print, and experiential elements to create a cohesive brand story 
+                that resonated with diverse audiences worldwide.
+            </p>
+        </div>
+
+        <!-- Single Image - 50% width -->
         <div class="work-section">
             <div class="single-image">
-                <div class="work-image" style="background-image: url('images_2/111.png');"></div>
-                <div class="work-info">
-                    <h3 class="work-item-title">Global Brand Launch</h3>
-                    <p class="work-item-description">
-                        A comprehensive international campaign launching a new lifestyle brand across multiple markets. 
-                        The campaign integrated digital, print, and experiential elements to create a cohesive brand story 
-                        that resonated with diverse audiences worldwide.
-                    </p>
-                </div>
+                <div class="work-image" style="background-image: url('images_2/777.png');"></div>
             </div>
         </div>
 
-        <!-- Second Single Image -->
-        <div class="work-section">
-            <div class="single-image">
-                <div class="work-image" style="background-image: url('images_2/32.png');"></div>
-                <div class="work-info">
-                    <h3 class="work-item-title">Sustainability Initiative</h3>
-                    <p class="work-item-description">
-                        An environmental awareness campaign focused on promoting sustainable practices in the fashion industry. 
-                        The campaign featured striking visual metaphors and compelling storytelling to drive engagement 
-                        and inspire action toward more eco-conscious consumer behavior.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Double Images Side by Side -->
+        <!-- First Row - Two Images Side by Side -->
         <div class="work-section">
             <div class="double-images">
-                <div class="work-image" style="background-image: url('images_2/33.png');"></div>
-                <div class="work-image" style="background-image: url('images_2/34.png');"></div>
+                <div class="work-image" style="background-image: url('images_2/555.png');"></div>
+                <div class="work-image" style="background-image: url('images_2/666.png');"></div>
             </div>
-            <div class="work-info">
-                <h3 class="work-item-title">Digital Experience Campaign</h3>
-                <p class="work-item-description">
-                    A multi-platform digital campaign that seamlessly blended interactive web experiences with social media engagement. 
-                    These companion pieces worked together to create an immersive brand journey that increased user interaction 
-                    and conversion rates by over 200%.
-                </p>
+        </div>
+
+        <!-- Second Row - Two Images Side by Side -->
+        <div class="work-section">
+            <div class="double-images">
+                <div class="work-image" style="background-image: url('images_2/333.png');"></div>
+                <div class="work-image" style="background-image: url('images_2/444.png');"></div>
+            </div>
+        </div>
+
+        <!-- Third Row - Two Images Side by Side -->
+        <div class="work-section">
+            <div class="double-images">
+                <div class="work-image" style="background-image: url('images_2/911.png');"></div>
+                <div class="work-image" style="background-image: url('images_2/921.png');"></div>
             </div>
         </div>
     </section>
