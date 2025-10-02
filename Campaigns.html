@@ -179,7 +179,7 @@
         .work-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 5rem 5% 10rem 5%;
+            padding: 8rem 5% 10rem 5%; /* Increased top padding to move content down */
         }
 
         .work-section {
@@ -187,13 +187,13 @@
         }
 
         .single-image {
-            width: 50%; /* 50% screen width */
-            margin: 0 auto 3rem auto;
+            width: 70%; /* Increased to 70% width */
+            margin: 0 auto 5rem auto; /* Increased bottom margin */
         }
 
         .double-images {
-            width: 50%; /* 50% screen width to match single image */
-            margin: 0 auto 3rem auto;
+            width: 70%; /* Increased to 70% width */
+            margin: 0 auto 5rem auto; /* Increased bottom margin */
             display: flex;
             gap: 0;
         }
@@ -205,17 +205,18 @@
         .work-image {
             width: 100%;
             height: 500px;
-            background-size: cover;
+            background-size: contain; /* Changed from cover to contain to prevent cropping */
             background-position: center;
             background-repeat: no-repeat;
             margin-bottom: 2rem;
-            border-radius: 8px;
+            border-radius: 0; /* Removed rounded corners */
             overflow: hidden;
+            background-color: #1a1a1a; /* Added background color for images with transparency */
         }
 
         .work-info {
             text-align: left;
-            margin-bottom: 4rem;
+            margin-bottom: 6rem; /* Increased margin to move images further down */
         }
 
         .work-item-title {
@@ -281,12 +282,12 @@
             }
             
             .work-container {
-                padding: 3rem 5% 10rem 5%;
+                padding: 6rem 5% 10rem 5%;
             }
             
             .single-image,
             .double-images {
-                width: 100%;
+                width: 95%;
             }
             
             .work-image {
@@ -368,7 +369,7 @@
             </p>
         </div>
 
-        <!-- Single Image - 50% width -->
+        <!-- Single Image - 70% width -->
         <div class="work-section">
             <div class="single-image">
                 <div class="work-image" style="background-image: url('images_2/777.png');"></div>
