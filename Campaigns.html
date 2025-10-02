@@ -147,10 +147,10 @@
             transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        .horizontal-slide {
+       .horizontal-slide {
     width: 100%; /* Single image takes full width of slideshow */
     height: 100%;
-    background-size: cover; /* This maintains aspect ratio and fills the container */
+    background-size: auto 100%; /* Stretch width automatically, maintain 100% height */
     background-position: center;
     background-repeat: no-repeat;
     flex-shrink: 0;
