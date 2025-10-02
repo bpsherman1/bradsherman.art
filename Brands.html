@@ -16,25 +16,30 @@
        /* White background for entire page below hero */
 /* White background for entire page below hero */
 /* Make everything after the hero white */
+/* White background for entire page below hero */
 body {
     font-family: 'Inter', sans-serif; 
-    background: #0a0a0a; 
-    color: white; 
+    background: #ffffff; /* Change body to white */
+    color: #000000; /* Default text color black */
     overflow-x: hidden;
     cursor: none;
 }
 
-/* The main content area after hero */
-main, .work-container, section:not(.hero) {
-    background: #ffffff !important;
-    color: #000000 !important;
+/* Hero section keeps dark background */
+.hero {
+    background: #0a0a0a; /* Ensure hero stays dark */
 }
 
-/* Ensure all text in content area is black */
-.work-container * {
+/* Work container inherits white background */
+.work-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 12rem 5% 10rem 5%;
+    background: #ffffff;
     color: #000000;
 }
 
+/* Ensure text in work area is black */
 .work-info,
 .work-item-title,
 .work-item-description {
@@ -43,13 +48,6 @@ main, .work-container, section:not(.hero) {
 
 .work-item-description {
     color: #333333;
-}
-
-/* Rest of your existing work container styles... */
-.work-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 12rem 5% 10rem 5%;
 }
 
 /* Lighter image boxes */
