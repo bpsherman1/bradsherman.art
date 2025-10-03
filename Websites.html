@@ -1,1 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Websites - Brad Sherman Design</title>
+    <link href="https://fonts.googleapis.com/css2?family=Futura:wght@700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base Reset */
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+        
+        /* White background for entire page below hero */
+        body {
+            font-family: 'Inter', sans-serif; 
+            background: #ffffff; /* Change body to white */
+            color: #000000; /* Default text color black */
+            overflow-x: hidden;
+          cursor:auto;
+        }
 
+        /* Hero section keeps dark background */
+        .hero {
+            background: #0a0a0a; /* Ensure hero stays dark */
+        }
+
+        /* Work container inherits white background */
+        .work-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 12rem 5% 10rem 5%;
+            background: #ffffff;
+        }
+
+        /* Ensure text in work area is black */
+        .work-info,
+        .work-item-title,
+        .work-item-description {
+            color: #000000 !important;
+        }
+
+        .work-item-description {
+            color: #333333 !important;
+        }
+
+        /* Lighter image boxes - OFF WHITE */
+        .work-image {
+            background-color: #f8f8f8 !important; /* Off-white instead of dark gray */
+            
+        }
+
+        /* Navigation Styles */
+        nav { 
+            position: fixed; 
+            top: 0; 
+            width: 100%; 
+            padding: 2rem; 
+            z-index: 100; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            mix-blend-mode: difference;
+        }
+        
+        .nav-links { 
+            display: flex; 
+            gap: 2rem; 
+            align-items: center; 
+        }
+        
+        nav a { 
+            color: white; 
+            text-decoration: none; 
+            font-weight: 600; 
+            position: relative; 
+        }
+        
+        /* Dropdown Styles */
+        .dropdown { position: relative; display: inline-block; }
+        .dropdown-content { 
+            position: absolute; 
+            top: 35px;
+            left: 0; 
+            background: rgba(255, 255, 255, 0.95); 
+            backdrop-filter: blur(20px); 
+            border: 1px solid #fff; 
+            border-radius: 8px; 
+            padding: 1rem 0; 
+            min-width: 200px; 
+            opacity: 0; 
+            visibility: hidden; 
+            transform: translateY(-10px); 
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1); 
+            mix-blend-mode: difference;
+        }
+        .dropdown:hover .dropdown-content { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-content a { 
+            display: block; 
+            padding: 0.5rem 1.5rem; 
+            color: black; 
+            text-decoration: none; 
+            transition: all 0.3s ease; 
+            border-left: 3px solid transparent; 
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        .dropdown-content a:hover { 
+            background: rgba(0, 0, 0, 0.1); 
+            border-left: 3px solid #ff0055; 
+            padding-left: 2rem; 
+        }
+
+        /* Hero Slideshow */
+        .hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .animated-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff0055, #00ffff, #ffaa00);
+            opacity: 0.1;
+            filter: blur(100px);
+        }
+
+        /* Mobile static image - shown by default */
+        .mobile-static-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-image: url('images_2/fire.png');
+        }
+
+        .horizontal-slideshow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 400%; /* Single wide image - 400% width */
+            height: 100%;
+            display: flex;
+            transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .horizontal-slide {
+            width: 100%; /* Single image takes full width of slideshow */
+            height: 100%;
+            background-size: auto 100%; /* Stretch width automatically, maintain 100% height */
+            background-position: 0% center; /* Explicitly position at left edge */
+            background-repeat: no-repeat;
+            flex-shrink: 0;
+        }
+
+       
+
+        .name-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 66%;
+            display: flex;
+            align-items: flex-end;
+            padding: 0 5%;
+            pointer-events: none;
+        }
+
+        .page-title {
+            font-family: 'Futura', sans-serif;
+            font-size: 10.5vw;
+            font-weight: 900;
+            color: white;
+            line-height: 0.8;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: -3px;
+            mix-blend-mode: difference;
+            text-align: center; /* Center the text */
+            position: absolute; /* If it needs to be positioned absolutely */
+            left: 50%; /* Center horizontally */
+            bottom: 0.05rem;
+            transform: translateX(-50%); /* Adjust for true centering */
+            width: 100%; /* Ensure it takes full width for proper centering */
+        }
+
+        /* Work Grid */
+        .work-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 12rem 5% 10rem 5%;
+        }
+
+        .work-section {
+            margin-bottom: 8rem;
+        }
+
+        .single-image {
+            width: 100%;
+            margin: 0 auto 5rem auto;
+        }
+
+        .work-image {
+            width: 100%;
+            height: 700px;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin-bottom: 2rem;
+            border-radius: 0;
+            overflow: hidden;
+            background-color: #f8f8f8; /* Off-white */
+        }
+
+        /* Shorter containers for wide images */
+        .shorter-containers .work-image {
+            height: 400px; /* Short height for wide images */
+        }
+
+        /* Project last row spacing */
+        .project-last-row {
+            margin-bottom: 12rem !important;
+        }
+
+        .work-info {
+            text-align: left;
+            margin-bottom: 10rem;
+        }
+
+        .work-item-title {
+            font-family: 'Futura', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #000000; /* Black text */
+        }
+
+        .work-item-description {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            color: #333333; /* Dark gray text */
+            line-height: 1.6;
+            max-width: 600px;
+        }
+
+        /* Hide mobile image and show slideshow on desktop */
+        @media (min-width: 769px) {
+            .mobile-static-image {
+                display: none;
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 15vw;
+            }
+            
+            .single-image {
+                width: 90%;
+            }
+            
+            .work-image {
+                height: 300px;
+            }
+            
+            .shorter-containers .work-image {
+                height: 250px;
+            }
+            
+            .work-item-title {
+                font-size: 1.5rem;
+                color: #000000 !important;
+            }
+            
+            nav {
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .project-last-row {
+                margin-bottom: 8rem !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 12vw;
+            }
+            
+            .work-container {
+                padding: 6rem 5% 10rem 5%;
+            }
+            
+            .single-image {
+                width: 95%;
+            }
+            
+            .work-image {
+                height: 250px;
+            }
+            
+            .shorter-containers .work-image {
+                height: 200px;
+            }
+
+            .project-last-row {
+                margin-bottom: 6rem !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div style="font-family: 'Futura', sans-serif; font-weight: 900; font-size: 1.2rem; color: white;">
+            <a href="index.html" style="color: white; text-decoration: none;">PORTFOLIO 2025</a>
+        </div>
+        <div class="nav-links">
+            <div class="dropdown">
+                <a href="#work" style="color: white; text-decoration: none; font-weight: 600; position: relative; cursor: pointer;">
+                    WORK
+                    <span style="position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #ff0055; transition: width 0.3s;"></span>
+                </a>
+                <div class="dropdown-content">
+                    <a href="index.html">Home</a>
+                    <a href="campaigns.html">Campaigns</a>
+                    <a href="typography.html">Typography</a>
+                    <a href="brands.html">Brands</a>
+                    <a href="graphics-italy-2025.html">Graphics Italy 2025</a>
+                    <a href="graphics.html">Graphics</a>
+                    <a href="websites.html">Websites</a>
+                    <a href="painting.html">Painting</a>
+                    <a href="woodworking.html">Woodworking</a>
+                    <a href="drawing.html">Drawing</a>
+                    <a href="photography.html">Photography</a>
+                    <a href="3d.html">3D</a>
+                </div>
+            </div>
+            <a href="index.html#contact" style="color: white; text-decoration: none; font-weight: 600; position: relative;">
+                CONTACT
+                <span style="position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #ffaa00; transition: width 0.3s;"></span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <!-- Animated Background -->
+        <div class="animated-bg"></div>
+        
+        <!-- Mobile Static Image (shown on mobile) -->
+        <div class="mobile-static-image"></div>
+        
+        <!-- Horizontal Slideshow - Single Wide Image (shown on desktop) -->
+        <div class="horizontal-slideshow">
+            <div class="horizontal-slide" style="background-image: url('images_2/camp.png');"></div>
+        </div>
+
+        <!-- Floating Particles -->
+        <div class="particles"></div>
+
+        <!-- Websites Title -->
+        <div class="name-container">
+            <h1 class="page-title">WEBSITES</h1>
+        </div>
+    </section>
+
+    <!-- Work Content -->
+    <section class="work-container">
+        <!-- First Project: The Food Gallery 2 -->
+        <div class="work-info">
+            <h3 class="work-item-title">The Food Gallery 2</h3>
+            <p class="work-item-description">
+                A responsive website design focused on culinary arts and food photography, 
+                featuring modern UI/UX principles and optimized for both desktop and mobile experiences.
+            </p>
+        </div>
+
+        <!-- Short and wide image -->
+        <div class="work-section">
+            <div class="single-image shorter-containers">
+                <div class="work-image" style="background-image: url('images_2/cc.png');"></div>
+            </div>
+        </div>
+
+        <!-- Second Project: The Food Gallery -->
+        <div class="work-info">
+            <h3 class="work-item-title">The Food Gallery</h3>
+            <p class="work-item-description">
+                The original food gallery website showcasing restaurant portfolios, 
+                recipe collections, and culinary storytelling through clean, intuitive design.
+            </p>
+        </div>
+
+        <!-- Short and wide image -->
+        <div class="work-section">
+            <div class="single-image shorter-containers">
+                <div class="work-image" style="background-image: url('images_2/cc.png');"></div>
+            </div>
+        </div>
+
+        <!-- Third Project: Portfolio -->
+        <div class="work-info">
+            <h3 class="work-item-title">Portfolio</h3>
+            <p class="work-item-description">
+                A personal portfolio website design emphasizing clean aesthetics, 
+                smooth navigation, and optimal presentation of creative work across various disciplines.
+            </p>
+        </div>
+
+        <!-- Normal height image -->
+        <div class="work-section">
+            <div class="single-image">
+                <div class="work-image" style="background-image: url('images_2/cc.png');"></div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Horizontal Slideshow Scroll Control
+        const slideshow = document.querySelector('.horizontal-slideshow');
+
+        // Scroll-based movement ONLY for desktop
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const maxScroll = window.innerHeight * 1.5;
+            const scrollPercent = Math.min(scrollY / maxScroll, 1);
+            const slideshowPosition = -(scrollPercent * 115);
+            
+            if (window.innerWidth > 768) {
+                slideshow.style.transform = `translateX(${slideshowPosition}%)`;
+            }
+        });
+
+        // Reset on scroll to top
+        window.addEventListener('scroll', () => {
+            if (window.scrollY === 0) {
+                slideshow.style.transform = 'translateX(0%)';
+            }
+        });
+
+       
+
+        // Navigation hover effects
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                if (link.querySelector('span')) {
+                    link.querySelector('span').style.width = '100%';
+                }
+            });
+            link.addEventListener('mouseleave', () => {
+                if (link.querySelector('span')) {
+                    link.querySelector('span').style.width = '0';
+                }
+            });
+        });
+
+        // Add keyframes for animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float {
+                0%, 100% { transform: translateY(0) rotate(0deg); }
+                25% { transform: translateY(-10px) rotate(90deg); }
+                50% { transform: translateY(0) rotate(180deg); }
+                75% { transform: translateY(10px) rotate(270deg); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize
+        createParticles();
+    </script>
+</body>
+</html>
