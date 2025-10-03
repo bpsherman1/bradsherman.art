@@ -11,6 +11,7 @@
             margin: 0; 
             padding: 0; 
             box-sizing: border-box; 
+            cursor:auto;
         }
 
         .project-last-row {
@@ -86,30 +87,7 @@
             
         }
 
-        /* Custom Cursor */
-        .cursor { 
-            position: fixed; 
-            width: 20px; 
-            height: 20px; 
-            background: #ff0055; 
-            border-radius: 50%; 
-            pointer-events: none; 
-            z-index: 9999; 
-            mix-blend-mode: difference; 
-            transition: transform 0.2s; 
-        }
-        
-        .cursor-follower { 
-            position: fixed; 
-            width: 60px; 
-            height: 60px; 
-            border: 2px solid #00ffff; 
-            border-radius: 50%; 
-            pointer-events: none; 
-            z-index: 9998; 
-            transition: all 0.6s ease; 
-        }
-
+      
         /* Navigation Styles */
         nav { 
             position: fixed; 
@@ -221,13 +199,7 @@
             flex-shrink: 0;
         }
 
-        .particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
+       
 
         .name-container {
             position: absolute;
@@ -352,10 +324,7 @@
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
-            .cursor, .cursor-follower {
-                display: none;
-            }
-            
+         
             .page-title {
                 font-size: 15vw;
             }
@@ -438,8 +407,7 @@
 </head>
 <body>
     <!-- Custom Cursor -->
-    <div class="cursor"></div>
-    <div class="cursor-follower"></div>
+ 
 
     <!-- Navigation -->
     <nav>
@@ -569,20 +537,7 @@
 
     <script>
         // Custom Cursor
-        const cursor = document.querySelector('.cursor');
-        const follower = document.querySelector('.cursor-follower');
 
-        document.addEventListener('mousemove', (e) => {
-            if (window.innerWidth > 768) {
-                cursor.style.left = e.clientX + 'px';
-                cursor.style.top = e.clientY + 'px';
-                
-                setTimeout(() => {
-                    follower.style.left = e.clientX - 30 + 'px';
-                    follower.style.top = e.clientY - 30 + 'px';
-                }, 100);
-            }
-        });
 
         // Horizontal Slideshow Scroll Control
         const slideshow = document.querySelector('.horizontal-slideshow');
@@ -606,27 +561,7 @@
             }
         });
 
-        // Create floating particles
-        function createParticles() {
-            const container = document.querySelector('.particles');
-            const particleCount = 30;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.style.position = 'absolute';
-                particle.style.width = Math.random() * 4 + 2 + 'px';
-                particle.style.height = particle.style.width;
-                particle.style.background = ['#ff0055', '#00ffff', '#ffaa00'][Math.floor(Math.random() * 3)];
-                particle.style.borderRadius = '50%';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.opacity = Math.random() * 0.5 + 0.2;
-                particle.style.animation = `float ${Math.random() * 10 + 10}s linear infinite`;
-                
-                container.appendChild(particle);
-            }
-        }
-
+      
         // Navigation hover effects
         document.querySelectorAll('nav a').forEach(link => {
             link.addEventListener('mouseenter', () => {
