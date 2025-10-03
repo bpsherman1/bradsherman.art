@@ -571,17 +571,7 @@
         const cursor = document.querySelector('.cursor');
         const follower = document.querySelector('.cursor-follower');
 
-        document.addEventListener('mousemove', (e) => {
-            if (window.innerWidth > 768) {
-                cursor.style.left = e.clientX + 'px';
-                cursor.style.top = e.clientY + 'px';
-                
-                setTimeout(() => {
-                    follower.style.left = e.clientX - 30 + 'px';
-                    follower.style.top = e.clientY - 30 + 'px';
-                }, 100);
-            }
-        });
+    
 
         // Horizontal Slideshow Scroll Control
         const slideshow = document.querySelector('.horizontal-slideshow');
@@ -605,26 +595,7 @@
             }
         });
 
-        // Create floating particles
-        function createParticles() {
-            const container = document.querySelector('.particles');
-            const particleCount = 30;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.style.position = 'absolute';
-                particle.style.width = Math.random() * 4 + 2 + 'px';
-                particle.style.height = particle.style.width;
-                particle.style.background = ['#ff0055', '#00ffff', '#ffaa00'][Math.floor(Math.random() * 3)];
-                particle.style.borderRadius = '50%';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.opacity = Math.random() * 0.5 + 0.2;
-                particle.style.animation = `float ${Math.random() * 10 + 10}s linear infinite`;
-                
-                container.appendChild(particle);
-            }
-        }
+      
 
         // Navigation hover effects
         document.querySelectorAll('nav a').forEach(link => {
