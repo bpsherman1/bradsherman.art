@@ -163,8 +163,6 @@
             flex-shrink: 0;
         }
 
-       
-
         .name-container {
             position: absolute;
             bottom: 0;
@@ -235,7 +233,7 @@
 
         .work-info {
             text-align: left;
-            margin-bottom: 10rem;
+            margin-bottom: 6rem; /* REDUCED from 10rem to 6rem - titles closer to images */
         }
 
         .work-item-title {
@@ -279,6 +277,10 @@
                 height: 250px;
             }
             
+            .work-info {
+                margin-bottom: 4rem; /* REDUCED for mobile */
+            }
+            
             .work-item-title {
                 font-size: 1.5rem;
                 color: #000000 !important;
@@ -316,6 +318,10 @@
             
             .shorter-containers .work-image {
                 height: 200px;
+            }
+            
+            .work-info {
+                margin-bottom: 3rem; /* REDUCED for small mobile */
             }
 
             .project-last-row {
@@ -371,9 +377,6 @@
             <div class="horizontal-slide" style="background-image: url('images_2/gal.png');"></div>
         </div>
 
-        <!-- Floating Particles -->
-        <div class="particles"></div>
-
         <!-- Websites Title -->
         <div class="name-container">
             <h1 class="page-title">WEBSITES</h1>
@@ -425,7 +428,7 @@
 
         <!-- Normal height image -->
         <div class="work-section">
-            <div class="single-image">
+            <div class="single-image project-last-row"> <!-- Added project-last-row class -->
                 <div class="work-image" style="background-image: url('images_2/front.png');"></div>
             </div>
         </div>
@@ -454,8 +457,6 @@
             }
         });
 
-       
-
         // Navigation hover effects
         document.querySelectorAll('nav a').forEach(link => {
             link.addEventListener('mouseenter', () => {
@@ -481,9 +482,6 @@
             }
         `;
         document.head.appendChild(style);
-
-        // Initialize
-        createParticles();
     </script>
 </body>
 </html>
