@@ -201,12 +201,12 @@
         }
 
         .work-section {
-            margin-bottom: 8rem;
+            margin-bottom: 12rem; /* INCREASED from 8rem to 12rem - more space after images */
         }
 
         .single-image {
             width: 100%;
-            margin: 0 auto 2rem auto; /* REDUCED from 5rem to 2rem - images closer to titles */
+            margin: 0 auto 0 auto; /* Remove bottom margin since work-section handles it */
         }
 
         .work-image {
@@ -228,18 +228,12 @@
 
         /* Project last row spacing */
         .project-last-row {
-            margin-bottom: 15rem !important; /* INCREASED from 12rem to 15rem - more space after last image */
+            margin-bottom: 15rem !important; /* INCREASED space after last image */
         }
 
         .work-info {
             text-align: left;
-            margin-bottom: 3rem; /* SIGNIFICANTLY REDUCED from 10rem to 3rem - titles much closer to images */
-            margin-top: 8rem; /* ADDED - more space above titles from previous images */
-        }
-
-        /* First title should have less top margin */
-        .work-info:first-child {
-            margin-top: 0; /* No extra space for the very first title */
+            margin-bottom: 3rem; /* Titles close to their images */
         }
 
         .work-item-title {
@@ -273,7 +267,6 @@
             
             .single-image {
                 width: 90%;
-                margin: 0 auto 1.5rem auto; /* REDUCED for mobile */
             }
             
             .work-image {
@@ -284,9 +277,12 @@
                 height: 250px;
             }
             
+            .work-section {
+                margin-bottom: 10rem; /* INCREASED for mobile */
+            }
+            
             .work-info {
-                margin-bottom: 2rem; /* REDUCED for mobile */
-                margin-top: 6rem; /* ADDED for mobile */
+                margin-bottom: 2rem; /* Titles close to their images on mobile */
             }
             
             .work-item-title {
@@ -318,7 +314,6 @@
             
             .single-image {
                 width: 95%;
-                margin: 0 auto 1rem auto; /* REDUCED for small mobile */
             }
             
             .work-image {
@@ -329,9 +324,12 @@
                 height: 200px;
             }
             
+            .work-section {
+                margin-bottom: 8rem; /* INCREASED for small mobile */
+            }
+            
             .work-info {
-                margin-bottom: 1.5rem; /* REDUCED for small mobile */
-                margin-top: 4rem; /* ADDED for small mobile */
+                margin-bottom: 1.5rem; /* Titles close to their images on small mobile */
             }
 
             .project-last-row {
@@ -437,8 +435,8 @@
         </div>
 
         <!-- Normal height image -->
-        <div class="work-section">
-            <div class="single-image project-last-row"> <!-- Added project-last-row class -->
+        <div class="work-section project-last-row"> <!-- Added project-last-row to the section -->
+            <div class="single-image">
                 <div class="work-image" style="background-image: url('images_2/front.png');"></div>
             </div>
         </div>
