@@ -24,6 +24,26 @@
            .tall-images .work-image {
             height: 820px; /* Increased height for last row */
         }
+ .medium-images .work-image {
+            height: 600px; /* Increased height for last row */
+        }
+        
+        .shorter-images .work-image {
+    height: 500px; /* Adjust this value to your preferred height */
+}
+
+/* Mobile responsive for shorter images */
+@media (max-width: 768px) {
+    .shorter-images .work-image {
+        height: 200px; /* Adjust mobile height */
+    }
+}
+
+@media (max-width: 480px) {
+    .shorter-images .work-image {
+        height: 180px; /* Adjust small mobile height */
+    }
+}
 
 .project-last-row {
     margin-bottom: 14rem !important; /* Increase from 5rem to 12rem */
@@ -265,7 +285,7 @@
 
         /* Taller images for last row */
         .taller-images .work-image {
-            height: 1200px; /* Increased height for last row */
+            height: 1000px; /* Increased height for last row */
         }
 
         .work-info {
@@ -481,7 +501,7 @@
 
         <!-- Single Image -->
         <div class="work-section">
-            <div class="single-image tall-images">
+            <div class="single-image shorter-images">
                 <div class="work-image" style="background-image: url('images_2/90.png');"></div>
             </div>
         </div>
@@ -515,7 +535,7 @@
 
         <!-- Row of 2 Images -->
         <div class="work-section">
-             <div class="single-image project-last-row">
+             <div class="single-image taller-images project-last-row">
               
                 <div class="work-image" style="background-image: url('images_2/SS.png');"></div>
             </div>
@@ -532,14 +552,14 @@
 
         <!-- Single Image -->
         <div class="work-section">
-            <div class="single-image">
+            <div class="single-image tall-images">
                 <div class="work-image" style="background-image: url('images_2/91.png');"></div>
             </div>
         </div>
 
    <!-- Single Image -->
         <div class="work-section">
-            <div class="single-image">
+            <div class="single-image medium-images">
                 <div class="work-image" style="background-image: url('images_2/92.png');"></div>
             </div>
         </div>
