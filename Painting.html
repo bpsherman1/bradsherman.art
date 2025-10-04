@@ -50,6 +50,10 @@
             background-color: #f8f8f8 !important; /* Off-white instead of dark gray */
             
         }
+          .works-image {
+            background-color: #ffffff !important; /* Off-white instead of dark gray */
+            
+        }
 
         /* Navigation Styles */
         nav { 
@@ -220,6 +224,19 @@
             background-color: #f8f8f8; /* Off-white */
         }
 
+  .works-image {
+            width: 100%;
+            height: 700px;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin-bottom: 0; /* Remove margin since text goes below */
+            border-radius: 0;
+            overflow: hidden;
+            background-color: #ffffff; /* Off-white */
+        }
+
+        
         /* Taller containers */
         .taller-containers .work-image {
             height: 850px; /* Taller height */
@@ -435,7 +452,7 @@
         <!-- Third painting - Taller -->
         <div class="work-section">
             <div class="single-image taller-containers">
-                <div class="work-image" style="background-image: url('images_2/p3.png');"></div>
+                <div class="works-image" style="background-image: url('images_2/p3.png');"></div>
             </div>
             <div class="image-text-below">
                 <h3 class="work-item-title">Painting Title 3</h3>
@@ -493,7 +510,7 @@
 
         <!-- Seventh painting - Normal -->
         <div class="work-section">
-            <div class="single-image">
+            <div class="single-image taller-containers">
                 <div class="work-image" style="background-image: url('images_2/p8.png');"></div>
             </div>
             <div class="image-text-below">
@@ -507,8 +524,8 @@
 
              <!-- Seventh painting - Normal -->
         <div class="work-section">
-            <div class="single-image">
-                <div class="work-image" style="background-image: url('images_2/p7.png');"></div>
+            <div class="single-image taller-containers">
+                <div class="works-image" style="background-image: url('images_2/p7.png');"></div>
             </div>
             <div class="image-text-below">
                 <h3 class="work-item-title">Still Life 4</h3>
