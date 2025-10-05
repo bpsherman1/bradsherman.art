@@ -50,6 +50,10 @@
             background-color: #f8f8f8 !important; /* Off-white instead of dark gray */
             
         }
+          .work-images {
+            background-color: #ffffff !important; /* Off-white instead of dark gray */
+            
+        }
 
         /* Navigation Styles */
         nav { 
@@ -219,9 +223,24 @@
             overflow: hidden;
             background-color: #f8f8f8; /* Off-white */
         }
+            .works-image {
+            width: 100%;
+            height: 700px;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin-bottom: 0; /* Remove margin since text goes below */
+            border-radius: 0;
+            overflow: hidden;
+            background-color: #ffffff; /* Off-white */
+        }
 
         /* Taller containers */
         .taller-containers .work-image {
+            height: 840px; /* Taller height */
+        }
+
+         .tallers-containers .work-image {
             height: 800px; /* Taller height */
         }
 
@@ -412,8 +431,8 @@
 
         <!-- Second drawing - Wider -->
         <div class="work-section">
-            <div class="single-image ">
-                <div class="work-image" style="background-image: url('images_2/house.png');"></div>
+            <div class="single-image tallers-containers">
+                <div class="works-image" style="background-image: url('images_2/house.png');"></div>
             </div>
             <div class="image-text-below">
                 <h3 class="work-item-title">Drawing Title 2</h3>
@@ -469,7 +488,7 @@
         <!-- Sixth drawing - Normal -->
         <div class="work-section">
             <div class="single-image">
-                <div class="work-image" style="background-image: url('images_2/egg.png');"></div>
+                <div class="works-image" style="background-image: url('images_2/egg.png');"></div>
             </div>
             <div class="image-text-below">
                 <h3 class="work-item-title">Drawing Title 6</h3>
