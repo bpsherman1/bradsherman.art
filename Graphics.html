@@ -59,13 +59,22 @@
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    margin-bottom: 10rem;
+    margin-bottom: 2rem;
     overflow: hidden;
     display: flex; /* Added */
     flex-direction: column; /* Added */
     height: 560px; /* Added - adjust as needed */
 }
+.swipe-text {
+    text-align: center;
+    margin-bottom: 10rem; /* This gives the spacing below */
+}
 
+.swipe-text .work-item-title {
+    color: #ffffff !important;
+    font-size: 1.5rem;
+    margin-bottom: 0;
+}
 .image-wrapper {
     width: 100%;
     overflow-x: auto;
@@ -616,14 +625,19 @@
     <div class="image-wrapper">
         <img src="images_2/york.png" alt="Your image description" class="wide-image">
     </div>
- <div class="scroll-hint">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M10 8L14 12L10 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-   
-</div>
+
 </div>
 
+<div class="scrollable-image-container">
+    <div class="image-wrapper">
+        <img src="images_2/york.png" alt="Your image description" class="wide-image">
+    </div>
+</div>
+<!-- Add this swipe text below the container -->
+<div class="swipe-text">
+    <h3 class="work-item-title">SWIPE</h3>
+</div>
+        
 <div class="work-section">
     <div class="triple-images-container taller-containers project-last-row">
         <div class="triple-images">
