@@ -20,6 +20,9 @@
     padding: 20px;
     margin-bottom: 10rem;
     overflow: hidden;
+    display: flex; /* Added */
+    flex-direction: column; /* Added */
+    height: 560px; /* Added - adjust as needed */
 }
 
 .image-wrapper {
@@ -29,6 +32,9 @@
     position: relative;
     scrollbar-width: thin;
     scrollbar-color: #ADAC9E #f1f1f1;
+    flex: 1; /* Added - makes image area take available space */
+    display: flex; /* Added */
+    align-items: center; /* Added - center vertically */
 }
 
 .image-wrapper::-webkit-scrollbar {
@@ -49,6 +55,7 @@
     height: 500px;
     display: block;
     cursor: grab;
+    margin: 0 auto; /* Added - center horizontally */
 }
 
 .wide-image:active {
@@ -62,6 +69,7 @@
     margin-top: 10px;
     color: #7f8c8d;
     font-size: 0.9rem;
+    flex-shrink: 0; /* Added - prevent shrinking */
 }
 
 .scroll-hint svg {
@@ -69,12 +77,21 @@
 }
 
 @media (max-width: 768px) {
+    .scrollable-image-container {
+        height: auto; /* Added - natural height on mobile */
+        padding: 15px; /* Added */
+    }
+    
     .wide-image {
         height: 300px;
     }
     
     .scroll-hint {
         display: none;
+    }
+    
+    .image-wrapper {
+        align-items: flex-start; /* Added - reset to top on mobile */
     }
 }
 
