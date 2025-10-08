@@ -14,16 +14,24 @@
             cursor: auto
         }
 
+.triple-images-container {
+    background-color: #333333; /* Your gray background */
+    border-radius: 0; /* Remove rounded corners if you want */
+    padding: 20px; /* Padding inside the container */
+    width: 100%;
+}
+
 .triple-images {
     display: flex;
-    gap: 20px; /* This adds 20px padding between images */
+    gap: 20px; /* 20px padding between images */
     width: 100%;
-    margin-bottom: 5rem;
+    height: 700px; /* Your taller container height */
 }
 
 .triple-images .work-image {
     width: calc(33.333% - 13.333px); /* Adjust width to account for gap */
-    height: 700px; /* Maintain your taller container height */
+    height: 100%; /* Fill the container height */
+    margin-bottom: 0; /* Remove individual margins */
 }
 
 /* Mobile responsive */
@@ -31,6 +39,7 @@
     .triple-images {
         flex-direction: column;
         gap: 2rem;
+        height: auto; /* Let height be natural on mobile */
     }
     
     .triple-images .work-image {
@@ -616,13 +625,14 @@
 </div>
 
 <div class="work-section">
-    <div class="triple-images">
-        <div class="work-image" style="background-image: url('images_2/maf.png');"></div>
-        <div class="work-image" style="background-image: url('images_2/boxing.png');"></div>
-        <div class="work-image" style="background-image: url('images_2/war.png');"></div>
+    <div class="triple-images-container taller-containers project-last-row">
+        <div class="triple-images">
+            <div class="work-image" style="background-image: url('images_2/maf.png');"></div>
+            <div class="work-image" style="background-image: url('images_2/boxing.png');"></div>
+            <div class="work-image" style="background-image: url('images_2/war.png');"></div>
+        </div>
     </div>
 </div>
-        
         
         <div class="work-section">
             <div class="single-image sho-containers project-last-row">
