@@ -13,7 +13,70 @@
             box-sizing: border-box; 
             cursor: auto
         }
+.scrollable-image-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+}
 
+.image-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 4px;
+    position: relative;
+    scrollbar-width: thin;
+    scrollbar-color: #3498db #f1f1f1;
+}
+
+.image-wrapper::-webkit-scrollbar {
+    height: 8px;
+}
+
+.image-wrapper::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.image-wrapper::-webkit-scrollbar-thumb {
+    background: #3498db;
+    border-radius: 4px;
+}
+
+.wide-image {
+    height: 500px;
+    display: block;
+    cursor: grab;
+}
+
+.wide-image:active {
+    cursor: grabbing;
+}
+
+.scroll-hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+.scroll-hint svg {
+    margin-right: 8px;
+}
+
+@media (max-width: 768px) {
+    .wide-image {
+        height: 300px;
+    }
+    
+    .scroll-hint {
+        display: none;
+    }
+}
 
 .taller-images .work-image {
     height:820px;
@@ -491,6 +554,18 @@
 
         <!-- Wide images grid (similar to graphics italy layout) -->
           <!-- Regular single images -->
+        <div class="scrollable-image-container">
+    <div class="image-wrapper">
+        <img src="images_3/york.png" alt="Your image description" class="wide-image">
+    </div>
+    <div class="scroll-hint">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 10L12 14L16 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Scroll horizontally to view the full image
+    </div>
+</div>
+        
         <div class="work-section">
             <div class="single-image sho-containers project-last-row">
                 <div class="work-image" style="background-image: url('images_2/1.png');"></div>
