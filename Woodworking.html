@@ -699,34 +699,47 @@
 
     <script>
         // Full Screen Image Viewer
+// Full Screen Image Viewer
 const modal = document.getElementById('imageModal');
 const modalImage = document.querySelector('.modal-image');
 const closeModal = document.querySelector('.close-modal');
 const prevBtn = document.querySelector('.prev-btn');
 const nextBtn = document.querySelector('.next-btn');
 
-// Get all images on the page
-const workImages = document.querySelectorAll('.work-image, .works.image');
+// Get all images on the page (both .work-image and .works-image)
+const workImages = document.querySelectorAll('.work-image');
+const worksImages = document.querySelectorAll('.works-image');
+const allImages = [...workImages, ...worksImages]; // Combine both arrays
 let currentImageIndex = 0;
 let images = [];
 
-
-
 // Extract image URLs from background images
-workImages.forEach((img, index) => {
+allImages.forEach((img, index) => {
     const bgImage = img.style.backgroundImage;
-    // Extract URL from background-image: url('...')
-    const imageUrl = bgImage.replace(/url\(['"]?(.*?)['"]?\)/i, '$1');
-    images.push(imageUrl);
+    console.log(`Image ${index}:`, bgImage); // Debug log
     
-    // Make image clickable
-    img.addEventListener('click', () => {
-        currentImageIndex = index;
-        openModal();
-    });
+    // Extract URL from background-image: url('...')
+    if (bgImage && bgImage !== 'none') {
+        const imageUrl = bgImage.replace(/url\(['"]?(.*?)['"]?\)/i, '$1');
+        images.push(imageUrl);
+        
+        // Make image clickable
+        img.addEventListener('click', () => {
+            currentImageIndex = index;
+            openModal();
+        });
+        
+        console.log(`Added image ${index}:`, imageUrl); // Debug log
+    }
 });
 
+console.log('Total images found:', images.length); // Debug log
+
 function openModal() {
+    if (images.length === 0) {
+        console.log('No images found'); // Debug log
+        return;
+    }
     modal.style.display = 'flex';
     modalImage.src = images[currentImageIndex];
     document.body.style.overflow = 'hidden'; // Prevent scrolling
