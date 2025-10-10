@@ -26,6 +26,100 @@ body {
     cursor:auto;
 }
 
+        /* Full Screen Image Viewer */
+.image-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    max-width: 90%;
+    max-height: 90%;
+    position: relative;
+}
+
+.modal-image {
+    max-width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+}
+
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1001;
+    background: none;
+    border: none;
+}
+
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+.nav-btn:hover {
+    opacity: 1;
+}
+
+.nav-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    border: 3px solid white;
+    border-width: 3px 3px 0 0;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.prev-btn {
+    left: 30px;
+}
+
+.prev-btn::before {
+    transform: translate(-50%, -50%) rotate(-135deg);
+}
+
+.next-btn {
+    right: 30px;
+}
+
+.next-btn::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+/* Make work images clickable */
+.work-image {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.work-image:hover {
+    transform: scale(1.02);
+}
+        
         .project-details {
     margin-top: 1rem;
 }
@@ -403,6 +497,16 @@ body {
         }
     </style>
 </head>
+    <!-- Full Screen Image Modal -->
+<div id="imageModal" class="image-modal">
+    <button class="close-modal">&times;</button>
+    <button class="nav-btn prev-btn">&lt;</button>
+    <button class="nav-btn next-btn">&gt;</button>
+    <div class="modal-content">
+        <img class="modal-image" src="" alt="">
+    </div>
+</div>
+    
 <body>
     <!-- Custom Cursor -->
   
@@ -595,7 +699,73 @@ body {
     </section>
 
     <script>
-     
+     // Full Screen Image Viewer
+const modal = document.getElementById('imageModal');
+const modalImage = document.querySelector('.modal-image');
+const closeModal = document.querySelector('.close-modal');
+const prevBtn = document.querySelector('.prev-btn');
+const nextBtn = document.querySelector('.next-btn');
+
+// Get all images on the page
+const workImages = document.querySelectorAll('.work-image');
+let currentImageIndex = 0;
+let images = [];
+
+// Extract image URLs from background images
+workImages.forEach((img, index) => {
+    const bgImage = img.style.backgroundImage;
+    // Extract URL from background-image: url('...')
+    const imageUrl = bgImage.replace(/url\(['"]?(.*?)['"]?\)/i, '$1');
+    images.push(imageUrl);
+    
+    // Make image clickable
+    img.addEventListener('click', () => {
+        currentImageIndex = index;
+        openModal();
+    });
+});
+
+function openModal() {
+    modal.style.display = 'flex';
+    modalImage.src = images[currentImageIndex];
+    document.body.style.overflow = 'hidden'; // Prevent scrolling
+}
+
+function closeModalFunc() {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto'; // Re-enable scrolling
+}
+
+function showNextImage() {
+    currentImageIndex = (currentImageIndex + 1) % images.length;
+    modalImage.src = images[currentImageIndex];
+}
+
+function showPrevImage() {
+    currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+    modalImage.src = images[currentImageIndex];
+}
+
+// Event listeners
+closeModal.addEventListener('click', closeModalFunc);
+nextBtn.addEventListener('click', showNextImage);
+prevBtn.addEventListener('click', showPrevImage);
+
+// Close modal when clicking outside image
+modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+        closeModalFunc();
+    }
+});
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+    if (modal.style.display === 'flex') {
+        if (e.key === 'Escape') closeModalFunc();
+        if (e.key === 'ArrowRight') showNextImage();
+        if (e.key === 'ArrowLeft') showPrevImage();
+    }
+});
 
         // Horizontal Slideshow Scroll Control
         const slideshow = document.querySelector('.horizontal-slideshow');
