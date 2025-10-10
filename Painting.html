@@ -708,32 +708,51 @@
     <script>
 
         // Full Screen Image Viewer
+// Full Screen Image Viewer
 const modal = document.getElementById('imageModal');
 const modalImage = document.querySelector('.modal-image');
 const closeModal = document.querySelector('.close-modal');
 const prevBtn = document.querySelector('.prev-btn');
 const nextBtn = document.querySelector('.next-btn');
 
-// Get all images on the page
-const workImages = document.querySelectorAll('.work-image, works-image');
+// Get all images on the page (all image classes)
+const workImages = document.querySelectorAll('.work-image');
+const worksImages = document.querySelectorAll('.works-image');
+const workssImages = document.querySelectorAll('.workss-image');
+const worksssImages = document.querySelectorAll('.worksss-image');
+
+// Combine all arrays
+const allImages = [...workImages, ...worksImages, ...workssImages, ...worksssImages];
 let currentImageIndex = 0;
 let images = [];
 
 // Extract image URLs from background images
-workImages.forEach((img, index) => {
+allImages.forEach((img, index) => {
     const bgImage = img.style.backgroundImage;
-    // Extract URL from background-image: url('...')
-    const imageUrl = bgImage.replace(/url\(['"]?(.*?)['"]?\)/i, '$1');
-    images.push(imageUrl);
+    console.log(`Image ${index}:`, bgImage); // Debug log
     
-    // Make image clickable
-    img.addEventListener('click', () => {
-        currentImageIndex = index;
-        openModal();
-    });
+    // Extract URL from background-image: url('...')
+    if (bgImage && bgImage !== 'none') {
+        const imageUrl = bgImage.replace(/url\(['"]?(.*?)['"]?\)/i, '$1');
+        images.push(imageUrl);
+        
+        // Make image clickable
+        img.addEventListener('click', () => {
+            currentImageIndex = index;
+            openModal();
+        });
+        
+        console.log(`Added image ${index}:`, imageUrl); // Debug log
+    }
 });
 
+console.log('Total images found:', images.length); // Debug log
+
 function openModal() {
+    if (images.length === 0) {
+        console.log('No images found'); // Debug log
+        return;
+    }
     modal.style.display = 'flex';
     modalImage.src = images[currentImageIndex];
     document.body.style.overflow = 'hidden'; // Prevent scrolling
@@ -774,41 +793,6 @@ document.addEventListener('keydown', (e) => {
         if (e.key === 'ArrowLeft') showPrevImage();
     }
 });
-        // Horizontal Slideshow Scroll Control
-        const slideshow = document.querySelector('.horizontal-slideshow');
-
-        // Scroll-based movement ONLY for desktop
-        window.addEventListener('scroll', () => {
-            const scrollY = window.scrollY;
-            const maxScroll = window.innerHeight * 1.5;
-            const scrollPercent = Math.min(scrollY / maxScroll, 1);
-            const slideshowPosition = -(scrollPercent * 115);
-            
-            if (window.innerWidth > 768) {
-                slideshow.style.transform = `translateX(${slideshowPosition}%)`;
-            }
-        });
-
-        // Reset on scroll to top
-        window.addEventListener('scroll', () => {
-            if (window.scrollY === 0) {
-                slideshow.style.transform = 'translateX(0%)';
-            }
-        });
-
-        // Navigation hover effects
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('mouseenter', () => {
-                if (link.querySelector('span')) {
-                    link.querySelector('span').style.width = '100%';
-                }
-            });
-            link.addEventListener('mouseleave', () => {
-                if (link.querySelector('span')) {
-                    link.querySelector('span').style.width = '0';
-                }
-            });
-        });
     </script>
 </body>
 </html>
