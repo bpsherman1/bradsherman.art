@@ -21,6 +21,34 @@
             cursor: auto;
         }
 
+        /* Mobile replacement for slideshow images */
+@media (max-width: 768px) {
+  .slideshow-container {
+    position: relative;
+    height: 60vh; /* Adjust as needed */
+  }
+  
+  .slideshow-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('images/mobile-type1.png');
+    background-size: cover;
+    background-position: center;
+    z-index: 10;
+  }
+  
+  /* Hide all slideshow images on mobile */
+  .slideshow-container img,
+  .slide,
+  .carousel-item {
+    display: none !important;
+  }
+}
+
         /* Full Screen Image Viewer */
 .image-modal {
     display: none;
