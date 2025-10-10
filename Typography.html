@@ -486,6 +486,7 @@
     <script>
 
         // Full Screen Image Viewer
+// Full Screen Image Viewer
 const modal = document.getElementById('imageModal');
 const modalImage = document.querySelector('.modal-image');
 const closeModal = document.querySelector('.close-modal');
@@ -500,21 +501,33 @@ let images = [];
 // Extract image URLs from background images
 workImages.forEach((img, index) => {
     const bgImage = img.style.backgroundImage;
-    // Extract URL from background-image: url('...')
-    const imageUrl = bgImage.replace(/url\(['"]?(.*?)['"]?\)/i, '$1');
-    images.push(imageUrl);
+    console.log('Background image:', bgImage); // Debug log
     
-    // Make image clickable
-    img.addEventListener('click', () => {
-        currentImageIndex = index;
-        openModal();
-    });
+    // Extract URL from background-image: url('...')
+    if (bgImage && bgImage !== 'none') {
+        const imageUrl = bgImage.replace(/url\(['"]?(.*?)['"]?\)/i, '$1');
+        images.push(imageUrl);
+        
+        // Make image clickable
+        img.addEventListener('click', () => {
+            console.log('Image clicked, index:', index); // Debug log
+            currentImageIndex = index;
+            openModal();
+        });
+    }
 });
 
+console.log('Total images found:', images.length); // Debug log
+
 function openModal() {
+    if (images.length === 0) {
+        console.log('No images to display'); // Debug log
+        return;
+    }
     modal.style.display = 'flex';
     modalImage.src = images[currentImageIndex];
     document.body.style.overflow = 'hidden'; // Prevent scrolling
+    console.log('Modal opened with image:', images[currentImageIndex]); // Debug log
 }
 
 function closeModalFunc() {
@@ -534,8 +547,8 @@ function showPrevImage() {
 
 // Event listeners
 closeModal.addEventListener('click', closeModalFunc);
-nextBtn.addEventListener('click', showNextImage);
-prevBtn.addEventListener('click', showPrevImage);
+if (nextBtn) nextBtn.addEventListener('click', showNextImage);
+if (prevBtn) prevBtn.addEventListener('click', showPrevImage);
 
 // Close modal when clicking outside image
 modal.addEventListener('click', (e) => {
@@ -552,82 +565,45 @@ document.addEventListener('keydown', (e) => {
         if (e.key === 'ArrowLeft') showPrevImage();
     }
 });
-        // Custom Cursor
-      
 
-        // Horizontal Slideshow Scroll Control
-        const slideshow = document.querySelector('.horizontal-slideshow');
-
-        // Scroll-based movement ONLY for desktop
-        window.addEventListener('scroll', () => {
-            const scrollY = window.scrollY;
-            const maxScroll = window.innerHeight * 1.5;
-            const scrollPercent = Math.min(scrollY / maxScroll, 1);
-            const slideshowPosition = -(scrollPercent * 115);
-            
-            if (window.innerWidth > 768) {
-                slideshow.style.transform = `translateX(${slideshowPosition}%)`;
-            }
-        });
-
-        // Reset on scroll to top
-        window.addEventListener('scroll', () => {
-            if (window.scrollY === 0) {
-                slideshow.style.transform = 'translateX(0%)';
-            }
-        });
-
-       
-        // Navigation hover effects
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('mouseenter', () => {
-                if (link.querySelector('span')) {
-                    link.querySelector('span').style.width = '100%';
-                }
-            });
-            link.addEventListener('mouseleave', () => {
-                if (link.querySelector('span')) {
-                    link.querySelector('span').style.width = '0';
-                }
-            });
-        });
-
-        // Add keyframes for animations
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes float {
-                0%, 100% { transform: translateY(0) rotate(0deg); }
-                25% { transform: translateY(-20px) rotate(90deg); }
-                50% { transform: translateY(0) rotate(180deg); }
-                75% { transform: translateY(20px) rotate(270deg); }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Initialize
-        createParticles();
-
-        // Hide cursor on mobile
-        if (window.innerWidth <= 768) {
-            cursor.style.display = 'none';
-            follower.style.display = 'none';
-        }
-        // Horizontal Slideshow Scroll Control
+// Horizontal Slideshow Scroll Control
 const slideshow = document.querySelector('.horizontal-slideshow');
 console.log('Slideshow element:', slideshow); // Debug log
 
-// Scroll-based movement ONLY for desktop
-window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-    const maxScroll = window.innerHeight * 1.5;
-    const scrollPercent = Math.min(scrollY / maxScroll, 1);
-    const slideshowPosition = -(scrollPercent * 115);
-    
-    console.log('Scroll position:', scrollY, 'Slideshow position:', slideshowPosition); // Debug log
-    
-    if (window.innerWidth > 768) {
-        slideshow.style.transform = `translateX(${slideshowPosition}%)`;
-    }
+if (slideshow) {
+    window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        const maxScroll = window.innerHeight * 1.5;
+        const scrollPercent = Math.min(scrollY / maxScroll, 1);
+        const slideshowPosition = -(scrollPercent * 115);
+        
+        console.log('Scroll position:', scrollY, 'Slideshow position:', slideshowPosition); // Debug log
+        
+        if (window.innerWidth > 768) {
+            slideshow.style.transform = `translateX(${slideshowPosition}%)`;
+        }
+    });
+
+    // Reset on scroll to top
+    window.addEventListener('scroll', () => {
+        if (window.scrollY === 0) {
+            slideshow.style.transform = 'translateX(0%)';
+        }
+    });
+}
+
+// Navigation hover effects
+document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('mouseenter', () => {
+        if (link.querySelector('span')) {
+            link.querySelector('span').style.width = '100%';
+        }
+    });
+    link.addEventListener('mouseleave', () => {
+        if (link.querySelector('span')) {
+            link.querySelector('span').style.width = '0';
+        }
+    });
 });
     </script>
 </body>
