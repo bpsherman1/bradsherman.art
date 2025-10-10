@@ -20,7 +20,15 @@
             overflow-x: hidden;
             cursor: auto;
         }
+@media (max-width: 768px) {
+  .slideshow-container { display: none; }
+  .mobile-hero-image { display: block; width: 100%; }
+}
 
+@media (min-width: 769px) {
+  .slideshow-container { display: block; }
+  .mobile-hero-image { display: none; }
+}
         /* Mobile replacement for slideshow images */
 @media (max-width: 768px) {
   .slideshow-container {
@@ -418,6 +426,7 @@
   
     
 <body>
+    <img src="images_2/work-page1-mobile.jpg" alt="Work Title" class="mobile-hero-image">
 
      <div id="imageModal" class="image-modal">
     <button class="close-modal">&times;</button>
