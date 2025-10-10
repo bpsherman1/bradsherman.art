@@ -700,18 +700,21 @@
     <script>
 
         // Full Screen Image Viewer
+// Full Screen Image Viewer
 const modal = document.getElementById('imageModal');
 const modalImage = document.querySelector('.modal-image');
 const closeModal = document.querySelector('.close-modal');
 const prevBtn = document.querySelector('.prev-btn');
 const nextBtn = document.querySelector('.next-btn');
 
-// Get all images on the page (both .work-image and .works-image)
+// Get all images on the page (all image classes)
 const workImages = document.querySelectorAll('.work-image');
 const worksImages = document.querySelectorAll('.works-image');
-        const worksImages = document.querySelectorAll('.workss-image');
-        const worksImages = document.querySelectorAll('.worksss-image');
-const allImages = [...workImages, ...workssImages, ...worksssImages,...worksImages]; // Combine both arrays
+const workssImages = document.querySelectorAll('.workss-image');
+const worksssImages = document.querySelectorAll('.worksss-image');
+
+// Combine all arrays
+const allImages = [...workImages, ...worksImages, ...workssImages, ...worksssImages];
 let currentImageIndex = 0;
 let images = [];
 
