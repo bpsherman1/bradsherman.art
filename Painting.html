@@ -116,6 +116,15 @@
 .work-image:hover {
     transform: scale(1.02);
 }
+
+        .works-image {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.works-image:hover {
+    transform: scale(1.02);
+}
         
 .project-year {
     font-family: 'Inter', sans-serif;
@@ -706,7 +715,7 @@ const prevBtn = document.querySelector('.prev-btn');
 const nextBtn = document.querySelector('.next-btn');
 
 // Get all images on the page
-const workImages = document.querySelectorAll('.work-image');
+const workImages = document.querySelectorAll('.work-image, works-image');
 let currentImageIndex = 0;
 let images = [];
 
