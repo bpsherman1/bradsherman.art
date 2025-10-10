@@ -391,9 +391,10 @@
     
 <body>
 
-      <div id="imageModal" class="image-modal">
+     <div id="imageModal" class="image-modal">
     <button class="close-modal">&times;</button>
-   
+    <button class="nav-btn prev-btn">&lt;</button>
+    <button class="nav-btn next-btn">&gt;</button>
     <div class="modal-content">
         <img class="modal-image" src="" alt="">
     </div>
@@ -611,6 +612,23 @@ document.addEventListener('keydown', (e) => {
             cursor.style.display = 'none';
             follower.style.display = 'none';
         }
+        // Horizontal Slideshow Scroll Control
+const slideshow = document.querySelector('.horizontal-slideshow');
+console.log('Slideshow element:', slideshow); // Debug log
+
+// Scroll-based movement ONLY for desktop
+window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const maxScroll = window.innerHeight * 1.5;
+    const scrollPercent = Math.min(scrollY / maxScroll, 1);
+    const slideshowPosition = -(scrollPercent * 115);
+    
+    console.log('Scroll position:', scrollY, 'Slideshow position:', slideshowPosition); // Debug log
+    
+    if (window.innerWidth > 768) {
+        slideshow.style.transform = `translateX(${slideshowPosition}%)`;
+    }
+});
     </script>
 </body>
 </html>
