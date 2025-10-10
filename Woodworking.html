@@ -706,13 +706,11 @@ const prevBtn = document.querySelector('.prev-btn');
 const nextBtn = document.querySelector('.next-btn');
 
 // Get all images on the page
-const workImages = document.querySelectorAll('.work-image');
+const workImages = document.querySelectorAll('.work-image, .works.image');
 let currentImageIndex = 0;
 let images = [];
 
-const worksImages = document.querySelectorAll('.works-image');
-let currentImageIndex = 0;
-let images = [];
+
 
 // Extract image URLs from background images
 workImages.forEach((img, index) => {
