@@ -443,9 +443,10 @@
         /* Mobile Responsive */
        /* Mobile Responsive */
 /* Mobile Responsive */
+/* Mobile Responsive */
 @media (max-width: 768px) {
-    /* Hero adjustments for mobile - FULL SCREEN HERO */
-     .hero {
+    /* Hero adjustments for mobile */
+    .hero {
         height: 90vh !important;
     }
     
@@ -454,7 +455,7 @@
         display: none !important;
     }
     
-    /* POSITION TEXT AT BOTTOM LEFT CORNER */
+    /* POSITION TEXT AT BOTTOM LEFT CORNER - LIKE REFERENCE PAGE */
     .name-container {
         height: 70% !important;
         bottom: 2% !important;
@@ -463,9 +464,9 @@
         padding: 0 5% !important;
     }
     
-    /* FIXED: Title styling - BOTTOM LEFT CORNER - WHITE TEXT */
+    /* FIXED: Title styling - BOTTOM LEFT CORNER - MATCHING REFERENCE PAGE STYLING */
     .page-title {
-        font-size: 16vw !important; /* This will now work */
+        font-size: 16vw !important;
         position: relative !important;
         bottom: auto !important;
         left: 0 !important;
@@ -476,12 +477,10 @@
         line-height: 0.9 !important;
         letter-spacing: -1px !important;
         width: auto !important;
-        white-space: normal !important; /* Changed from nowrap to normal */
+        white-space: normal !important;
         text-align: left !important;
         margin-left: 0 !important;
         word-wrap: break-word !important;
-        /* Force the font size to be applied */
-        font-size: 16vw !important;
     }
 
     /* Show mobile static image */
@@ -489,7 +488,7 @@
         display: block !important;
     }
     
-    /* UPDATED DROPDOWN - BLACK BACKGROUND */
+    /* UPDATED DROPDOWN - BLACK BACKGROUND (MATCHING REFERENCE) */
     .dropdown-content { 
         position: fixed !important; 
         top: 90px !important;
@@ -576,7 +575,7 @@
     }
     
     .work-container {
-        padding: 8rem 5% 10rem 5%; /* Adjusted top padding */
+        padding: 8rem 5% 10rem 5%;
     }
     
     .section-title {
@@ -586,114 +585,6 @@
     
     .image-text-below {
         margin-bottom: 8rem;
-    }
-}
-
-/* Small mobile screens */
-@media (max-width: 480px) {
-    /* Full screen hero for small screens */
-    .hero {
-        height: 90vh !important;
-    }
-    
-    .horizontal-slideshow {
-        height: 90vh !important;
-    }
-    
-    .name-container {
-        height: 75% !important;
-        bottom: 3% !important;
-    }
-    
-    .page-title {
-        font-size: 12vw !important; /* Smaller for small screens */
-        letter-spacing: -0.5px !important;
-    }
-    
-    .work-container {
-        padding: 6rem 5% 10rem 5%;
-    }
-    
-    .single-image {
-        width: 95%;
-    }
-    
-    .work-image {
-        height: 250px;
-    }
-    
-    .works-image {
-        height: 250px;
-    }
-    
-    .taller-containers .work-image {
-        height: 350px;
-    }
-    
-    .taller-containers .works-image {
-        height: 350px;
-    }
-    
-    /* NAVIGATION */
-    nav {
-        padding: 0.4rem 0.8rem !important;
-    }
-    
-    .nav-links {
-        gap: 1rem !important;
-    }
-    
-    .dropdown-content {
-        top: 85px !important;
-        width: 50% !important;
-        padding: 0.4rem 0 !important;
-    }
-    
-    .dropdown-content a {
-        padding: 0.3rem 0.8rem !important;
-        font-size: 0.75rem !important;
-    }
-    
-    .section-title {
-        font-size: 1.6rem;
-        margin: 8rem 0 6rem 0;
-    }
-    
-    .work-item-title {
-        font-size: 1rem;
-    }
-}
-
-@media (max-width: 360px) {
-    .hero {
-        height: 90vh !important;
-    }
-    
-    .horizontal-slideshow {
-        height: 90vh !important;
-    }
-    
-    .name-container {
-        height: 80% !important;
-        bottom: 2% !important;
-    }
-    
-    .page-title {
-        font-size: 11vw !important; /* Smallest size */
-        letter-spacing: 0px !important;
-    }
-    
-    .nav-links {
-        gap: 1rem !important;
-    }
-    
-    .dropdown-content {
-        top: 80px !important;
-        width: 55% !important;
-    }
-    
-    .work-container {
-        padding: 5rem 5% 8rem 5%;
     }
 }
     </style>
@@ -992,6 +883,21 @@ document.addEventListener('keydown', (e) => {
         if (e.key === 'ArrowLeft') showPrevImage();
     }
 });
+      
+// Change title to "ACRYLIC PAINTINGS" only on mobile
+function updateMobileTitle() {
+    if (window.innerWidth <= 768) {
+        const pageTitle = document.querySelector('.page-title');
+        if (pageTitle && pageTitle.textContent === 'PAINTING') {
+            pageTitle.textContent = 'ACRYLIC PAINTINGS';
+        }
+    }
+}
+
+// Run on load and resize
+window.addEventListener('load', updateMobileTitle);
+window.addEventListener('resize', updateMobileTitle);
+
     </script>
 </body>
 </html>
