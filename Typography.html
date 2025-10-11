@@ -25,33 +25,36 @@
 /* Mobile Styles */
 /* Mobile Responsive */
 /* Mobile Responsive */
+/* Mobile Responsive */
 @media (max-width: 768px) {
-    /* Hero adjustments for mobile */
+    /* Hero adjustments for mobile - SMALLER HERO */
     .hero {
-        height: 90vh !important;
+        height: 40vh !important; /* Smaller hero section to fit full image */
     }
     
     .horizontal-slideshow {
-        height: 90vh !important;
+        height: 40vh !important; /* Match the smaller hero */
         display: none !important;
     }
     
-    /* CORRECTED: To move text LOWER, we INCREASE height and DECREASE bottom */
+    /* POSITION TEXT AT BOTTOM OF SMALLER IMAGE */
     .name-container {
-        height: 80% !important; /* INCREASED from 66% to 80% - moves text DOWN */
-        bottom: 2% !important; /* DECREASED from 15% to 2% - moves text DOWN */
+        height: 85% !important; /* Higher height to position text at bottom */
+        bottom: 5% !important; /* Position near bottom of the image */
         align-items: flex-end !important;
     }
     
-    /* Single-line title styling - MAKE SURE THIS IS SMALLER FOR LONGER WORDS */
+    /* Single-line title styling - WHITE TEXT (no invert) */
     .page-title {
-        font-size: 15vw !important; /* Reduced from 16vw to 12vw for longer words */
+        font-size: 15vw !important;
         position: relative !important;
         bottom: auto !important;
         transform: translateX(-50%) !important;
         margin-bottom: 0 !important;
-        line-height: 0.9 !important; /* Tighter line height */
-        letter-spacing: -2px !important; /* Reduced letter spacing */
+        line-height: 0.9 !important;
+        letter-spacing: -2px !important;
+        mix-blend-mode: normal !important; /* Remove difference blend mode */
+        color: white !important; /* Ensure white color */
     }
 
     /* Show mobile static image */
@@ -62,8 +65,8 @@
     /* Rest of your mobile CSS */
     .main-name { 
         font-size: 15vw; 
-        mix-blend-mode: difference !important;
-        color: white !important;
+        mix-blend-mode: normal !important; /* Remove invert */
+        color: white !important; /* White text */
     }
     
     .dropdown-content { 
@@ -140,14 +143,23 @@
 
 /* Small mobile screens */
 @media (max-width: 480px) {
+    /* Even smaller hero for small screens */
+    .hero {
+        height: 35vh !important;
+    }
+    
+    .horizontal-slideshow {
+        height: 35vh !important;
+    }
+    
     .name-container {
-        height: 85% !important; /* Even higher */
-        bottom: 1% !important; /* Even lower */
+        height: 90% !important; /* Even higher to position text at bottom */
+        bottom: 3% !important; /* Slightly adjusted for small screens */
     }
     
     .page-title {
-        font-size: 11vw !important; /* Even smaller for very small screens */
-        letter-spacing: -1px !important; /* Even tighter letter spacing */
+        font-size: 11vw !important;
+        letter-spacing: -1px !important;
     }
     
     .work-container {
@@ -188,6 +200,23 @@
 }
 
 @media (max-width: 360px) {
+    .hero {
+        height: 30vh !important;
+    }
+    
+    .horizontal-slideshow {
+        height: 30vh !important;
+    }
+    
+    .name-container {
+        height: 92% !important;
+        bottom: 2% !important;
+    }
+    
+    .page-title {
+        font-size: 10vw !important;
+    }
+    
     .nav-links {
         gap: 1rem !important;
     }
@@ -195,10 +224,6 @@
     .dropdown-content {
         top: 80px !important;
         width: 55% !important;
-    }
-    
-    .page-title {
-        font-size: 10vw !important; /* Smallest for very narrow screens */
     }
 }
         /* Full Screen Image Viewer */
