@@ -20,6 +20,68 @@
             overflow-x: hidden;
             cursor: auto;
         }
+
+        /* Mobile Responsive */
+@media (max-width: 768px) {
+    /* FIX: Move title higher to avoid Safari bar */
+    .hero {
+        height: 90vh !important; /* Reduce from 100vh to 90vh */
+    }
+    
+    .horizontal-slideshow {
+        height: 90vh !important; /* Match the hero height */
+    }
+    
+    /* Adjust name container positioning - MOVE TITLE HIGHER */
+    .name-container {
+        height: 70% !important; /* Reduce from 66% to 70% */
+        bottom: 5% !important; /* Move up from bottom */
+    }
+    
+    /* Make title text smaller on mobile */
+    .page-title {
+        font-size: 14vw !important; /* Reduce from 15vw to 14vw */
+    }
+
+    .cursor, .cursor-follower {
+        display: none;
+    }
+    
+    .single-image,
+    .double-images {
+        width: 90%;
+    }
+    
+    .double-images {
+        flex-direction: column;
+    }
+    
+    .double-images .work-image {
+        width: 100%;
+        height: 300px;
+    }
+    
+    .work-image {
+        height: 300px;
+    }
+    
+    /* Taller images mobile */
+    .taller-images .work-image {
+        height: 500px;
+    }
+    
+    .work-item-title {
+        font-size: 1.5rem;
+    }
+    
+    nav {
+        padding: 1rem;
+    }
+    
+    .nav-links {
+        gap: 1rem;
+    }
+}
         /* Full Screen Image Viewer */
 .image-modal {
     display: none;
@@ -496,28 +558,33 @@
         }
 
         @media (max-width: 480px) {
-            .page-title {
-                font-size: 12vw;
-            }
-            
-            .work-container {
-                padding: 6rem 5% 10rem 5%;
-            }
-            
-            .single-image,
-            .double-images {
-                width: 95%;
-            }
-            
-            .work-image {
-                height: 250px;
-            }
-            
-            /* Taller images small mobile */
-            .taller-images .work-image {
-                height: 350px;
-            }
-        }
+           .name-container {
+        height: 75% !important; /* Even higher on small screens */
+        bottom: 8% !important;
+    }
+    
+    .page-title {
+        font-size: 12vw !important;
+    }
+    
+    .work-container {
+        padding: 6rem 5% 10rem 5%;
+    }
+    
+    .single-image,
+    .double-images {
+        width: 95%;
+    }
+    
+    .work-image {
+        height: 250px;
+    }
+    
+    /* Taller images small mobile */
+    .taller-images .work-image {
+        height: 350px;
+    }
+}
     </style>
 </head>
     <!-- Full Screen Image Modal -->
