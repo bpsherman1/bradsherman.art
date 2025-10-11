@@ -19,44 +19,44 @@
             color: white; 
             overflow-x: hidden;
             cursor: auto;
+
+  
         }
+/* Mobile Styles */
 @media (max-width: 768px) {
-  .slideshow-container { display: none; }
-  .mobile-hero-image { display: block; width: 100%; }
+    /* Hide desktop slideshow on mobile */
+    .horizontal-slideshow {
+        display: none !important;
+    }
+    
+    /* Show mobile static image */
+    .mobile-static-image {
+        display: block !important;
+    }
+    
+    /* Hide the extra mobile image you added in HTML */
+    .mobile-hero-image {
+        display: none !important;
+    }
 }
 
+/* Desktop Styles */
 @media (min-width: 769px) {
-  .slideshow-container { display: block; }
-  .mobile-hero-image { display: none; }
+    /* Show desktop slideshow */
+    .horizontal-slideshow {
+        display: flex !important;
+    }
+    
+    /* Hide mobile static image */
+    .mobile-static-image {
+        display: none !important;
+    }
+    
+    /* Hide the extra mobile image */
+    .mobile-hero-image {
+        display: none !important;
+    }
 }
-        /* Mobile replacement for slideshow images */
-@media (max-width: 768px) {
-  .slideshow-container {
-    position: relative;
-    height: 60vh; /* Adjust as needed */
-  }
-  
-  .slideshow-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('images_2/mobile-type1.png');
-    background-size: cover;
-    background-position: center;
-    z-index: 10;
-  }
-  
-  /* Hide all slideshow images on mobile */
-  .slideshow-container img,
-  .slide,
-  .carousel-item {
-    display: none !important;
-  }
-}
-
         /* Full Screen Image Viewer */
 .image-modal {
     display: none;
@@ -426,7 +426,7 @@
   
     
 <body>
-    <img src="images_2/type1.png" alt="Work Title" class="mobile-hero-image">
+   
 
      <div id="imageModal" class="image-modal">
     <button class="close-modal">&times;</button>
