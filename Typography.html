@@ -23,27 +23,46 @@
   
         }
 /* Mobile Styles */
+/* Mobile Responsive */
 @media (max-width: 768px) {
-
-     .main-name { 
-        font-size: 15vw; 
-        mix-blend-mode: difference !important;
-        color: white !important;
+    /* Hero adjustments for mobile */
+    .hero {
+        height: 90vh !important;
     }
-    /* Hide desktop slideshow on mobile */
+    
     .horizontal-slideshow {
+        height: 90vh !important;
         display: none !important;
     }
     
+    /* CORRECTED: To move text LOWER, we INCREASE height and DECREASE bottom */
+    .name-container {
+        height: 80% !important; /* INCREASED from 66% to 80% - moves text DOWN */
+        bottom: 2% !important; /* DECREASED from 15% to 2% - moves text DOWN */
+        align-items: flex-end !important;
+    }
+    
+    /* Single-line title styling */
+    .page-title {
+        font-size: 16vw !important;
+        position: relative !important;
+        bottom: auto !important;
+        transform: translateX(-50%) !important;
+        margin-bottom: 0 !important;
+    }
+
     /* Show mobile static image */
     .mobile-static-image {
         display: block !important;
     }
     
-    /* Hide the extra mobile image you added in HTML */
-    .mobile-hero-image {
-        display: none !important;
+    /* Rest of your mobile CSS */
+    .main-name { 
+        font-size: 15vw; 
+        mix-blend-mode: difference !important;
+        color: white !important;
     }
+    
     .dropdown-content { 
         position: fixed !important; 
         top: 90px !important;
@@ -52,12 +71,12 @@
         transform: translateY(-10px) !important;
         width: 45% !important;
         min-width: unset !important;
-        background: #000000 !important; /* SOLID BLACK */
-        border: none !important; /* Remove border */
+        background: #000000 !important;
+        border: none !important;
         padding: 0.5rem 0 !important;
         max-height: 60vh;
         overflow-y: auto;
-        mix-blend-mode: normal !important; /* No inversion */
+        mix-blend-mode: normal !important;
         backdrop-filter: none !important;
         opacity: 1 !important;
         z-index: 1000 !important;
@@ -72,7 +91,7 @@
     .dropdown-content a {
         padding: 0.4rem 1rem !important;
         font-size: 0.8rem !important;
-        color: #ffffff !important; /* White text on black */
+        color: #ffffff !important;
         text-align: right !important;
         mix-blend-mode: normal !important;
         border-left: none !important;
@@ -85,24 +104,93 @@
         background: rgba(255, 255, 255, 0.2) !important;
         padding-right: 1.5rem !important;
     }
-
+    
+    .cursor, .cursor-follower {
+        display: none;
+    }
+    
+    .single-image {
+        width: 90%;
+    }
+    
+    .work-image {
+        height: 300px;
+    }
+    
+    .taller-images .work-image {
+        height: 500px;
+    }
+    
+    .work-item-title {
+        font-size: 1.5rem;
+    }
+    
+    /* NAVIGATION - MATCH CAMPAIGNS PAGE */
+    nav {
+        padding: 1rem;
+    }
+    
+    .nav-links {
+        gap: 1rem;
+    }
 }
 
-/* Desktop Styles */
-@media (min-width: 769px) {
-    /* Show desktop slideshow */
-    .horizontal-slideshow {
-        display: flex !important;
+/* Small mobile screens */
+@media (max-width: 480px) {
+    .name-container {
+        height: 85% !important; /* Even higher */
+        bottom: 1% !important; /* Even lower */
     }
     
-    /* Hide mobile static image */
-    .mobile-static-image {
-        display: none !important;
+    .page-title {
+        font-size: 14vw !important;
     }
     
-    /* Hide the extra mobile image */
-    .mobile-hero-image {
-        display: none !important;
+    .work-container {
+        padding: 6rem 5% 10rem 5%;
+    }
+    
+    .single-image {
+        width: 95%;
+    }
+    
+    .work-image {
+        height: 250px;
+    }
+    
+    .taller-images .work-image {
+        height: 350px;
+    }
+    
+    /* NAVIGATION - MATCH CAMPAIGNS PAGE */
+    nav {
+        padding: 0.4rem 0.8rem !important;
+    }
+    
+    .nav-links {
+        gap: 1rem !important;
+    }
+    
+    .dropdown-content {
+        top: 85px !important;
+        width: 50% !important;
+        padding: 0.4rem 0 !important;
+    }
+    
+    .dropdown-content a {
+        padding: 0.3rem 0.8rem !important;
+        font-size: 0.75rem !important;
+    }
+}
+
+@media (max-width: 360px) {
+    .nav-links {
+        gap: 1rem !important;
+    }
+    
+    .dropdown-content {
+        top: 80px !important;
+        width: 55% !important;
     }
 }
         /* Full Screen Image Viewer */
@@ -426,21 +514,7 @@
                 display: none;
             }
             
-             .name-container {
-        height: 80% !important; /* INCREASED from 66% to 80% - moves text DOWN */
-        bottom: 2% !important; /* DECREASED from 15% to 2% - moves text DOWN */
-        align-items: flex-end !important;
-    }
-    
-    /* Single-line title styling */
-    .page-title {
-        font-size: 15vw !important;
-        position: relative !important;
-        bottom: auto !important;
-        transform: translateX(-50%) !important;
-        margin-bottom: 0 !important;
-    }
-
+            
             
             .single-image {
                 width: 90%;
