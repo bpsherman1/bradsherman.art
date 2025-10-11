@@ -238,7 +238,7 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            background-image: url('images_2/phots1.png');
+            background-image: url('images_2/potty.png');
         }
 
         .horizontal-slideshow {
@@ -394,80 +394,266 @@
 }
 
         /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .page-title {
-                font-size: 15vw;
-            }
-            
-            .single-image {
-                width: 90%;
-            }
-            
-            .work-image {
-                height: 300px;
-            }
-            
-            .taller-containers .work-image {
-                height: 400px;
-            }
-            
-            .short-wide-containers .work-image {
-                height: 250px;
-            }
-            
-            .image-text-below {
-                margin-top: 1.5rem;
-                margin-bottom: 10rem; /* Same as painting page */
-            }
-            
-            .work-item-title {
-                font-size: 1.1rem; /* Same as painting page */
-                color: #000000 !important;
-            }
-            
-            nav {
-                padding: 1rem;
-            }
-            
-            .nav-links {
-                gap: 1rem;
-            }
-        }
+        /* Mobile Responsive */
+@media (max-width: 768px) {
+    /* Hero adjustments for mobile - SMALLER HERO */
+    .hero {
+        height: 40vh !important; /* Smaller hero section to fit full image */
+    }
+    
+    .horizontal-slideshow {
+        height: 40vh !important; /* Match the smaller hero */
+        display: none !important;
+    }
+    
+    /* POSITION TEXT AT BOTTOM OF SMALLER IMAGE */
+    .name-container {
+        height: 85% !important; /* Higher height to position text at bottom */
+        bottom: 5% !important; /* Position near bottom of the image */
+        align-items: flex-end !important;
+        padding-bottom: 1rem !important; /* Add some bottom padding */
+    }
+    
+    /* Single-line title styling - WHITE TEXT (no invert) */
+    .page-title {
+        font-size: 13vw !important; /* Smaller for mobile */
+        position: relative !important;
+        bottom: auto !important;
+        transform: translateX(-50%) !important;
+        margin-bottom: 0 !important;
+        mix-blend-mode: normal !important; /* Remove difference blend mode */
+        color: white !important; /* Ensure white color */
+        line-height: 0.9 !important; /* Tighter line height */
+        letter-spacing: -1px !important; /* Reduce letter spacing */
+        width: 95% !important; /* Slightly narrower to prevent edge cutting */
+    }
 
-        @media (max-width: 480px) {
-            .page-title {
-                font-size: 12vw;
-            }
-            
-            .work-container {
-                padding: 12rem 5% 10rem 5%; /* Same as painting page */
-            }
-            
-            .single-image {
-                width: 95%;
-            }
-            
-            .work-image {
-                height: 250px;
-            }
-            
-            .taller-containers .work-image {
-                height: 300px;
-            }
-            
-            .short-wide-containers .work-image {
-                height: 200px;
-            }
-            
-            .image-text-below {
-                margin-top: 1rem;
-                margin-bottom: 8rem; /* Same as painting page */
-            }
-            
-            .work-item-title {
-                font-size: 1rem; /* Same as painting page */
-            }
-        }
+    /* Show mobile static image */
+    .mobile-static-image {
+        display: block !important;
+    }
+    
+    /* Rest of your mobile CSS */
+    .main-name { 
+        font-size: 13vw !important; 
+        mix-blend-mode: normal !important; /* Remove invert */
+        color: white !important; /* White text */
+    }
+    
+    .dropdown-content { 
+        position: fixed !important; 
+        top: 90px !important;
+        right: 1rem !important;
+        left: auto !important;
+        transform: translateY(-10px) !important;
+        width: 45% !important;
+        min-width: unset !important;
+        background: #000000 !important;
+        border: none !important;
+        padding: 0.5rem 0 !important;
+        max-height: 60vh;
+        overflow-y: auto;
+        mix-blend-mode: normal !important;
+        backdrop-filter: none !important;
+        opacity: 1 !important;
+        z-index: 1000 !important;
+    }
+    
+    .dropdown:hover .dropdown-content {
+        transform: translateY(0) !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    
+    .dropdown-content a {
+        padding: 0.4rem 1rem !important;
+        font-size: 0.8rem !important;
+        color: #ffffff !important;
+        text-align: right !important;
+        mix-blend-mode: normal !important;
+        border-left: none !important;
+        font-weight: 600 !important;
+        background: transparent !important;
+        display: block !important;
+    }
+    
+    .dropdown-content a:hover {
+        background: rgba(255, 255, 255, 0.2) !important;
+        padding-right: 1.5rem !important;
+    }
+    
+    .cursor, .cursor-follower {
+        display: none;
+    }
+    
+    .single-image {
+        width: 90%;
+    }
+    
+    .work-image {
+        height: 300px;
+    }
+    
+    .works-image {
+        height: 300px;
+    }
+    
+    .taller-containers .work-image {
+        height: 400px;
+    }
+    
+    .short-wide-containers .work-image {
+        height: 250px;
+    }
+    
+    .image-text-below {
+        margin-top: 1.5rem;
+        margin-bottom: 8rem; /* Adjusted spacing */
+    }
+    
+    .work-item-title {
+        font-size: 1.1rem; /* Same as painting page */
+        color: #000000 !important;
+    }
+    
+    /* NAVIGATION - MATCH BRANDS PAGE */
+    nav {
+        padding: 1rem;
+    }
+    
+    .nav-links {
+        gap: 1rem;
+    }
+    
+    .work-container {
+        padding: 8rem 5% 10rem 5%; /* Adjusted top padding for smaller hero */
+    }
+    
+    .work-section {
+        margin-bottom: 6rem;
+    }
+}
+
+/* Small mobile screens */
+@media (max-width: 480px) {
+    /* Even smaller hero for small screens */
+    .hero {
+        height: 35vh !important;
+    }
+    
+    .horizontal-slideshow {
+        height: 35vh !important;
+    }
+    
+    .name-container {
+        height: 90% !important; /* Even higher to position text at bottom */
+        bottom: 3% !important; /* Slightly adjusted for small screens */
+        padding-bottom: 0.8rem !important; /* Less padding on smaller screens */
+    }
+    
+    .page-title {
+        font-size: 11vw !important; /* Even smaller for small screens */
+        letter-spacing: -0.5px !important; /* Even tighter letter spacing */
+    }
+    
+    .work-container {
+        padding: 6rem 5% 10rem 5%;
+    }
+    
+    .single-image {
+        width: 95%;
+    }
+    
+    .work-image {
+        height: 250px;
+    }
+    
+    .works-image {
+        height: 250px;
+    }
+    
+    .taller-containers .work-image {
+        height: 350px;
+    }
+    
+    .short-wide-containers .work-image {
+        height: 200px;
+    }
+    
+    /* NAVIGATION - MATCH BRANDS PAGE */
+    nav {
+        padding: 0.4rem 0.8rem !important;
+    }
+    
+    .nav-links {
+        gap: 1rem !important;
+    }
+    
+    .dropdown-content {
+        top: 85px !important;
+        width: 50% !important;
+        padding: 0.4rem 0 !important;
+    }
+    
+    .dropdown-content a {
+        padding: 0.3rem 0.8rem !important;
+        font-size: 0.75rem !important;
+    }
+    
+    .work-section {
+        margin-bottom: 5rem;
+    }
+    
+    .work-item-title {
+        font-size: 1rem; /* Same as painting page */
+    }
+    
+    .image-text-below {
+        margin-bottom: 6rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .hero {
+        height: 30vh !important;
+    }
+    
+    .horizontal-slideshow {
+        height: 30vh !important;
+    }
+    
+    .name-container {
+        height: 92% !important;
+        bottom: 2% !important;
+        padding-bottom: 0.5rem !important; /* Minimal padding for very small screens */
+    }
+    
+    .page-title {
+        font-size: 10vw !important; /* Smallest size for very small screens */
+        letter-spacing: 0px !important; /* No negative letter spacing */
+    }
+    
+    .nav-links {
+        gap: 1rem !important;
+    }
+    
+    .dropdown-content {
+        top: 80px !important;
+        width: 55% !important;
+    }
+    
+    .work-container {
+        padding: 5rem 5% 8rem 5%;
+    }
+    
+    .work-section {
+        margin-bottom: 4rem;
+    }
+    
+    .image-text-below {
+        margin-bottom: 5rem;
+    }
+}
     </style>
 </head>
 <body>
