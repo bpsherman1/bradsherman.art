@@ -426,9 +426,21 @@
                 display: none;
             }
             
-            .page-title {
-                font-size: 15vw;
-            }
+             .name-container {
+        height: 80% !important; /* INCREASED from 66% to 80% - moves text DOWN */
+        bottom: 2% !important; /* DECREASED from 15% to 2% - moves text DOWN */
+        align-items: flex-end !important;
+    }
+    
+    /* Single-line title styling */
+    .page-title {
+        font-size: 15vw !important;
+        position: relative !important;
+        bottom: auto !important;
+        transform: translateX(-50%) !important;
+        margin-bottom: 0 !important;
+    }
+
             
             .single-image {
                 width: 90%;
