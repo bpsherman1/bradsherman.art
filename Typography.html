@@ -24,6 +24,7 @@
         }
 /* Mobile Styles */
 /* Mobile Responsive */
+/* Mobile Responsive */
 @media (max-width: 768px) {
     /* Hero adjustments for mobile */
     .hero {
@@ -42,13 +43,15 @@
         align-items: flex-end !important;
     }
     
-    /* Single-line title styling */
+    /* Single-line title styling - MAKE SURE THIS IS SMALLER FOR LONGER WORDS */
     .page-title {
-        font-size: 14vw !important;
+        font-size: 14vw !important; /* Reduced from 16vw to 12vw for longer words */
         position: relative !important;
         bottom: auto !important;
         transform: translateX(-50%) !important;
         margin-bottom: 0 !important;
+        line-height: 0.9 !important; /* Tighter line height */
+        letter-spacing: -2px !important; /* Reduced letter spacing */
     }
 
     /* Show mobile static image */
@@ -143,7 +146,8 @@
     }
     
     .page-title {
-        font-size: 14vw !important;
+        font-size: 11vw !important; /* Even smaller for very small screens */
+        letter-spacing: -1px !important; /* Even tighter letter spacing */
     }
     
     .work-container {
@@ -191,6 +195,10 @@
     .dropdown-content {
         top: 80px !important;
         width: 55% !important;
+    }
+    
+    .page-title {
+        font-size: 10vw !important; /* Smallest for very narrow screens */
     }
 }
         /* Full Screen Image Viewer */
