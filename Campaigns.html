@@ -14,37 +14,40 @@
         }
    /* Mobile Responsive */
 /* Mobile Responsive */
+/* Mobile Responsive */
 @media (max-width: 768px) {
-    /* Hero adjustments for mobile - SHORTER HERO */
+    /* Hero adjustments for mobile - SMALLER HERO */
     .hero {
-        height: 50vh !important; /* Much shorter hero section */
+        height: 40vh !important; /* Smaller hero section to fit full image */
     }
     
     .horizontal-slideshow {
-        height: 50vh !important; /* Match the shorter hero */
+        height: 40vh !important; /* Match the smaller hero */
     }
     
-    /* POSITION TEXT AT BOTTOM OF SHORTER IMAGE */
+    /* POSITION TEXT AT BOTTOM OF SMALLER IMAGE */
     .name-container {
         height: 85% !important; /* Higher height to position text at bottom */
-        bottom: 5% !important; /* Position near bottom of the shorter image */
+        bottom: 5% !important; /* Position near bottom of the image */
         align-items: flex-end !important;
     }
     
-    /* Single-line title styling */
+    /* Single-line title styling - WHITE TEXT (no invert) */
     .page-title {
         font-size: 16vw !important;
         position: relative !important;
         bottom: auto !important;
         transform: translateX(-50%) !important;
         margin-bottom: 0 !important;
+        mix-blend-mode: normal !important; /* Remove difference blend mode */
+        color: white !important; /* Ensure white color */
     }
 
     /* Rest of your mobile CSS */
     .main-name { 
         font-size: 15vw; 
-        mix-blend-mode: difference !important;
-        color: white !important;
+        mix-blend-mode: normal !important; /* Remove invert */
+        color: white !important; /* White text */
     }
     
     .dropdown-content { 
@@ -153,13 +156,13 @@
 
 /* Small mobile screens */
 @media (max-width: 480px) {
-    /* Even shorter hero for small screens */
+    /* Even smaller hero for small screens */
     .hero {
-        height: 45vh !important;
+        height: 35vh !important;
     }
     
     .horizontal-slideshow {
-        height: 45vh !important;
+        height: 35vh !important;
     }
     
     .name-container {
@@ -223,11 +226,11 @@
 
 @media (max-width: 360px) {
     .hero {
-        height: 40vh !important;
+        height: 30vh !important;
     }
     
     .horizontal-slideshow {
-        height: 40vh !important;
+        height: 30vh !important;
     }
     
     .name-container {
