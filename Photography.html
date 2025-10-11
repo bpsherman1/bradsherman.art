@@ -395,6 +395,7 @@
 
         /* Mobile Responsive */
         /* Mobile Responsive */
+/* Mobile Responsive */
 @media (max-width: 768px) {
     /* Hero adjustments for mobile - SMALLER HERO */
     .hero {
@@ -414,9 +415,9 @@
         padding-bottom: 1rem !important; /* Add some bottom padding */
     }
     
-    /* Single-line title styling - WHITE TEXT (no invert) */
+    /* Single-line title styling - WHITE TEXT (no invert) - SMALLER FOR PHOTOGRAPHY */
     .page-title {
-        font-size: 13vw !important; /* Smaller for mobile */
+        font-size: 12vw !important; /* SMALLER for photography */
         position: relative !important;
         bottom: auto !important;
         transform: translateX(-50%) !important;
@@ -424,20 +425,15 @@
         mix-blend-mode: normal !important; /* Remove difference blend mode */
         color: white !important; /* Ensure white color */
         line-height: 0.9 !important; /* Tighter line height */
-        letter-spacing: -1px !important; /* Reduce letter spacing */
-        width: 95% !important; /* Slightly narrower to prevent edge cutting */
+        letter-spacing: -0.5px !important; /* Reduce letter spacing more */
+        width: 100% !important; /* Full width */
+        white-space: nowrap !important; /* Prevent line breaks */
+        overflow: visible !important; /* Ensure text is visible */
     }
 
     /* Show mobile static image */
     .mobile-static-image {
         display: block !important;
-    }
-    
-    /* Rest of your mobile CSS */
-    .main-name { 
-        font-size: 13vw !important; 
-        mix-blend-mode: normal !important; /* Remove invert */
-        color: white !important; /* White text */
     }
     
     .dropdown-content { 
@@ -552,8 +548,8 @@
     }
     
     .page-title {
-        font-size: 11vw !important; /* Even smaller for small screens */
-        letter-spacing: -0.5px !important; /* Even tighter letter spacing */
+        font-size: 10.5vw !important; /* Even smaller for small screens */
+        letter-spacing: 0px !important; /* No negative letter spacing */
     }
     
     .work-container {
@@ -629,7 +625,7 @@
     }
     
     .page-title {
-        font-size: 10vw !important; /* Smallest size for very small screens */
+        font-size: 9.5vw !important; /* Smallest size for very small screens */
         letter-spacing: 0px !important; /* No negative letter spacing */
     }
     
