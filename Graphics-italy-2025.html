@@ -458,6 +458,7 @@
 /* Mobile Responsive */
 /* Mobile Responsive */
 /* Mobile Responsive */
+/* Mobile Responsive */
 @media (max-width: 768px) {
     /* Hero adjustments for mobile - SMALLER HERO */
     .hero {
@@ -469,24 +470,30 @@
         display: none !important;
     }
     
-    /* POSITION TEXT AT BOTTOM OF SMALLER IMAGE */
+    /* POSITION TEXT AT BOTTOM LEFT OF SMALLER IMAGE */
     .name-container {
         height: 85% !important; /* Higher height to position text at bottom */
         bottom: 5% !important; /* Position near bottom of the image */
-        align-items: flex-end !important;
+        align-items: flex-start !important; /* Left align */
+        padding: 0 1rem !important; /* Add left padding */
+        justify-content: flex-end !important;
     }
     
-    /* Title styling - WHITE TEXT (no invert) */
+    /* Title styling - INVERTED COLOR & LEFT ALIGNED */
     .page-title {
         font-size: 13vw !important; /* Adjusted for two-line title */
         position: relative !important;
         bottom: auto !important;
-        transform: translateX(-50%) !important;
+        transform: none !important; /* Remove center transform */
         margin-bottom: 0 !important;
         line-height: 0.85 !important;
         letter-spacing: -2px !important;
-        mix-blend-mode: normal !important; /* Remove difference blend mode */
-        color: white !important; /* Ensure white color */
+        mix-blend-mode: difference !important; /* INVERTED COLOR */
+        color: white !important;
+        text-align: left !important; /* Left aligned */
+        left: auto !important; /* Remove center positioning */
+        width: auto !important; /* Auto width for left alignment */
+        padding-left: 1rem !important; /* Add left padding */
     }
 
     /* Show mobile static image */
@@ -611,11 +618,13 @@
     .name-container {
         height: 90% !important; /* Even higher to position text at bottom */
         bottom: 3% !important; /* Slightly adjusted for small screens */
+        padding: 0 0.8rem !important; /* Tighter padding */
     }
     
     .page-title {
         font-size: 11vw !important;
         letter-spacing: -1px !important;
+        padding-left: 0.8rem !important; /* Tighter padding */
     }
     
     .work-container {
@@ -685,10 +694,12 @@
     .name-container {
         height: 92% !important;
         bottom: 2% !important;
+        padding: 0 0.6rem !important; /* Tightest padding */
     }
     
     .page-title {
         font-size: 10vw !important;
+        padding-left: 0.6rem !important; /* Tightest padding */
     }
     
     .nav-links {
