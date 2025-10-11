@@ -40,7 +40,7 @@
     
     /* Make title text smaller on mobile */
     .page-title {
-        font-size: 14vw !important; /* Reduce from 15vw to 14vw */
+        font-size: 16vw !important; /* Reduce from 15vw to 14vw */
     }
 
     .cursor, .cursor-follower {
@@ -513,6 +513,12 @@
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
+
+            .main-name { 
+        font-size: 15vw; 
+        mix-blend-mode: difference !important;
+        color: white !important;
+    }
             .cursor, .cursor-follower {
                 display: none;
             }
