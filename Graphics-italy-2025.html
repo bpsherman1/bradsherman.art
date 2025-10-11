@@ -455,6 +455,7 @@
 
         /* Mobile Responsive */
       /* Mobile Responsive */
+/* Mobile Responsive */
 @media (max-width: 768px) {
     /* Hero adjustments for mobile */
     .hero {
@@ -466,22 +467,28 @@
         display: none !important;
     }
     
-    /* SPECIAL FOR TWO-LINE TITLE: Move text HIGHER for two lines */
+    /* MATCH BRAD SHERMAN STYLE: Left-aligned and positioned much higher */
     .name-container {
-        height: 60% !important; /* LOWER height to move text UP */
-        bottom: 8% !important; /* HIGHER bottom to move text UP */
-        align-items: flex-end !important;
+        height: 40% !important; /* Much lower height to move text UP */
+        bottom: 15% !important; /* Much higher bottom to move text UP */
+        align-items: flex-start !important; /* Left align like Brad Sherman */
+        padding: 0 1rem !important; /* Reduced padding for left alignment */
+        justify-content: flex-end !important;
     }
     
-    /* Two-line title styling */
+    /* Two-line title styling - LEFT ALIGNED like Brad Sherman */
     .page-title {
-        font-size: 15vw !important; /* Smaller for two lines */
+        font-size: 13vw !important;
         position: relative !important;
         bottom: auto !important;
-        transform: translateX(-50%) !important;
+        transform: none !important; /* Remove center transform */
         margin-bottom: 0 !important;
-        line-height: 0.85 !important; /* Tighter line height for two lines */
-        letter-spacing: -2px !important; /* Tighter letter spacing */
+        line-height: 0.85 !important;
+        letter-spacing: -2px !important;
+        text-align: left !important; /* Left aligned */
+        left: auto !important; /* Remove center positioning */
+        width: auto !important; /* Auto width for left alignment */
+        padding-left: 1rem !important; /* Match Brad Sherman spacing */
     }
 
     /* Show mobile static image */
@@ -594,16 +601,18 @@
 
 /* Small mobile screens */
 @media (max-width: 480px) {
-    /* Even higher positioning for very small screens */
+    /* Even higher positioning for very small screens - match Brad Sherman */
     .name-container {
-        height: 55% !important; /* Even lower height */
-        bottom: 10% !important; /* Even higher bottom */
+        height: 35% !important; /* Even lower height */
+        bottom: 18% !important; /* Even higher bottom */
+        padding: 0 0.8rem !important; /* Tighter padding */
     }
     
     .page-title {
-        font-size: 11vw !important; /* Even smaller for very small screens */
-        line-height: 0.8 !important; /* Even tighter */
-        letter-spacing: -1px !important; /* Even tighter spacing */
+        font-size: 11vw !important;
+        line-height: 0.8 !important;
+        letter-spacing: -1px !important;
+        padding-left: 0.8rem !important; /* Tighter padding */
     }
     
     .work-container {
@@ -672,12 +681,13 @@
     }
     
     .page-title {
-        font-size: 10vw !important; /* Smallest for very narrow screens */
+        font-size: 10vw !important;
     }
     
     .name-container {
-        height: 50% !important; /* Lowest height for smallest screens */
-        bottom: 12% !important; /* Highest bottom position */
+        height: 30% !important; /* Lowest height for smallest screens */
+        bottom: 20% !important; /* Highest bottom position */
+        padding: 0 0.6rem !important; /* Tightest padding */
     }
 }
     </style>
