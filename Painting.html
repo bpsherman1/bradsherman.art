@@ -445,40 +445,43 @@
 /* Mobile Responsive */
 @media (max-width: 768px) {
     /* Hero adjustments for mobile - FULL SCREEN HERO */
-    .hero {
-        height: 90vh !important; /* Full screen hero like photography page */
+     .hero {
+        height: 90vh !important;
     }
     
     .horizontal-slideshow {
-        height: 90vh !important; /* Match the hero height */
+        height: 90vh !important;
         display: none !important;
     }
     
     /* POSITION TEXT AT BOTTOM LEFT CORNER */
     .name-container {
-        height: 70% !important; /* Adjusted height for bottom positioning */
-        bottom: 2% !important; /* Position near bottom */
+        height: 70% !important;
+        bottom: 2% !important;
         align-items: flex-end !important;
-        justify-content: flex-start !important; /* Align to left */
+        justify-content: flex-start !important;
         padding: 0 5% !important;
     }
     
-    /* Title styling - BOTTOM LEFT CORNER - WHITE TEXT */
+    /* FIXED: Title styling - BOTTOM LEFT CORNER - WHITE TEXT */
     .page-title {
-        font-size: 16vw !important; /* Good size for "PAINTING" */
+        font-size: 16vw !important; /* This will now work */
         position: relative !important;
         bottom: auto !important;
         left: 0 !important;
-        transform: none !important; /* Remove centering transform */
+        transform: none !important;
         margin-bottom: 0 !important;
         mix-blend-mode: difference !important;
         color: white !important;
         line-height: 0.9 !important;
         letter-spacing: -1px !important;
         width: auto !important;
-        white-space: nowrap !important;
-        text-align: left !important; /* Left aligned */
+        white-space: normal !important; /* Changed from nowrap to normal */
+        text-align: left !important;
         margin-left: 0 !important;
+        word-wrap: break-word !important;
+        /* Force the font size to be applied */
+        font-size: 16vw !important;
     }
 
     /* Show mobile static image */
