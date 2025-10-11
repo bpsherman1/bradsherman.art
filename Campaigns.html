@@ -16,6 +16,8 @@
 /* Mobile Responsive - AGGRESSIVE POSITIONING */
 @media (max-width: 768px) {
     /* Hero adjustments for mobile */
+   @media (max-width: 768px) {
+    /* Hero adjustments for mobile */
     .hero {
         height: 90vh !important;
     }
@@ -24,10 +26,10 @@
         height: 90vh !important;
     }
     
-    /* EXTREME POSITIONING FOR SINGLE-LINE TITLES - Move text MUCH LOWER */
+    /* CORRECTED: To move text LOWER, we INCREASE height and DECREASE bottom */
     .name-container {
-        height: 40% !important; /* Reduced from 50% to 40% - moves text WAY DOWN */
-        bottom: 25% !important; /* Increased from 15% to 25% - moves text WAY DOWN */
+        height: 80% !important; /* INCREASED from 66% to 80% - moves text DOWN */
+        bottom: 2% !important; /* DECREASED from 15% to 2% - moves text DOWN */
         align-items: flex-end !important;
     }
     
@@ -38,10 +40,9 @@
         bottom: auto !important;
         transform: translateX(-50%) !important;
         margin-bottom: 0 !important;
-        margin-top: auto !important; /* Push to bottom of container */
     }
 
-    /* Rest of your mobile CSS remains the same */
+    /* Rest of your mobile CSS */
     .main-name { 
         font-size: 15vw; 
         mix-blend-mode: difference !important;
@@ -163,9 +164,9 @@
 /* Small mobile screens - EVEN MORE AGGRESSIVE */
 @media (max-width: 480px) {
     /* EXTREME POSITIONING - Move text AS LOW AS POSSIBLE */
-    .name-container {
-        height: 35% !important; /* Even lower */
-        bottom: 30% !important; /* Even lower - almost at bottom */
+     .name-container {
+        height: 85% !important; /* Even higher */
+        bottom: 1% !important; /* Even lower */
     }
     
     .page-title {
