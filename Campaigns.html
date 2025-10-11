@@ -12,11 +12,8 @@
             padding: 0; 
             box-sizing: border-box; 
         }
-    /* Mobile Responsive */
-/* Mobile Responsive - AGGRESSIVE POSITIONING */
+   /* Mobile Responsive */
 @media (max-width: 768px) {
-    /* Hero adjustments for mobile */
-   @media (max-width: 768px) {
     /* Hero adjustments for mobile */
     .hero {
         height: 90vh !important;
@@ -139,25 +136,23 @@
         font-size: 1.5rem;
     }
     
+    /* NAVIGATION - MATCH BRANDS PAGE */
     nav {
         padding: 1rem;
     }
     
     .nav-links {
-        gap: 1rem;
+        gap: 1rem; /* This should match your Brands page */
     }
-    
-  
     
     .project-last-row {
         margin-bottom: 8rem !important;
     }
 }
 
-/* Small mobile screens - EVEN MORE AGGRESSIVE */
+/* Small mobile screens */
 @media (max-width: 480px) {
-    /* EXTREME POSITIONING - Move text AS LOW AS POSSIBLE */
-     .name-container {
+    .name-container {
         height: 85% !important; /* Even higher */
         bottom: 1% !important; /* Even lower */
     }
@@ -191,11 +186,14 @@
         height: 180px;
     }
     
+    /* NAVIGATION - MATCH BRANDS PAGE */
     nav {
         padding: 0.4rem 0.8rem !important;
     }
     
-    
+    .nav-links {
+        gap: 1rem !important; /* Match Brands page spacing */
+    }
     
     .dropdown-content {
         top: 85px !important;
@@ -215,10 +213,13 @@
 
 @media (max-width: 360px) {
     .nav-links {
-        gap: 0.4rem !important;
-        margin-top: -10px;
+        gap: 1rem !important; /* Match Brands page spacing */
     }
     
+    .dropdown-content {
+        top: 80px !important;
+        width: 55% !important;
+    }
 }
         body { 
             font-family: 'Inter', sans-serif; 
