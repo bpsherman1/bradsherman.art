@@ -12,47 +12,89 @@
             padding: 0; 
             box-sizing: border-box; 
         }
-        
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background: #0a0a0a; 
-            color: white; 
-            overflow-x: hidden;
-            cursor: auto;
-        }
-
-        /* Mobile Responsive */
-/* Mobile Responsive */
+    /* Mobile Responsive */
 @media (max-width: 768px) {
-    /* FIX: Move title higher to avoid Safari bar */
+    /* Hero adjustments for mobile */
     .hero {
-        height: 90vh !important; /* Reduce from 100vh to 90vh */
+        height: 90vh !important;
     }
     
     .horizontal-slideshow {
-        height: 90vh !important; /* Match the hero height */
+        height: 90vh !important;
     }
     
-    /* ADJUSTED: For single-line titles, position LOWER than two-line titles */
+    /* SINGLE-LINE TITLE POSITIONING - Move text LOWER */
     .name-container {
-        height: 60% !important; /* Reduce from 70% to 60% - moves text DOWN */
-        bottom: 10% !important; /* Increase from 5% to 10% - moves text DOWN */
-        align-items: flex-end !important; /* Ensure text stays at bottom */
+        height: 50% !important; /* Reduced from 60% to 50% - moves text DOWN */
+        bottom: 15% !important; /* Increased from 10% to 15% - moves text DOWN */
+        align-items: flex-end !important;
     }
     
-    /* Make title text smaller on mobile */
+    /* Single-line title styling */
     .page-title {
         font-size: 16vw !important;
-        position: relative !important; /* Change from absolute to relative */
-        bottom: auto !important; /* Remove absolute positioning */
-        transform: translateX(-50%) !important; /* Keep horizontal centering */
+        position: relative !important;
+        bottom: auto !important;
+        transform: translateX(-50%) !important;
         margin-bottom: 0 !important;
     }
 
+    /* FIXED: Brad Sherman text - inverse color (for index page) */
+    .main-name { 
+        font-size: 15vw; 
+        mix-blend-mode: difference !important;
+        color: white !important;
+    }
+    
+    /* FIXED DROPDOWN - SOLID BLACK BACKGROUND (for index page) */
+    .dropdown-content { 
+        position: fixed !important; 
+        top: 90px !important;
+        right: 1rem !important;
+        left: auto !important;
+        transform: translateY(-10px) !important;
+        width: 45% !important;
+        min-width: unset !important;
+        background: #000000 !important; /* SOLID BLACK */
+        border: none !important; /* Remove border */
+        padding: 0.5rem 0 !important;
+        max-height: 60vh;
+        overflow-y: auto;
+        mix-blend-mode: normal !important; /* No inversion */
+        backdrop-filter: none !important;
+        opacity: 1 !important;
+        z-index: 1000 !important;
+    }
+    
+    .dropdown:hover .dropdown-content {
+        transform: translateY(0) !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    
+    .dropdown-content a {
+        padding: 0.4rem 1rem !important;
+        font-size: 0.8rem !important;
+        color: #ffffff !important; /* White text on black */
+        text-align: right !important;
+        mix-blend-mode: normal !important;
+        border-left: none !important;
+        font-weight: 600 !important;
+        background: transparent !important;
+        display: block !important;
+    }
+    
+    .dropdown-content a:hover {
+        background: rgba(255, 255, 255, 0.2) !important;
+        padding-right: 1.5rem !important;
+    }
+    
+    /* Hide cursor on mobile */
     .cursor, .cursor-follower {
         display: none;
     }
     
+    /* Work grid adjustments */
     .single-image,
     .double-images {
         width: 90%;
@@ -76,10 +118,32 @@
         height: 500px;
     }
     
+    /* Shorter containers mobile */
+    .shorter-containers .work-image {
+        height: 250px;
+    }
+    
+    .shorter-images .work-image {
+        height: 200px;
+    }
+    
+    /* Triple images mobile */
+    .triple-images {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .triple-images .work-image {
+        width: 100%;
+        height: 250px;
+    }
+    
+    /* Text sizing */
     .work-item-title {
         font-size: 1.5rem;
     }
     
+    /* Navigation adjustments */
     nav {
         padding: 1rem;
     }
@@ -87,7 +151,121 @@
     .nav-links {
         gap: 1rem;
     }
+    
+    nav a {
+        font-size: 0.8rem !important;
+    }
+    
+    .logo {
+        font-size: 0.9rem !important;
+        margin-top: -5px;
+    }
+    
+    /* Project spacing */
+    .project-last-row {
+        margin-bottom: 8rem !important;
+    }
 }
+
+/* Small mobile screens */
+@media (max-width: 480px) {
+    /* SINGLE-LINE TITLE - Even LOWER on small screens */
+    .name-container {
+        height: 45% !important; /* Even lower */
+        bottom: 18% !important; /* Even lower */
+    }
+    
+    .page-title {
+        font-size: 14vw !important;
+    }
+    
+    .work-container {
+        padding: 6rem 5% 10rem 5%;
+    }
+    
+    .single-image,
+    .double-images {
+        width: 95%;
+    }
+    
+    .work-image {
+        height: 250px;
+    }
+    
+    /* Taller images small mobile */
+    .taller-images .work-image {
+        height: 350px;
+    }
+    
+    .shorter-containers .work-image {
+        height: 200px;
+    }
+    
+    .shorter-images .work-image {
+        height: 180px;
+    }
+    
+    /* Navigation for small screens */
+    nav {
+        padding: 0.4rem 0.8rem !important;
+    }
+    
+    nav a {
+        font-size: 0.75rem !important;
+    }
+    
+    .logo {
+        font-size: 0.85rem !important;
+    }
+    
+    .nav-links {
+        gap: 0.5rem !important;
+        margin-top: -8px;
+    }
+    
+    .dropdown-content {
+        top: 85px !important;
+        width: 50% !important;
+        padding: 0.4rem 0 !important;
+    }
+    
+    .dropdown-content a {
+        padding: 0.3rem 0.8rem !important;
+        font-size: 0.75rem !important;
+    }
+    
+    .project-last-row {
+        margin-bottom: 6rem !important;
+    }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+    .nav-links {
+        gap: 0.4rem !important;
+        margin-top: -10px;
+    }
+    
+    nav a {
+        font-size: 0.7rem !important;
+    }
+    
+    .dropdown-content {
+        top: 80px !important;
+        width: 55% !important;
+    }
+}
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: #0a0a0a; 
+            color: white; 
+            overflow-x: hidden;
+            cursor: auto;
+        }
+
+        /* Mobile Responsive */
+/* Mobile Responsive */
+
         /* Full Screen Image Viewer */
 .image-modal {
     display: none;
@@ -221,28 +399,10 @@
 }
 
 /* Mobile responsive for shorter images */
-@media (max-width: 768px) {
-    .shorter-images .work-image {
-        height: 200px; /* Adjust mobile height */
-    }
-}
 
-@media (max-width: 480px) {
-    .shorter-images .work-image {
-        height: 180px; /* Adjust small mobile height */
-    }
-}
-
-.project-last-row {
-    margin-bottom: 14rem !important; /* Increase from 5rem to 12rem */
-}
 
 /* Mobile responsive */
-@media (max-width: 768px) {
-    .project-last-row {
-        margin-bottom: 8rem !important;
-    }
-}
+
 
         /* Triple Images Layout */
 .triple-images {
@@ -264,30 +424,7 @@
 }
 
 /* Mobile responsive */
-@media (max-width: 768px) {
-    .shorter-containers .work-image {
-        height: 250px; /* Reduce from 300px */
-    }
-}
 
-@media (max-width: 480px) {
-    .shorter-containers .work-image {
-        height: 200px; /* Reduce from 250px */
-    }
-}
-
-/* Mobile Responsive for triple images */
-@media (max-width: 768px) {
-    .triple-images {
-        flex-direction: column;
-        gap: 1rem;
-    }
-    
-    .triple-images .work-image {
-        width: 100%;
-        height: 250px;
-    }
-}
         
            
 
@@ -511,93 +648,10 @@
         }
 
         /* Hide mobile image and show slideshow on desktop */
-        @media (min-width: 769px) {
-            .mobile-static-image {
-                display: none;
-            }
-        }
+   
 
         /* Mobile Responsive */
-        @media (max-width: 768px) {
-
-            .main-name { 
-        font-size: 15vw; 
-        mix-blend-mode: difference !important;
-        color: white !important;
-    }
-            .cursor, .cursor-follower {
-                display: none;
-            }
-            
-            .page-title {
-                font-size: 15vw;
-            }
-            
-            .single-image,
-            .double-images {
-                width: 90%;
-            }
-            
-            .double-images {
-                flex-direction: column;
-            }
-            
-            .double-images .work-image {
-                width: 100%;
-                height: 300px;
-            }
-            
-            .work-image {
-                height: 300px;
-            }
-            
-            /* Taller images mobile */
-            .taller-images .work-image {
-                height: 500px;
-            }
-            
-            .work-item-title {
-                font-size: 1.5rem;
-            }
-            
-            nav {
-                padding: 1rem;
-            }
-            
-            .nav-links {
-                gap: 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-           
-            .name-container {
-        height: 55% !important; /* Even lower on small screens */
-        bottom: 12% !important; /* Even lower */
-    }
-    
-    .page-title {
-        font-size: 14vw !important; /* Slightly smaller */
-    }
-    
-    .work-container {
-        padding: 6rem 5% 10rem 5%;
-    }
-    
-    .single-image,
-    .double-images {
-        width: 95%;
-    }
-    
-    .work-image {
-        height: 250px;
-    }
-    
-    /* Taller images small mobile */
-    .taller-images .work-image {
-        height: 350px;
-    }
-}
+       
         
     </style>
 </head>
