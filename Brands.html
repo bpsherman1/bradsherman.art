@@ -287,7 +287,7 @@ body {
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            background-image: url('images_2/fff.png');
+            background-image: url('images_2/brands.png');
         }
 
         .horizontal-slideshow {
@@ -417,11 +417,31 @@ body {
         }
 
         /* Hide mobile image and show slideshow on desktop */
-        @media (min-width: 769px) {
-            .mobile-static-image {
-                display: none;
-            }
-        }
+       /* Mobile Styles */
+@media (max-width: 768px) {
+    /* Hide desktop slideshow on mobile */
+    .horizontal-slideshow {
+        display: none !important;
+    }
+    
+    /* Show mobile static image */
+    .mobile-static-image {
+        display: block !important;
+    }
+}
+
+/* Desktop Styles */
+@media (min-width: 769px) {
+    /* Show desktop slideshow */
+    .horizontal-slideshow {
+        display: flex !important;
+    }
+    
+    /* Hide mobile static image */
+    .mobile-static-image {
+        display: none !important;
+    }
+}
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
