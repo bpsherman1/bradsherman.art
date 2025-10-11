@@ -287,7 +287,7 @@ body {
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            background-image: url('images_2/brands.png');
+            background-image: url('images_2/31.png');
         }
 
         .horizontal-slideshow {
@@ -445,31 +445,34 @@ body {
 
         /* Mobile Responsive */
        /* Mobile Responsive */
+/* Mobile Responsive */
 @media (max-width: 768px) {
-    /* Hero adjustments for mobile */
+    /* Hero adjustments for mobile - SMALLER HERO */
     .hero {
-        height: 90vh !important;
+        height: 40vh !important; /* Smaller hero section to fit full image */
     }
     
     .horizontal-slideshow {
-        height: 90vh !important;
+        height: 40vh !important; /* Match the smaller hero */
         display: none !important;
     }
     
-    /* CORRECTED: To move text LOWER, we INCREASE height and DECREASE bottom */
+    /* POSITION TEXT AT BOTTOM OF SMALLER IMAGE */
     .name-container {
-        height: 80% !important; /* INCREASED from 66% to 80% - moves text DOWN */
-        bottom: 2% !important; /* DECREASED from 15% to 2% - moves text DOWN */
+        height: 85% !important; /* Higher height to position text at bottom */
+        bottom: 5% !important; /* Position near bottom of the image */
         align-items: flex-end !important;
     }
     
-    /* Single-line title styling - 15vw as requested */
+    /* Single-line title styling - WHITE TEXT (no invert) */
     .page-title {
         font-size: 16vw !important;
         position: relative !important;
         bottom: auto !important;
         transform: translateX(-50%) !important;
         margin-bottom: 0 !important;
+        mix-blend-mode: normal !important; /* Remove difference blend mode */
+        color: white !important; /* Ensure white color */
     }
 
     /* Show mobile static image */
@@ -480,11 +483,10 @@ body {
     /* Rest of your mobile CSS */
     .main-name { 
         font-size: 16vw; 
-        mix-blend-mode: difference !important;
-        color: white !important;
+        mix-blend-mode: normal !important; /* Remove invert */
+        color: white !important; /* White text */
     }
     
-    /* NEW DROPDOWN STYLING */
     .dropdown-content { 
         position: fixed !important; 
         top: 90px !important;
@@ -589,13 +591,22 @@ body {
 
 /* Small mobile screens */
 @media (max-width: 480px) {
+    /* Even smaller hero for small screens */
+    .hero {
+        height: 35vh !important;
+    }
+    
+    .horizontal-slideshow {
+        height: 35vh !important;
+    }
+    
     .name-container {
-        height: 85% !important; /* Even higher */
-        bottom: 1% !important; /* Even lower */
+        height: 90% !important; /* Even higher to position text at bottom */
+        bottom: 3% !important; /* Slightly adjusted for small screens */
     }
     
     .page-title {
-        font-size: 14vw !important; /* Slightly smaller for very small screens */
+        font-size: 14vw !important;
     }
     
     .work-container {
@@ -657,6 +668,23 @@ body {
 }
 
 @media (max-width: 360px) {
+    .hero {
+        height: 30vh !important;
+    }
+    
+    .horizontal-slideshow {
+        height: 30vh !important;
+    }
+    
+    .name-container {
+        height: 92% !important;
+        bottom: 2% !important;
+    }
+    
+    .page-title {
+        font-size: 13vw !important;
+    }
+    
     .nav-links {
         gap: 1rem !important;
     }
@@ -664,10 +692,6 @@ body {
     .dropdown-content {
         top: 80px !important;
         width: 55% !important;
-    }
-    
-    .page-title {
-        font-size: 13vw !important; /* Smallest for very narrow screens */
     }
 }
     </style>
