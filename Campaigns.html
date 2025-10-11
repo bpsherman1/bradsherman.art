@@ -13,6 +13,7 @@
             box-sizing: border-box; 
         }
     /* Mobile Responsive */
+/* Mobile Responsive - AGGRESSIVE POSITIONING */
 @media (max-width: 768px) {
     /* Hero adjustments for mobile */
     .hero {
@@ -23,10 +24,10 @@
         height: 90vh !important;
     }
     
-    /* SINGLE-LINE TITLE POSITIONING - Move text LOWER */
+    /* EXTREME POSITIONING FOR SINGLE-LINE TITLES - Move text MUCH LOWER */
     .name-container {
-        height: 50% !important; /* Reduced from 60% to 50% - moves text DOWN */
-        bottom: 15% !important; /* Increased from 10% to 15% - moves text DOWN */
+        height: 40% !important; /* Reduced from 50% to 40% - moves text WAY DOWN */
+        bottom: 25% !important; /* Increased from 15% to 25% - moves text WAY DOWN */
         align-items: flex-end !important;
     }
     
@@ -37,16 +38,16 @@
         bottom: auto !important;
         transform: translateX(-50%) !important;
         margin-bottom: 0 !important;
+        margin-top: auto !important; /* Push to bottom of container */
     }
 
-    /* FIXED: Brad Sherman text - inverse color (for index page) */
+    /* Rest of your mobile CSS remains the same */
     .main-name { 
         font-size: 15vw; 
         mix-blend-mode: difference !important;
         color: white !important;
     }
     
-    /* FIXED DROPDOWN - SOLID BLACK BACKGROUND (for index page) */
     .dropdown-content { 
         position: fixed !important; 
         top: 90px !important;
@@ -55,12 +56,12 @@
         transform: translateY(-10px) !important;
         width: 45% !important;
         min-width: unset !important;
-        background: #000000 !important; /* SOLID BLACK */
-        border: none !important; /* Remove border */
+        background: #000000 !important;
+        border: none !important;
         padding: 0.5rem 0 !important;
         max-height: 60vh;
         overflow-y: auto;
-        mix-blend-mode: normal !important; /* No inversion */
+        mix-blend-mode: normal !important;
         backdrop-filter: none !important;
         opacity: 1 !important;
         z-index: 1000 !important;
@@ -75,7 +76,7 @@
     .dropdown-content a {
         padding: 0.4rem 1rem !important;
         font-size: 0.8rem !important;
-        color: #ffffff !important; /* White text on black */
+        color: #ffffff !important;
         text-align: right !important;
         mix-blend-mode: normal !important;
         border-left: none !important;
@@ -89,12 +90,10 @@
         padding-right: 1.5rem !important;
     }
     
-    /* Hide cursor on mobile */
     .cursor, .cursor-follower {
         display: none;
     }
     
-    /* Work grid adjustments */
     .single-image,
     .double-images {
         width: 90%;
@@ -113,12 +112,10 @@
         height: 300px;
     }
     
-    /* Taller images mobile */
     .taller-images .work-image {
         height: 500px;
     }
     
-    /* Shorter containers mobile */
     .shorter-containers .work-image {
         height: 250px;
     }
@@ -127,7 +124,6 @@
         height: 200px;
     }
     
-    /* Triple images mobile */
     .triple-images {
         flex-direction: column;
         gap: 1rem;
@@ -138,12 +134,10 @@
         height: 250px;
     }
     
-    /* Text sizing */
     .work-item-title {
         font-size: 1.5rem;
     }
     
-    /* Navigation adjustments */
     nav {
         padding: 1rem;
     }
@@ -161,18 +155,17 @@
         margin-top: -5px;
     }
     
-    /* Project spacing */
     .project-last-row {
         margin-bottom: 8rem !important;
     }
 }
 
-/* Small mobile screens */
+/* Small mobile screens - EVEN MORE AGGRESSIVE */
 @media (max-width: 480px) {
-    /* SINGLE-LINE TITLE - Even LOWER on small screens */
+    /* EXTREME POSITIONING - Move text AS LOW AS POSSIBLE */
     .name-container {
-        height: 45% !important; /* Even lower */
-        bottom: 18% !important; /* Even lower */
+        height: 35% !important; /* Even lower */
+        bottom: 30% !important; /* Even lower - almost at bottom */
     }
     
     .page-title {
@@ -192,7 +185,6 @@
         height: 250px;
     }
     
-    /* Taller images small mobile */
     .taller-images .work-image {
         height: 350px;
     }
@@ -205,7 +197,6 @@
         height: 180px;
     }
     
-    /* Navigation for small screens */
     nav {
         padding: 0.4rem 0.8rem !important;
     }
@@ -239,7 +230,6 @@
     }
 }
 
-/* Very small screens */
 @media (max-width: 360px) {
     .nav-links {
         gap: 0.4rem !important;
