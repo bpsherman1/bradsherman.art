@@ -22,6 +22,7 @@
         }
 
         /* Mobile Responsive */
+/* Mobile Responsive */
 @media (max-width: 768px) {
     /* FIX: Move title higher to avoid Safari bar */
     .hero {
@@ -32,15 +33,20 @@
         height: 90vh !important; /* Match the hero height */
     }
     
-    /* Adjust name container positioning - MOVE TITLE HIGHER */
+    /* ADJUSTED: For single-line titles, position LOWER than two-line titles */
     .name-container {
-        height: 70% !important; /* Reduce from 66% to 70% */
-        bottom: 5% !important; /* Move up from bottom */
+        height: 60% !important; /* Reduce from 70% to 60% - moves text DOWN */
+        bottom: 10% !important; /* Increase from 5% to 10% - moves text DOWN */
+        align-items: flex-end !important; /* Ensure text stays at bottom */
     }
     
     /* Make title text smaller on mobile */
     .page-title {
-        font-size: 16vw !important; /* Reduce from 15vw to 14vw */
+        font-size: 16vw !important;
+        position: relative !important; /* Change from absolute to relative */
+        bottom: auto !important; /* Remove absolute positioning */
+        transform: translateX(-50%) !important; /* Keep horizontal centering */
+        margin-bottom: 0 !important;
     }
 
     .cursor, .cursor-follower {
@@ -564,13 +570,14 @@
         }
 
         @media (max-width: 480px) {
-           .name-container {
-        height: 75% !important; /* Even higher on small screens */
-        bottom: 8% !important;
+           
+            .name-container {
+        height: 55% !important; /* Even lower on small screens */
+        bottom: 12% !important; /* Even lower */
     }
     
     .page-title {
-        font-size: 12vw !important;
+        font-size: 14vw !important; /* Slightly smaller */
     }
     
     .work-container {
@@ -591,6 +598,7 @@
         height: 350px;
     }
 }
+        
     </style>
 </head>
     <!-- Full Screen Image Modal -->
