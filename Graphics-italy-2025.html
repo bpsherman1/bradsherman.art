@@ -147,35 +147,7 @@
 }
 
 /* Mobile responsive */
-@media (max-width: 768px) {
-    .project-last-row {
-        margin-bottom: 8rem !important;
-    }
-}
 
-/* Taller containers for specific images */
-.taller-containers .work-image {
-    height: 800px; /* Taller than the default 700px */
-}
-
-/* Make sure shorter containers override doesn't affect taller ones */
-.taller-containers .work-image.shorter-containers {
-    height: 800px !important;
-}
-
-/* Mobile responsive for taller containers */
-@media (max-width: 768px) {
-    .taller-containers .work-image {
-        height: 400px; /* Taller than mobile default 300px */
-    }
-}
-
-@media (max-width: 480px) {
-    .taller-containers .work-image {
-        height: 300px; /* Taller than small mobile default 250px */
-    }
-}
-        
         /* White background for entire page below hero */
         body {
             font-family: 'Inter', sans-serif; 
@@ -482,86 +454,232 @@
 }
 
         /* Mobile Responsive */
-        @media (max-width: 768px) {
-         
-            .page-title {
-                font-size: 15vw;
-            }
-            
-            .single-image,
-            .double-images {
-                width: 90%;
-            }
-            
-            .double-images {
-                flex-direction: column;
-            }
-            
-            .double-images .work-image {
-                width: 100%;
-                height: 300px;
-            }
-            
-            .work-image {
-                height: 300px;
-            }
-            
-            .shorter-containers .work-image {
-                height: 250px;
-            }
-            
-            .tight-grid .work-image {
-                height: 250px; /* Adjusted for mobile */
-            }
-            
-            .work-item-title {
-                font-size: 1.5rem;
-                color: #ffffff !important;
-            }
-            
-            nav {
-                padding: 1rem;
-            }
-            
-            .nav-links {
-                gap: 1rem;
-            }
+      /* Mobile Responsive */
+@media (max-width: 768px) {
+    /* Hero adjustments for mobile */
+    .hero {
+        height: 90vh !important;
+    }
+    
+    .horizontal-slideshow {
+        height: 90vh !important;
+        display: none !important;
+    }
+    
+    /* SPECIAL FOR TWO-LINE TITLE: Move text HIGHER for two lines */
+    .name-container {
+        height: 60% !important; /* LOWER height to move text UP */
+        bottom: 8% !important; /* HIGHER bottom to move text UP */
+        align-items: flex-end !important;
+    }
+    
+    /* Two-line title styling */
+    .page-title {
+        font-size: 13vw !important; /* Smaller for two lines */
+        position: relative !important;
+        bottom: auto !important;
+        transform: translateX(-50%) !important;
+        margin-bottom: 0 !important;
+        line-height: 0.85 !important; /* Tighter line height for two lines */
+        letter-spacing: -2px !important; /* Tighter letter spacing */
+    }
 
-            .project-last-row {
-                margin-bottom: 8rem !important;
-            }
-        }
+    /* Show mobile static image */
+    .mobile-static-image {
+        display: block !important;
+    }
+    
+    /* NEW DROPDOWN STYLING */
+    .dropdown-content { 
+        position: fixed !important; 
+        top: 90px !important;
+        right: 1rem !important;
+        left: auto !important;
+        transform: translateY(-10px) !important;
+        width: 45% !important;
+        min-width: unset !important;
+        background: #000000 !important;
+        border: none !important;
+        padding: 0.5rem 0 !important;
+        max-height: 60vh;
+        overflow-y: auto;
+        mix-blend-mode: normal !important;
+        backdrop-filter: none !important;
+        opacity: 1 !important;
+        z-index: 1000 !important;
+    }
+    
+    .dropdown:hover .dropdown-content {
+        transform: translateY(0) !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    
+    .dropdown-content a {
+        padding: 0.4rem 1rem !important;
+        font-size: 0.8rem !important;
+        color: #ffffff !important;
+        text-align: right !important;
+        mix-blend-mode: normal !important;
+        border-left: none !important;
+        font-weight: 600 !important;
+        background: transparent !important;
+        display: block !important;
+    }
+    
+    .dropdown-content a:hover {
+        background: rgba(255, 255, 255, 0.2) !important;
+        padding-right: 1.5rem !important;
+    }
+    
+    .cursor, .cursor-follower {
+        display: none;
+    }
+    
+    .single-image,
+    .double-images,
+    .doubles-images {
+        width: 90%;
+    }
+    
+    .double-images,
+    .doubles-images {
+        flex-direction: column;
+    }
+    
+    .double-images .work-image,
+    .doubles-images .work-image {
+        width: 100%;
+        height: 300px;
+    }
+    
+    .work-image {
+        height: 300px;
+    }
+    
+    .taller-containers .work-image {
+        height: 400px;
+    }
+    
+    .talling-containers .work-image {
+        height: 350px;
+    }
+    
+    .shorter-containers .work-image {
+        height: 250px;
+    }
+    
+    .tight-grid .work-image {
+        height: 250px;
+    }
+    
+    .work-item-title {
+        font-size: 1.5rem;
+        color: #ffffff !important;
+    }
+    
+    /* NAVIGATION */
+    nav {
+        padding: 1rem;
+    }
+    
+    .nav-links {
+        gap: 1rem;
+    }
+    
+    .project-last-row {
+        margin-bottom: 8rem !important;
+    }
+}
 
-        @media (max-width: 480px) {
-            .page-title {
-                font-size: 12vw;
-            }
-            
-            .work-container {
-                padding: 6rem 5% 10rem 5%;
-            }
-            
-            .single-image,
-            .double-images {
-                width: 95%;
-            }
-            
-            .work-image {
-                height: 250px;
-            }
-            
-            .shorter-containers .work-image {
-                height: 200px;
-            }
-            
-            .tight-grid .work-image {
-                height: 200px; /* Adjusted for small mobile */
-            }
+/* Small mobile screens */
+@media (max-width: 480px) {
+    /* Even higher positioning for very small screens */
+    .name-container {
+        height: 55% !important; /* Even lower height */
+        bottom: 10% !important; /* Even higher bottom */
+    }
+    
+    .page-title {
+        font-size: 11vw !important; /* Even smaller for very small screens */
+        line-height: 0.8 !important; /* Even tighter */
+        letter-spacing: -1px !important; /* Even tighter spacing */
+    }
+    
+    .work-container {
+        padding: 6rem 5% 10rem 5%;
+    }
+    
+    .single-image,
+    .double-images,
+    .doubles-images {
+        width: 95%;
+    }
+    
+    .work-image {
+        height: 250px;
+    }
+    
+    .taller-containers .work-image {
+        height: 300px;
+    }
+    
+    .talling-containers .work-image {
+        height: 280px;
+    }
+    
+    .shorter-containers .work-image {
+        height: 200px;
+    }
+    
+    .tight-grid .work-image {
+        height: 200px;
+    }
+    
+    /* NAVIGATION */
+    nav {
+        padding: 0.4rem 0.8rem !important;
+    }
+    
+    .nav-links {
+        gap: 1rem !important;
+    }
+    
+    .dropdown-content {
+        top: 85px !important;
+        width: 50% !important;
+        padding: 0.4rem 0 !important;
+    }
+    
+    .dropdown-content a {
+        padding: 0.3rem 0.8rem !important;
+        font-size: 0.75rem !important;
+    }
+    
+    .project-last-row {
+        margin-bottom: 6rem !important;
+    }
+}
 
-            .project-last-row {
-                margin-bottom: 6rem !important;
-            }
-        }
+@media (max-width: 360px) {
+    .nav-links {
+        gap: 1rem !important;
+    }
+    
+    .dropdown-content {
+        top: 80px !important;
+        width: 55% !important;
+    }
+    
+    .page-title {
+        font-size: 10vw !important; /* Smallest for very narrow screens */
+    }
+    
+    .name-container {
+        height: 50% !important; /* Lowest height for smallest screens */
+        bottom: 12% !important; /* Highest bottom position */
+    }
+}
     </style>
 </head>
 <body>
