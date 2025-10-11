@@ -444,80 +444,232 @@ body {
 }
 
         /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .cursor, .cursor-follower {
-                display: none;
-            }
-            
-            .page-title {
-                font-size: 15vw;
-            }
-            
-            .single-image,
-            .double-images {
-                width: 90%;
-            }
-            
-            .double-images {
-                flex-direction: column;
-            }
-            
-            .double-images .work-image {
-                width: 100%;
-                height: 300px;
-            }
-            
-            .work-image {
-                height: 300px;
-            }
-            
-            .shorter-containers .work-image {
-                height: 250px;
-            }
-            
-            .work-item-title {
-                font-size: 1.5rem;
-            }
-            
-            nav {
-                padding: 1rem;
-            }
-            
-            .nav-links {
-                gap: 1rem;
-            }
+       /* Mobile Responsive */
+@media (max-width: 768px) {
+    /* Hero adjustments for mobile */
+    .hero {
+        height: 90vh !important;
+    }
+    
+    .horizontal-slideshow {
+        height: 90vh !important;
+        display: none !important;
+    }
+    
+    /* CORRECTED: To move text LOWER, we INCREASE height and DECREASE bottom */
+    .name-container {
+        height: 80% !important; /* INCREASED from 66% to 80% - moves text DOWN */
+        bottom: 2% !important; /* DECREASED from 15% to 2% - moves text DOWN */
+        align-items: flex-end !important;
+    }
+    
+    /* Single-line title styling - 15vw as requested */
+    .page-title {
+        font-size: 15vw !important;
+        position: relative !important;
+        bottom: auto !important;
+        transform: translateX(-50%) !important;
+        margin-bottom: 0 !important;
+    }
 
-            .project-last-row {
-                margin-bottom: 8rem !important;
-            }
-        }
+    /* Show mobile static image */
+    .mobile-static-image {
+        display: block !important;
+    }
+    
+    /* Rest of your mobile CSS */
+    .main-name { 
+        font-size: 15vw; 
+        mix-blend-mode: difference !important;
+        color: white !important;
+    }
+    
+    /* NEW DROPDOWN STYLING */
+    .dropdown-content { 
+        position: fixed !important; 
+        top: 90px !important;
+        right: 1rem !important;
+        left: auto !important;
+        transform: translateY(-10px) !important;
+        width: 45% !important;
+        min-width: unset !important;
+        background: #000000 !important;
+        border: none !important;
+        padding: 0.5rem 0 !important;
+        max-height: 60vh;
+        overflow-y: auto;
+        mix-blend-mode: normal !important;
+        backdrop-filter: none !important;
+        opacity: 1 !important;
+        z-index: 1000 !important;
+    }
+    
+    .dropdown:hover .dropdown-content {
+        transform: translateY(0) !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    
+    .dropdown-content a {
+        padding: 0.4rem 1rem !important;
+        font-size: 0.8rem !important;
+        color: #ffffff !important;
+        text-align: right !important;
+        mix-blend-mode: normal !important;
+        border-left: none !important;
+        font-weight: 600 !important;
+        background: transparent !important;
+        display: block !important;
+    }
+    
+    .dropdown-content a:hover {
+        background: rgba(255, 255, 255, 0.2) !important;
+        padding-right: 1.5rem !important;
+    }
+    
+    .cursor, .cursor-follower {
+        display: none;
+    }
+    
+    .single-image,
+    .double-images {
+        width: 90%;
+    }
+    
+    .double-images {
+        flex-direction: column;
+    }
+    
+    .double-images .work-image {
+        width: 100%;
+        height: 300px;
+    }
+    
+    .work-image {
+        height: 300px;
+    }
+    
+    .taller-images .work-image {
+        height: 500px;
+    }
+    
+    .shorter-containers .work-image {
+        height: 250px;
+    }
+    
+    .taller1-images .work-image {
+        height: 400px;
+    }
+    
+    .shorten-containers .work-image {
+        height: 350px;
+    }
+    
+    .long-containers .work-image {
+        height: 200px;
+    }
+    
+    .work-item-title {
+        font-size: 1.5rem;
+    }
+    
+    /* NAVIGATION - MATCH CAMPAIGNS PAGE */
+    nav {
+        padding: 1rem;
+    }
+    
+    .nav-links {
+        gap: 1rem;
+    }
+    
+    .project-last-row {
+        margin-bottom: 8rem !important;
+    }
+}
 
-        @media (max-width: 480px) {
-            .page-title {
-                font-size: 12vw;
-            }
-            
-            .work-container {
-                padding: 6rem 5% 10rem 5%;
-            }
-            
-            .single-image,
-            .double-images {
-                width: 95%;
-            }
-            
-            .work-image {
-                height: 250px;
-            }
-            
-            .shorter-containers .work-image {
-                height: 200px;
-            }
+/* Small mobile screens */
+@media (max-width: 480px) {
+    .name-container {
+        height: 85% !important; /* Even higher */
+        bottom: 1% !important; /* Even lower */
+    }
+    
+    .page-title {
+        font-size: 14vw !important; /* Slightly smaller for very small screens */
+    }
+    
+    .work-container {
+        padding: 6rem 5% 10rem 5%;
+    }
+    
+    .single-image,
+    .double-images {
+        width: 95%;
+    }
+    
+    .work-image {
+        height: 250px;
+    }
+    
+    .taller-images .work-image {
+        height: 350px;
+    }
+    
+    .shorter-containers .work-image {
+        height: 200px;
+    }
+    
+    .taller1-images .work-image {
+        height: 300px;
+    }
+    
+    .shorten-containers .work-image {
+        height: 280px;
+    }
+    
+    .long-containers .work-image {
+        height: 150px;
+    }
+    
+    /* NAVIGATION - MATCH CAMPAIGNS PAGE */
+    nav {
+        padding: 0.4rem 0.8rem !important;
+    }
+    
+    .nav-links {
+        gap: 1rem !important;
+    }
+    
+    .dropdown-content {
+        top: 85px !important;
+        width: 50% !important;
+        padding: 0.4rem 0 !important;
+    }
+    
+    .dropdown-content a {
+        padding: 0.3rem 0.8rem !important;
+        font-size: 0.75rem !important;
+    }
+    
+    .project-last-row {
+        margin-bottom: 6rem !important;
+    }
+}
 
-            .project-last-row {
-                margin-bottom: 6rem !important;
-            }
-        }
+@media (max-width: 360px) {
+    .nav-links {
+        gap: 1rem !important;
+    }
+    
+    .dropdown-content {
+        top: 80px !important;
+        width: 55% !important;
+    }
+    
+    .page-title {
+        font-size: 13vw !important; /* Smallest for very narrow screens */
+    }
+}
     </style>
 </head>
     <!-- Full Screen Image Modal -->
