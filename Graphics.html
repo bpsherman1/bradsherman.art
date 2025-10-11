@@ -576,6 +576,7 @@
         /* Mobile Responsive */
        /* Mobile Responsive */
 /* Mobile Responsive */
+/* Mobile Responsive */
 @media (max-width: 768px) {
     /* Hero adjustments for mobile - FULL SCREEN HERO */
     .hero {
@@ -596,9 +597,9 @@
         padding: 0 5% !important;
     }
     
-    /* Title styling - BOTTOM LEFT CORNER - WHITE TEXT */
+    /* Title styling - BOTTOM LEFT CORNER - WHITE TEXT - ALLOW 2 LINES */
     .page-title {
-        font-size: 14vw !important; /* Good size for "GRAPHIC WORK" */
+        font-size: 13vw !important; /* Slightly smaller to fit better */
         position: relative !important;
         bottom: auto !important;
         left: 0 !important;
@@ -606,12 +607,14 @@
         margin-bottom: 0 !important;
         mix-blend-mode: normal !important;
         color: white !important;
-        line-height: 0.9 !important;
-        letter-spacing: -1px !important;
+        line-height: 0.95 !important; /* Slightly tighter line height */
+        letter-spacing: -0.5px !important; /* Slightly tighter letter spacing */
         width: auto !important;
-        white-space: nowrap !important;
+        white-space: normal !important; /* ALLOW LINE BREAKS */
         text-align: left !important; /* Left aligned */
         margin-left: 0 !important;
+        word-wrap: break-word !important; /* Allow breaking long words */
+        max-width: 90% !important; /* Prevent going off screen */
     }
 
     /* Show mobile static image */
@@ -744,8 +747,9 @@
     }
     
     .page-title {
-        font-size: 12vw !important; /* Smaller for small screens */
-        letter-spacing: -0.5px !important;
+        font-size: 11.5vw !important; /* Smaller for small screens */
+        letter-spacing: 0px !important; /* No negative spacing on small screens */
+        line-height: 1 !important; /* Normal line height */
     }
     
     .work-container {
@@ -821,8 +825,9 @@
     }
     
     .page-title {
-        font-size: 11vw !important; /* Smallest size */
+        font-size: 10.5vw !important; /* Smallest size */
         letter-spacing: 0px !important;
+        line-height: 1.05 !important; /* Slightly looser for readability */
     }
     
     .nav-links {
