@@ -277,7 +277,7 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            background-image: url('images_2/lira1.png');
+            background-image: url('images_2/time.png');
         }
 
         .horizontal-slideshow {
@@ -457,39 +457,36 @@
       /* Mobile Responsive */
 /* Mobile Responsive */
 /* Mobile Responsive */
+/* Mobile Responsive */
 @media (max-width: 768px) {
-    /* Hero adjustments for mobile */
+    /* Hero adjustments for mobile - SMALLER HERO */
     .hero {
-        height: 90vh !important;
+        height: 40vh !important; /* Smaller hero section to fit full image */
     }
     
     .horizontal-slideshow {
-        height: 90vh !important;
+        height: 40vh !important; /* Match the smaller hero */
         display: none !important;
     }
     
-    /* MATCH BRAD SHERMAN POSITIONING: Bottom left corner */
+    /* POSITION TEXT AT BOTTOM OF SMALLER IMAGE */
     .name-container {
-        height: 70% !important; /* Match Brad Sherman - 70% height */
-        bottom: 2% !important; /* Match Brad Sherman - 2% from bottom */
-        align-items: flex-start !important; /* Left align like Brad Sherman */
-        padding: 0 1rem !important; /* Reduced padding for left alignment */
-        justify-content: flex-end !important;
+        height: 85% !important; /* Higher height to position text at bottom */
+        bottom: 5% !important; /* Position near bottom of the image */
+        align-items: flex-end !important;
     }
     
-    /* Two-line title styling - LEFT ALIGNED at bottom like Brad Sherman */
+    /* Title styling - WHITE TEXT (no invert) */
     .page-title {
-        font-size: 16vw !important;
+        font-size: 13vw !important; /* Adjusted for two-line title */
         position: relative !important;
         bottom: auto !important;
-        transform: none !important; /* Remove center transform */
+        transform: translateX(-50%) !important;
         margin-bottom: 0 !important;
         line-height: 0.85 !important;
         letter-spacing: -2px !important;
-        text-align: left !important; /* Left aligned */
-        left: auto !important; /* Remove center positioning */
-        width: auto !important; /* Auto width for left alignment */
-        padding-left: 1rem !important; /* Match Brad Sherman spacing */
+        mix-blend-mode: normal !important; /* Remove difference blend mode */
+        color: white !important; /* Ensure white color */
     }
 
     /* Show mobile static image */
@@ -602,18 +599,23 @@
 
 /* Small mobile screens */
 @media (max-width: 480px) {
-    /* Match Brad Sherman positioning for small screens */
+    /* Even smaller hero for small screens */
+    .hero {
+        height: 35vh !important;
+    }
+    
+    .horizontal-slideshow {
+        height: 35vh !important;
+    }
+    
     .name-container {
-        height: 70% !important; /* Keep 70% height */
-        bottom: 2% !important; /* Keep 2% from bottom */
-        padding: 0 0.8rem !important; /* Tighter padding */
+        height: 90% !important; /* Even higher to position text at bottom */
+        bottom: 3% !important; /* Slightly adjusted for small screens */
     }
     
     .page-title {
         font-size: 11vw !important;
-        line-height: 0.8 !important;
         letter-spacing: -1px !important;
-        padding-left: 0.8rem !important; /* Tighter padding */
     }
     
     .work-container {
@@ -672,6 +674,23 @@
 }
 
 @media (max-width: 360px) {
+    .hero {
+        height: 30vh !important;
+    }
+    
+    .horizontal-slideshow {
+        height: 30vh !important;
+    }
+    
+    .name-container {
+        height: 92% !important;
+        bottom: 2% !important;
+    }
+    
+    .page-title {
+        font-size: 10vw !important;
+    }
+    
     .nav-links {
         gap: 1rem !important;
     }
@@ -679,16 +698,6 @@
     .dropdown-content {
         top: 80px !important;
         width: 55% !important;
-    }
-    
-    .page-title {
-        font-size: 10vw !important;
-    }
-    
-    .name-container {
-        height: 70% !important; /* Keep 70% height */
-        bottom: 2% !important; /* Keep 2% from bottom */
-        padding: 0 0.6rem !important; /* Tightest padding */
     }
 }
     </style>
