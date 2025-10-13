@@ -217,14 +217,14 @@
             }
 
             .contact-title {
-                font-size: 16.25vw;
+                font-size: 14.25vw;
                 margin-bottom: 3rem;
                 margin-left: 1.8rem;
             }
 
             .contact-content {
                 grid-template-columns: 1fr;
-                gap: 3rem;
+                gap: 1.5rem;
             }
 
             .contact-item {
@@ -232,6 +232,7 @@
                 text-align: left;
                 margin-left: 2rem;
                 width:80%;
+                margin-bottom: 1rem;
             }
 
             .contact-item:hover {
@@ -239,48 +240,68 @@
             }
 
             /* Mobile dropdown styling */
+            nav {
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
             .dropdown-content { 
-                position: fixed !important; 
-                top: 90px !important;
-                right: 1rem !important;
-                left: auto !important;
-                transform: translateY(-10px) !important;
-                width: 45% !important;
-                min-width: unset !important;
-                background: #000000 !important;
-                border: none !important;
-                padding: 0.5rem 0 !important;
-                max-height: 60vh;
-                overflow-y: auto;
-                mix-blend-mode: normal !important;
-                backdrop-filter: none !important;
-                opacity: 1 !important;
-                z-index: 1000 !important;
-            }
-            
-            .dropdown:hover .dropdown-content {
-                transform: translateY(0) !important;
-                opacity: 1 !important;
-                visibility: visible !important;
-            }
-            
-            .dropdown-content a {
-                padding: 0.4rem 1rem !important;
-                font-size: 0.8rem !important;
-                color: #ffffff !important;
-                text-align: right !important;
-                mix-blend-mode: normal !important;
-                border-left: none !important;
-                font-weight: 600 !important;
-                background: transparent !important;
-                display: block !important;
-                transition: all 0.2s ease !important;
-            }
-            
-            .dropdown-content a:hover {
-                background: rgba(255, 255, 255, 0.2) !important;
-                padding-right: 1.5rem !important;
-                color: #ffffff !important;
+        position: fixed !important; 
+        top: 90px !important;
+        right: 1rem !important;
+        left: auto !important;
+        transform: translateY(-10px) !important;
+        width: 45% !important;
+        min-width: unset !important;
+        background: #000000 !important;
+        border: none !important;
+        padding: 0.5rem 0 !important;
+        max-height: 60vh;
+        overflow-y: auto;
+        mix-blend-mode: normal !important;
+        backdrop-filter: none !important;
+        opacity: 1 !important;
+        z-index: 1000 !important;
+    }
+    
+    .dropdown:hover .dropdown-content {
+        transform: translateY(0) !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    
+    .dropdown-content a {
+        padding: 0.4rem 1rem !important;
+        font-size: 0.8rem !important;
+        color: #ffffff !important;
+        text-align: right !important;
+        mix-blend-mode: normal !important;
+        border-left: none !important;
+        font-weight: 600 !important;
+        background: transparent !important;
+        display: block !important;
+    }
+    
+    .dropdown-content a:hover {
+        background: rgba(255, 255, 255, 0.2) !important;
+        padding-right: 1.5rem !important;
+    }
+    
+    .cursor, .cursor-follower {
+        display: none;
+    }
+
+        }
+
+ @media (max-width: 480px) {
+        .contact-item {
+                font-size: 1.0rem;
+                text-align: left;
+                margin-left: 2rem;
+                width:80%;
+                margin-bottom: .5rem;
             }
         }
     </style>
@@ -329,9 +350,9 @@
         <div class="contact-content">
             <div class="contact-info">
                 <div class="contact-item">Brad Sherman</div>
-                <div class="contact-item">973-699-3352</div>
+            
                 <div class="contact-item">bpsherm04@hotmail.com</div>
-                <div class="contact-item">UW-Madison 2026</div>
+               
                  <div class="contact-item">Montclair, NJ</div>
             </div>
 
