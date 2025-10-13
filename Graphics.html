@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+     <link rel="icon" type="image/png" href="images_2/favicon.png">
+    <link rel="apple-touch-icon" href="images_2/favicon.png">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Graphics - Brad Sherman Design</title>
@@ -579,51 +583,209 @@
 /* Mobile Responsive */
 /* Mobile Responsive */
 @media (max-width: 768px) {
-    /* Hero adjustments for mobile - FULL SCREEN HERO */
+    /* ========== HERO SECTION - KEEPING ORIGINAL FULL HEIGHT ========== */
     .hero {
-        height: 90vh !important; /* Full screen hero like photography page */
+        height: 90vh !important;
     }
     
     .horizontal-slideshow {
-        height: 90vh !important; /* Match the hero height */
+        height: 90vh !important;
         display: none !important;
     }
     
-    /* POSITION TEXT AT BOTTOM LEFT CORNER */
+    /* KEEP ORIGINAL TEXT POSITIONING */
     .name-container {
-        height: 70% !important; /* Adjusted height for bottom positioning */
-        bottom: 2% !important; /* Position near bottom */
+        height: 70% !important;
+        bottom: 2% !important;
         align-items: flex-end !important;
-        justify-content: flex-start !important; /* Align to left */
+        justify-content: flex-start !important;
         padding: 0 5% !important;
     }
     
-    /* Title styling - BOTTOM LEFT CORNER - WHITE TEXT - ALLOW 2 LINES - LARGER FONT */
+    /* KEEP ORIGINAL TITLE STYLING */
     .page-title {
-        font-size: 16vw !important; /* LARGER FONT SIZE */
+        font-size: 16.5vw !important;
         position: relative !important;
         bottom: auto !important;
         left: 0 !important;
-        transform: none !important; /* Remove centering transform */
+        transform: none !important;
         margin-bottom: 0 !important;
         mix-blend-mode: normal !important;
         color: white !important;
-        line-height: 0.95 !important; /* Slightly tighter line height */
-        letter-spacing: -0.5px !important; /* Slightly tighter letter spacing */
+        line-height: 0.95 !important;
+        letter-spacing: -0.5px !important;
         width: auto !important;
-        white-space: normal !important; /* ALLOW LINE BREAKS */
-        text-align: left !important; /* Left aligned */
+        white-space: normal !important;
+        text-align: left !important;
         margin-left: 0 !important;
-        word-wrap: break-word !important; /* Allow breaking long words */
-        max-width: 90% !important; /* Prevent going off screen */
+        word-wrap: break-word !important;
+        max-width: 90% !important;
     }
 
-    /* Show mobile static image */
     .mobile-static-image {
         display: block !important;
     }
+
+    /* ========== CONTAINER HEIGHT CONTROLS ========== */
+    /* Control container heights - images will be 100% within them */
     
-    /* UPDATED DROPDOWN - BLACK BACKGROUND */
+    /* ========== SINGLE IMAGE CONTAINERS ========== */
+    /* TALLEST single images - main project showcase images */
+    .single-image.taller-containers {
+        height: 500px !important;
+    }
+    
+    /* TALL single images - regular project images */
+    .single-image.taller-container {
+        height: 450px !important;
+    }
+    
+    /* MEDIUM single images - shorter supporting images */
+    .single-image.sho-containers {
+        height: 280px !important;
+    }
+    
+    /* SHORT single images - smallest supporting images */
+    .single-image.sh-containers {
+        height: 270px !important;
+    }
+
+    /* ========== DOUBLE IMAGE CONTAINERS ========== */
+    /* TALL double images - taller side-by-side images */
+    .double-images.taller-images {
+        height: 520px !important;
+        flex-direction: row !important;
+        gap: 0.3rem !important;
+        background-color: #333333 !important;
+        padding: 0.5rem !important;
+        border-radius: 0 !important;
+        overflow: hidden !important;
+    }
+
+    /* ========== SPECIAL CONTAINERS ========== */
+    /* SCROLLABLE CONTAINER - horizontal scroll images */
+    .scrollable-image-container {
+        height: 300px !important;
+        padding: 1rem !important;
+        margin-bottom: 1rem !important;
+        margin-left: 2rem;
+        margin-top: 4rem;
+    }
+    
+    .scrollable-image-container .wide-image {
+        height: 250px !important;
+    }
+
+    /* TRIPLE IMAGES CONTAINER - grid of three images */
+    .triple-images-container {
+        height: 700px !important;
+        padding: 1rem !important;
+        margin-top: 2rem !important;
+        margin-bottom: 1rem !important;
+        margin-left: 2rem;
+    }
+    
+    .triple-images {
+        flex-direction: column !important;
+        gap: 1rem !important;
+        height: 100% !important;
+    }
+    
+    .triple-images .work-image {
+        width: 100% !important;
+        height: calc(33.333% - 0.666rem) !important;
+    }
+
+    .double-images.taller-images {
+        margin-bottom: 8rem !important; /* Extra space under yanks images */
+    }
+    
+    /* Move the first Work Graphics image down further */
+    .work-section:nth-child(2) .single-image:first-child {
+        margin-top: 6rem !important; /* Even more space above first Work Graphics image */
+    }
+
+    /* ========== IMAGE SIZING ========== */
+    /* Make all images fill their containers */
+    .work-image {
+        height: 100% !important;
+        width: 100% !important;
+        background-size: contain !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        margin-bottom: 0 !important;
+        background-color: #333333 !important;
+    }
+
+    /* Double images individual sizing */
+    .double-images .work-image {
+        width: 50% !important;
+        height: 100% !important;
+        background-color: transparent !important;
+    }
+
+    /* ========== LAYOUT FIXES ========== */
+    .single-image,
+    .double-images,
+    .scrollable-image-container,
+    .triple-images-container {
+        width: 90% !important;
+        margin-bottom: 4rem !important; /* Consistent spacing between images */
+    }
+
+    /* ========== FIX SPACING BETWEEN PROJECT SECTIONS ========== */
+    /* Add more space between School Graphics last image and Work Graphics title */
+    .work-section:first-child .project-last-row {
+        margin-bottom: 8rem !important; /* INCREASED: from 4rem to 8rem */
+    }
+    
+    /* Add more space between Work Graphics description and its first image */
+    .work-section:nth-child(2) .work-info {
+        margin-bottom: 6rem !important; /* INCREASED: from 4rem to 6rem */
+    }
+    
+    /* Ensure Work Graphics first image has proper spacing */
+    .work-section:nth-child(2) .single-image:first-child,
+    .work-section:nth-child(2) .double-images:first-child {
+        margin-top: 2rem !important; /* Extra space above first image */
+    }
+
+    /* ========== REDUCED SPACING BETWEEN PROJECTS AND IMAGES ========== */
+    .work-section {
+        margin-bottom: 3rem !important;
+    }
+    
+    /* Move project images closer to descriptions */
+    .work-info {
+        margin-bottom: 2rem !important;
+    }
+
+    /* ========== TEXT STYLING - MATCHING CAMPAIGNS PAGE ========== */
+    .work-info {
+        text-align: left !important;
+        margin-left: 2rem;
+        max-width: 85%;
+        margin-top: -5rem;
+    }
+
+    .work-item-title {
+        font-family: 'Futura', sans-serif !important;
+        font-size: 1.5rem !important;
+        font-weight: 700 !important;
+        margin-bottom: 1rem !important;
+        color: #ffffff !important;
+        margin-top: 5rem;
+    }
+
+    .work-item-description {
+        font-family: 'Inter', sans-serif !important;
+        font-size: 0.9rem !important;
+        color: #ccc !important;
+        line-height: 1.6 !important;
+        max-width: 100% !important;
+    }
+
+    /* ========== NAVIGATION & LAYOUT ========== */
     .dropdown-content { 
         position: fixed !important; 
         top: 90px !important;
@@ -670,70 +832,32 @@
         display: none;
     }
     
-    .single-image,
-    .double-images {
-        width: 90%;
-    }
-    
-    .double-images {
-        flex-direction: column;
-    }
-    
-    .double-images .work-image {
-        width: 100%;
-        height: 300px;
-    }
-    
-    .work-image {
-        height: 300px;
-    }
-    
-    .shorter-containers .work-image {
-        height: 250px;
-    }
-    
-    .wide-images-grid .work-image {
-        height: 250px;
-    }
-    
-    .taller-containers .work-image {
-        height: 400px;
-    }
-    
-    .sho-containers .work-image {
-        height: 280px;
-    }
-    
-    .sh-containers .work-image {
-        height: 270px;
-    }
-    
-    .work-item-title {
-        font-size: 1.5rem;
-        color: #ffffff !important;
-    }
-    
-    /* NAVIGATION */
-    nav {
-        padding: 1rem;
-    }
-    
-    .nav-links {
-        gap: 1rem;
-    }
-    
     .work-container {
-        padding: 8rem 5% 10rem 5%; /* Adjusted top padding */
+        padding: 8rem 5% 10rem 5%;
     }
     
     .project-last-row {
-        margin-bottom: 8rem !important;
+        margin-bottom: 12rem !important;
+    }
+    
+    .double-images.taller-images {
+        margin-bottom: 10rem !important; /* Extra space under yanks images */
+    }
+    
+    /* Move the first Work Graphics image down further - TARGET THE SPECIFIC IMAGE */
+    .work-section:nth-child(2) .single-image.taller-containers:first-child {
+        margin-top: 4rem !important; /* Even more space above first Work Graphics image */
+    }
+    
+    /* Alternative: Target by the specific image background if needed */
+    .work-image[style*="images_2/print.png"] {
+        margin-top: 4rem !important;
     }
 }
 
-/* Small mobile screens */
+/* ========== SMALL MOBILE SCREENS (480px) ========== */
 @media (max-width: 480px) {
-    /* Full screen hero for small screens */
+    /* KEEP ORIGINAL HERO HEIGHT */
     .hero {
         height: 90vh !important;
     }
@@ -742,76 +866,148 @@
         height: 90vh !important;
     }
     
+    /* KEEP ORIGINAL TEXT POSITIONING */
     .name-container {
         height: 75% !important;
         bottom: 3% !important;
     }
     
+    /* KEEP ORIGINAL TITLE STYLING */
     .page-title {
-        font-size: 13.5vw !important; /* LARGER FONT SIZE */
-        letter-spacing: 0px !important; /* No negative spacing on small screens */
-        line-height: 1 !important; /* Normal line height */
+        font-size: 14.5vw !important;
+        letter-spacing: 0px !important;
+        line-height: 1 !important;
+    }
+
+    /* ========== ADJUSTED CONTAINER HEIGHTS FOR SMALL SCREENS ========== */
+    /* TALLEST single images */
+    .double-images.taller-images {
+        margin-bottom: 5rem !important; /* Slightly less on small screens */
     }
     
+    .work-section:nth-child(2) .single-image:first-child {
+        margin-top: 5rem !important; /* Slightly less on small screens */
+    }
+    
+    .single-image.taller-containers {
+        height: 380px !important;
+    }
+    
+    /* TALL single images */
+    .single-image.taller-container {
+        height: 350px !important;
+    }
+    
+    /* MEDIUM single images */
+    .single-image.sho-containers {
+        height: 230px !important;
+    }
+    
+    .work-section:nth-child(2) .single-image:first-child {
+        margin-bottom: -8rem !important; /* Slightly less on small screens */
+    }
+    
+    .double-images.taller-images {
+        margin-bottom: 10rem !important;
+    }
+    
+    .work-section:nth-child(2) .single-image.taller-containers:first-child {
+        margin-top: 5rem !important;
+    }
+    
+    .work-image[style*="images_2/print.png"] {
+        margin-top: 3rem !important;
+    }
+    
+    /* SHORT single images */
+    .single-image.sh-containers {
+        height: 220px !important;
+    }
+
+    /* TALL double images */
+    .double-images.taller-images {
+        height: 320px !important;
+        gap: 0.25rem !important;
+    }
+    
+    .double-images.taller-images {
+        margin-bottom: 10rem !important; /* Slightly less on small screens */
+    }
+    
+    /* SCROLLABLE CONTAINER */
+    .scrollable-image-container {
+        height: 250px !important;
+        margin-left: 1.2rem;
+    }
+    
+    .scrollable-image-container .wide-image {
+        height: 200px !important;
+    }
+
+    /* TRIPLE IMAGES CONTAINER */
+    .triple-images-container {
+        height: 700px !important;
+        margin-left: 1.2rem;
+        margin-top: 4rem !important;
+        margin-bottom: 4rem !important;
+    }
+
+    /* ========== ADJUSTED SPACING FOR SMALLER SCREENS ========== */
+    .single-image,
+    .double-images,
+    .scrollable-image-container,
+    .triple-images-container {
+        margin-bottom: 3rem !important; /* Slightly less on small screens */
+    }
+
+    .work-section:first-child .project-last-row {
+        margin-bottom: 6rem !important; /* INCREASED: from 6rem to 6rem */
+    }
+    
+    .work-section:nth-child(2) .work-info {
+        margin-bottom: 5rem !important; /* INCREASED: from 3rem to 5rem */
+    }
+    
+    .work-section:nth-child(2) .single-image:first-child,
+    .work-section:nth-child(2) .double-images:first-child {
+        margin-top: 1.5rem !important; /* Slightly less on small screens */
+    }
+
+    .work-section {
+        margin-bottom: 2rem !important;
+    }
+    
+    .work-info {
+        margin-bottom: 1.5rem !important;
+    }
+
+    /* ========== TEXT ADJUSTMENTS ========== */
+    .work-info {
+        margin-left: 1rem;
+        max-width: 90%;
+    }
+
+    .work-item-title {
+        font-size: 1.3rem !important;
+        margin-bottom: 0.8rem !important;
+    }
+
+    .work-item-description {
+        font-size: 0.8rem !important;
+    }
+
     .work-container {
         padding: 6rem 5% 10rem 5%;
     }
     
-    .single-image,
-    .double-images {
-        width: 95%;
-    }
-    
-    .work-image {
-        height: 250px;
-    }
-    
-    .shorter-containers .work-image {
-        height: 200px;
-    }
-    
-    .wide-images-grid .work-image {
-        height: 200px;
-    }
-    
-    .taller-containers .work-image {
-        height: 300px;
-    }
-    
-    .sho-containers .work-image {
-        height: 230px;
-    }
-    
-    .sh-containers .work-image {
-        height: 220px;
-    }
-    
-    /* NAVIGATION */
-    nav {
-        padding: 0.4rem 0.8rem !important;
-    }
-    
-    .nav-links {
-        gap: 1rem !important;
-    }
-    
-    .dropdown-content {
-        top: 85px !important;
-        width: 50% !important;
-        padding: 0.4rem 0 !important;
-    }
-    
-    .dropdown-content a {
-        padding: 0.3rem 0.8rem !important;
-        font-size: 0.75rem !important;
-    }
-    
     .project-last-row {
-        margin-bottom: 6rem !important;
+        margin-bottom: 10rem !important;
     }
 }
 
+/* ========== SMALLEST MOBILE SCREENS (360px) ========== */
 @media (max-width: 360px) {
+    /* KEEP ORIGINAL HERO HEIGHT */
     .hero {
         height: 90vh !important;
     }
@@ -820,28 +1016,103 @@
         height: 90vh !important;
     }
     
+    /* KEEP ORIGINAL TEXT POSITIONING */
     .name-container {
         height: 80% !important;
         bottom: 2% !important;
     }
     
+    /* KEEP ORIGINAL TITLE STYLING */
     .page-title {
-        font-size: 12vw !important; /* LARGER FONT SIZE */
+        font-size: 13vw !important;
         letter-spacing: 0px !important;
-        line-height: 1.05 !important; /* Slightly looser for readability */
+        line-height: 1.05 !important;
+    }
+
+    /* ========== FINAL CONTAINER HEIGHT ADJUSTMENTS ========== */
+    /* TALLEST single images */
+    .single-image.taller-containers {
+        height: 280px !important;
     }
     
-    .nav-links {
-        gap: 1rem !important;
+    /* TALL single images */
+    .single-image.taller-container {
+        height: 250px !important;
     }
     
-    .dropdown-content {
-        top: 80px !important;
-        width: 55% !important;
+    /* MEDIUM single images */
+    .single-image.sho-containers {
+        height: 180px !important;
     }
     
+    /* SHORT single images */
+    .single-image.sh-containers {
+        height: 170px !important;
+    }
+
+    /* TALL double images */
+    .double-images.taller-images {
+        height: 250px !important;
+        gap: 0.2rem !important;
+    }
+
+    /* SCROLLABLE CONTAINER */
+    .scrollable-image-container {
+        height: 200px !important;
+    }
+    
+    .scrollable-image-container .wide-image {
+        height: 160px !important;
+    }
+
+    /* TRIPLE IMAGES CONTAINER */
+    .triple-images-container {
+        height: 550px !important;
+    }
+
+    /* ========== FINAL SPACING ADJUSTMENTS FOR SMALLEST SCREENS ========== */
+    .single-image,
+    .double-images,
+    .scrollable-image-container,
+    .triple-images-container {
+        margin-bottom: 2rem !important; /* Even less on smallest screens */
+    }
+
+    .work-section:first-child .project-last-row {
+        margin-bottom: 5rem !important; /* INCREASED: from 5rem to 5rem */
+    }
+    
+    .work-section:nth-child(2) .work-info {
+        margin-bottom: 4rem !important; /* INCREASED: from 2.5rem to 4rem */
+    }
+    
+    .work-section:nth-child(2) .single-image:first-child,
+    .work-section:nth-child(2) .double-images:first-child {
+        margin-top: 1rem !important; /* Even less on smallest screens */
+    }
+
+    .work-section {
+        margin-bottom: 1.5rem !important;
+    }
+    
+    .work-info {
+        margin-bottom: 1rem !important;
+    }
+
+    .work-item-title {
+        font-size: 1.1rem !important;
+    }
+
+    .work-item-description {
+        font-size: 0.75rem !important;
+    }
+
     .work-container {
         padding: 5rem 5% 8rem 5%;
+    }
+    
+    .project-last-row {
+        margin-bottom: 8rem !important;
     }
 }
     </style>
@@ -886,10 +1157,9 @@
                     <a href="3d.html">3D</a>
                 </div>
             </div>
-            <a href="index.html#contact" style="color: white; text-decoration: none; font-weight: 600; position: relative;">
-                CONTACT
-                <span style="position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #ffaa00; transition: width 0.3s;"></span>
-            </a>
+            <a href="Contacts.html" style="color: white; text-decoration: none; font-weight: 600; position: relative;">
+    CONTACT
+</a>
         </div>
     </nav>
 
@@ -986,7 +1256,7 @@
 
         <!-- Row of 2 Images -->
         <div class="work-section">
-            <div class="double-images taller-images taller-containers project-last-row">
+            <div class="double-images taller-images taller-containers ">
                 <div class="work-image" style="background-image: url('images_2/yank1.png');"></div>
                 <div class="work-image" style="background-image: url('images_2/yank2.png');"></div>
             </div>
@@ -994,7 +1264,7 @@
 
         <!-- Final single image -->
         <div class="work-section">
-            <div class="single-image taller-containers project-last-row">
+            <div class="single-image taller-containers  project-last-row">
                 <div class="work-image" style="background-image: url('images_2/bag.png');"></div>
             </div>
         </div>

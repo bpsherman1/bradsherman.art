@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Page Title</title>
+    
+    <link rel="icon" type="image/png" href="images_2/favicon.png">
+    <link rel="apple-touch-icon" href="images_2/favicon.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Futura:wght@700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Your existing styles and fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Futura:wght@700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Woodworking - Brad Sherman Design</title>
@@ -443,7 +454,70 @@
     .hero {
         height: 40vh !important; /* Smaller hero section to fit full image */
     }
+    .work-section .single-image,
+.work-section .double-images {
+    width: 100%;
+    margin: 0 auto 5rem auto;
+}
+
+/* Specifically target the Yankee Stadium section if needed */
+.work-section:has(.works-image) .single-image {
+    width: 100%;
+    margin: 0 auto 5rem auto;
+}
+    .work-info {
+        text-align: left !important;
+        margin-bottom: 2rem !important;
+        margin-left: 2rem;
+        max-width: 85%;
+        margin-top: -5rem;
+    }
+.shorter-containers .works-image {
+    height: 400px; /* Short height for wide images */
+    margin-bottom: -5rem;
+}
+    .work-item-title {
+        font-family: 'Futura', sans-serif !important;
+        font-size: 1.5rem !important;
+        font-weight: 700 !important;
+        margin-bottom: 1rem !important;
+        color: #000000 !important;
+        margin-top: 5rem;
+    }
+
+    .work-item-description {
+        font-family: 'Inter', sans-serif !important;
+        font-size: 0.9rem !important;
+        color: #ccc !important;
+        line-height: 1.6 !important;
+        max-width: 100% !important;
+    }
+
+    .project-details {
+        margin-top: 1rem !important;
+    }
+
+    .project-year,
+    .project-institution,
+    .project-description {
+        font-size: 0.85rem !important;
+        margin-bottom: 1rem !important;
+    }
+
+    /* ========== SMALLER GAPS BETWEEN IMAGES ========== */
+    .work-section {
+        margin-bottom: 3rem !important; /* REDUCED from 6rem to 3rem */
+    }
     
+    .single-image,
+    .double-images {
+        margin-bottom: 2rem !important; /* Small gap between images */
+    }
+
+    /* Keep the same distance from titles and text */
+    .work-info {
+        margin-bottom: 2rem !important; /* Same as before */
+    }
     .horizontal-slideshow {
         height: 40vh !important; /* Match the smaller hero */
         display: none !important;
@@ -459,12 +533,12 @@
     
     /* Single-line title styling - WHITE TEXT (no invert) - SMALLER FOR LONG WORDS */
     .page-title {
-        font-size: 13vw !important; /* Smaller for long words */
+        font-size: 16vw !important; /* Smaller for long words */
         position: relative !important;
         bottom: auto !important;
         transform: translateX(-50%) !important;
         margin-bottom: 0 !important;
-        mix-blend-mode: normal !important; /* Remove difference blend mode */
+        mix-blend-mode: difference !important; /* Remove difference blend mode */
         color: white !important; /* Ensure white color */
         line-height: 0.9 !important; /* Tighter line height */
         letter-spacing: -1px !important; /* Reduce letter spacing */
@@ -479,11 +553,7 @@
     }
     
     /* Rest of your mobile CSS */
-    .main-name { 
-        font-size: 13vw !important; 
-        mix-blend-mode: normal !important; /* Remove invert */
-        color: white !important; /* White text */
-    }
+    
     
     .dropdown-content { 
         position: fixed !important; 
@@ -592,7 +662,7 @@
     }
     
     .project-last-row {
-        margin-bottom: 10rem !important;
+        margin-bottom: 16rem !important;
     }
 }
 
@@ -602,7 +672,49 @@
     .hero {
         height: 35vh !important;
     }
+    .work-section .single-image,
+.work-section .double-images {
+    width: 100%;
+    margin: 0 auto 5rem auto;
+}
+
+/* Specifically target the Yankee Stadium section if needed */
+.work-section:has(.works-image) .single-image {
+    width: 100%;
+    margin: 0 auto 5rem auto;
+}
+    .work-info {
+        margin-bottom: 2.5rem !important;
+        margin-left: 1rem;
+        max-width: 90%;
+
+    }
+
+    .work-item-title {
+        font-size: 1.3rem !important;
+        margin-bottom: 0.8rem !important;
+    }
+
+    .work-item-description {
+        font-size: 0.8rem !important;
+    }
+
+    .project-year,
+    .project-institution,
+    .project-description {
+        font-size: 0.8rem !important;
+        margin-bottom: 0.8rem !important;
+    }
+
+    /* ========== SMALLER GAPS BETWEEN IMAGES FOR SMALL SCREENS ========== */
+    .work-section {
+        margin-bottom: 2rem !important; /* REDUCED from 5rem to 2rem */
+    }
     
+    .single-image,
+    .double-images {
+        margin-bottom: 1.5rem !important; /* Even smaller gap on small screens */
+    }
     .horizontal-slideshow {
         height: 35vh !important;
     }
@@ -614,7 +726,7 @@
     }
     
     .page-title {
-        font-size: 11vw !important; /* Even smaller for small screens */
+        font-size: 16vw !important; /* Even smaller for small screens */
         letter-spacing: -0.5px !important; /* Even tighter letter spacing */
         line-height: 0.95 !important; /* Slightly looser line height */
     }
@@ -677,7 +789,7 @@
     }
     
     .project-last-row {
-        margin-bottom: 8rem !important;
+        margin-bottom: 14rem !important;
     }
 }
 
@@ -685,7 +797,33 @@
     .hero {
         height: 30vh !important;
     }
+     .work-info {
+        margin-bottom: 1rem !important;
+    }
+
+    .work-item-title {
+        font-size: 1.1rem !important;
+    }
+
+    .work-item-description {
+        font-size: 0.75rem !important;
+    }
+
+    .project-year,
+    .project-institution,
+    .project-description {
+        font-size: 0.75rem !important;
+    }
+
+    /* ========== SMALLER GAPS BETWEEN IMAGES FOR SMALLEST SCREENS ========== */
+    .work-section {
+        margin-bottom: 1.5rem !important; /* REDUCED from 4rem to 1.5rem */
+    }
     
+    .single-image,
+    .double-images {
+        margin-bottom: 1rem !important; /* Smallest gap on tiny screens */
+    }
     .horizontal-slideshow {
         height: 30vh !important;
     }
@@ -697,7 +835,7 @@
     }
     
     .page-title {
-        font-size: 10vw !important; /* Smallest size for very small screens */
+        font-size: 15vw !important; /* Smallest size for very small screens */
         letter-spacing: 0px !important; /* No negative letter spacing */
         line-height: 1 !important; /* Normal line height */
     }
@@ -720,7 +858,7 @@
     }
     
     .project-last-row {
-        margin-bottom: 6rem !important;
+        margin-bottom: 12rem !important;
     }
 }
     </style>
@@ -762,10 +900,9 @@
                     <a href="3d.html">3D</a>
                 </div>
             </div>
-            <a href="index.html#contact" style="color: white; text-decoration: none; font-weight: 600; position: relative;">
-                CONTACT
-                <span style="position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #ffaa00; transition: width 0.3s;"></span>
-            </a>
+           <a href="Contacts.html" style="color: white; text-decoration: none; font-weight: 600; position: relative;">
+    CONTACT
+</a>
         </div>
     </nav>
 
@@ -841,24 +978,24 @@
         </div>
     </div>
 
-        <!-- Three Normal Images -->
-        <div class="work-section">
-            <div class="single-image taller-containers">
-                <div class="works-image" style="background-image: url('images_2/vene.png');"></div>
-            </div>
-        </div>
+      <!-- Three Normal Images -->
+<div class="work-section">
+    <div class="single-image taller-containers">
+        <div class="works-image" style="background-image: url('images_2/vene.png');"></div>
+    </div>
+</div>
 
-        <div class="work-section">
-            <div class="single-image taller-containers">
-                <div class="works-image" style="background-image: url('images_2/angle.png');"></div>
-            </div>
-        </div>
+<div class="work-section">
+    <div class="single-image taller-containers">
+        <div class="works-image" style="background-image: url('images_2/angle.png');"></div>
+    </div>
+</div>
 
-        <div class="work-section">
-            <div class="single-image taller-containers project-last-row">
-                <div class="works-image" style="background-image: url('images_2/crop.png');"></div>
-            </div>
-        </div>
+<div class="work-section">
+    <div class="single-image taller-containers project-last-row">
+        <div class="works-image" style="background-image: url('images_2/crop.png');"></div>
+    </div>
+</div>
 
         <!-- Third Project: Key Table -->
              <div class="work-info">

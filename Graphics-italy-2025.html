@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+     <link rel="icon" type="image/png" href="images_2/favicon.png">
+    <link rel="apple-touch-icon" href="images_2/favicon.png">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Graphics Italy 2025 - Brad Sherman Design</title>
@@ -461,49 +465,189 @@
 /* Mobile Responsive */
 /* Mobile Responsive */
 @media (max-width: 768px) {
-    /* Hero adjustments for mobile - SMALLER HERO */
+    /* ========== HERO SECTION ========== */
     .hero {
-        height: 40vh !important; /* Smaller hero section to fit full image */
+        height: 40vh !important;
     }
     
     .horizontal-slideshow {
-        height: 40vh !important; /* Match the smaller hero */
+        height: 40vh !important;
         display: none !important;
     }
     
-    /* POSITION TEXT AT BOTTOM LEFT OF SMALLER IMAGE - MOVED DOWN */
-     .name-container {
-        height: 85% !important; /* Higher height to position text at bottom */
-        bottom: 5% !important; /* Position near bottom of the image */
+    .name-container {
+        height: 85% !important;
+        bottom: 5% !important;
         align-items: flex-end !important;
     }
-    /* Title styling - INVERTED COLOR & LEFT ALIGNED */
-  
-
-
- .page-title {
-        font-size: 15vw !important;
+    
+    .page-title {
+        font-size: 14vw !important;
         position: relative !important;
         bottom: auto !important;
         transform: translateX(-50%) !important;
         margin-bottom: 0 !important;
-        line-height: 0.9 !important;
-        letter-spacing: -2px !important;
-        mix-blend-mode: difference !important; /* Remove difference blend mode */
-        color: white !important; /* Ensure white color */
-     text-align: left !important; /* Left aligned */
-        
+        mix-blend-mode: difference !important;
+        color: white !important;
+        text-align: left;
     }
 
-
-
-    
-    /* Show mobile static image */
     .mobile-static-image {
         display: block !important;
     }
+
+    /* ========== CONTAINER HEIGHT CONTROLS ========== */
+    /* Control container heights - images will be 100% within them */
     
-    /* NEW DROPDOWN STYLING */
+    /* ========== SINGLE IMAGE CONTAINERS ========== */
+    /* TALLEST single images - usually hero/full-width images */
+    .single-image.tall-images {
+        height: 650px !important;
+        margin-top: 4rem;
+    }
+    
+    /* TALL single images - main project images */
+    .single-image.taller-containers {
+        height: 500px !important;
+        margin-top: 4rem;
+    }
+    
+    /* MEDIUM single images - secondary project images */
+    .single-image.talling-containers {
+        height: 450px !important;
+        margin-top: 4rem;
+    }
+    
+    /* SHORT single images - smaller supporting images */
+    .single-image.shorter-containers {
+        height: 250px !important;
+        margin-top: 4rem;
+    }
+
+    /* ========== DOUBLE IMAGE CONTAINERS ========== */
+    /* REGULAR double images - side-by-side images */
+    .double-images,
+    .doubles-images {
+        height: 350px !important;
+        flex-direction: row !important;
+        gap: 0.3rem !important;
+        background-color: #333333 !important;
+        padding: 0.5rem !important;
+        border-radius: 0 !important;
+        overflow: hidden !important;
+    }
+    
+    /* TALL double images - taller side-by-side images */
+    .double-images.taller-images {
+        height: 590px !important;
+        gap: 0.3rem !important;
+    }
+
+    /* ========== GRID CONTAINERS ========== */
+    /* TIGHT GRID - multiple images in grid layout */
+    .tight-grid {
+        margin-left:2rem;
+        height: 1400px !important;
+        gap: 1.5rem !important;
+        background-color: #333333 !important;
+        padding: 1.5rem !important;
+         margin-top:4rem;
+    }
+
+    /* ========== IMAGE SIZING ========== */
+    /* Make all images fill their containers */
+    .work-image {
+        height: 100% !important;
+        width: 100% !important;
+        background-size: contain !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        margin-bottom: 0 !important;
+        background-color: #333333 !important;
+    }
+
+    /* Double images individual sizing */
+    .double-images .work-image,
+    .doubles-images .work-image {
+        width: 50% !important;
+        height: 100% !important;
+        background-color: transparent !important;
+    }
+
+    /* Tight grid images */
+    .tight-grid .work-image {
+    
+        width: 100% !important;
+        height: 100% !important;
+        background-color: transparent !important;
+    }
+
+    /* ========== LAYOUT FIXES ========== */
+    .single-image,
+    .double-images,
+    .doubles-images,
+    .tight-grid {
+        width: 90%;
+        margin-bottom: 0.5rem !important;
+    }
+
+    /* ========== REDUCED SPACING BETWEEN PROJECTS AND IMAGES ========== */
+    .work-section {
+        margin-bottom: 3rem !important;
+    }
+    
+    /* Move first project images closer to description */
+    .work-section:first-child .work-info {
+        margin-bottom: 2rem !important;
+    }
+    
+    /* First project - closer image spacing */
+    .work-section:first-child .single-image,
+    .work-section:first-child .double-images,
+    .work-section:first-child .doubles-images,
+    .work-section:first-child .tight-grid {
+        margin-bottom: 0.5rem !important;
+    }
+
+    /* ========== TEXT STYLING - MATCHING CAMPAIGNS PAGE ========== */
+    .work-info {
+        text-align: left !important;
+        margin-bottom: 2rem !important;
+        margin-left: 2rem;
+        max-width: 85%;
+        margin-top: -5rem;
+    }
+
+    .work-item-title {
+        font-family: 'Futura', sans-serif !important;
+        font-size: 1.5rem !important;
+        font-weight: 700 !important;
+        margin-bottom: 1rem !important;
+        color: #ffffff !important;
+        margin-top: 5rem;
+    }
+
+    .work-item-description {
+        font-family: 'Inter', sans-serif !important;
+        font-size: 0.9rem !important;
+        color: #ccc !important;
+        line-height: 1.6 !important;
+        max-width: 100% !important;
+        
+    }
+
+    .project-details {
+        margin-top: 1rem !important;
+    }
+
+    .project-year,
+    .project-institution,
+    .project-description {
+        font-size: 0.85rem !important;
+        margin-bottom: 1rem !important;
+    }
+
+    /* ========== NAVIGATION & LAYOUT ========== */
     .dropdown-content { 
         position: fixed !important; 
         top: 90px !important;
@@ -550,65 +694,17 @@
         display: none;
     }
     
-    .single-image,
-    .double-images,
-    .doubles-images {
-        width: 90%;
-    }
-    
-    .double-images,
-    .doubles-images {
-        flex-direction: column;
-    }
-    
-    .double-images .work-image,
-    .doubles-images .work-image {
-        width: 100%;
-        height: 300px;
-    }
-    
-    .work-image {
-        height: 300px;
-    }
-    
-    .taller-containers .work-image {
-        height: 400px;
-    }
-    
-    .talling-containers .work-image {
-        height: 350px;
-    }
-    
-    .shorter-containers .work-image {
-        height: 250px;
-    }
-    
-    .tight-grid .work-image {
-        height: 250px;
-    }
-    
-    .work-item-title {
-        font-size: 1.5rem;
-        color: #ffffff !important;
-    }
-    
-    /* NAVIGATION */
-    nav {
-        padding: 1rem;
-    }
-    
-    .nav-links {
-        gap: 1rem;
+    .work-container {
+        padding: 8rem 5% 10rem 5%;
     }
     
     .project-last-row {
-        margin-bottom: 8rem !important;
+        margin-bottom: 12rem !important;
     }
 }
 
-/* Small mobile screens */
+/* ========== SMALL MOBILE SCREENS (480px) ========== */
 @media (max-width: 480px) {
-    /* Even smaller hero for small screens */
     .hero {
         height: 35vh !important;
     }
@@ -618,72 +714,112 @@
     }
     
     .name-container {
-        height: 65% !important; /* Even LOWER to move text further DOWN */
-        bottom: 10% !important; /* Even HIGHER bottom to move text further DOWN */
-        padding: 0 0.8rem !important; /* Tighter padding */
+        height: 90% !important;
+        bottom: 3% !important;
     }
     
     .page-title {
-       
-        letter-spacing: -1px !important;
-        padding-left: 0.8rem !important; /* Tighter padding */
+        font-size: 13vw;
+        margin-top: 5rem;
+    }
+
+    /* ========== ADJUSTED CONTAINER HEIGHTS FOR SMALL SCREENS ========== */
+    /* TALLEST single images */
+    .single-image.tall-images {
+        height: 490px !important;
     }
     
-    .work-container {
-        padding: 6rem 5% 10rem 5%;
+    /* TALL single images */
+    .single-image.taller-containers {
+        height: 310px !important;
+    }
+    
+    /* MEDIUM single images */
+    .single-image.talling-containers {
+        height: 350px !important;
+    }
+    
+    /* SHORT single images */
+    .single-image.shorter-containers {
+        height: 200px !important;
+    }
+
+    /* REGULAR double images */
+    .double-images,
+    .doubles-images {
+        height: 300px !important;
+        gap: 0.25rem !important;
+    }
+    
+    /* TALL double images */
+    .double-images.taller-images {
+        height: 200px !important;
+        gap: 0.25rem !important;
+    }
+
+    /* TIGHT GRID */
+    .tight-grid {
+        height: 1200px !important;
+        gap: 0.25rem !important;
+        margin-left: 1.2rem;
+    }
+
+    /* ========== ADJUSTED SPACING FOR SMALLER SCREENS ========== */
+    .work-section {
+        margin-bottom: 2rem !important;
+    }
+    
+    .work-section:first-child .work-info {
+        margin-bottom: 1rem !important;
     }
     
     .single-image,
     .double-images,
-    .doubles-images {
-        width: 95%;
+    .doubles-images,
+    .tight-grid {
+        margin-bottom: 0.3rem !important;
     }
-    
-    .work-image {
-        height: 250px;
+
+    .work-section:first-child .single-image,
+    .work-section:first-child .double-images,
+    .work-section:first-child .doubles-images,
+    .work-section:first-child .tight-grid {
+        margin-bottom: 0.3rem !important;
     }
-    
-    .taller-containers .work-image {
-        height: 300px;
+
+    /* ========== TEXT ADJUSTMENTS ========== */
+    .work-info {
+        margin-bottom: 1.5rem !important;
+        margin-left: 1rem;
+        max-width: 90%;
     }
-    
-    .talling-containers .work-image {
-        height: 280px;
+
+    .work-item-title {
+        font-size: 1.3rem !important;
+        margin-bottom: 0.8rem !important;
     }
-    
-    .shorter-containers .work-image {
-        height: 200px;
+
+    .work-item-description {
+        font-size: 0.8rem !important;
     }
-    
-    .tight-grid .work-image {
-        height: 200px;
+
+    .project-year,
+    .project-institution,
+    .project-description {
+        font-size: 0.8rem !important;
+        margin-bottom: 0.8rem !important;
     }
-    
-    /* NAVIGATION */
-    nav {
-        padding: 0.4rem 0.8rem !important;
-    }
-    
-    .nav-links {
-        gap: 1rem !important;
-    }
-    
-    .dropdown-content {
-        top: 85px !important;
-        width: 50% !important;
-        padding: 0.4rem 0 !important;
-    }
-    
-    .dropdown-content a {
-        padding: 0.3rem 0.8rem !important;
-        font-size: 0.75rem !important;
+
+    .work-container {
+        padding: 6rem 5% 10rem 5%;
     }
     
     .project-last-row {
-        margin-bottom: 6rem !important;
+        margin-bottom: 10rem !important;
     }
 }
 
+/* ========== SMALLEST MOBILE SCREENS (360px) ========== */
 @media (max-width: 360px) {
     .hero {
         height: 30vh !important;
@@ -694,23 +830,97 @@
     }
     
     .name-container {
-        height: 60% !important; /* LOWEST height */
-        bottom: 12% !important; /* HIGHEST bottom */
-        padding: 0 0.6rem !important; /* Tightest padding */
+        height: 92% !important;
+        bottom: 2% !important;
     }
     
     .page-title {
-        font-size: 10vw !important;
-        padding-left: 0.6rem !important; /* Tightest padding */
+        font-size: 13vw !important;
+    }
+
+    /* ========== FINAL CONTAINER HEIGHT ADJUSTMENTS ========== */
+    /* TALLEST single images */
+    .single-image.tall-images {
+        height: 450px !important;
     }
     
-    .nav-links {
-        gap: 1rem !important;
+    /* TALL single images */
+    .single-image.taller-containers {
+        height: 250px !important;
     }
     
-    .dropdown-content {
-        top: 80px !important;
-        width: 55% !important;
+    /* MEDIUM single images */
+    .single-image.talling-containers {
+        height: 220px !important;
+    }
+    
+    /* SHORT single images */
+    .single-image.shorter-containers {
+        height: 150px !important;
+    }
+
+    /* REGULAR double images */
+    .double-images,
+    .doubles-images {
+        height: 180px !important;
+        gap: 0.2rem !important;
+    }
+    
+    /* TALL double images */
+    .double-images.taller-images {
+        height: 250px !important;
+        gap: 0.2rem !important;
+    }
+
+    /* TIGHT GRID */
+    .tight-grid {
+        height: 1000px !important;
+        gap: 0.2rem !important;
+    }
+
+    /* ========== FINAL SPACING ADJUSTMENTS FOR SMALLEST SCREENS ========== */
+    .work-section {
+        margin-bottom: 1.5rem !important;
+    }
+    
+    .work-section:first-child .work-info {
+        margin-bottom: 1rem !important;
+    }
+    
+    .single-image,
+    .double-images,
+    .doubles-images,
+    .tight-grid {
+        margin-bottom: 0.2rem !important;
+    }
+
+    .work-section:first-child .single-image,
+    .work-section:first-child .double-images,
+    .work-section:first-child .doubles-images,
+    .work-section:first-child .tight-grid {
+        margin-bottom: 0.2rem !important;
+    }
+
+    .work-item-title {
+        font-size: 1.1rem !important;
+    }
+
+    .work-item-description {
+        font-size: 0.75rem !important;
+    }
+
+    .project-year,
+    .project-institution,
+    .project-description {
+        font-size: 0.75rem !important;
+    }
+
+    .work-container {
+        padding: 5rem 5% 8rem 5%;
+    }
+    
+    .project-last-row {
+        margin-bottom: 8rem !important;
     }
 }
     </style>
@@ -753,10 +963,9 @@
                     <a href="3d.html">3D</a>
                 </div>
             </div>
-            <a href="index.html#contact" style="color: white; text-decoration: none; font-weight: 600; position: relative;">
-                CONTACT
-                <span style="position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #ffaa00; transition: width 0.3s;"></span>
-            </a>
+            <a href="Contacts.html" style="color: white; text-decoration: none; font-weight: 600; position: relative;">
+    CONTACT
+</a>
         </div>
     </nav>
 
@@ -845,7 +1054,7 @@
     
 
  <div class="work-section">
-            <div class="doubles-images  taller-containers project-last-row">
+            <div class="doubles-images  taller-containers ">
                 <div class="work-image" style="background-image: url('images_2/lb.png');"></div>
                 <div class="work-image" style="background-image: url('images_2/lbb.png');"></div>
             </div>

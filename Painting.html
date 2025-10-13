@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+     <link rel="icon" type="image/png" href="images_2/favicon.png">
+    <link rel="apple-touch-icon" href="images_2/favicon.png">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painting - Brad Sherman Design</title>
@@ -449,7 +453,11 @@
     .hero {
         height: 90vh !important;
     }
-    
+     .taller-containers .work-image,
+    .taller-containers .works-image {
+        height: 50vh; /* 50% of viewport height */
+        max-height: 400px; /* But never taller than 400px */
+    }
     .horizontal-slideshow {
         height: 90vh !important;
         display: none !important;
@@ -540,29 +548,60 @@
     }
     
     .work-image {
-        height: 300px;
+        height: 800px;
     }
     
     .works-image {
-        height: 300px;
+        height: 800px;
     }
     
     .taller-containers .work-image {
-        height: 400px;
+        height: 800px;
+        margin-top: 8rem;
     }
     
     .taller-containers .works-image {
-        height: 400px;
+        height: 800px;
+        margin-top: 8rem;
     }
     
-    .work-info {
-        margin-bottom: 6rem;
+   .work-info {
+        text-align: left !important;
+        margin-bottom: 2rem !important;
+        margin-left: 2rem;
+        max-width: 85%;
         margin-top: 2rem;
     }
-    
+
     .work-item-title {
-        font-size: 1.1rem;
+        font-family: 'Futura', sans-serif !important;
+        font-size: 1.5rem !important;
+        font-weight: 700 !important;
+        margin-bottom: 1rem !important;
         color: #000000 !important;
+        margin-top: 2rem;
+    }
+
+    .work-item-description {
+        font-family: 'Inter', sans-serif !important;
+        font-size: 0.9rem !important;
+        color: #ccc !important;
+        line-height: 1.6 !important;
+        max-width: 100% !important;
+          margin-bottom: 5rem !important;
+       
+
+    }
+
+    .project-details {
+        margin-top: 1rem !important;
+    }
+
+    .project-year,
+    .project-institution,
+    .project-description {
+        font-size: 0.85rem !important;
+        margin-bottom: 1rem !important;
     }
     
     /* NAVIGATION */
@@ -592,7 +631,11 @@
     .hero {
         height: 90vh !important;
     }
-    
+    .taller-containers .work-image,
+    .taller-containers .works-image {
+        height: 45vh; /* 45% of viewport height */
+        max-height: 350px;
+    }
     .horizontal-slideshow {
         height: 90vh !important;
     }
@@ -603,7 +646,7 @@
     }
     
     .page-title {
-        font-size: 14vw !important; /* Slightly smaller for 480px */
+        font-size: 15vw !important; /* Slightly smaller for 480px */
         letter-spacing: -0.5px !important;
     }
     
@@ -624,18 +667,38 @@
     }
     
     .taller-containers .work-image {
-        height: 350px;
+        height: 650px;
     }
     
     .taller-containers .works-image {
-        height: 350px;
+        height: 450px;
     }
     
     /* NAVIGATION */
     nav {
         padding: 0.4rem 0.8rem !important;
     }
-    
+     .work-info {
+        margin-bottom: 1.5rem !important;
+        margin-left: 1rem;
+        max-width: 90%;
+    }
+
+    .work-item-title {
+        font-size: 1.3rem !important;
+        margin-bottom: 0.8rem !important;
+    }
+
+    .work-item-description {
+        font-size: 0.8rem !important;
+    }
+
+    .project-year,
+    .project-institution,
+    .project-description {
+        font-size: 0.8rem !important;
+        margin-bottom: 0.8rem !important;
+    }
     .nav-links {
         gap: 1rem !important;
     }
@@ -669,14 +732,18 @@
     .horizontal-slideshow {
         height: 90vh !important;
     }
-    
+    .taller-containers .work-image,
+    .taller-containers .works-image {
+        height: 40vh; /* 40% of viewport height */
+        max-height: 280px;
+    }
     .name-container {
         height: 80% !important;
         bottom: 2% !important;
     }
     
     .page-title {
-        font-size: 12vw !important; /* Smallest size for 360px */
+        font-size: 15vw !important; /* Smallest size for 360px */
         letter-spacing: 0px !important;
     }
     
@@ -716,6 +783,23 @@
     
     .work-item-title {
         font-size: 0.9rem;
+    }
+     .work-info {
+        margin-bottom: 1rem !important;
+    }
+
+    .work-item-title {
+        font-size: 1.1rem !important;
+    }
+
+    .work-item-description {
+        font-size: 0.75rem !important;
+    }
+
+    .project-year,
+    .project-institution,
+    .project-description {
+        font-size: 0.75rem !important;
     }
 }
     </style>
@@ -757,10 +841,9 @@
                     <a href="3d.html">3D</a>
                 </div>
             </div>
-            <a href="index.html#contact" style="color: white; text-decoration: none; font-weight: 600; position: relative;">
-                CONTACT
-                <span style="position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #ffaa00; transition: width 0.3s;"></span>
-            </a>
+            <a href="Contacts.html" style="color: white; text-decoration: none; font-weight: 600; position: relative;">
+    CONTACT
+</a>
         </div>
     </nav>
 

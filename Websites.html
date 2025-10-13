@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+     <link rel="icon" type="image/png" href="images_2/favicon.png">
+    <link rel="apple-touch-icon" href="images_2/favicon.png">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Websites - Brad Sherman Design</title>
@@ -329,7 +333,7 @@
     
     /* Single-line title styling - WHITE TEXT (no invert) */
     .page-title {
-        font-size: 17vw !important;
+        font-size: 18.25vw !important;
         position: relative !important;
         bottom: auto !important;
         transform: translateX(-50%) !important;
@@ -343,12 +347,56 @@
         display: block !important;
     }
     
-    /* Rest of your mobile CSS */
-    .main-name { 
-        font-size: 17vw; 
-        mix-blend-mode: normal !important; /* Remove invert */
-        color: white !important; /* White text */
+    /* ========== WORK TITLE & DESCRIPTION STYLING ========== */
+  
+    /* ... keep all your hero and navigation styles ... */
+
+    /* ========== WORK TITLE & DESCRIPTION STYLING ========== */
+    .work-info {
+        text-align: left !important;
+        margin-bottom: 2rem !important;
+        margin-left: 2rem;
+        max-width: 85%;
+        margin-top: -5rem;
     }
+
+    .work-item-title {
+        font-family: 'Futura', sans-serif !important;
+        font-size: 1.5rem !important;
+        font-weight: 700 !important;
+        margin-bottom: 1rem !important;
+        color: #000000 !important;
+        margin-top: 5rem;
+    }
+
+    .work-item-description {
+        font-family: 'Inter', sans-serif !important;
+        font-size: 0.9rem !important;
+        color: #ccc !important;
+        line-height: 1.6 !important;
+        max-width: 100% !important;
+    }
+
+    .project-details {
+        margin-top: 1rem !important;
+    }
+
+    .project-year,
+    .project-institution,
+    .project-description {
+        font-size: 0.85rem !important;
+        margin-bottom: 1rem !important;
+    }
+
+    /* ========== LARGE MARGIN UNDER ALL IMAGES ========== */
+    .single-image,
+    .double-images {
+        margin-bottom: 12rem !important; /* HUGE space after every image */
+    }
+
+    
+    /* Rest of your mobile CSS */
+   
     
     .dropdown-content { 
         position: fixed !important; 
@@ -408,15 +456,6 @@
         height: 250px;
     }
     
-    .work-info {
-        margin-bottom: 2rem;
-    }
-    
-    .work-item-title {
-        font-size: 1.5rem;
-        color: #000000 !important;
-    }
-    
     /* NAVIGATION - MATCH BRANDS PAGE */
     nav {
         padding: 1rem;
@@ -437,6 +476,60 @@
     .project-last-row {
         margin-bottom: 12rem !important;
     }
+    .work-info {
+        text-align: left !important;
+        margin-bottom: 2rem !important; /* REDUCED: from 5rem to 2rem - moves first image closer to description */
+        margin-left: 2rem;
+        max-width: 85%;
+        margin-top: -5rem;
+    }
+
+    .work-item-title {
+        font-family: 'Futura', sans-serif !important;
+        font-size: 1.5rem !important;
+        font-weight: 700 !important;
+        margin-bottom: 1rem !important;
+        color: #000000 !important;
+        margin-top: 5rem;
+    }
+
+    .work-item-description {
+        font-family: 'Inter', sans-serif !important;
+        font-size: 0.9rem !important;
+        color: #ccc !important;
+        line-height: 1.6 !important;
+        max-width: 100% !important;
+    }
+
+    .project-details {
+        margin-top: 1rem !important;
+    }
+
+    .project-year,
+    .project-institution,
+    .project-description {
+        font-size: 0.85rem !important;
+        margin-bottom: 1rem !important;
+    }
+
+    /* ========== SPACING ADJUSTMENTS ========== */
+    /* Make space under first image much larger */
+    .work-section:first-child .single-image:first-child,
+    .work-section:first-child .double-images:first-child {
+        margin-bottom: 12rem !important; /* LARGE space after first image */
+    }
+    
+    /* Make space under second image much larger */
+    .work-section:nth-child(2) .single-image:first-child,
+    .work-section:nth-child(2) .double-images:first-child {
+        margin-bottom: 12rem !important; /* LARGE space after second image */
+    }
+    
+    /* Regular spacing for other images */
+    .single-image,
+    .double-images {
+        margin-bottom: 15rem !important;
+    }
 }
 
 /* Small mobile screens */
@@ -456,7 +549,36 @@
     }
     
     .page-title {
-        font-size: 14vw !important;
+        font-size: 18.5vw !important;
+    }
+    
+    /* ========== WORK TITLE & DESCRIPTION STYLING FOR SMALL SCREENS ========== */
+    .work-info {
+        margin-bottom: 1.5rem !important; /* Small space between description and first image */
+        margin-left: 1rem;
+        max-width: 90%;
+    }
+
+    .work-item-title {
+        font-size: 1.3rem !important;
+        margin-bottom: 0.8rem !important;
+    }
+
+    .work-item-description {
+        font-size: 0.8rem !important;
+    }
+
+    /* ========== LARGE SPACING UNDER ALL IMAGES FOR SMALL SCREENS ========== */
+    .single-image,
+    .double-images {
+        margin-bottom: 14rem !important; /* Large space after EVERY image */
+    }
+
+    .project-year,
+    .project-institution,
+    .project-description {
+        font-size: 0.8rem !important;
+        margin-bottom: 0.8rem !important;
     }
     
     .work-container {
@@ -499,12 +621,36 @@
         margin-bottom: 6rem;
     }
     
-    .work-item-title {
-        font-size: 1.3rem;
-    }
-    
     .project-last-row {
         margin-bottom: 10rem !important;
+    }
+    .work-info {
+        margin-bottom: 1.5rem !important;
+        margin-left: 1rem;
+        max-width: 90%;
+    }
+
+    .work-item-title {
+        font-size: 1.3rem !important;
+    }
+
+    .work-item-description {
+        font-size: 0.8rem !important;
+    }
+
+    .project-year,
+    .project-institution,
+    .project-description {
+        font-size: 0.8rem !important;
+    }
+
+    /* LARGE MARGIN UNDER ALL IMAGES */
+    .single-image,
+    .double-images {
+        margin-bottom: 10rem !important; /* Still huge but slightly smaller */
+    }
+    .project-last-row {
+        margin-bottom: 12rem !important;
     }
 }
 
@@ -523,7 +669,26 @@
     }
     
     .page-title {
-        font-size: 13vw !important;
+        font-size: 18vw !important;
+    }
+    
+    /* ========== WORK TITLE & DESCRIPTION STYLING FOR SMALLEST SCREENS ========== */
+    .work-info {
+        margin-bottom: 3rem !important;
+    }
+
+    .work-item-title {
+        font-size: 1.1rem !important;
+    }
+
+    .work-item-description {
+        font-size: 0.75rem !important;
+    }
+
+    .project-year,
+    .project-institution,
+    .project-description {
+        font-size: 0.75rem !important;
     }
     
     .nav-links {
@@ -544,7 +709,45 @@
     }
     
     .project-last-row {
-        margin-bottom: 8rem !important;
+        margin-bottom: 11rem !important;
+    }
+    .work-info {
+        margin-bottom: 1rem !important;
+    }
+
+    .work-item-title {
+        font-size: 1.1rem !important;
+    }
+
+    .work-item-description {
+        font-size: 0.75rem !important;
+    }
+
+    .project-year,
+    .project-institution,
+    .project-description {
+        font-size: 0.75rem !important;
+    }
+
+    /* LARGE MARGIN UNDER ALL IMAGES */
+    .single-image,
+    .double-images {
+        margin-bottom: 8rem !important; /* Still large but smaller for tiny screens */
+    }
+    /* ========== SPACING ADJUSTMENTS FOR SMALLEST SCREENS ========== */
+    .work-section:first-child .single-image:first-child,
+    .work-section:first-child .double-images:first-child {
+        margin-bottom: 5rem !important; /* Even less on smallest screens */
+    }
+    
+    .work-section:nth-child(2) .single-image:first-child,
+    .work-section:nth-child(2) .double-images:first-child {
+        margin-bottom: 5rem !important; /* Even less on smallest screens */
+    }
+    
+    .single-image,
+    .double-images {
+        margin-bottom: 2rem !important;
     }
 }
     </style>
@@ -576,10 +779,9 @@
                     <a href="3d.html">3D</a>
                 </div>
             </div>
-            <a href="index.html#contact" style="color: white; text-decoration: none; font-weight: 600; position: relative;">
-                CONTACT
-                <span style="position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #ffaa00; transition: width 0.3s;"></span>
-            </a>
+          <a href="Contacts.html" style="color: white; text-decoration: none; font-weight: 600; position: relative;">
+    CONTACT
+</a>
         </div>
     </nav>
 
@@ -619,7 +821,7 @@
 </div>
 
         <!-- Short and wide image -->
-        <div class="work-section">
+        <div class="work-section project-last-row">
             <div class="single-image shorter-containers">
                 <div class="work-image" style="background-image: url('images_2/ccc.png');"></div>
             </div>
@@ -640,7 +842,7 @@
 </div>
 
         <!-- Short and wide image -->
-        <div class="work-section">
+        <div class="work-section ">
             <div class="single-image ">
                 <div class="work-image" style="background-image: url('images_2/old.png');"></div>
             </div>

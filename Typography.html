@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+     <link rel="icon" type="image/png" href="images_2/favicon.png">
+    <link rel="apple-touch-icon" href="images_2/favicon.png">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Typography - Brad Sherman Design</title>
@@ -25,46 +29,103 @@
 /* Mobile Styles */
 /* Mobile Responsive */
 /* Mobile Responsive */
-/* Mobile Responsive */
 @media (max-width: 768px) {
-    /* Hero adjustments for mobile - SMALLER HERO */
+    /* ========== HERO SECTION ========== */
     .hero {
-        height: 40vh !important; /* Smaller hero section to fit full image */
+        height: 40vh !important;
     }
     
     .horizontal-slideshow {
-        height: 40vh !important; /* Match the smaller hero */
+        height: 40vh !important;
         display: none !important;
     }
     
-    /* POSITION TEXT AT BOTTOM OF SMALLER IMAGE */
     .name-container {
-        height: 85% !important; /* Higher height to position text at bottom */
-        bottom: 5% !important; /* Position near bottom of the image */
+        height: 85% !important;
+        bottom: 5% !important;
         align-items: flex-end !important;
     }
     
-    /* Single-line title styling - WHITE TEXT (no invert) */
     .page-title {
-        font-size: 12.5vw !important;
+        font-size: 12vw !important;
         position: relative !important;
         bottom: auto !important;
         transform: translateX(-50%) !important;
         margin-bottom: 0 !important;
-        line-height: 0.9 !important;
-        letter-spacing: -2px !important;
-        mix-blend-mode: normal !important; /* Remove difference blend mode */
-        color: white !important; /* Ensure white color */
+        mix-blend-mode: normal !important;
+        color: white !important;
     }
 
-    /* Show mobile static image */
     .mobile-static-image {
         display: block !important;
     }
+
+    /* ========== CONTAINER HEIGHT CONTROLS ========== */
+    /* Control container heights - images will be 100% within them */
     
-    /* Rest of your mobile CSS */
+    /* Single image containers */
+    .single-image.tall-images {
+        height: 550px !important;
+    }
     
-    
+    .single-image.taller-images {
+        height: 500px !important;
+    }
+
+    /* ========== IMAGE SIZING ========== */
+    /* Make all images fill their containers */
+    .work-image {
+        height: 100% !important;
+        width: 100% !important;
+        background-size: contain !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        margin-bottom: 0 !important;
+    }
+
+    /* ========== LAYOUT FIXES ========== */
+    .single-image {
+        width: 90%;
+    }
+
+    /* ========== TEXT STYLING - MATCHING CAMPAIGNS PAGE ========== */
+    .work-info {
+        text-align: left !important;
+        margin-bottom: 5rem !important;
+        margin-left: 2rem;
+        max-width: 85%;
+        margin-top: -5rem;
+    }
+
+    .work-item-title {
+        font-family: 'Futura', sans-serif !important;
+        font-size: 1.5rem !important;
+        font-weight: 700 !important;
+        margin-bottom: 1rem !important;
+        color: white !important;
+        margin-top: 5rem;
+    }
+
+    .work-item-description {
+        font-family: 'Inter', sans-serif !important;
+        font-size: 0.9rem !important;
+        color: #ccc !important;
+        line-height: 1.6 !important;
+        max-width: 100% !important;
+    }
+
+    .project-details {
+        margin-top: 1rem !important;
+    }
+
+    .project-year,
+    .project-institution,
+    .project-description {
+        font-size: 0.85rem !important;
+        margin-bottom: 1rem !important;
+    }
+
+    /* ========== NAVIGATION & LAYOUT ========== */
     .dropdown-content { 
         position: fixed !important; 
         top: 90px !important;
@@ -111,35 +172,17 @@
         display: none;
     }
     
-    .single-image {
-        width: 90%;
+    .work-container {
+        padding: 8rem 5% 10rem 5%;
     }
     
-    .work-image {
-        height: 300px;
-    }
-    
-    .taller-images .work-image {
-        height: 500px;
-    }
-    
-    .work-item-title {
-        font-size: 1.5rem;
-    }
-    
-    /* NAVIGATION - MATCH CAMPAIGNS PAGE */
-    nav {
-        padding: 1rem;
-    }
-    
-    .nav-links {
-        gap: 1rem;
+    .work-section {
+        margin-bottom: 8rem;
     }
 }
 
-/* Small mobile screens */
+/* ========== SMALL MOBILE SCREENS (480px) ========== */
 @media (max-width: 480px) {
-    /* Even smaller hero for small screens */
     .hero {
         height: 35vh !important;
     }
@@ -149,52 +192,57 @@
     }
     
     .name-container {
-        height: 90% !important; /* Even higher to position text at bottom */
-        bottom: 3% !important; /* Slightly adjusted for small screens */
+        height: 90% !important;
+        bottom: 3% !important;
     }
     
     .page-title {
-        font-size: 11vw !important;
-        letter-spacing: -1px !important;
+        font-size: 13vw;
+        margin-top: 5rem;
+    }
+
+    /* ========== ADJUSTED CONTAINER HEIGHTS FOR SMALL SCREENS ========== */
+    .single-image.tall-images {
+        height: 520px !important;
     }
     
+    .single-image.taller-images {
+        height: 440px !important;
+    }
+
+    /* ========== TEXT ADJUSTMENTS ========== */
+    .work-info {
+        margin-bottom: 4rem !important;
+        margin-left: 1rem;
+        max-width: 90%;
+    }
+
+    .work-item-title {
+        font-size: 1.3rem !important;
+        margin-bottom: 0.8rem !important;
+    }
+
+    .work-item-description {
+        font-size: 0.8rem !important;
+    }
+
+    .project-year,
+    .project-institution,
+    .project-description {
+        font-size: 0.8rem !important;
+        margin-bottom: 0.8rem !important;
+    }
+
     .work-container {
         padding: 6rem 5% 10rem 5%;
     }
     
-    .single-image {
-        width: 95%;
-    }
-    
-    .work-image {
-        height: 250px;
-    }
-    
-    .taller-images .work-image {
-        height: 350px;
-    }
-    
-    /* NAVIGATION - MATCH CAMPAIGNS PAGE */
-    nav {
-        padding: 0.4rem 0.8rem !important;
-    }
-    
-    .nav-links {
-        gap: 1rem !important;
-    }
-    
-    .dropdown-content {
-        top: 85px !important;
-        width: 50% !important;
-        padding: 0.4rem 0 !important;
-    }
-    
-    .dropdown-content a {
-        padding: 0.3rem 0.8rem !important;
-        font-size: 0.75rem !important;
+    .work-section {
+        margin-bottom: 6rem;
     }
 }
 
+/* ========== SMALLEST MOBILE SCREENS (360px) ========== */
 @media (max-width: 360px) {
     .hero {
         height: 30vh !important;
@@ -210,16 +258,38 @@
     }
     
     .page-title {
-        font-size: 10vw !important;
+        font-size: 13vw !important;
+    }
+
+    /* ========== FINAL CONTAINER HEIGHT ADJUSTMENTS ========== */
+    .single-image.tall-images {
+        height: 450px !important;
     }
     
-    .nav-links {
-        gap: 1rem !important;
+    .single-image.taller-images {
+        height: 280px !important;
+    }
+
+    .work-item-title {
+        font-size: 1.1rem !important;
+    }
+
+    .work-item-description {
+        font-size: 0.75rem !important;
+    }
+
+    .project-year,
+    .project-institution,
+    .project-description {
+        font-size: 0.75rem !important;
+    }
+
+    .work-container {
+        padding: 5rem 5% 8rem 5%;
     }
     
-    .dropdown-content {
-        top: 80px !important;
-        width: 55% !important;
+    .work-section {
+        margin-bottom: 5rem;
     }
 }
         /* Full Screen Image Viewer */
@@ -625,10 +695,9 @@
                     <a href="3d.html">3D</a>
                 </div>
             </div>
-            <a href="index.html#contact" style="color: white; text-decoration: none; font-weight: 600; position: relative;">
-                CONTACT
-                <span style="position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #ffaa00; transition: width 0.3s;"></span>
-            </a>
+            <a href="Contacts.html" style="color: white; text-decoration: none; font-weight: 600; position: relative;">
+    CONTACT
+</a>
         </div>
     </nav>
 

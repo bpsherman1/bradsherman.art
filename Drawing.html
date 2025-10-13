@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+     <link rel="icon" type="image/png" href="images_2/favicon.png">
+    <link rel="apple-touch-icon" href="images_2/favicon.png">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Drawing - Brad Sherman Design</title>
@@ -187,8 +191,7 @@
         .work-item-title,
         .work-item-description {
             color: #000000 !important;
-            margin-bottom: 10rem;
-             margin-top: 3rem;
+           
         }
 
         .work-item-description {
@@ -513,7 +516,7 @@
     
     /* Title styling - BOTTOM LEFT CORNER - WHITE TEXT */
     .page-title {
-        font-size: 15.5vw !important; /* Changed to 15.5vw as requested */
+        font-size: 15vw !important;
         position: relative !important;
         bottom: auto !important;
         left: 0 !important;
@@ -524,7 +527,7 @@
         line-height: 0.9 !important;
         letter-spacing: -1px !important;
         width: auto !important;
-        white-space: normal !important; /* Changed to allow wrapping */
+        white-space: normal !important;
         text-align: left !important;
         margin-left: 0 !important;
         word-wrap: break-word !important;
@@ -534,6 +537,44 @@
     .mobile-static-image {
         display: block !important;
     }
+    
+    /* WORK INFO TEXT STYLING - UPDATED TO MATCH CURRENT PATTERN */
+    /* WORK INFO TEXT STYLING - CONSISTENT SPACING */
+.work-info {
+    text-align: left !important;
+    margin: 40px auto 200px auto !important; /* Fixed pixel values for consistency */
+    max-width: 90% !important;
+    padding: 0 5% !important;
+}
+
+.work-item-title {
+    font-family: 'Futura', sans-serif !important;
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 16px !important; /* Fixed pixel value */
+    color: #000000 !important;
+    margin-top: 0 !important;
+}
+
+.work-item-description {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.9rem !important;
+    color: #333333 !important;
+    line-height: 1.6 !important;
+    max-width: 100% !important;
+}
+
+.project-details {
+    margin-top: 16px !important; /* Fixed pixel value */
+}
+
+.project-year,
+.project-institution,
+.project-description {
+    font-size: 0.85rem !important;
+    margin-bottom: 12px !important; /* Fixed pixel value */
+    color: #939598 !important;
+}
     
     /* DROPDOWN STYLING */
     .dropdown-content { 
@@ -599,38 +640,71 @@
     }
     
     .worksss-image {
-        height: 300px;
+        height: 400px;
     }
     
     .taller-containers .work-image {
-        height: 400px;
+        height: 600px;
+        background-color: #f8f8f8;
     }
     
     .taller-containers .worksss-image {
-        height: 400px;
+        height: 500px;
+        background-color: #f8f8f8;
     }
     
     .taller-images .work-image {
-        height: 350px;
+        height: 550px;
+        background-color: #f8f8f8;
     }
     
     .taller-images .workss-image {
-        height: 350px;
+        height: 450px;
+        background-color: #f8f8f8;
     }
     
     .wider-containers .work-image {
-        height: 250px;
+        height: 400px;
+        background-color: #f8f8f8;
     }
     
-    .work-info {
-        margin-bottom: 6rem;
-        margin-top: 2rem;
-    }
-    
-    .work-item-title {
-        font-size: 1.1rem;
-        color: #000000 !important;
-    }
+    /* WORK INFO TEXT STYLING - POSITIONED UNDER IMAGES */
+.work-info {
+    text-align: left !important;
+    margin: 2rem auto 12rem auto !important; /* Large bottom margin after description */
+    max-width: 90% !important;
+    margin-top: 2rem !important; /* Small margin between image and title */
+    padding: 0 5% !important;
+}
+
+.work-item-title {
+    font-family: 'Futura', sans-serif !important;
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 1rem !important;
+    color: #000000 !important;
+    margin-top: 0 !important; /* Remove top margin */
+}
+
+.work-item-description {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.9rem !important;
+    color: #333333 !important; /* Changed from #ccc to dark gray */
+    line-height: 1.6 !important;
+    max-width: 100% !important;
+}
+
+.project-details {
+    margin-top: 1rem !important;
+}
+
+.project-year,
+.project-institution,
+.project-description {
+    font-size: 0.85rem !important;
+    margin-bottom: 1rem !important;
+    color: #939598 !important;
+}
     
     /* NAVIGATION */
     nav {
@@ -650,7 +724,7 @@
     }
     
     .image-text-below {
-        margin-bottom: 8rem;
+        margin-bottom: 18rem;
     }
 }
 
@@ -670,9 +744,33 @@
     }
     
     .page-title {
-        font-size: 14vw !important; /* Adjusted for 480px */
+        font-size: 14.25vw !important;
         letter-spacing: -0.5px !important;
     }
+    
+    /* WORK INFO TEXT STYLING - UPDATED FOR SMALL SCREENS */
+   /* WORK INFO TEXT STYLING - UPDATED FOR SMALL SCREENS */
+.work-info {
+    margin: 2rem auto 10rem auto !important;
+    max-width: 90% !important;
+    padding: 0 5% !important;
+}
+
+.work-item-title {
+    font-size: 1.3rem !important;
+    margin-bottom: 0.8rem !important;
+}
+
+.work-item-description {
+    font-size: 0.8rem !important;
+}
+
+.project-year,
+.project-institution,
+.project-description {
+    font-size: 0.8rem !important;
+    margin-bottom: 0.8rem !important;
+}
     
     .work-container {
         padding: 6rem 5% 10rem 5%;
@@ -766,9 +864,29 @@
     }
     
     .page-title {
-        font-size: 13vw !important; /* Adjusted for 360px */
+        font-size: 14.5vw !important;
         letter-spacing: 0px !important;
     }
+    
+    /* WORK INFO TEXT STYLING - UPDATED FOR SMALLEST SCREENS */
+   /* WORK INFO TEXT STYLING - UPDATED FOR SMALLEST SCREENS */
+.work-info {
+    margin: 2rem auto 8rem auto !important;
+}
+
+.work-item-title {
+    font-size: 1.1rem !important;
+}
+
+.work-item-description {
+    font-size: 0.75rem !important;
+}
+
+.project-year,
+.project-institution,
+.project-description {
+    font-size: 0.75rem !important;
+}
     
     .nav-links {
         gap: 1rem !important;
@@ -829,10 +947,9 @@
                     <a href="3d.html">3D</a>
                 </div>
             </div>
-            <a href="index.html#contact" style="color: white; text-decoration: none; font-weight: 600; position: relative;">
-                CONTACT
-                <span style="position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #ffaa00; transition: width 0.3s;"></span>
-            </a>
+            <a href="Contacts.html" style="color: white; text-decoration: none; font-weight: 600; position: relative;">
+    CONTACT
+</a>
         </div>
     </nav>
 
@@ -932,8 +1049,8 @@
 
         <!-- Sixth drawing - Normal -->
         <div class="work-section">
-            <div class="single-image">
-                <div class="works-image" style="background-image: url('images_2/egg.png');"></div>
+            <div class="single-image taller-images">
+                <div class="workss-image" style="background-image: url('images_2/egg.png');"></div>
             </div>
              <div class="work-info">
         <h3 class="work-item-title">Still Life</h3>

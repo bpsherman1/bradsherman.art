@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+     <link rel="icon" type="image/png" href="images_2/favicon.png">
+    <link rel="apple-touch-icon" href="images_2/favicon.png">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brands - Brad Sherman Design</title>
@@ -447,46 +451,176 @@ body {
        /* Mobile Responsive */
 /* Mobile Responsive */
 @media (max-width: 768px) {
-    /* Hero adjustments for mobile - SMALLER HERO */
+    /* ========== HERO SECTION ========== */
     .hero {
-        height: 40vh !important; /* Smaller hero section to fit full image */
+        height: 40vh !important;
     }
     
     .horizontal-slideshow {
-        height: 40vh !important; /* Match the smaller hero */
+        height: 40vh !important;
         display: none !important;
     }
     
-    /* POSITION TEXT AT BOTTOM OF SMALLER IMAGE */
     .name-container {
-        height: 85% !important; /* Higher height to position text at bottom */
-        bottom: 5% !important; /* Position near bottom of the image */
+        height: 85% !important;
+        bottom: 5% !important;
         align-items: flex-end !important;
     }
     
-    /* Single-line title styling - WHITE TEXT (no invert) */
     .page-title {
-        font-size: 16vw !important;
+        font-size: 14vw !important;
         position: relative !important;
         bottom: auto !important;
         transform: translateX(-50%) !important;
         margin-bottom: 0 !important;
-        mix-blend-mode: normal !important; /* Remove difference blend mode */
-        color: white !important; /* Ensure white color */
+        mix-blend-mode: normal !important;
+        color: white !important;
     }
 
-    /* Show mobile static image */
     .mobile-static-image {
         display: block !important;
     }
+
+    /* ========== CONTAINER HEIGHT CONTROLS ========== */
+    /* Control container heights - images will be 100% within them */
     
-    /* Rest of your mobile CSS */
-    .main-name { 
-        font-size: 16vw; 
-        mix-blend-mode: normal !important; /* Remove invert */
-        color: white !important; /* White text */
+    /* Single image containers */
+    .single-image.tall-images {
+        height: 550px !important;
     }
     
+    .single-image.taller-images {
+        height: 500px !important;
+    }
+    
+    .single-image.shorter-containers {
+        height: 250px !important;
+    }
+    
+    .single-image.taller1-images {
+        height: 400px !important;
+    }
+    
+    .single-image.shorten-containers {
+        height: 400px !important;
+    }
+    
+    .single-image.long-containers {
+        height: 180px !important;
+    }
+
+    /* Double image containers - CONNECTED CONTAINERS */
+    .double-images {
+        height: 350px !important;
+        flex-direction: row !important;
+        gap: 0.3rem !important; /* Reduced gap for closer spacing */
+        background-color: #F7F8F8 !important; /* Container background color */
+        padding: 0.5rem !important; /* Add padding to show container color around images */
+        border-radius: 0 !important;
+        overflow: hidden !important;
+    }
+    
+    .double-images.taller-images {
+        height: 600px !important;
+        gap: 0.3rem !important; /* Consistent small gap */
+    }
+
+    .double-images.short-images {
+        height: 200px !important;
+        gap: 0.3rem !important; /* Consistent small gap */
+    }
+
+    /* ========== IMAGE SIZING ========== */
+    /* Make all images fill their containers */
+    .work-image {
+        height: 100% !important;
+        width: 100% !important;
+        background-size: contain !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        margin-bottom: 0 !important;
+        background-color: #F7F8F8 !important; /* Match container background */
+    }
+
+    /* Double images individual sizing */
+    .double-images .work-image {
+        width: 50% !important;
+        height: 100% !important;
+        background-color: transparent !important; /* Remove individual background to show container color */
+    }
+
+    /* ========== LAYOUT FIXES ========== */
+    .single-image {
+        width: 90%;
+        margin-bottom: 1rem !important; /* REDUCED: from 1rem to 0.5rem */
+    }
+    
+    .double-images {
+        width: 90%;
+        margin-bottom: 1rem !important; /* REDUCED: from 1rem to 0.5rem */
+    }
+
+    /* ========== REDUCED SPACING BETWEEN PROJECTS AND IMAGES ========== */
+    .work-section {
+        margin-bottom: 4rem !important; /* REDUCED: from 5rem to 3rem */
+    }
+    
+    /* Move first project images closer to description */
+    .work-section:first-child .work-info {
+        margin-bottom: 3rem !important; /* REDUCED: from 5rem to 2rem */
+    }
+    
+    /* First project - closer image spacing */
+    .work-section:first-child .single-image,
+    .work-section:first-child .double-images {
+        margin-bottom: 0.5rem !important; /* REDUCED: from 1rem to 0.5rem */
+    }
+
+    /* Second project - closer spacing for 2nd and 3rd images */
+    .work-section:nth-child(2) .single-image:nth-child(2),
+    .work-section:nth-child(2) .single-image:nth-child(3),
+    .work-section:nth-child(2) .double-images {
+        margin-bottom: 0.5rem !important; /* REDUCED: from 1rem to 0.5rem */
+    }
+
+    /* ========== TEXT STYLING - MATCHING CAMPAIGNS PAGE ========== */
+    .work-info {
+        text-align: left !important;
+        margin-bottom: 2rem !important; /* REDUCED: from 5rem to 2rem */
+        margin-left: 2rem;
+        max-width: 85%;
+        margin-top: -5rem;
+    }
+
+    .work-item-title {
+        font-family: 'Futura', sans-serif !important;
+        font-size: 1.5rem !important;
+        font-weight: 700 !important;
+        margin-bottom: 1rem !important;
+        color: #000000 !important;
+        margin-top: 5rem;
+    }
+
+    .work-item-description {
+        font-family: 'Inter', sans-serif !important;
+        font-size: 0.9rem !important;
+        color: #ccc !important;
+        line-height: 1.6 !important;
+        max-width: 100% !important;
+    }
+
+    .project-details {
+        margin-top: 1rem !important;
+    }
+
+    .project-year,
+    .project-institution,
+    .project-description {
+        font-size: 0.85rem !important;
+        margin-bottom: 1rem !important;
+    }
+
+    /* ========== NAVIGATION & LAYOUT ========== */
     .dropdown-content { 
         position: fixed !important; 
         top: 90px !important;
@@ -533,55 +667,8 @@ body {
         display: none;
     }
     
-    .single-image,
-    .double-images {
-        width: 90%;
-    }
-    
-    .double-images {
-        flex-direction: column;
-    }
-    
-    .double-images .work-image {
-        width: 100%;
-        height: 300px;
-    }
-    
-    .work-image {
-        height: 300px;
-    }
-    
-    .taller-images .work-image {
-        height: 500px;
-    }
-    
-    .shorter-containers .work-image {
-        height: 250px;
-    }
-    
-    .taller1-images .work-image {
-        height: 400px;
-    }
-    
-    .shorten-containers .work-image {
-        height: 350px;
-    }
-    
-    .long-containers .work-image {
-        height: 200px;
-    }
-    
-    .work-item-title {
-        font-size: 1.5rem;
-    }
-    
-    /* NAVIGATION - MATCH CAMPAIGNS PAGE */
-    nav {
-        padding: 1rem;
-    }
-    
-    .nav-links {
-        gap: 1rem;
+    .work-container {
+        padding: 8rem 5% 10rem 5%;
     }
     
     .project-last-row {
@@ -589,9 +676,8 @@ body {
     }
 }
 
-/* Small mobile screens */
+/* ========== SMALL MOBILE SCREENS (480px) ========== */
 @media (max-width: 480px) {
-    /* Even smaller hero for small screens */
     .hero {
         height: 35vh !important;
     }
@@ -601,65 +687,108 @@ body {
     }
     
     .name-container {
-        height: 90% !important; /* Even higher to position text at bottom */
-        bottom: 3% !important; /* Slightly adjusted for small screens */
+        height: 90% !important;
+        bottom: 3% !important;
     }
     
     .page-title {
-        font-size: 14vw !important;
+        font-size: 13vw;
+        margin-top: 5rem;
+    }
+
+    /* ========== ADJUSTED CONTAINER HEIGHTS FOR SMALL SCREENS ========== */
+    .single-image.tall-images {
+        height: 490px !important;
     }
     
+    .single-image.taller-images {
+        height: 350px !important;
+    }
+    
+    .single-image.shorter-containers {
+        height: 260px !important;
+    }
+    
+    .single-image.taller1-images {
+        height: 290px !important;
+    margin-top:2rem;}
+    
+    .single-image.shorten-containers {
+        height: 320px !important;
+    }
+    
+    .single-image.long-containers {
+        height: 150px !important;
+    }
+
+    .double-images {
+        height: 240px !important;
+        gap: 0.25rem !important; /* Even smaller gap on small screens */
+    }
+    
+    .double-images.taller-images {
+        height: 320px !important;
+        gap: 0.25rem !important;
+    }
+
+    .double-images.short-images {
+        height: 200px !important;
+        gap: 0.25rem !important;
+    }
+
+    /* ========== ADJUSTED SPACING FOR SMALLER SCREENS ========== */
+    .work-section {
+        margin-bottom: 2rem !important; /* REDUCED: from 6rem to 2rem */
+    }
+    
+    .work-section:first-child .work-info {
+        margin-bottom: 1.5rem !important; /* REDUCED */
+    }
+    
+    .single-image {
+        margin-bottom: 0.3rem !important; /* REDUCED: from 1.5rem to 0.3rem */
+    }
+    
+    .double-images {
+        margin-bottom: 0.3rem !important; /* REDUCED: from 1.5rem to 0.3rem */
+    }
+
+    .work-section:first-child .single-image,
+    .work-section:first-child .double-images {
+        margin-bottom: 0.3rem !important; /* REDUCED: from 0.8rem to 0.3rem */
+    }
+
+    .work-section:nth-child(2) .single-image:nth-child(2),
+    .work-section:nth-child(2) .single-image:nth-child(3),
+    .work-section:nth-child(2) .double-images {
+        margin-bottom: 0.3rem !important; /* REDUCED: from 0.8rem to 0.3rem */
+    }
+
+    /* ========== TEXT ADJUSTMENTS ========== */
+    .work-info {
+        margin-bottom: 1.5rem !important; /* REDUCED: from 4rem to 1.5rem */
+        margin-left: 1rem;
+        max-width: 90%;
+    }
+
+    .work-item-title {
+        font-size: 1.3rem !important;
+        margin-bottom: 0.8rem !important;
+    }
+
+    .work-item-description {
+        font-size: 0.8rem !important;
+    }
+
+    .project-year,
+    .project-institution,
+    .project-description {
+        font-size: 0.8rem !important;
+        margin-bottom: 0.8rem !important;
+    }
+
     .work-container {
         padding: 6rem 5% 10rem 5%;
-    }
-    
-    .single-image,
-    .double-images {
-        width: 95%;
-    }
-    
-    .work-image {
-        height: 250px;
-    }
-    
-    .taller-images .work-image {
-        height: 350px;
-    }
-    
-    .shorter-containers .work-image {
-        height: 200px;
-    }
-    
-    .taller1-images .work-image {
-        height: 300px;
-    }
-    
-    .shorten-containers .work-image {
-        height: 280px;
-    }
-    
-    .long-containers .work-image {
-        height: 150px;
-    }
-    
-    /* NAVIGATION - MATCH CAMPAIGNS PAGE */
-    nav {
-        padding: 0.4rem 0.8rem !important;
-    }
-    
-    .nav-links {
-        gap: 1rem !important;
-    }
-    
-    .dropdown-content {
-        top: 85px !important;
-        width: 50% !important;
-        padding: 0.4rem 0 !important;
-    }
-    
-    .dropdown-content a {
-        padding: 0.3rem 0.8rem !important;
-        font-size: 0.75rem !important;
     }
     
     .project-last-row {
@@ -667,6 +796,7 @@ body {
     }
 }
 
+/* ========== SMALLEST MOBILE SCREENS (360px) ========== */
 @media (max-width: 360px) {
     .hero {
         height: 30vh !important;
@@ -684,14 +814,95 @@ body {
     .page-title {
         font-size: 13vw !important;
     }
-    
-    .nav-links {
-        gap: 1rem !important;
+
+    /* ========== FINAL CONTAINER HEIGHT ADJUSTMENTS ========== */
+   .single-image.tall-images {
+        height: 450px !important;
     }
     
-    .dropdown-content {
-        top: 80px !important;
-        width: 55% !important;
+    .single-image.taller-images {
+        height: 280px !important;
+    }
+    
+    .single-image.shorter-containers {
+        height: 150px !important;
+    }
+    
+    .single-image.taller1-images {
+        height: 250px !important;
+    }
+    
+    .single-image.shorten-containers {
+        height: 220px !important;
+    }
+    
+    .single-image.long-containers {
+        height: 120px !important;
+    }
+
+    .double-images {
+        height: 180px !important;
+        gap: 0.2rem !important; /* Smallest gap on tiny screens */
+    }
+    
+    .double-images.taller-images {
+        height: 250px !important;
+        gap: 0.2rem !important;
+    }
+
+    .double-images.short-images {
+        height: 150px !important;
+        gap: 0.2rem !important;
+    }
+
+    /* ========== FINAL SPACING ADJUSTMENTS FOR SMALLEST SCREENS ========== */
+    .work-section {
+        margin-bottom: 1.5rem !important; /* REDUCED: from 5rem to 1.5rem */
+    }
+    
+    .work-section:first-child .work-info {
+        margin-bottom: 1rem !important; /* REDUCED */
+    }
+    
+    .single-image {
+        margin-bottom: 0.2rem !important; /* REDUCED: from 1rem to 0.2rem */
+    }
+    
+    .double-images {
+        margin-bottom: 0.2rem !important; /* REDUCED: from 1rem to 0.2rem */
+    }
+
+    .work-section:first-child .single-image,
+    .work-section:first-child .double-images {
+        margin-bottom: 0.2rem !important; /* REDUCED: from 0.5rem to 0.2rem */
+    }
+
+    .work-section:nth-child(2) .single-image:nth-child(2),
+    .work-section:nth-child(2) .single-image:nth-child(3),
+    .work-section:nth-child(2) .double-images {
+        margin-bottom: 0.2rem !important; /* REDUCED: from 0.5rem to 0.2rem */
+    }
+
+    .work-item-title {
+        font-size: 1.1rem !important;
+    }
+
+    .work-item-description {
+        font-size: 0.75rem !important;
+    }
+
+    .project-year,
+    .project-institution,
+    .project-description {
+        font-size: 0.75rem !important;
+    }
+
+    .work-container {
+        padding: 5rem 5% 8rem 5%;
+    }
+    
+    .project-last-row {
+        margin-bottom: 8rem !important;
     }
 }
     </style>
@@ -735,10 +946,9 @@ body {
                     <a href="3d.html">3D</a>
                 </div>
             </div>
-            <a href="index.html#contact" style="color: white; text-decoration: none; font-weight: 600; position: relative;">
-                CONTACT
-                <span style="position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #ffaa00; transition: width 0.3s;"></span>
-            </a>
+            <a href="Contacts.html" style="color: white; text-decoration: none; font-weight: 600; position: relative;">
+    CONTACT
+</a>
         </div>
     </nav>
 

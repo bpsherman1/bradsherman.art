@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Brad Sherman Design</title>
+    <link href="https://fonts.googleapis.com/css2?family=Futura:wght@700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" href="images_2/favicon.png">
+    <link rel="apple-touch-icon" href="images_2/favicon.png">
+    
+    <style>
+        /* Base Reset */
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif; 
+            background: #0a0a0a;
+            color: white;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff0055, #00ffff, #ffaa00);
+            opacity: 0.03;
+            filter: blur(100px);
+            z-index: -1;
+        }
+
+        /* Navigation Styles */
+        nav { 
+            position: fixed; 
+            top: 0; 
+            width: 100%; 
+            padding: 2rem; 
+            z-index: 100; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            mix-blend-mode: difference;
+        }
+        
+        .nav-links { 
+            display: flex; 
+            gap: 2rem; 
+            align-items: center; 
+        }
+        
+        nav a { 
+            color: white; 
+            text-decoration: none; 
+            font-weight: 600; 
+            position: relative; 
+        }
+
+        /* Dropdown Styles */
+        .dropdown { position: relative; display: inline-block; }
+        .dropdown-content { 
+            position: absolute; 
+            top: 35px;
+            left: 0; 
+            background: rgba(255, 255, 255, 0.95); 
+            backdrop-filter: blur(20px); 
+            border: 1px solid #fff; 
+            border-radius: 8px; 
+            padding: 1rem 0; 
+            min-width: 200px; 
+            opacity: 0; 
+            visibility: hidden; 
+            transform: translateY(-10px); 
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1); 
+            mix-blend-mode: difference;
+        }
+        .dropdown:hover .dropdown-content { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-content a { 
+            display: block; 
+            padding: 0.5rem 1.5rem; 
+            color: black; 
+            text-decoration: none; 
+            transition: all 0.3s ease; 
+            border-left: 3px solid transparent; 
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        .dropdown-content a:hover { 
+            background: rgba(0, 0, 0, 0.1); 
+            border-left: 3px solid #ff0055; 
+            padding-left: 2rem; 
+            color: #ffffff !important;
+        }
+
+        /* Contact Layout - CLEAN VERSION */
+        .contact-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 10%;
+        }
+
+        .contact-title {
+            font-family: 'Futura', sans-serif;
+            font-size: 9vw;
+            font-weight: 600;
+            color: white;
+            text-transform: uppercase;
+            margin-bottom: 4rem;
+            line-height: 0.85;
+            letter-spacing: -0px;
+            mix-blend-mode: difference;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: start;
+            
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 5rem;
+        }
+
+        .contact-item {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            color: #ccc;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+        }
+
+        .contact-item:hover {
+            color: white;
+            transform: translateX(10px);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+             margin-top: 5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: none;
+            border-radius: 0;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-bottom-color: #ff0055;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: #ff0055;
+            color: white;
+            border: none;
+            padding: 1.2rem 2rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            background: #e0004a;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+
+             .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+             margin-top: 2rem;
+             max-width: 85%;
+             margin-left: 2rem
+        }
+            .contact-container {
+                padding: 8rem 5% 3rem 5%;
+            }
+
+            .contact-title {
+                font-size: 16.25vw;
+                margin-bottom: 3rem;
+                margin-left: 1.8rem;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .contact-item {
+                font-size: 1.0rem;
+                text-align: left;
+                margin-left: 2rem;
+                width:80%;
+            }
+
+            .contact-item:hover {
+                transform: translateX(5px);
+            }
+
+            /* Mobile dropdown styling */
+            .dropdown-content { 
+                position: fixed !important; 
+                top: 90px !important;
+                right: 1rem !important;
+                left: auto !important;
+                transform: translateY(-10px) !important;
+                width: 45% !important;
+                min-width: unset !important;
+                background: #000000 !important;
+                border: none !important;
+                padding: 0.5rem 0 !important;
+                max-height: 60vh;
+                overflow-y: auto;
+                mix-blend-mode: normal !important;
+                backdrop-filter: none !important;
+                opacity: 1 !important;
+                z-index: 1000 !important;
+            }
+            
+            .dropdown:hover .dropdown-content {
+                transform: translateY(0) !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+            
+            .dropdown-content a {
+                padding: 0.4rem 1rem !important;
+                font-size: 0.8rem !important;
+                color: #ffffff !important;
+                text-align: right !important;
+                mix-blend-mode: normal !important;
+                border-left: none !important;
+                font-weight: 600 !important;
+                background: transparent !important;
+                display: block !important;
+                transition: all 0.2s ease !important;
+            }
+            
+            .dropdown-content a:hover {
+                background: rgba(255, 255, 255, 0.2) !important;
+                padding-right: 1.5rem !important;
+                color: #ffffff !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div style="font-family: 'Futura', sans-serif; font-weight: 900; font-size: 1.2rem; color: white;">
+            <a href="index.html" style="color: white; text-decoration: none;">PORTFOLIO 2025</a>
+        </div>
+        <div class="nav-links">
+            <div class="dropdown">
+                <a href="#work" style="color: white; text-decoration: none; font-weight: 600; position: relative; cursor: pointer;">
+                    WORK
+                    <span style="position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #ff0055; transition: width 0.3s;"></span>
+                </a>
+                <div class="dropdown-content">
+                    <a href="index.html">Home</a>
+                    <a href="campaigns.html">Campaigns</a>
+                    <a href="typography.html">Typography</a>
+                    <a href="brands.html">Brands</a>
+                    <a href="graphics-italy-2025.html">Graphics Italy 2025</a>
+                    <a href="graphics.html">Graphics</a>
+                    <a href="websites.html">Websites</a>
+                    <a href="painting.html">Painting</a>
+                    <a href="woodworking.html">Woodworking</a>
+                    <a href="drawing.html">Drawing</a>
+                    <a href="photography.html">Photography</a>
+                    <a href="3d.html">3D</a>
+                </div>
+            </div>
+            <a href="contact.html" style="color: white; text-decoration: none; font-weight: 600; position: relative;">
+                CONTACT
+                <span style="position: absolute; bottom: -5px; left: 0; width: 100%; height: 2px; background: #ffaa00;"></span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Contact Content -->
+    <section class="contact-container">
+        <h1 class="contact-title">CONTACT</h1>
+        
+        <div class="contact-content">
+            <div class="contact-info">
+                <div class="contact-item">Brad Sherman</div>
+                <div class="contact-item">973-699-3352</div>
+                <div class="contact-item">bpsherm04@hotmail.com</div>
+                <div class="contact-item">UW-Madison 2026</div>
+                 <div class="contact-item">Montclair, NJ</div>
+            </div>
+
+            <div class="contact-form">
+                <form action="https://formsubmit.co/bpsherm04@hotmail.com" method="POST">
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <textarea name="message" placeholder="Your Message" required></textarea>
+                    </div>
+                    
+                    <input type="hidden" name="_subject" value="New message from your portfolio!">
+                    <input type="hidden" name="_template" value="table">
+                    
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Navigation hover effects
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                if (link.querySelector('span')) {
+                    link.querySelector('span').style.width = '100%';
+                }
+            });
+            link.addEventListener('mouseleave', () => {
+                if (link.querySelector('span')) {
+                    link.querySelector('span').style.width = '0';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

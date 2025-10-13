@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+     <link rel="icon" type="image/png" href="images_2/favicon.png">
+    <link rel="apple-touch-icon" href="images_2/favicon.png">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Photography - Brad Sherman Design</title>
@@ -420,13 +424,13 @@
     
     /* Title styling - BOTTOM LEFT CORNER - WHITE TEXT - SMALLER FOR PHOTOGRAPHY */
     .page-title {
-        font-size: 12.25vw !important; /* SMALLER to prevent cutoff */
+        font-size: 11vw !important; /* SMALLER to prevent cutoff */
         position: relative !important;
         bottom: auto !important;
         left: 0 !important;
         transform: none !important; /* Remove centering transform */
         margin-bottom: 0 !important;
-        mix-blend-mode: normal !important;
+        mix-blend-mode: difference !important;
         color: white !important;
         line-height: 0.9 !important;
         letter-spacing: -0.5px !important; /* Slightly tighter */
@@ -491,22 +495,58 @@
         width: 90%;
     }
     
-    .work-image {
-        height: 300px;
+   .image-text-below {
+    text-align: left !important;
+    margin: 40px auto 200px auto !important; /* Fixed pixel values for consistency */
+    max-width: 90% !important;
+    padding: 0 5% !important;
+}
+.work-info {
+        text-align: left !important;
+        margin-bottom: 2rem !important;
+        margin-left: -1rem;
+        max-width: 85%;
+        margin-top: 2rem;
     }
-    
-    .works-image {
-        height: 300px;
-    }
-    
-    .taller-containers .work-image {
-        height: 400px;
-    }
-    
-    .short-wide-containers .work-image {
-        height: 250px;
-    }
-    
+
+.work-item-title {
+    font-family: 'Futura', sans-serif !important;
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 16px !important; /* Fixed pixel value */
+    color: #000000 !important;
+    margin-top: 0 !important;
+     margin-left: -1rem;
+}
+
+.work-item-description {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.9rem !important;
+    color: #333333 !important;
+    line-height: 1.6 !important;
+    max-width: 100% !important;
+     margin-left: -1rem;
+}
+
+/* ========== IMAGE HEIGHT CONTROLS - ADJUST THESE VALUES ========== */
+/* Normal image heights */
+.work-image {
+    height: 300px; /* ← ADJUST THIS FOR NORMAL IMAGES */
+}
+
+.works-image {
+    height: 300px; /* ← ADJUST THIS FOR WORKS IMAGES */
+}
+
+/* Taller containers - for vertical photos */
+.taller-containers .work-image {
+    height: 450px; /* ← ADJUST THIS FOR TALLER IMAGES */
+}
+
+/* Short and wide containers - for landscape photos */
+.short-wide-containers .work-image {
+    height: 300px; /* ← ADJUST THIS FOR WIDE IMAGES */
+}
     .image-text-below {
         margin-top: 1.5rem;
         margin-bottom: 8rem;
@@ -552,7 +592,7 @@
     }
     
     .page-title {
-        font-size: 10.25vw !important; /* Smaller for small screens */
+        font-size: 10.5vw !important; /* Smaller for small screens */
         letter-spacing: 0px !important;
     }
     
@@ -564,21 +604,38 @@
         width: 95%;
     }
     
+    .image-text-below {
+        margin: 32px auto 160px auto !important; /* Slightly smaller fixed values */
+        max-width: 90% !important;
+        padding: 0 5% !important;
+    }
+
+    .work-item-title {
+        font-size: 1.3rem !important;
+        margin-bottom: 12px !important;
+    }
+
+    .work-item-description {
+        font-size: 0.8rem !important;
+    }
+    
+    /* ========== IMAGE HEIGHT ADJUSTMENTS FOR 480px ========== */
     .work-image {
-        height: 250px;
+        height: 250px; /* ← ADJUST THIS FOR NORMAL IMAGES AT 480px */
     }
     
     .works-image {
-        height: 250px;
+        height: 250px; /* ← ADJUST THIS FOR WORKS IMAGES AT 480px */
     }
     
     .taller-containers .work-image {
-        height: 350px;
+        height: 350px; /* ← ADJUST THIS FOR TALLER IMAGES AT 480px */
     }
     
     .short-wide-containers .work-image {
-        height: 200px;
+        height: 200px; /* ← ADJUST THIS FOR WIDE IMAGES AT 480px */
     }
+
     
     /* NAVIGATION */
     nav {
@@ -617,6 +674,17 @@
     .hero {
         height: 90vh !important;
     }
+    .image-text-below {
+        margin: 24px auto 120px auto !important; /* Even smaller fixed values */
+    }
+
+    .work-item-title {
+        font-size: 1.1rem !important;
+    }
+
+    .work-item-description {
+        font-size: 0.75rem !important;
+    }
     
     .horizontal-slideshow {
         height: 90vh !important;
@@ -628,7 +696,7 @@
     }
     
     .page-title {
-        font-size: 9vw !important; /* Smallest size */
+        font-size: 10.5vw !important; /* Smallest size */
         letter-spacing: 0px !important;
     }
     
@@ -691,10 +759,9 @@
                     <a href="3d.html">3D</a>
                 </div>
             </div>
-            <a href="index.html#contact" style="color: white; text-decoration: none; font-weight: 600; position: relative;">
-                CONTACT
-                <span style="position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #ffaa00; transition: width 0.3s;"></span>
-            </a>
+            <a href="Contacts.html" style="color: white; text-decoration: none; font-weight: 600; position: relative;">
+    CONTACT
+</a>
         </div>
     </nav>
 
