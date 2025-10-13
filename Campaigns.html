@@ -579,51 +579,88 @@
     }
 
     /* ========== NAVIGATION & LAYOUT ========== */
-    .dropdown-content { 
-        position: fixed !important; 
-        top: 90px !important;
-        right: 1rem !important;
-        left: auto !important;
-        transform: translateY(-10px) !important;
-        width: 45% !important;
-        min-width: unset !important;
-        background: #000000 !important;
-        border: none !important;
-        padding: 0.5rem 0 !important;
-        max-height: 60vh;
-        overflow-y: auto;
-        mix-blend-mode: normal !important;
-        backdrop-filter: none !important;
-        opacity: 1 !important;
-        z-index: 1000 !important;
-    }
-    
-    .dropdown:hover .dropdown-content {
-        transform: translateY(0) !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-    }
-    
-    .dropdown-content a {
-        padding: 0.4rem 1rem !important;
-        font-size: 0.8rem !important;
-        color: #ffffff !important;
-        text-align: right !important;
-        mix-blend-mode: normal !important;
-        border-left: none !important;
-        font-weight: 600 !important;
-        background: transparent !important;
-        display: block !important;
-    }
-    
-    .dropdown-content a:hover {
-        background: rgba(255, 255, 255, 0.2) !important;
-        padding-right: 1.5rem !important;
-    }
-    
-    .cursor, .cursor-follower {
-        display: none;
-    }
+    /* ========== NAVIGATION FIX - MATCH INDEX PAGE ========== */
+nav { 
+    padding: 0.5rem 1rem !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+
+/* Fix the PORTFOLIO 2025 text to prevent wrapping */
+nav > div:first-child {
+    font-family: 'Futura', sans-serif !important;
+    font-weight: 900 !important;
+    font-size: 1rem !important; /* Smaller font to prevent wrapping */
+    color: white !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+}
+
+nav > div:first-child a {
+    color: white !important;
+    text-decoration: none !important;
+}
+
+.nav-links {
+    display: flex !important;
+    gap: 1rem !important;
+    align-items: center !important;
+    flex-shrink: 0 !important;
+}
+
+/* Ensure navigation links stay on one line */
+.nav-links a {
+    white-space: nowrap !important;
+    font-size: 0.9rem !important;
+}
+
+/* DROPDOWN STYLING - MATCH INDEX PAGE */
+.dropdown-content { 
+    position: fixed !important; 
+    top: 90px !important;
+    right: 1rem !important;
+    left: auto !important;
+    transform: translateY(-10px) !important;
+    width: 45% !important;
+    min-width: unset !important;
+    background: #000000 !important;
+    border: none !important;
+    padding: 0.5rem 0 !important;
+    max-height: 60vh;
+    overflow-y: auto;
+    mix-blend-mode: normal !important;
+    backdrop-filter: none !important;
+    opacity: 1 !important;
+    z-index: 1000 !important;
+}
+
+.dropdown:hover .dropdown-content {
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.dropdown-content a {
+    padding: 0.4rem 1rem !important;
+    font-size: 0.8rem !important;
+    color: #ffffff !important;
+    text-align: right !important;
+    mix-blend-mode: normal !important;
+    border-left: none !important;
+    font-weight: 600 !important;
+    background: transparent !important;
+    display: block !important;
+}
+
+.dropdown-content a:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    padding-right: 1.5rem !important;
+}
+
+.cursor, .cursor-follower {
+    display: none;
+}
     
     .work-container {
         padding: 8rem 5% 10rem 5%;
@@ -636,6 +673,29 @@
     .project-last-row {
         margin-bottom: 12rem !important;
     }
+    /* ========== FIX NAVIGATION VERTICAL ALIGNMENT ========== */
+.nav-links a {
+    white-space: nowrap !important;
+    font-size: 0.9rem !important;
+    line-height: 1 !important; /* Force consistent line height */
+    vertical-align: middle !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    height: 100% !important;
+}
+
+/* Specifically target the CONTACT link to ensure perfect alignment */
+.nav-links a[href="Contacts.html"] {
+    line-height: inherit !important;
+    vertical-align: baseline !important;
+}
+
+/* Ensure both WORK dropdown and CONTACT link have same styling */
+.dropdown > a,
+.nav-links > a:not(.dropdown) {
+    line-height: 1.2 !important;
+    padding: 0.2rem 0 !important; /* Add tiny vertical padding if needed */
+}
 }
 
 /* ========== SMALL MOBILE SCREENS (480px) ========== */
@@ -697,7 +757,32 @@
     .shorter-containers {
         height: 150px !important; /* ADJUST: Generic shorter containers */
     }
-
+nav {
+        padding: 0.4rem 0.8rem !important;
+    }
+    
+    nav > div:first-child {
+        font-size: 0.9rem !important; /* Even smaller on small screens */
+    }
+    
+    .nav-links {
+        gap: 0.8rem !important;
+    }
+    
+    .nav-links a {
+        font-size: 0.8rem !important;
+    }
+    
+    .dropdown-content {
+        top: 85px !important;
+        width: 50% !important;
+        padding: 0.4rem 0 !important;
+    }
+    
+    .dropdown-content a {
+        padding: 0.3rem 0.8rem !important;
+        font-size: 0.75rem !important;
+    }
     /* ========== TEXT ADJUSTMENTS ========== */
     .work-info {
         margin-bottom: 4rem !important;
@@ -733,7 +818,7 @@
         margin-bottom: 10rem !important;
     }
     
-
+}
 
 /* ========== SMALLEST MOBILE SCREENS (360px) ========== */
 @media (max-width: 360px) {
@@ -753,7 +838,22 @@
     .page-title {
         font-size: 13vw !important;
     }
-
+ nav > div:first-child {
+        font-size: 0.85rem !important; /* Smallest size */
+    }
+    
+    .nav-links {
+        gap: 0.6rem !important;
+    }
+    
+    .nav-links a {
+        font-size: 0.75rem !important;
+    }
+    
+    .dropdown-content {
+        top: 80px !important;
+        width: 55% !important;
+    }
     /* ========== FINAL CONTAINER HEIGHT ADJUSTMENTS ========== */
     .single-image.tall-images {
         height: 450px !important; /* ADJUST: Project 1 first image */
@@ -818,7 +918,7 @@
         margin-bottom: 8rem !important;
     }
 }
-}
+
     </style>
 </head>
     <!-- Full Screen Image Modal -->
