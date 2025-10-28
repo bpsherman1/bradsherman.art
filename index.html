@@ -27,7 +27,8 @@
         }
         
         /* Custom Cursor - Hidden on mobile */
-        .cursor { 
+        @media (min-width: 1200px) {
+         .cursor { 
             position: fixed; 
             width: 20px; 
             height: 20px; 
@@ -38,17 +39,8 @@
             mix-blend-mode: difference; 
             transition: transform 0.2s; 
         }
-        
-        .cursor-follower { 
-            position: fixed; 
-            width: 60px; 
-            height: 60px; 
-            border: 2px solid #00ffff; 
-            border-radius: 50%; 
-            pointer-events: none; 
-            z-index: 9998; 
-            transition: all 0.6s ease; 
         }
+      
 
         /* Dropdown Styles */
         .dropdown { position: relative; display: inline-block; }
