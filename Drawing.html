@@ -38,7 +38,7 @@
     align-items: center;
 }
 
-        /* Base Reset */
+               /* Base Reset */
         * { 
             margin: 0; 
             padding: 0; 
@@ -341,7 +341,7 @@
 
         /* WORK GRID - MAIN STYLES */
         .work-section {
-            margin-bottom: 18rem !important; /* Increased space BETWEEN different images */
+            margin-bottom: 22rem !important; /* HUGE space between description and next image */
         }
 
         .single-image {
@@ -415,16 +415,12 @@
             height: 400px;
         }
 
-        /* TEXT BELOW IMAGES - INCREASED SPACING */
-       work-info {
-    margin-top: 3rem !important; /* Reduced from 4rem to 2rem - pulls text closer to image above */
-    margin-bottom: 0;
-    text-align: left;
-}
-
-.work-section {
-    margin-bottom: 15rem !important; /* Increased from 15rem to 18rem - pushes next image further down */
-}
+        /* TEXT BELOW IMAGES - PERFECT SPACING */
+        .work-info {
+            margin-top: 2.5rem !important; /* Small, clean space between image and its text */
+            margin-bottom: 0;
+            text-align: left;
+        }
 
         .work-item-title {
             font-family: 'Futura', sans-serif;
@@ -461,7 +457,7 @@
             }
         }
 
-        /* ===== MOBILE RESPONSIVE - CLEANED UP ===== */
+        /* ===== MOBILE RESPONSIVE - PERFECT SPACING ===== */
         @media (max-width: 768px) {
             .hero {
                 height: 90vh !important;
@@ -502,17 +498,17 @@
                 display: block !important;
             }
             
-            /* MOBILE SPACING - INCREASED */
+            /* MOBILE SPACING - PERFECT */
             .work-container {
                 padding: 8rem 5% 10rem 5% !important;
             }
             
             .work-section {
-                margin-bottom: 12rem !important; /* MUCH more space between images on mobile */
+                margin-bottom: 16rem !important; /* HUGE space between description and next image on mobile */
             }
             
             .work-info {
-                margin-top: 3.5rem !important; /* More space between image and text on mobile */
+                margin-top: 2rem !important; /* Small space between image and its text on mobile */
                 margin-bottom: 0 !important;
                 max-width: 90% !important;
                 padding: 0 5% !important;
@@ -673,11 +669,11 @@
             }
             
             .work-section {
-                margin-bottom: 10rem !important;
+                margin-bottom: 14rem !important; /* Large space between description and next image */
             }
             
             .work-info {
-                margin-top: 3rem !important;
+                margin-top: 1.75rem !important; /* Small space between image and its text */
                 max-width: 90% !important;
                 padding: 0 5% !important;
             }
@@ -782,11 +778,11 @@
             }
             
             .work-section {
-                margin-bottom: 8rem !important;
+                margin-bottom: 12rem !important; /* Large space between description and next image */
             }
             
             .work-info {
-                margin-top: 2.5rem !important;
+                margin-top: 1.5rem !important; /* Tiny space between image and its text */
             }
             
             .work-item-title {
@@ -812,6 +808,8 @@
                 width: 55% !important;
             }
         }
+
+         
     </style>
 </head>
 <body>
