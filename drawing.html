@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Drawing - Brad Sherman</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -17,89 +17,128 @@
             overflow-x: hidden;
         }
 
+        /* ── GRAIN OVERLAY ────────────────────────────────── */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            background-size: 200px 200px;
+        }
+
         /* ── MODAL ────────────────────────────────────────── */
         .image-modal {
             display: none;
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(255,255,255,0.97);
+            background: rgba(255,255,255,0.98);
             z-index: 1000;
             justify-content: center;
             align-items: center;
         }
-        .modal-content {
-            max-width: 90%;
-            max-height: 90%;
-            position: relative;
-        }
-        .modal-image {
-            max-width: 100%;
-            max-height: 90vh;
-            object-fit: contain;
-        }
+        .modal-content { max-width: 90%; max-height: 90%; position: relative; }
+        .modal-image { max-width: 100%; max-height: 90vh; object-fit: contain; }
         .close-modal {
-            position: fixed;
-            top: 20px; right: 30px;
-            color: #000000;
-            font-size: 36px;
-            font-weight: 300;
-            cursor: pointer;
-            z-index: 1001;
-            background: none;
-            border: none;
-            line-height: 1;
+            position: fixed; top: 20px; right: 30px;
+            color: #000; font-size: 36px; font-weight: 300;
+            cursor: pointer; z-index: 1001;
+            background: none; border: none; line-height: 1;
         }
         .nav-btn {
-            position: fixed;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            width: 60px; height: 60px;
-            cursor: pointer;
-            opacity: 0.4;
-            transition: opacity 0.3s;
+            position: fixed; top: 50%; transform: translateY(-50%);
+            background: none; border: none;
+            width: 60px; height: 60px; cursor: pointer;
+            opacity: 0.25; transition: opacity 0.3s;
         }
         .nav-btn:hover { opacity: 1; }
         .nav-btn::before {
-            content: '';
-            position: absolute;
+            content: ''; position: absolute;
             top: 50%; left: 50%;
-            width: 16px; height: 16px;
-            border: 2px solid #000000;
-            border-width: 2px 2px 0 0;
+            width: 14px; height: 14px;
+            border: 1.5px solid #000;
+            border-width: 1.5px 1.5px 0 0;
             transform: translate(-50%, -50%) rotate(45deg);
         }
         .prev-btn { left: 20px; }
         .prev-btn::before { transform: translate(-50%, -50%) rotate(-135deg); }
         .next-btn { right: 20px; }
 
+        /* ── BLACK HEADER PANEL ───────────────────────────── */
+        .header-panel {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            height: 25vh;
+            background: #000000;
+            z-index: 50;
+            transition: opacity 0.5s ease;
+        }
+
         /* ── NAV ──────────────────────────────────────────── */
         nav {
             position: fixed;
             top: 0; width: 100%;
-            padding: 2rem;
-            z-index: 100;
+            padding: 2rem 2rem 2rem 2rem;
+            z-index: 200;
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            mix-blend-mode: difference;
+            align-items: flex-start;
             transition: background 0.4s ease, border-bottom 0.4s ease;
+        }
+
+        .nav-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: calc(25vh - 4rem);
         }
 
         .nav-name {
             font-family: 'Futura', 'Futura PT', 'Century Gothic', 'Trebuchet MS', sans-serif;
             font-weight: 900;
-            font-size: 0.9rem;
+            font-size: 1.05rem;
             letter-spacing: 0.08em;
             text-transform: uppercase;
-            /* slide in from left on load */
+            color: #ffffff;
             opacity: 0;
             transform: translateX(-28px);
             animation: slideInLeft 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.5s forwards;
-            /* smooth transition for scroll fade */
             transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .hero-title {
+            font-family: 'Futura', 'Futura PT', 'Century Gothic', 'Trebuchet MS', sans-serif;
+            font-weight: 900;
+            font-size: clamp(4rem, 11vw, 10rem);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            line-height: 1;
+            opacity: 0;
+            animation: fadeTitle 1.2s ease 0.2s forwards;
+            will-change: opacity, transform;
+            background: linear-gradient(
+                90deg,
+                #ffffff 0%,
+                #ffffff 5%,
+                #c2410c 18%,
+                #92400e 30%,
+                #1e40af 42%,
+                #0f766e 54%,
+                #c2410c 66%,
+                #92400e 74%,
+                #ffffff 82%,
+                #ffffff 100%
+            );
+            background-size: 600% 100%;
+            background-position: 100% 0;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .nav-links {
@@ -109,9 +148,10 @@
             opacity: 0;
             animation: fadeUp 0.9s ease 0.65s forwards;
             transition: opacity 0.5s ease, transform 0.5s ease;
+            padding-top: 0.15rem;
         }
 
-        nav a { color: white; text-decoration: none; font-weight: 600; }
+        nav a { color: #ffffff; text-decoration: none; font-weight: 600; }
 
         @keyframes slideInLeft {
             from { opacity: 0; transform: translateX(-28px); }
@@ -121,7 +161,12 @@
             from { opacity: 0; transform: translateY(10px); }
             to   { opacity: 1; transform: translateY(0); }
         }
+        @keyframes fadeTitle {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
 
+        /* ── DROPDOWN ─────────────────────────────────────── */
         .dropdown { position: relative; display: inline-block; }
         .dropdown-content {
             position: absolute;
@@ -145,65 +190,39 @@
             text-decoration: none;
             transition: all 0.3s ease;
             border-left: 3px solid transparent;
-            font-weight: 700;
-            font-size: 0.9rem;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.02em;
         }
         .dropdown-content a:hover {
-            background: rgba(0,0,0,0.05);
-            border-left: 3px solid #ff0055;
+            background: rgba(0,0,0,0.04);
+            border-left: 3px solid #000;
             padding-left: 2rem;
         }
 
-        /* ── HERO ─────────────────────────────────────────── */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            background: #ffffff;
-        }
-
-        .hero-title {
-            font-family: 'Futura', 'Futura PT', 'Century Gothic', 'Trebuchet MS', sans-serif;
-            font-weight: 900;
-            font-size: clamp(3.5rem, 9vw, 8rem);
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            color: #000000;
-            text-align: center;
-            line-height: 1;
-            /* fade in on load */
-            opacity: 0;
-            animation: fadeTitle 1.2s ease 0.15s forwards;
-            /* smooth scroll fade handled via JS inline styles */
-            will-change: opacity, transform;
-        }
-
-        @keyframes fadeTitle {
-            from { opacity: 0; }
-            to   { opacity: 1; }
-        }
+        /* ── HERO SPACER ──────────────────────────────────── */
+        .hero-spacer { height: 105vh; }
 
         /* ── WORK GRID ────────────────────────────────────── */
         .work-container {
             max-width: 900px;
             margin: 0 auto;
-            padding: 6rem 5% 12rem 5%;
+            padding: 0 5% 12rem 5%;
         }
 
         .work-section {
             margin-bottom: 18rem;
             opacity: 0;
-            transform: translateY(32px);
+            transform: translateY(28px);
             transition: opacity 1.4s ease, transform 1.4s ease;
+            position: relative;
         }
         .work-section.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        .single-image { width: 100%; }
+        .img-wrap { width: 100%; }
 
         .work-img {
             width: 100%;
@@ -217,41 +236,49 @@
         .work-info {
             margin-top: 1.8rem;
             padding-top: 1.4rem;
-            border-top: 1px solid #ebebeb;
+            border-top: 0.5px solid #e0e0e0;
         }
 
         .work-item-title {
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
+            font-family: 'Futura', 'Futura PT', 'Century Gothic', 'Trebuchet MS', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 0.45rem;
             color: #000000;
-            letter-spacing: 0.02em;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
         }
 
         .project-year {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.85rem;
-            color: #939598;
+            font-family: 'Futura', 'Futura PT', 'Century Gothic', 'Trebuchet MS', sans-serif;
+            font-size: 0.75rem;
+            color: #999999;
             font-weight: 400;
-            margin-bottom: 0.2rem;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.15rem;
         }
 
         .project-institution {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.85rem;
-            color: #939598;
-            font-style: italic;
+            font-family: 'Futura', 'Futura PT', 'Century Gothic', 'Trebuchet MS', sans-serif;
+            font-size: 0.75rem;
+            color: #999999;
             font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
         }
 
         /* ── MOBILE ───────────────────────────────────────── */
         @media (max-width: 768px) {
-            nav { padding: 1rem; }
+            nav { padding: 1.2rem; }
             .nav-links { gap: 1rem; }
-            .hero-title { font-size: clamp(2.5rem, 12vw, 4.5rem); }
-            .work-container { padding: 4rem 5% 8rem 5%; }
-            .work-section { margin-bottom: 5rem; }
+            .hero-title { font-size: clamp(2rem, 10vw, 3.5rem); }
+            .work-container { padding: 0 5% 8rem 5%; max-width: 100%; }
+            .work-section { margin-bottom: 16rem; }
+            .hero-spacer { height: 60vh; }
+            .work-section:nth-child(odd)  .img-wrap,
+            .work-section:nth-child(even) .img-wrap { width: 100%; margin-left: 0; }
+            .work-index { display: none; }
+            .work-info { flex-direction: column; gap: 0.4rem; }
 
             .dropdown-content {
                 position: fixed !important;
@@ -269,7 +296,6 @@
                 color: #ffffff !important;
                 text-align: right !important;
                 border-left: none !important;
-                mix-blend-mode: normal !important;
             }
         }
     </style>
@@ -286,14 +312,22 @@
         </div>
     </div>
 
+    <!-- Black header panel -->
+    <div class="header-panel" id="headerPanel"></div>
+
     <!-- Nav -->
     <nav id="mainNav">
-        <div class="nav-name" id="navName">
-            <a href="index.html" style="color:white;text-decoration:none;">Brad Sherman</a>
+        <div class="nav-left">
+            <div class="nav-name" id="navName">
+                <a href="index.html" style="color:#ffffff;text-decoration:none;">Brad Sherman</a>
+            </div>
+            <div id="heroTitleWrap" style="will-change:opacity;">
+                <h1 class="hero-title" id="heroTitle">Drawings</h1>
+            </div>
         </div>
         <div class="nav-links" id="navLinks">
             <div class="dropdown">
-                <a href="#" style="color:white;text-decoration:none;font-weight:600;cursor:pointer;">Work</a>
+                <a href="#" style="color:#ffffff;text-decoration:none;font-weight:600;cursor:pointer;">Work</a>
                 <div class="dropdown-content">
                     <a href="index.html">Home</a>
                     <a href="painting.html">Painting</a>
@@ -303,20 +337,18 @@
                     <a href="photography.html">Photography</a>
                 </div>
             </div>
-            <a href="Contacts.html" style="color:white;text-decoration:none;font-weight:600;">Contact</a>
+            <a href="Contacts.html" style="color:#ffffff;text-decoration:none;font-weight:600;">Contact</a>
         </div>
     </nav>
 
-    <!-- Hero -->
-    <section class="hero">
-        <h1 class="hero-title" id="heroTitle">Drawings</h1>
-    </section>
+    <div class="hero-spacer"></div>
 
     <!-- Work -->
     <section class="work-container">
 
         <div class="work-section">
-            <div class="single-image">
+            <div class="img-wrap">
+                <span class="work-index">01</span>
                 <picture>
                     <source media="(max-width: 768px)" srcset="images_2/1-mobile.jpg">
                     <source media="(min-width: 769px)" srcset="images_2/1-desktop.jpg">
@@ -325,12 +357,15 @@
             </div>
             <div class="work-info">
                 <h3 class="work-item-title">Still Life</h3>
-                <p class="project-year">2022</p>
+                <div class="work-meta">
+                    <span class="project-year">2022</span>
+                </div>
             </div>
         </div>
 
         <div class="work-section">
-            <div class="single-image">
+            <div class="img-wrap">
+                <span class="work-index">02</span>
                 <picture>
                     <source media="(max-width: 768px)" srcset="images_2/2-mobile.jpg">
                     <source media="(min-width: 769px)" srcset="images_2/2-desktop.jpg">
@@ -339,13 +374,16 @@
             </div>
             <div class="work-info">
                 <h3 class="work-item-title">Martha's Vineyard</h3>
-                <p class="project-year">2023</p>
-                <p class="project-institution">UW-Madison</p>
+                <div class="work-meta">
+                    <span class="project-year">2023</span>
+                    <span class="project-institution">UW–Madison</span>
+                </div>
             </div>
         </div>
 
         <div class="work-section">
-            <div class="single-image">
+            <div class="img-wrap">
+                <span class="work-index">03</span>
                 <picture>
                     <source media="(max-width: 768px)" srcset="images_2/3-mobile.jpg">
                     <source media="(min-width: 769px)" srcset="images_2/3-desktop.jpg">
@@ -354,13 +392,16 @@
             </div>
             <div class="work-info">
                 <h3 class="work-item-title">Still Life</h3>
-                <p class="project-year">2023</p>
-                <p class="project-institution">UW-Madison</p>
+                <div class="work-meta">
+                    <span class="project-year">2023</span>
+                    <span class="project-institution">UW–Madison</span>
+                </div>
             </div>
         </div>
 
         <div class="work-section">
-            <div class="single-image">
+            <div class="img-wrap">
+                <span class="work-index">04</span>
                 <picture>
                     <source media="(max-width: 768px)" srcset="images_2/4-mobile.jpg">
                     <source media="(min-width: 769px)" srcset="images_2/4-desktop.jpg">
@@ -369,12 +410,15 @@
             </div>
             <div class="work-info">
                 <h3 class="work-item-title">Grandad Portrait</h3>
-                <p class="project-year">2022</p>
+                <div class="work-meta">
+                    <span class="project-year">2022</span>
+                </div>
             </div>
         </div>
 
         <div class="work-section">
-            <div class="single-image">
+            <div class="img-wrap">
+                <span class="work-index">05</span>
                 <picture>
                     <source media="(max-width: 768px)" srcset="images_2/5-mobile.jpg">
                     <source media="(min-width: 769px)" srcset="images_2/5-desktop.jpg">
@@ -383,13 +427,16 @@
             </div>
             <div class="work-info">
                 <h3 class="work-item-title">Mountains</h3>
-                <p class="project-year">2023</p>
-                <p class="project-institution">UW-Madison</p>
+                <div class="work-meta">
+                    <span class="project-year">2023</span>
+                    <span class="project-institution">UW–Madison</span>
+                </div>
             </div>
         </div>
 
         <div class="work-section">
-            <div class="single-image">
+            <div class="img-wrap">
+                <span class="work-index">06</span>
                 <picture>
                     <source media="(max-width: 768px)" srcset="images_2/6-mobile.jpg">
                     <source media="(min-width: 769px)" srcset="images_2/6-desktop.jpg">
@@ -398,7 +445,9 @@
             </div>
             <div class="work-info">
                 <h3 class="work-item-title">Still Life</h3>
-                <p class="project-year">2022</p>
+                <div class="work-meta">
+                    <span class="project-year">2022</span>
+                </div>
             </div>
         </div>
 
@@ -445,40 +494,66 @@
             if (e.key === 'ArrowLeft')   showPrev();
         });
 
-        // ── Scroll: fade hero title + nav text, solidify nav ──
-        const nav       = document.getElementById('mainNav');
-        const heroTitle = document.getElementById('heroTitle');
-        const navName   = document.getElementById('navName');
-        const navLinks  = document.getElementById('navLinks');
+        // ── Scroll ────────────────────────────────────────
+        const nav           = document.getElementById('mainNav');
+        const headerPanel   = document.getElementById('headerPanel');
+        const heroTitle     = document.getElementById('heroTitle');
+        const heroTitleWrap = document.getElementById('heroTitleWrap');
+        const navName       = document.getElementById('navName');
+        const navLinks      = document.getElementById('navLinks');
+        const navLeft       = document.querySelector('.nav-left');
 
-        const vh         = window.innerHeight;
-        const FADE_START = 0;           // start fading immediately
-        const FADE_END   = vh * 0.25;   // fully gone by 25vh
-        const NAV_SOLID  = vh * 0.60;   // nav bar goes opaque/solid at 60vh
+        const vh          = window.innerHeight;
+        const FADE_START  = 0;
+        const FADE_END    = vh * 0.25;
+        const TITLE_START = vh * 0.18;
+        const TITLE_END   = vh * 0.42;
+        const NAV_SOLID   = vh * 0.50;
+        const COLOR_END   = vh * 0.18;
 
         window.addEventListener('scroll', () => {
             const y = window.scrollY;
 
-            // — Hero title —
-            if (y <= FADE_START) {
-                heroTitle.style.opacity   = '1';
-                heroTitle.style.transform = 'translateY(0)';
+            // — Black panel fade —
+            if (y <= 0) {
+                headerPanel.style.opacity = '1';
             } else if (y < FADE_END) {
-                const p = (y - FADE_START) / (FADE_END - FADE_START);
-                heroTitle.style.opacity   = String(1 - p);
-                heroTitle.style.transform = `translateY(${-p * 14}px)`;
+                headerPanel.style.opacity = String(1 - y / FADE_END);
             } else {
-                heroTitle.style.opacity   = '0';
-                heroTitle.style.transform = 'translateY(-14px)';
+                headerPanel.style.opacity = '0';
             }
 
-            // — Nav name + links (fade while in hero zone) —
+            // — Color sweep —
+            heroTitle.style.transition = 'none';
+            if (y <= 0) {
+                heroTitle.style.backgroundPosition = '100% 0';
+            } else if (y < COLOR_END) {
+                const pos = 100 - ((y / COLOR_END) * 70);
+                heroTitle.style.backgroundPosition = `${pos}% 0`;
+            } else {
+                heroTitle.style.backgroundPosition = '30% 0';
+            }
+
+            // — Title fade —
+            if (y <= TITLE_START) {
+                heroTitleWrap.style.opacity   = '1';
+                heroTitleWrap.style.transform = 'translateY(0)';
+            } else if (y < TITLE_END) {
+                const p = (y - TITLE_START) / (TITLE_END - TITLE_START);
+                heroTitleWrap.style.opacity   = String(1 - p);
+                heroTitleWrap.style.transform = `translateY(${-p * 12}px)`;
+            } else {
+                heroTitleWrap.style.opacity   = '0';
+                heroTitleWrap.style.transform = 'translateY(-12px)';
+            }
+
+            // — Nav text fade —
             if (y <= NAV_SOLID) {
-                if (y <= FADE_START) {
+                if (y <= 0) {
                     navName.style.opacity  = '1';
                     navLinks.style.opacity = '1';
                 } else if (y < FADE_END) {
-                    const p = (y - FADE_START) / (FADE_END - FADE_START);
+                    const p = y / FADE_END;
                     navName.style.opacity  = String(1 - p);
                     navLinks.style.opacity = String(1 - p);
                 } else {
@@ -487,25 +562,31 @@
                 }
             }
 
-            // — Nav bar itself: stays transparent until deep scroll —
+            // — Nav goes solid —
             if (y > NAV_SOLID) {
-                nav.style.mixBlendMode  = 'normal';
-                nav.style.background    = 'rgba(255,255,255,0.96)';
-                nav.style.borderBottom  = '1px solid #ebebeb';
-                navName.style.opacity   = '1';
-                navLinks.style.opacity  = '1';
-                nav.querySelectorAll('a').forEach(a => a.style.color = '#000');
+                nav.style.background         = 'rgba(255,255,255,0.97)';
+                nav.style.borderBottom       = '0.5px solid #ebebeb';
+                nav.style.alignItems         = 'center';
+                navLeft.style.height         = 'auto';
+                navLeft.style.justifyContent = 'flex-start';
+                navLeft.style.gap            = '0';
+                navName.style.opacity        = '1';
+                navLinks.style.opacity       = '1';
+                heroTitleWrap.style.display  = 'none';
+                nav.querySelectorAll('a:not(.dropdown-content a)').forEach(a => a.style.color = '#000');
             } else {
-                nav.style.mixBlendMode  = 'difference';
-                nav.style.background    = 'transparent';
-                nav.style.borderBottom  = 'none';
-                nav.querySelectorAll('a').forEach(a => a.style.color = 'white');
+                nav.style.background         = 'transparent';
+                nav.style.borderBottom       = 'none';
+                nav.style.alignItems         = 'flex-start';
+                navLeft.style.height         = 'calc(25vh - 4rem)';
+                navLeft.style.justifyContent = 'space-between';
+                navLeft.style.gap            = '';
+                heroTitleWrap.style.display  = '';
+                nav.querySelectorAll('a:not(.dropdown-content a)').forEach(a => a.style.color = '#fff');
             }
         }, { passive: true });
 
-        // ── Scroll: work sections fade in on enter ─────────
-        const workSections = document.querySelectorAll('.work-section');
-
+        // ── Work sections fade in ──────────────────────────
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -513,12 +594,9 @@
                     observer.unobserve(entry.target);
                 }
             });
-        }, {
-            threshold: 0.05,
-            rootMargin: '0px 0px -120px 0px'
-        });
+        }, { threshold: 0.05, rootMargin: '0px 0px -120px 0px' });
 
-        workSections.forEach(section => observer.observe(section));
+        document.querySelectorAll('.work-section').forEach(s => observer.observe(s));
     </script>
 </body>
 </html>
