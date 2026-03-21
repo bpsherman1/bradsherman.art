@@ -193,10 +193,10 @@
         }
 
         .work-section {
-            margin-bottom: 13rem;
+            margin-bottom: 18rem;
             opacity: 0;
             transform: translateY(32px);
-            transition: opacity 0.85s ease, transform 0.85s ease;
+            transition: opacity 1.4s ease, transform 1.4s ease;
         }
         .work-section.visible {
             opacity: 1;
@@ -514,8 +514,8 @@
                 }
             });
         }, {
-            threshold: 0.08,
-            rootMargin: '0px 0px -30px 0px'
+            threshold: 0.05,
+            rootMargin: '0px 0px -120px 0px'
         });
 
         workSections.forEach(section => observer.observe(section));
