@@ -126,22 +126,22 @@
         .dropdown-content {
             position: absolute;
             top: 35px; left: 0;
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid #eee;
+            background: #ffffff;
+            border: 1px solid #e8e8e8;
             border-radius: 8px;
             padding: 1rem 0;
             min-width: 200px;
             opacity: 0; visibility: hidden;
             transform: translateY(-10px);
             transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-            mix-blend-mode: difference;
+            mix-blend-mode: normal;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
         }
         .dropdown:hover .dropdown-content { opacity: 1; visibility: visible; transform: translateY(0); }
         .dropdown-content a {
             display: block;
             padding: 0.5rem 1.5rem;
-            color: black;
+            color: #000000 !important;
             text-decoration: none;
             transition: all 0.3s ease;
             border-left: 3px solid transparent;
@@ -193,7 +193,7 @@
         }
 
         .work-section {
-            margin-bottom: 8rem;
+            margin-bottom: 13rem;
             opacity: 0;
             transform: translateY(32px);
             transition: opacity 0.85s ease, transform 0.85s ease;
@@ -452,16 +452,11 @@
         const navLinks  = document.getElementById('navLinks');
 
         const vh         = window.innerHeight;
-        const FADE_START = vh * 0.08;   // start fading at 8vh scroll
-        const FADE_END   = vh * 0.30;   // fully gone at 30vh
+        const FADE_START = 0;           // start fading immediately
+        const FADE_END   = vh * 0.25;   // fully gone by 25vh
         const NAV_SOLID  = vh * 0.60;   // nav bar goes opaque/solid at 60vh
 
-        // After the load animation completes (~1.5s), JS takes over opacity control
-        let animDone = false;
-        setTimeout(() => { animDone = true; }, 1500);
-
         window.addEventListener('scroll', () => {
-            if (!animDone) return;
             const y = window.scrollY;
 
             // — Hero title —
