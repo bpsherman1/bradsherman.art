@@ -201,11 +201,11 @@
         }
 
         /* ── HERO SPACER ──────────────────────────────────── */
-        .hero-spacer { height: 72vh; }
+        .hero-spacer { height: 55vh; }
 
         /* ── WORK GRID ────────────────────────────────────── */
         .work-container {
-            max-width: 900px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 5% 12rem 5%;
         }
@@ -269,9 +269,13 @@
 
         /* ── MOBILE ───────────────────────────────────────── */
         @media (max-width: 768px) {
-            nav { padding: 1.2rem; }
-            .nav-links { gap: 1rem; }
-            .hero-title { font-size: clamp(2rem, 10vw, 3.5rem); }
+            .header-panel { height: 18vh; }
+            nav { padding: 1rem; }
+            .nav-left { height: calc(18vh - 2rem); }
+            .nav-name { font-size: 0.78rem; }
+            .nav-links { gap: 0.6rem; }
+            .nav-links a { font-size: 0.75rem; }
+            .hero-title { font-size: clamp(1.6rem, 8vw, 2.8rem); }
             .work-container { padding: 0 5% 8rem 5%; }
             .work-section { margin-bottom: 16rem; }
             .hero-spacer { height: 60vh; }
@@ -482,12 +486,14 @@
         const navLeft       = document.querySelector('.nav-left');
 
         const vh          = window.innerHeight;
+        const isMobile    = window.innerWidth <= 768;
+        const panelH      = isMobile ? 0.18 : 0.25;
         const FADE_START  = 0;
-        const FADE_END    = vh * 0.25;
-        const TITLE_START = vh * 0.18;
-        const TITLE_END   = vh * 0.42;
-        const NAV_SOLID   = vh * 0.50;
-        const COLOR_END   = vh * 0.18;
+        const FADE_END    = vh * panelH;
+        const TITLE_START = vh * (isMobile ? 0.12 : 0.18);
+        const TITLE_END   = vh * (isMobile ? 0.32 : 0.42);
+        const NAV_SOLID   = vh * (isMobile ? 0.38 : 0.50);
+        const COLOR_END   = vh * (isMobile ? 0.12 : 0.18);
 
         window.addEventListener('scroll', () => {
             const y = window.scrollY;
@@ -556,7 +562,7 @@
                 nav.style.background         = 'transparent';
                 nav.style.borderBottom       = 'none';
                 nav.style.alignItems         = 'flex-start';
-                navLeft.style.height         = 'calc(25vh - 4rem)';
+                navLeft.style.height         = isMobile ? 'calc(18vh - 2rem)' : 'calc(25vh - 4rem)';
                 navLeft.style.justifyContent = 'space-between';
                 navLeft.style.gap            = '';
                 heroTitleWrap.style.display  = '';
