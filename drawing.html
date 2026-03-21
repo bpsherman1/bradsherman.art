@@ -82,7 +82,7 @@
         /* ── NAV ──────────────────────────────────────────── */
         nav {
             position: fixed;
-            top: 0; width: 100%;
+            top: 0; left: 0; width: 100%;
             padding: 2rem 2rem 2rem 2rem;
             z-index: 200;
             display: flex;
@@ -144,11 +144,15 @@
         .nav-links {
             display: flex;
             gap: 2rem;
-            align-items: center;
+            align-items: baseline;
             opacity: 0;
             animation: fadeUp 0.9s ease 0.65s forwards;
             transition: opacity 0.5s ease, transform 0.5s ease;
-            padding-top: 0.15rem;
+        }
+
+        .nav-links a, .dropdown > a {
+            line-height: 1;
+            display: inline-block;
         }
 
         nav a { color: #ffffff; text-decoration: none; font-weight: 600; }
@@ -271,11 +275,16 @@
         @media (max-width: 768px) {
             .header-panel { height: 18vh; }
             nav { padding: 1rem; }
-            .nav-left { height: calc(18vh - 2rem); }
-            .nav-name { font-size: 0.78rem; }
-            .nav-links { gap: 0.6rem; }
-            .nav-links a { font-size: 0.75rem; }
-            .hero-title { font-size: clamp(1.6rem, 8vw, 2.8rem); }
+            .nav-left { height: calc(18vh - 3.5rem); }
+            .nav-name { font-size: 1.05rem; }
+            .nav-links {
+                gap: 0.6rem;
+                align-items: baseline;
+                align-self: flex-start;
+                margin-top: 0;
+            }
+            .nav-links a { font-size: 0.85rem; }
+            .hero-title { font-size: clamp(2.5rem, 10vw, 3.6rem); }
             .work-container { padding: 0 5% 8rem 5%; }
             .work-section { margin-bottom: 16rem; }
             .hero-spacer { height: 60vh; }
@@ -551,6 +560,7 @@
                 nav.style.background         = 'rgba(255,255,255,0.97)';
                 nav.style.borderBottom       = '0.5px solid #ebebeb';
                 nav.style.alignItems         = 'center';
+                nav.style.paddingBottom      = isMobile ? '0.8rem' : '1rem';
                 navLeft.style.height         = 'auto';
                 navLeft.style.justifyContent = 'flex-start';
                 navLeft.style.gap            = '0';
@@ -561,6 +571,7 @@
             } else {
                 nav.style.background         = 'transparent';
                 nav.style.borderBottom       = 'none';
+                nav.style.paddingBottom      = isMobile ? '1rem' : '2rem';
                 nav.style.alignItems         = 'flex-start';
                 navLeft.style.height         = isMobile ? 'calc(18vh - 2rem)' : 'calc(25vh - 4rem)';
                 navLeft.style.justifyContent = 'space-between';
