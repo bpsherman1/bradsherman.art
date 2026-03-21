@@ -238,6 +238,8 @@
             width: 100%;
             display: block;
             height: auto;
+            max-height: 80vh;
+            object-fit: contain;
             cursor: pointer;
             transition: opacity 0.3s ease;
         }
@@ -307,12 +309,12 @@
             .nav-left { height: calc(18vh - 2.8rem); }
             .nav-name { font-size: 1.05rem; }
             .nav-links {
-                gap: 0.6rem;
+                gap: 0.5rem;
                 align-items: baseline;
                 align-self: flex-start;
                 margin-top: 0;
             }
-            .nav-links a { font-size: 0.85rem; }
+            .nav-links a { font-size: 0.78rem; }
             .hero-title { font-size: clamp(2.5rem, 10vw, 3.6rem); }
             .work-container { padding: 0 5% 8rem 5%; }
             .work-section { margin-bottom: 16rem; }
@@ -389,7 +391,10 @@
 
         <div class="work-section">
             <div class="single-image">
-                <img class="work-img" src="images_2/p1.jpg" alt="Giardino Di Augusto, Capri" loading="eager" decoding="async"/>
+                <picture>
+                    <source media="(max-width: 768px)" srcset="images_2/p1-mobile.jpg">
+                    <img class="work-img" src="images_2/p1-desktop.jpg" alt="Giardino Di Augusto, Capri" loading="eager" decoding="async"/>
+                </picture>
             </div>
             <div class="work-info">
                 <h3 class="work-item-title">Giardino Di Augusto, Capri</h3>
@@ -401,7 +406,10 @@
 
         <div class="work-section">
             <div class="single-image">
-                <img class="work-img" src="images_2/Union.jpg" alt="Memorial Union, Madison" loading="lazy" decoding="async"/>
+                <picture>
+                    <source media="(max-width: 768px)" srcset="images_2/p2-mobile.jpg">
+                    <img class="work-img" src="images_2/p2-desktop.jpg" alt="Memorial Union, Madison" loading="lazy" decoding="async"/>
+                </picture>
             </div>
             <div class="work-info">
                 <h3 class="work-item-title">Memorial Union, Madison</h3>
@@ -413,7 +421,10 @@
 
         <div class="work-section">
             <div class="single-image">
-                <img class="work-img" src="images_2/Pari.jpg" alt="An Evening in Paris" loading="lazy" decoding="async"/>
+                <picture>
+                    <source media="(max-width: 768px)" srcset="images_2/p3-mobile.jpg">
+                    <img class="work-img" src="images_2/p3-desktop.jpg" alt="An Evening in Paris" loading="lazy" decoding="async"/>
+                </picture>
             </div>
             <div class="work-info">
                 <h3 class="work-item-title">An Evening in Paris</h3>
@@ -425,7 +436,10 @@
 
         <div class="work-section">
             <div class="single-image">
-                <img class="work-img" src="images_2/p2.jpg" alt="Ponte Vecchio, Firenze" loading="lazy" decoding="async"/>
+                <picture>
+                    <source media="(max-width: 768px)" srcset="images_2/p4-mobile.jpg">
+                    <img class="work-img" src="images_2/p4-desktop.jpg" alt="Ponte Vecchio, Firenze" loading="lazy" decoding="async"/>
+                </picture>
             </div>
             <div class="work-info">
                 <h3 class="work-item-title">Ponte Vecchio, Firenze</h3>
@@ -437,7 +451,10 @@
 
         <div class="work-section">
             <div class="single-image">
-                <img class="work-img" src="images_2/pontev.jpg" alt="Ponte Vecchio, Firenze II" loading="lazy" decoding="async"/>
+                <picture>
+                    <source media="(max-width: 768px)" srcset="images_2/p5-mobile.jpg">
+                    <img class="work-img" src="images_2/p5-desktop.jpg" alt="Ponte Vecchio, Firenze II" loading="lazy" decoding="async"/>
+                </picture>
             </div>
             <div class="work-info">
                 <h3 class="work-item-title">Ponte Vecchio, Firenze</h3>
@@ -449,7 +466,10 @@
 
         <div class="work-section">
             <div class="single-image">
-                <img class="work-img" src="images_2/Chirico.jpg" alt="Warm Surreal" loading="lazy" decoding="async"/>
+                <picture>
+                    <source media="(max-width: 768px)" srcset="images_2/p6-mobile.jpg">
+                    <img class="work-img" src="images_2/p6-desktop.jpg" alt="Warm Surreal" loading="lazy" decoding="async"/>
+                </picture>
             </div>
             <div class="work-info">
                 <h3 class="work-item-title">Warm Surreal</h3>
@@ -461,7 +481,10 @@
 
         <div class="work-section">
             <div class="single-image">
-                <img class="work-img" src="images_2/Monopoli.jpg" alt="Old City, Monopoli" loading="lazy" decoding="async"/>
+                <picture>
+                    <source media="(max-width: 768px)" srcset="images_2/p7-mobile.jpg">
+                    <img class="work-img" src="images_2/p7-desktop.jpg" alt="Old City, Monopoli" loading="lazy" decoding="async"/>
+                </picture>
             </div>
             <div class="work-info">
                 <h3 class="work-item-title">Old City, Monopoli</h3>
@@ -478,7 +501,10 @@
 
         <div class="work-section">
             <div class="single-image">
-                <img class="work-img" src="images_2/p4.jpg" alt="Farfalle" loading="lazy" decoding="async"/>
+                <picture>
+                    <source media="(max-width: 768px)" srcset="images_2/p8-mobile.jpg">
+                    <img class="work-img" src="images_2/p8-desktop.jpg" alt="Farfalle" loading="lazy" decoding="async"/>
+                </picture>
             </div>
             <div class="work-info">
                 <h3 class="work-item-title">Farfalle</h3>
@@ -490,7 +516,10 @@
 
         <div class="work-section">
             <div class="single-image">
-                <img class="work-img" src="images_2/p5.jpg" alt="Wine Opener" loading="lazy" decoding="async"/>
+                <picture>
+                    <source media="(max-width: 768px)" srcset="images_2/p9-mobile.jpg">
+                    <img class="work-img" src="images_2/p9-desktop.jpg" alt="Wine Opener" loading="lazy" decoding="async"/>
+                </picture>
             </div>
             <div class="work-info">
                 <h3 class="work-item-title">Wine Opener</h3>
@@ -502,7 +531,10 @@
 
         <div class="work-section">
             <div class="single-image">
-                <img class="work-img" src="images_2/p6.jpg" alt="Coffee Grinder" loading="lazy" decoding="async"/>
+                <picture>
+                    <source media="(max-width: 768px)" srcset="images_2/p10-mobile.jpg">
+                    <img class="work-img" src="images_2/p10-desktop.jpg" alt="Coffee Grinder" loading="lazy" decoding="async"/>
+                </picture>
             </div>
             <div class="work-info">
                 <h3 class="work-item-title">Coffee Grinder</h3>
@@ -514,7 +546,10 @@
 
         <div class="work-section">
             <div class="single-image">
-                <img class="work-img" src="images_2/p7.jpg" alt="Still Life Black & White" loading="lazy" decoding="async"/>
+                <picture>
+                    <source media="(max-width: 768px)" srcset="images_2/p11-mobile.jpg">
+                    <img class="work-img" src="images_2/p11-desktop.jpg" alt="Still Life Black & White" loading="lazy" decoding="async"/>
+                </picture>
             </div>
             <div class="work-info">
                 <h3 class="work-item-title">Still Life Black &amp; White</h3>
