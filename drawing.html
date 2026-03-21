@@ -4,7 +4,7 @@
     <link rel="icon" type="image/png" href="images_2/favicon.png">
     <link rel="apple-touch-icon" href="images_2/favicon.png">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Drawing - Brad Sherman</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -77,6 +77,7 @@
             background: #000000;
             z-index: 50;
             transition: opacity 0.5s ease;
+            padding-top: env(safe-area-inset-top);
         }
 
         /* ── NAV ──────────────────────────────────────────── */
@@ -84,6 +85,7 @@
             position: fixed;
             top: 0; left: 0; width: 100%;
             padding: 2rem 2rem 2rem 2rem;
+            padding-top: max(2rem, env(safe-area-inset-top));
             z-index: 200;
             display: flex;
             justify-content: space-between;
@@ -275,7 +277,7 @@
         @media (max-width: 768px) {
             .header-panel { height: 18vh; }
             nav { padding: 1rem; }
-            .nav-left { height: calc(18vh - 3.5rem); }
+            .nav-left { height: calc(18vh - 2.8rem); }
             .nav-name { font-size: 1.05rem; }
             .nav-links {
                 gap: 0.6rem;
@@ -560,7 +562,7 @@
                 nav.style.background         = 'rgba(255,255,255,0.97)';
                 nav.style.borderBottom       = '0.5px solid #ebebeb';
                 nav.style.alignItems         = 'center';
-                nav.style.paddingBottom      = isMobile ? '0.8rem' : '1rem';
+                nav.style.paddingTop         = isMobile ? 'max(1rem, env(safe-area-inset-top))' : '2rem';
                 navLeft.style.height         = 'auto';
                 navLeft.style.justifyContent = 'flex-start';
                 navLeft.style.gap            = '0';
