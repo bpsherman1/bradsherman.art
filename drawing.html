@@ -68,14 +68,24 @@
         .prev-btn::before { transform: translate(-50%, -50%) rotate(-135deg); }
         .next-btn { right: 20px; }
 
-        /* ── BLACK HEADER PANEL ───────────────────────────── */
+        /* ── SAFE AREA TOP COVER ──────────────────────────── */
+        /* Always white behind the status bar / dynamic island */
+        .top-cover {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            height: env(safe-area-inset-top, 50px);
+            background: #ffffff;
+            z-index: 600;
+            pointer-events: none;
+        }
         .header-panel {
             position: fixed;
             top: 0; left: 0;
             width: 100%;
             height: 25vh;
             background: #000000;
-            z-index: 50;
+            z-index: 490;
             transition: opacity 0.5s ease;
             padding-top: env(safe-area-inset-top);
         }
@@ -86,11 +96,22 @@
             top: 0; left: 0; width: 100%;
             padding: 2rem 2rem 2rem 2rem;
             padding-top: max(2rem, env(safe-area-inset-top));
-            z-index: 200;
+            z-index: 500;
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             transition: background 0.4s ease, border-bottom 0.4s ease;
+        }
+
+        /* solid white cover that sits behind nav text but above everything else */
+        nav.nav-solid-cover::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.97);
+            z-index: -1;
         }
 
         .nav-left {
@@ -280,16 +301,17 @@
             .nav-left { height: calc(18vh - 2.8rem); }
             .nav-name { font-size: 1.05rem; }
             .nav-links {
-                gap: 0.6rem;
+                gap: 0.4rem;
                 align-items: baseline;
                 align-self: flex-start;
                 margin-top: 0;
+                padding-right: 0;
             }
-            .nav-links a { font-size: 0.85rem; }
+            .nav-links a { font-size: 0.68rem; letter-spacing: 0.02em; }
             .hero-title { font-size: clamp(2.5rem, 10vw, 3.6rem); }
             .work-container { padding: 0 5% 8rem 5%; }
             .work-section { margin-bottom: 16rem; }
-            .hero-spacer { height: 60vh; }
+            .hero-spacer { height: 42vh; }
 
             .dropdown-content {
                 position: fixed !important;
@@ -322,6 +344,9 @@
             <img class="modal-image" src="" alt="">
         </div>
     </div>
+
+    <!-- Safe area top cover - always white above dynamic island -->
+    <div class="top-cover" id="topCover"></div>
 
     <!-- Black header panel -->
     <div class="header-panel" id="headerPanel"></div>
@@ -490,6 +515,7 @@
         // ── Scroll ────────────────────────────────────────
         const nav           = document.getElementById('mainNav');
         const headerPanel   = document.getElementById('headerPanel');
+        const topCover      = document.getElementById('topCover');
         const heroTitle     = document.getElementById('heroTitle');
         const heroTitleWrap = document.getElementById('heroTitleWrap');
         const navName       = document.getElementById('navName');
@@ -556,6 +582,9 @@
                     navLinks.style.opacity = '0';
                 }
             }
+
+            // — Top cover color matches nav state —
+            topCover.style.background = y > NAV_SOLID ? '#ffffff' : '#000000';
 
             // — Nav goes solid —
             if (y > NAV_SOLID) {
