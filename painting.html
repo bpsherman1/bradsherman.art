@@ -1,1164 +1,678 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-     <link rel="icon" type="image/png" href="images_2/favicon.png">
+    <link rel="icon" type="image/png" href="images_2/favicon.png">
     <link rel="apple-touch-icon" href="images_2/favicon.png">
-
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painting - Brad Sherman Design</title>
-    <link href="https://fonts.googleapis.com/css2?family=Futura:wght@700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Painting - Brad Sherman</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Base Reset */
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-        }
-        
-        /* White background for entire page below hero */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: 'Inter', sans-serif; 
-            background: #ffffff; /* Change body to white */
-            color: #000000; /* Default text color black */
+            font-family: 'Inter', sans-serif;
+            background: #ffffff;
+            color: #000000;
             overflow-x: hidden;
         }
 
-        /* Full Screen Image Viewer */
-.image-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #ffffff;
-    z-index: 1000;
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    max-width: 90%;
-    max-height: 90%;
-    position: relative;
-}
-
-.modal-image {
-    max-width: 100%;
-    max-height: 90vh;
-    object-fit: contain;
-}
-
-.close-modal {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    color: #000000; /* Changed to black */
-    font-size: 40px;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 1001;
-    background: none;
-    border: none;
-}
-
-.nav-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    width: 60px;
-    height: 60px;
-    cursor: pointer;
-    opacity: 0.7;
-    transition: opacity 0.3s;
-    color: transparent; /* Add this to hide the text arrows */
-    font-size: 0; /* Add this to hide the text arrows */
-}
-
-.nav-btn:hover {
-    opacity: 1;
-}
-
-.nav-btn::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 20px;
-    height: 20px;
-    border: 3px solid #000000; /* Changed to black */
-    border-width: 3px 3px 0 0;
-    transform: translate(-50%, -50%) rotate(45deg);
-}
-
-.prev-btn {
-    left: 30px;
-}
-
-.prev-btn::before {
-    transform: translate(-50%, -50%) rotate(-135deg);
-}
-
-.next-btn {
-    right: 30px;
-}
-
-.next-btn::before {
-    transform: translate(-50%, -50%) rotate(45deg);
-}
-
-/* Make work images clickable */
-.work-image {
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.work-image:hover {
-    transform: scale(1.02);
-}
-
-        .works-image {
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.works-image:hover {
-    transform: scale(1.02);
-}
-        
-.project-year {
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    color: #939598;
-    margin-bottom: 1.5rem;
-    font-weight: 600;
-}
-
-.project-institution {
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    color: #939598;
-    margin-bottom: 1.5rem;
-    font-style: italic; /* Makes it italic */
-    font-weight: 400;
-}
-
-.project-description {
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    color: #939598;
-    line-height: 1.6;
-    max-width: 600px;
-}
-        /* Hero section keeps dark background */
-        .hero {
-            background: #0a0a0a; /* Ensure hero stays dark */
+        /* ── GRAIN OVERLAY ────────────────────────────────── */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            background-size: 200px 200px;
         }
 
-        /* Work container inherits white background */
-        .work-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 18rem 5% 10rem 5%; /* INCREASED top padding from 15rem to 18rem */
+        /* ── MODAL ────────────────────────────────────────── */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(255,255,255,0.98);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content { max-width: 90%; max-height: 90%; position: relative; }
+        .modal-image { max-width: 100%; max-height: 90vh; object-fit: contain; }
+        .close-modal {
+            position: fixed; top: 20px; right: 30px;
+            color: #000; font-size: 36px; font-weight: 300;
+            cursor: pointer; z-index: 1001;
+            background: none; border: none; line-height: 1;
+        }
+        .nav-btn {
+            position: fixed; top: 50%; transform: translateY(-50%);
+            background: none; border: none;
+            width: 60px; height: 60px; cursor: pointer;
+            opacity: 0.25; transition: opacity 0.3s;
+        }
+        .nav-btn:hover { opacity: 1; }
+        .nav-btn::before {
+            content: ''; position: absolute;
+            top: 50%; left: 50%;
+            width: 14px; height: 14px;
+            border: 1.5px solid #000;
+            border-width: 1.5px 1.5px 0 0;
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+        .prev-btn { left: 20px; }
+        .prev-btn::before { transform: translate(-50%, -50%) rotate(-135deg); }
+        .next-btn { right: 20px; }
+
+        /* ── TOP COVER ────────────────────────────────────── */
+        .top-cover { display: none; }
+
+        /* ── NAV ──────────────────────────────────────────── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            padding: 2rem;
+            z-index: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            transition: background 0.4s ease, border-bottom 0.4s ease;
+        }
+
+        nav.is-solid::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100vh;
             background: #ffffff;
+            z-index: -1;
         }
 
-        /* Ensure text in work area is black */
-        .work-info,
-        .work-item-title,
-        .work-item-description {
-            color: #000000 !important;
-            margin-bottom: 10rem;
-            margin-top: 3rem;
+        /* ── BLACK HEADER PANEL ───────────────────────────── */
+        .header-panel {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            height: 25vh;
+            background: #000000;
+            z-index: 490;
+            transition: opacity 0.5s ease;
         }
 
-        .work-item-description {
-            color: #8F8F8F !important;
+        .nav-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: calc(25vh - 4rem);
         }
 
-        /* Lighter image boxes - OFF WHITE */
-        .work-image {
-            background-color: #f8f8f8 !important; /* Off-white instead of dark gray */
-            
-        }
-          .works-image {
-            background-color: #ffffff !important; /* Off-white instead of dark gray */
-            
+        .nav-name {
+            font-family: 'Futura', 'Futura PT', 'Century Gothic', 'Trebuchet MS', sans-serif;
+            font-weight: 900;
+            font-size: 1.05rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #ffffff;
+            opacity: 0;
+            transform: translateX(-28px);
+            animation: slideInLeft 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.5s forwards;
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
 
-        /* Navigation Styles */
-        nav { 
-            position: fixed; 
-            top: 0; 
-            width: 100%; 
-            padding: 2rem; 
-            z-index: 100; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            mix-blend-mode: difference;
+        .hero-title {
+            font-family: 'Futura', 'Futura PT', 'Century Gothic', 'Trebuchet MS', sans-serif;
+            font-weight: 900;
+            font-size: clamp(4rem, 11vw, 7.5rem);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            line-height: 1;
+            opacity: 0;
+            animation: fadeTitle 1.2s ease 0.2s forwards;
+            will-change: opacity, transform;
+            /* Painting gradient: warm golds, deep reds, rich burgundy */
+            background: linear-gradient(
+                90deg,
+                #ffffff 0%,
+                #ffffff 5%,
+                #b91c1c 18%,
+                #d97706 30%,
+                #92400e 42%,
+                #b45309 54%,
+                #b91c1c 66%,
+                #d97706 74%,
+                #ffffff 82%,
+                #ffffff 100%
+            );
+            background-size: 600% 100%;
+            background-position: 100% 0;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        
-        .nav-links { 
-            display: flex; 
-            gap: 2rem; 
-            align-items: center; 
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: baseline;
+            opacity: 0;
+            animation: fadeUp 0.9s ease 0.65s forwards;
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
-        
-        nav a { 
-            color: white; 
-            text-decoration: none; 
-            font-weight: 600; 
-            position: relative; 
+
+        .nav-links a, .dropdown > a {
+            line-height: 1;
+            display: inline-block;
         }
-        
-        /* Dropdown Styles */
+
+        nav a { color: #ffffff; text-decoration: none; font-weight: 600; }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-28px); }
+            to   { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeTitle {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* ── DROPDOWN ─────────────────────────────────────── */
         .dropdown { position: relative; display: inline-block; }
-        .dropdown-content { 
-            position: absolute; 
-            top: 35px;
-            left: 0; 
-            background: rgba(255, 255, 255, 0.95); 
-            backdrop-filter: blur(20px); 
-            border: 1px solid #fff; 
-            border-radius: 8px; 
-            padding: 1rem 0; 
-            min-width: 200px; 
-            opacity: 0; 
-            visibility: hidden; 
-            transform: translateY(-10px); 
-            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1); 
-            mix-blend-mode: difference;
+        .dropdown-content {
+            position: absolute;
+            top: 35px; left: 0;
+            background: #ffffff;
+            border: 1px solid #e8e8e8;
+            border-radius: 8px;
+            padding: 1rem 0;
+            min-width: 200px;
+            opacity: 0; visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            mix-blend-mode: normal;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
         }
         .dropdown:hover .dropdown-content { opacity: 1; visibility: visible; transform: translateY(0); }
-        .dropdown-content a { 
-            display: block; 
-            padding: 0.5rem 1.5rem; 
-            color: black; 
-            text-decoration: none; 
-            transition: all 0.3s ease; 
-            border-left: 3px solid transparent; 
-            font-weight: 700;
-            font-size: 0.9rem;
+        .dropdown-content a {
+            display: block;
+            padding: 0.5rem 1.5rem;
+            color: #000000 !important;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.02em;
         }
-        .dropdown-content a:hover { 
-            background: rgba(0, 0, 0, 0.1); 
-            border-left: 3px solid #ff0055; 
-            padding-left: 2rem; 
-        }
-
-        /* Hero Slideshow */
-        .hero {
-            height: 100vh;
-            position: relative;
-            overflow: hidden;
+        .dropdown-content a:hover {
+            background: rgba(0,0,0,0.04);
+            border-left: 3px solid #000;
+            padding-left: 2rem;
         }
 
-        .animated-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, #ff0055, #00ffff, #ffaa00);
-            opacity: 0.1;
-            filter: blur(100px);
-        }
+        /* ── HERO SPACER ──────────────────────────────────── */
+        .hero-spacer { height: 55vh; }
 
-        /* Mobile static image - shown by default */
-        .mobile-static-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-image: url('images_2/paints1.png');
-        }
-
-        .horizontal-slideshow {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 400%; /* Single wide image - 400% width */
-            height: 100%;
-            display: flex;
-            transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        .horizontal-slide {
-            width: 100%; /* Single image takes full width of slideshow */
-            height: 100%;
-            background-size: auto 100%; /* Stretch width automatically, maintain 100% height */
-            background-position: 0% center; /* Explicitly position at left edge */
-            background-repeat: no-repeat;
-            flex-shrink: 0;
-        }
-
-        .name-container {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 66%;
-            display: flex;
-            align-items: flex-end;
-            padding: 0 5%;
-            pointer-events: none;
-        }
-
-        .page-title {
-            font-family: 'Futura', sans-serif;
-            font-size: 10.5vw;
-            font-weight: 900;
-            color: white;
-            line-height: 0.8;
-            margin: 0;
-            text-transform: uppercase;
-            letter-spacing: -3px;
-            mix-blend-mode: difference;
-            text-align: center; /* Center the text */
-            position: absolute; /* If it needs to be positioned absolutely */
-            left: 50%; /* Center horizontally */
-            bottom: 0.05rem;
-            transform: translateX(-50%); /* Adjust for true centering */
-            width: 100%; /* Ensure it takes full width for proper centering */
-        }
-
-        /* Work Grid */
+        /* ── WORK GRID ────────────────────────────────────── */
         .work-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 18rem 5% 10rem 5%; /* INCREASED top padding */
+            padding: 0 5% 12rem 5%;
         }
 
         .work-section {
-            margin-bottom: 12rem;
+            margin-bottom: 18rem;
         }
 
-        .single-image {
+        .single-image { width: 100%; }
+
+        .work-img {
             width: 100%;
-            margin: 0 auto 0 auto; /* Remove bottom margin since text goes below */
+            display: block;
+            height: auto;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
         }
+        .work-img:hover { opacity: 0.9; }
 
-        .work-image {
-            width: 100%;
-            height: 700px;
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-            margin-bottom: 0; /* Remove margin since text goes below */
-            border-radius: 0;
-            overflow: hidden;
-            background-color: #f8f8f8; /* Off-white */
-        }
-
-  .works-image {
-            width: 100%;
-            height: 700px;
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-            margin-bottom: 0; /* Remove margin since text goes below */
-            border-radius: 0;
-            overflow: hidden;
-            background-color: #ffffff; /* Off-white */
-        }
-
-         .taller-containers .works-image {
-            height: 850px; /* Taller height */
-        }
-        /* Taller containers */
-        .taller-containers .work-image {
-            height: 850px; /* Taller height */
-        }
-
-        /* Text below image styling */
-        .image-text-below {
-            margin-top: 2rem; /* Small margin between image and title */
-            margin-bottom: 12rem; /* INCREASED margin after description from 10rem to 12rem */
-            text-align: left;
-        }
-
-        .image-text-below .work-item-title {
-            margin-bottom: 1rem;
-        }
-
-        /* Section title in middle */
+        /* ── SECTION DIVIDER TITLE ────────────────────────── */
         .section-title {
-            font-family: 'Futura', sans-serif;
-            font-size: 2rem; /* SMALLER font size from 2.5rem to 2rem */
-            font-weight: 900;
+            font-family: 'Futura', 'Futura PT', 'Century Gothic', 'Trebuchet MS', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
             color: #000000;
-            text-align: center;
-            margin: 18rem 0 12rem 0; /* INCREASED space above and below from 15rem/10rem to 18rem/12rem */
+            letter-spacing: 0.25em;
             text-transform: uppercase;
+            margin-bottom: 8rem;
+            padding-top: 2rem;
+            border-top: 0.5px solid #e0e0e0;
+        }
+
+        /* ── CAPTIONS ─────────────────────────────────────── */
+        .work-info {
+            margin-top: 1.8rem;
+            padding-top: 1.4rem;
+            border-top: 0.5px solid #e0e0e0;
         }
 
         .work-item-title {
-            font-family: 'Futura', sans-serif;
-            font-size: 1.25rem; /* SMALLER font size from 1.5rem to 1.25rem */
+            font-family: 'Futura', 'Futura PT', 'Century Gothic', 'Trebuchet MS', sans-serif;
+            font-size: 0.85rem;
             font-weight: 700;
-            margin-bottom: 1rem;
-            color: #000000; /* Black text */
+            margin-bottom: 0.45rem;
+            color: #000000;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
         }
 
-        .work-item-description {
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            color: #333333; /* Dark gray text */
-            line-height: 1.6;
-            max-width: 600px;
+        .project-year {
+            font-family: 'Futura', 'Futura PT', 'Century Gothic', 'Trebuchet MS', sans-serif;
+            font-size: 0.75rem;
+            color: #999999;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.15rem;
         }
 
-        /* Hide mobile image and show slideshow on desktop */
-        /* Mobile Styles */
-@media (max-width: 768px) {
-    /* Hide desktop slideshow on mobile */
-    .horizontal-slideshow {
-        display: none !important;
-    }
-    
-    /* Show mobile static image */
-    .mobile-static-image {
-        display: block !important;
-    }
-}
+        .project-institution {
+            font-family: 'Futura', 'Futura PT', 'Century Gothic', 'Trebuchet MS', sans-serif;
+            font-size: 0.75rem;
+            color: #999999;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 0.15rem;
+        }
 
-/* Desktop Styles */
-@media (min-width: 769px) {
-    /* Show desktop slideshow */
-    .horizontal-slideshow {
-        display: flex !important;
-    }
-    
-    /* Hide mobile static image */
-    .mobile-static-image {
-        display: none !important;
-    }
-}
+        .project-description {
+            font-family: 'Futura', 'Futura PT', 'Century Gothic', 'Trebuchet MS', sans-serif;
+            font-size: 0.72rem;
+            color: #bbbbbb;
+            font-weight: 400;
+            letter-spacing: 0.06em;
+        }
 
-        /* Mobile Responsive */
-       /* Mobile Responsive */
-/* Mobile Responsive */
-/* Mobile Responsive */
-@media (max-width: 768px) {
-    /* Hero adjustments for mobile */
-    .hero {
-        height: 90vh !important;
-    }
-     .taller-containers .work-image,
-    .taller-containers .works-image {
-        height: 50vh; /* 50% of viewport height */
-        max-height: 400px; /* But never taller than 400px */
-    }
-    .horizontal-slideshow {
-        height: 90vh !important;
-        display: none !important;
-    }
-    
-    /* POSITION TEXT AT BOTTOM LEFT CORNER - LIKE REFERENCE PAGE */
-    .name-container {
-        height: 70% !important;
-        bottom: 2% !important;
-        align-items: flex-end !important;
-        justify-content: flex-start !important;
-        padding: 0 5% !important;
-    }
-    
-    /* FIXED: Title styling - BOTTOM LEFT CORNER - MATCHING REFERENCE PAGE STYLING */
-    .page-title {
-        font-size: 15.5vw !important;
-        position: relative !important;
-        bottom: auto !important;
-        left: 0 !important;
-        transform: none !important;
-        margin-bottom: 0 !important;
-        mix-blend-mode: difference !important;
-        color: white !important;
-        line-height: 0.9 !important;
-        letter-spacing: -1px !important;
-        width: auto !important;
-        white-space: normal !important;
-        text-align: left !important;
-        margin-left: 0 !important;
-        word-wrap: break-word !important;
-    }
+        /* ── MOBILE ───────────────────────────────────────── */
+        @media (max-width: 768px) {
+            .header-panel { height: 18vh; }
+            nav { padding: 1rem; }
+            .nav-left { height: calc(18vh - 2.8rem); }
+            .nav-name { font-size: 1.05rem; }
+            .nav-links {
+                gap: 0.6rem;
+                align-items: baseline;
+                align-self: flex-start;
+                margin-top: 0;
+            }
+            .nav-links a { font-size: 0.85rem; }
+            .hero-title { font-size: clamp(2.5rem, 10vw, 3.6rem); }
+            .work-container { padding: 0 5% 8rem 5%; }
+            .work-section { margin-bottom: 16rem; }
+            .hero-spacer { height: 42vh; }
 
-    /* Show mobile static image */
-    .mobile-static-image {
-        display: block !important;
-    }
-    
-    /* UPDATED DROPDOWN - BLACK BACKGROUND (MATCHING REFERENCE) */
-    .dropdown-content { 
-        position: fixed !important; 
-        top: 90px !important;
-        right: 1rem !important;
-        left: auto !important;
-        transform: translateY(-10px) !important;
-        width: 45% !important;
-        min-width: unset !important;
-        background: #000000 !important;
-        border: none !important;
-        padding: 0.5rem 0 !important;
-        max-height: 60vh;
-        overflow-y: auto;
-        mix-blend-mode: normal !important;
-        backdrop-filter: none !important;
-        opacity: 1 !important;
-        z-index: 1000 !important;
-    }
-    
-    .dropdown:hover .dropdown-content {
-        transform: translateY(0) !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-    }
-    
-    .dropdown-content a {
-        padding: 0.4rem 1rem !important;
-        font-size: 0.8rem !important;
-        color: #ffffff !important;
-        text-align: right !important;
-        mix-blend-mode: normal !important;
-        border-left: none !important;
-        font-weight: 600 !important;
-        background: transparent !important;
-        display: block !important;
-    }
-    
-    .dropdown-content a:hover {
-        background: rgba(255, 255, 255, 0.2) !important;
-        padding-right: 1.5rem !important;
-    }
-    
-    .cursor, .cursor-follower {
-        display: none;
-    }
-    
-    .single-image {
-        width: 90%;
-    }
-    
-    .work-image {
-        height: 800px;
-    }
-    
-    .works-image {
-        height: 800px;
-    }
-    
-    .taller-containers .work-image {
-        height: 800px;
-        margin-top: 8rem;
-    }
-    
-    .taller-containers .works-image {
-        height: 800px;
-        margin-top: 8rem;
-    }
-    
-   .work-info {
-        text-align: left !important;
-        margin-bottom: 2rem !important;
-        margin-left: 2rem;
-        max-width: 85%;
-        margin-top: 2rem;
-    }
-
-    .work-item-title {
-        font-family: 'Futura', sans-serif !important;
-        font-size: 1.5rem !important;
-        font-weight: 700 !important;
-        margin-bottom: 1rem !important;
-        color: #000000 !important;
-        margin-top: 2rem;
-    }
-
-    .work-item-description {
-        font-family: 'Inter', sans-serif !important;
-        font-size: 0.9rem !important;
-        color: #ccc !important;
-        line-height: 1.6 !important;
-        max-width: 100% !important;
-          margin-bottom: 5rem !important;
-       
-
-    }
-
-    .project-details {
-        margin-top: 1rem !important;
-    }
-
-    .project-year,
-    .project-institution,
-    .project-description {
-        font-size: 0.85rem !important;
-        margin-bottom: 1rem !important;
-    }
-    
-    /* NAVIGATION */
-    nav {
-        padding: 1rem;
-    }
-    
-    .nav-links {
-        gap: 1rem;
-    }
-    
-    .work-container {
-        padding: 8rem 5% 10rem 5%;
-    }
-    
-    .section-title {
-        font-size: 1.8rem;
-        margin: 10rem 0 8rem 0;
-    }
-    
-    .image-text-below {
-        margin-bottom: 8rem;
-    }
-}/* Small mobile screens */
-@media (max-width: 480px) {
-    /* Full screen hero for small screens */
-    .hero {
-        height: 90vh !important;
-    }
-    .taller-containers .work-image,
-    .taller-containers .works-image {
-        height: 45vh; /* 45% of viewport height */
-        max-height: 350px;
-    }
-    .horizontal-slideshow {
-        height: 90vh !important;
-    }
-    
-    .name-container {
-        height: 75% !important;
-        bottom: 3% !important;
-    }
-    
-    .page-title {
-        font-size: 15vw !important; /* Slightly smaller for 480px */
-        letter-spacing: -0.5px !important;
-    }
-    
-    .work-container {
-        padding: 6rem 5% 10rem 5%;
-    }
-    
-    .single-image {
-        width: 95%;
-    }
-    
-    .work-image {
-        height: 250px;
-    }
-    
-    .works-image {
-        height: 250px;
-    }
-    
-    .taller-containers .work-image {
-        height: 650px;
-    }
-    
-    .taller-containers .works-image {
-        height: 450px;
-    }
-    
-    /* NAVIGATION */
-    nav {
-        padding: 0.4rem 0.8rem !important;
-    }
-     .work-info {
-        margin-bottom: 1.5rem !important;
-        margin-left: 1rem;
-        max-width: 90%;
-    }
-
-    .work-item-title {
-        font-size: 1.3rem !important;
-        margin-bottom: 0.8rem !important;
-    }
-
-    .work-item-description {
-        font-size: 0.8rem !important;
-    }
-
-    .project-year,
-    .project-institution,
-    .project-description {
-        font-size: 0.8rem !important;
-        margin-bottom: 0.8rem !important;
-    }
-    .nav-links {
-        gap: 1rem !important;
-    }
-    
-    .dropdown-content {
-        top: 85px !important;
-        width: 50% !important;
-        padding: 0.4rem 0 !important;
-    }
-    
-    .dropdown-content a {
-        padding: 0.3rem 0.8rem !important;
-        font-size: 0.75rem !important;
-    }
-    
-    .section-title {
-        font-size: 1.6rem;
-        margin: 8rem 0 6rem 0;
-    }
-    
-    .work-item-title {
-        font-size: 1rem;
-    }
-}
-
-@media (max-width: 360px) {
-    .hero {
-        height: 90vh !important;
-    }
-    
-    .horizontal-slideshow {
-        height: 90vh !important;
-    }
-    .taller-containers .work-image,
-    .taller-containers .works-image {
-        height: 40vh; /* 40% of viewport height */
-        max-height: 280px;
-    }
-    .name-container {
-        height: 80% !important;
-        bottom: 2% !important;
-    }
-    
-    .page-title {
-        font-size: 15vw !important; /* Smallest size for 360px */
-        letter-spacing: 0px !important;
-    }
-    
-    .nav-links {
-        gap: 1rem !important;
-    }
-    
-    .dropdown-content {
-        top: 80px !important;
-        width: 55% !important;
-    }
-    
-    .work-container {
-        padding: 5rem 5% 8rem 5%;
-    }
-    
-    .work-image {
-        height: 220px;
-    }
-    
-    .works-image {
-        height: 220px;
-    }
-    
-    .taller-containers .work-image {
-        height: 320px;
-    }
-    
-    .taller-containers .works-image {
-        height: 320px;
-    }
-    
-    .section-title {
-        font-size: 1.4rem;
-        margin: 6rem 0 5rem 0;
-    }
-    
-    .work-item-title {
-        font-size: 0.9rem;
-    }
-     .work-info {
-        margin-bottom: 1rem !important;
-    }
-
-    .work-item-title {
-        font-size: 1.1rem !important;
-    }
-
-    .work-item-description {
-        font-size: 0.75rem !important;
-    }
-
-    .project-year,
-    .project-institution,
-    .project-description {
-        font-size: 0.75rem !important;
-    }
-}
+            .dropdown-content {
+                position: fixed !important;
+                top: 80px !important;
+                right: 1rem !important;
+                left: auto !important;
+                width: 50% !important;
+                min-width: unset !important;
+                background: #000000 !important;
+                border: none !important;
+                mix-blend-mode: normal !important;
+                backdrop-filter: none !important;
+            }
+            .dropdown-content a {
+                color: #ffffff !important;
+                text-align: right !important;
+                border-left: none !important;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Full Screen Image Modal -->
-<div id="imageModal" class="image-modal">
-    <button class="close-modal">&times;</button>
-    <button class="nav-btn prev-btn">&lt;</button>
-    <button class="nav-btn next-btn">&gt;</button>
-    <div class="modal-content">
-        <img class="modal-image" src="" alt="">
-    </div>
-</div>
-    <!-- Navigation -->
-    <nav>
-        <div style="font-family: 'Futura', sans-serif; font-weight: 900; font-size: 1.2rem; color: white;">
-            <a href="index.html" style="color: white; text-decoration: none;">PORTFOLIO 2025</a>
+    <!-- Modal -->
+    <div id="imageModal" class="image-modal">
+        <button class="close-modal">&times;</button>
+        <button class="nav-btn prev-btn"></button>
+        <button class="nav-btn next-btn"></button>
+        <div class="modal-content">
+            <img class="modal-image" src="" alt="">
         </div>
-        <div class="nav-links">
+    </div>
+
+    <!-- Safe area top cover -->
+    <div class="top-cover" id="topCover"></div>
+
+    <!-- Black header panel -->
+    <div class="header-panel" id="headerPanel"></div>
+
+    <!-- Nav -->
+    <nav id="mainNav">
+        <div class="nav-left">
+            <div class="nav-name" id="navName">
+                <a href="index.html" style="color:#ffffff;text-decoration:none;">Brad Sherman</a>
+            </div>
+            <div id="heroTitleWrap" style="will-change:opacity;">
+                <h1 class="hero-title" id="heroTitle">Paintings</h1>
+            </div>
+        </div>
+        <div class="nav-links" id="navLinks">
             <div class="dropdown">
-                <a href="#work" style="color: white; text-decoration: none; font-weight: 600; position: relative; cursor: pointer;">
-                    WORK
-                    <span style="position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #ff0055; transition: width 0.3s;"></span>
-                </a>
+                <a href="#" style="color:#ffffff;text-decoration:none;font-weight:600;cursor:pointer;">Work</a>
                 <div class="dropdown-content">
                     <a href="index.html">Home</a>
-                      <a href="painting.html">Painting</a>
-                      <a href="drawing.html">Drawing</a>
-                      <a href="woodworking.html">Woodworking</a>
+                    <a href="painting.html">Painting</a>
+                    <a href="drawing.html">Drawing</a>
+                    <a href="woodworking.html">Woodworking</a>
                     <a href="websites.html">Websites</a>
                     <a href="photography.html">Photography</a>
-                 
                 </div>
             </div>
-            <a href="Contacts.html" style="color: white; text-decoration: none; font-weight: 600; position: relative;">
-    CONTACT
-</a>
+            <a href="Contacts.html" style="color:#ffffff;text-decoration:none;font-weight:600;">Contact</a>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <!-- Animated Background -->
-        <div class="animated-bg"></div>
-        
-        <!-- Mobile Static Image (shown on mobile) -->
-        <div class="mobile-static-image"></div>
-        
-        <!-- Horizontal Slideshow - Single Wide Image (shown on desktop) -->
-        <div class="horizontal-slideshow">
-            <div class="horizontal-slide" style="background-image: url('images_2/hip.jpg');"></div>
-        </div>
+    <div class="hero-spacer"></div>
 
-        <!-- Painting Title -->
-        <div class="name-container">
-            <h1 class="page-title">PAINTING</h1>
-        </div>
-    </section>
-
-    <!-- Work Content -->
+    <!-- Work -->
     <section class="work-container">
-        <!-- First painting - Taller -->
+
         <div class="work-section">
-            <div class="single-image taller-containers">
-                <div class="work-image" style="background-image: url('images_2/p1.jpg');"></div>
+            <div class="single-image">
+                <img class="work-img" src="images_2/p1.jpg" alt="Giardino Di Augusto, Capri" loading="eager" decoding="async"/>
             </div>
-            
             <div class="work-info">
-        <h3 class="work-item-title">Giardino Di Augusto, Capri</h3>
-        <div class="project-details">
-            <p class="project-year">2025</p>
-            <p class="project-institution">Acrylic on Canvas</p>
-            <p class="project-description">
-                30 x 40 cm
-            </p>
-        </div>
-    </div>
-
-                 <div class="work-section">
-            <div class="single-image taller-containers">
-                <div class="work-image" style="background-image: url('images_2/Union.jpg');"></div>
+                <h3 class="work-item-title">Giardino Di Augusto, Capri</h3>
+                <p class="project-year">2025</p>
+                <p class="project-institution">Acrylic on Canvas</p>
+                <p class="project-description">30 × 40 cm</p>
             </div>
-           
-               <div class="work-info">
-        <h3 class="work-item-title">Memorial Union, Madison</h3>
-        <div class="project-details">
-            <p class="project-year">2025</p>
-            <p class="project-institution">Acrylic on Canvas</p>
-            <p class="project-description">
-                30 x 40 cm
-            </p>
         </div>
-    </div>
 
-                                <div class="work-section">
-            <div class="single-image taller-containers">
-                <div class="work-image" style="background-image: url('images_2/Pari.jpg');"></div>
-            </div>
-           
-               <div class="work-info">
-        <h3 class="work-item-title">An Evening in Paris </h3>
-        <div class="project-details">
-            <p class="project-year">2026</p>
-            <p class="project-institution">Acrylic on Canvas</p>
-            <p class="project-description">
-                20 x 16 in
-            </p>
-        </div>
-    </div>
-
-                      
-        <!-- Second painting - Normal -->
         <div class="work-section">
-            <div class="single-image taller-containers">
-                <div class="work-image" style="background-image: url('images_2/p2.jpg');"></div>
+            <div class="single-image">
+                <img class="work-img" src="images_2/Union.jpg" alt="Memorial Union, Madison" loading="lazy" decoding="async"/>
             </div>
-           
-               <div class="work-info">
-        <h3 class="work-item-title">Ponte Vecchio, Firenze</h3>
-        <div class="project-details">
-            <p class="project-year">2025</p>
-            <p class="project-institution">Acrylic on Canvas</p>
-            <p class="project-description">
-                30 x 40 cm
-            </p>
-        </div>
-    </div>
-
-        <!-- Third painting - Taller -->
-        <div class="work-section">
-            <div class="single-image taller-containers">
-                <div class="works-image" style="background-image: url('images_2/pontev.jpg');"></div>
-            </div>
-          
-             <div class="work-info">
-        <h3 class="work-item-title">Ponte Vecchio, Firenze</h3>
-        <div class="project-details">
-            <p class="project-year">2025</p>
-            <p class="project-institution">Acrylic on Canvas</p>
-            <p class="project-description">
-                25 x 35 cm
-            </p>
-        </div>
-    </div>
-
-
-                                <div class="work-section">
-            <div class="single-image taller-containers">
-                <div class="work-image" style="background-image: url('images_2/Chirico.jpg');"></div>
-            </div>
-           
-               <div class="work-info">
-        <h3 class="work-item-title">Warm Surreal </h3>
-        <div class="project-details">
-            <p class="project-year">2026</p>
-            <p class="project-institution">Acrylic on Canvas</p>
-            <p class="project-description">
-                10 x 16 in
-            </p>
-        </div>
-    </div>
-
-             
-                 <div class="work-section">
-            <div class="single-image taller-containers">
-                <div class="works-image" style="background-image: url('images_2/Monopoli.jpg');"></div>
-            </div>
-          
-             <div class="work-info">
-        <h3 class="work-item-title">Old City, Monopoli</h3>
-        <div class="project-details">
-            <p class="project-year">2026</p>
-            <p class="project-institution">Acrylic on Paper</p>
-            <p class="project-description">
-                21 x 28 cm
-            </p>
-        </div>
-    </div>
-
-        <!-- Section Title: Still Lifes -->
-        <h2 class="section-title">STILL LIFES</h2>
-
-        <!-- Fourth painting - Taller -->
-        <div class="work-section">
-            <div class="single-image taller-containers">
-                <div class="work-image" style="background-image: url('images_2/p4.jpg');"></div>
-            </div>
-            
-               <div class="work-info">
-        <h3 class="work-item-title">Farfalle</h3>
-        <div class="project-details">
-            <p class="project-year">2025</p>
-            <p class="project-institution">Acrylic on Canvas</p>
-            <p class="project-description">
-                25 x 35 cm
-            </p>
-        </div>
-    </div>
-
-        <!-- Fifth painting - Taller -->
-        <div class="work-section">
-            <div class="single-image taller-containers">
-                <div class="work-image" style="background-image: url('images_2/p5.jpg');"></div>
-            </div>
-           
-             <div class="work-info">
-        <h3 class="work-item-title">Wine Opener</h3>
-        <div class="project-details">
-            <p class="project-year">2025</p>
-            <p class="project-institution">Acrylic on Canvas</p>
-            <p class="project-description">
-                25 x 35 cm
-            </p>
-        </div>
-    </div>
-
-        <!-- Sixth painting - Taller -->
-        <div class="work-section">
-            <div class="single-image taller-containers">
-                <div class="work-image" style="background-image: url('images_2/p6.jpg');"></div>
-            </div>
-           
             <div class="work-info">
-        <h3 class="work-item-title">Coffee Grinder</h3>
-        <div class="project-details">
-            <p class="project-year">2025</p>
-            <p class="project-institution">Acrylic on Canvas</p>
-            <p class="project-description">
-                25 x 35 cm
-            </p>
-        </div>
-    </div>
-
-    
-
-             <!-- Seventh painting - Normal -->
-        <div class="work-section">
-            <div class="single-image taller-containers">
-                <div class="works-image" style="background-image: url('images_2/p7.jpg');"></div>
+                <h3 class="work-item-title">Memorial Union, Madison</h3>
+                <p class="project-year">2025</p>
+                <p class="project-institution">Acrylic on Canvas</p>
+                <p class="project-description">30 × 40 cm</p>
             </div>
-          
-               <div class="work-info">
-        <h3 class="work-item-title">Still Life Black & White</h3>
-        <div class="project-details">
-            <p class="project-year">2025</p>
-            <p class="project-institution">Acrylic on Canvas</p>
-            <p class="project-description">
-                40 x 30 cm
-            </p>
         </div>
-    </div>
-            
+
+        <div class="work-section">
+            <div class="single-image">
+                <img class="work-img" src="images_2/Pari.jpg" alt="An Evening in Paris" loading="lazy" decoding="async"/>
+            </div>
+            <div class="work-info">
+                <h3 class="work-item-title">An Evening in Paris</h3>
+                <p class="project-year">2026</p>
+                <p class="project-institution">Acrylic on Canvas</p>
+                <p class="project-description">20 × 16 in</p>
+            </div>
+        </div>
+
+        <div class="work-section">
+            <div class="single-image">
+                <img class="work-img" src="images_2/p2.jpg" alt="Ponte Vecchio, Firenze" loading="lazy" decoding="async"/>
+            </div>
+            <div class="work-info">
+                <h3 class="work-item-title">Ponte Vecchio, Firenze</h3>
+                <p class="project-year">2025</p>
+                <p class="project-institution">Acrylic on Canvas</p>
+                <p class="project-description">30 × 40 cm</p>
+            </div>
+        </div>
+
+        <div class="work-section">
+            <div class="single-image">
+                <img class="work-img" src="images_2/pontev.jpg" alt="Ponte Vecchio, Firenze II" loading="lazy" decoding="async"/>
+            </div>
+            <div class="work-info">
+                <h3 class="work-item-title">Ponte Vecchio, Firenze</h3>
+                <p class="project-year">2025</p>
+                <p class="project-institution">Acrylic on Canvas</p>
+                <p class="project-description">25 × 35 cm</p>
+            </div>
+        </div>
+
+        <div class="work-section">
+            <div class="single-image">
+                <img class="work-img" src="images_2/Chirico.jpg" alt="Warm Surreal" loading="lazy" decoding="async"/>
+            </div>
+            <div class="work-info">
+                <h3 class="work-item-title">Warm Surreal</h3>
+                <p class="project-year">2026</p>
+                <p class="project-institution">Acrylic on Canvas</p>
+                <p class="project-description">10 × 16 in</p>
+            </div>
+        </div>
+
+        <div class="work-section">
+            <div class="single-image">
+                <img class="work-img" src="images_2/Monopoli.jpg" alt="Old City, Monopoli" loading="lazy" decoding="async"/>
+            </div>
+            <div class="work-info">
+                <h3 class="work-item-title">Old City, Monopoli</h3>
+                <p class="project-year">2026</p>
+                <p class="project-institution">Acrylic on Paper</p>
+                <p class="project-description">21 × 28 cm</p>
+            </div>
+        </div>
+
+        <!-- Still Lifes divider -->
+        <div class="work-section" style="margin-bottom:6rem;">
+            <p class="section-title">Still Lifes</p>
+        </div>
+
+        <div class="work-section">
+            <div class="single-image">
+                <img class="work-img" src="images_2/p4.jpg" alt="Farfalle" loading="lazy" decoding="async"/>
+            </div>
+            <div class="work-info">
+                <h3 class="work-item-title">Farfalle</h3>
+                <p class="project-year">2025</p>
+                <p class="project-institution">Acrylic on Canvas</p>
+                <p class="project-description">25 × 35 cm</p>
+            </div>
+        </div>
+
+        <div class="work-section">
+            <div class="single-image">
+                <img class="work-img" src="images_2/p5.jpg" alt="Wine Opener" loading="lazy" decoding="async"/>
+            </div>
+            <div class="work-info">
+                <h3 class="work-item-title">Wine Opener</h3>
+                <p class="project-year">2025</p>
+                <p class="project-institution">Acrylic on Canvas</p>
+                <p class="project-description">25 × 35 cm</p>
+            </div>
+        </div>
+
+        <div class="work-section">
+            <div class="single-image">
+                <img class="work-img" src="images_2/p6.jpg" alt="Coffee Grinder" loading="lazy" decoding="async"/>
+            </div>
+            <div class="work-info">
+                <h3 class="work-item-title">Coffee Grinder</h3>
+                <p class="project-year">2025</p>
+                <p class="project-institution">Acrylic on Canvas</p>
+                <p class="project-description">25 × 35 cm</p>
+            </div>
+        </div>
+
+        <div class="work-section">
+            <div class="single-image">
+                <img class="work-img" src="images_2/p7.jpg" alt="Still Life Black & White" loading="lazy" decoding="async"/>
+            </div>
+            <div class="work-info">
+                <h3 class="work-item-title">Still Life Black &amp; White</h3>
+                <p class="project-year">2025</p>
+                <p class="project-institution">Acrylic on Canvas</p>
+                <p class="project-description">40 × 30 cm</p>
+            </div>
+        </div>
+
     </section>
 
     <script>
+        // ── Modal ──────────────────────────────────────────
+        const modal      = document.getElementById('imageModal');
+        const modalImage = document.querySelector('.modal-image');
+        const closeBtn   = document.querySelector('.close-modal');
+        const prevBtn    = document.querySelector('.prev-btn');
+        const nextBtn    = document.querySelector('.next-btn');
+        const allImgs    = [...document.querySelectorAll('.work-img')];
+        let currentIdx   = 0;
 
-        // Full Screen Image Viewer
-// Full Screen Image Viewer
-const modal = document.getElementById('imageModal');
-const modalImage = document.querySelector('.modal-image');
-const closeModal = document.querySelector('.close-modal');
-const prevBtn = document.querySelector('.prev-btn');
-const nextBtn = document.querySelector('.next-btn');
-
-// Get all images on the page (all image classes)
-const workImages = document.querySelectorAll('.work-image');
-const worksImages = document.querySelectorAll('.works-image');
-const workssImages = document.querySelectorAll('.workss-image');
-const worksssImages = document.querySelectorAll('.worksss-image');
-
-// Combine all arrays
-const allImages = [...workImages, ...worksImages, ...workssImages, ...worksssImages];
-let currentImageIndex = 0;
-let images = [];
-
-// Extract image URLs from background images
-allImages.forEach((img, index) => {
-    const bgImage = img.style.backgroundImage;
-    console.log(`Image ${index}:`, bgImage); // Debug log
-    
-    // Extract URL from background-image: url('...')
-    if (bgImage && bgImage !== 'none') {
-        const imageUrl = bgImage.replace(/url\(['"]?(.*?)['"]?\)/i, '$1');
-        images.push(imageUrl);
-        
-        // Make image clickable
-        img.addEventListener('click', () => {
-            currentImageIndex = index;
-            openModal();
-        });
-        
-        console.log(`Added image ${index}:`, imageUrl); // Debug log
-    }
-});
-
-console.log('Total images found:', images.length); // Debug log
-
-function openModal() {
-    if (images.length === 0) {
-        console.log('No images found'); // Debug log
-        return;
-    }
-    modal.style.display = 'flex';
-    modalImage.src = images[currentImageIndex];
-    document.body.style.overflow = 'hidden'; // Prevent scrolling
-}
-
-function closeModalFunc() {
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto'; // Re-enable scrolling
-}
-
-function showNextImage() {
-    currentImageIndex = (currentImageIndex + 1) % images.length;
-    modalImage.src = images[currentImageIndex];
-}
-
-function showPrevImage() {
-    currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
-    modalImage.src = images[currentImageIndex];
-}
-
-// Event listeners
-closeModal.addEventListener('click', closeModalFunc);
-nextBtn.addEventListener('click', showNextImage);
-prevBtn.addEventListener('click', showPrevImage);
-
-// Close modal when clicking outside image
-modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-        closeModalFunc();
-    }
-});
-
-// Keyboard navigation
-document.addEventListener('keydown', (e) => {
-    if (modal.style.display === 'flex') {
-        if (e.key === 'Escape') closeModalFunc();
-        if (e.key === 'ArrowRight') showNextImage();
-        if (e.key === 'ArrowLeft') showPrevImage();
-    }
-});
-      
-// Change title to "ACRYLIC PAINTINGS" only on mobile
-function updateMobileTitle() {
-    if (window.innerWidth <= 768) {
-        const pageTitle = document.querySelector('.page-title');
-        if (pageTitle && pageTitle.textContent === 'PAINTING') {
-            pageTitle.textContent = 'ACRYLIC PAINTINGS';
+        function openModal(idx) {
+            currentIdx = idx;
+            modalImage.src = allImgs[idx].src;
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
         }
-    }
-}
+        function closeModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+        function showNext() {
+            currentIdx = (currentIdx + 1) % allImgs.length;
+            modalImage.src = allImgs[currentIdx].src;
+        }
+        function showPrev() {
+            currentIdx = (currentIdx - 1 + allImgs.length) % allImgs.length;
+            modalImage.src = allImgs[currentIdx].src;
+        }
 
-// Run on load and resize
-window.addEventListener('load', updateMobileTitle);
-window.addEventListener('resize', updateMobileTitle);
+        allImgs.forEach((img, i) => img.addEventListener('click', () => openModal(i)));
+        closeBtn.addEventListener('click', closeModal);
+        nextBtn.addEventListener('click', showNext);
+        prevBtn.addEventListener('click', showPrev);
+        modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+        document.addEventListener('keydown', e => {
+            if (modal.style.display !== 'flex') return;
+            if (e.key === 'Escape')      closeModal();
+            if (e.key === 'ArrowRight')  showNext();
+            if (e.key === 'ArrowLeft')   showPrev();
+        });
+
+        // ── Scroll ────────────────────────────────────────
+        const nav           = document.getElementById('mainNav');
+        const headerPanel   = document.getElementById('headerPanel');
+        const topCover      = document.getElementById('topCover');
+        const heroTitle     = document.getElementById('heroTitle');
+        const heroTitleWrap = document.getElementById('heroTitleWrap');
+        const navName       = document.getElementById('navName');
+        const navLinks      = document.getElementById('navLinks');
+        const navLeft       = document.querySelector('.nav-left');
+
+        const vh          = window.innerHeight;
+        const isMobile    = window.innerWidth <= 768;
+        const panelH      = isMobile ? 0.18 : 0.25;
+        const FADE_START  = 0;
+        const FADE_END    = vh * panelH;
+        const TITLE_START = vh * (isMobile ? 0.12 : 0.18);
+        const TITLE_END   = vh * (isMobile ? 0.32 : 0.42);
+        const NAV_SOLID   = vh * (isMobile ? 0.38 : 0.50);
+        const COLOR_END   = vh * (isMobile ? 0.12 : 0.18);
+
+        window.addEventListener('scroll', () => {
+            const y = window.scrollY;
+
+            // — Black panel fade —
+            if (y <= 0) {
+                headerPanel.style.opacity = '1';
+            } else if (y < FADE_END) {
+                headerPanel.style.opacity = String(1 - y / FADE_END);
+            } else {
+                headerPanel.style.opacity = '0';
+            }
+
+            // — Color sweep —
+            heroTitle.style.transition = 'none';
+            if (y <= 0) {
+                heroTitle.style.backgroundPosition = '100% 0';
+            } else if (y < COLOR_END) {
+                const pos = 100 - ((y / COLOR_END) * 70);
+                heroTitle.style.backgroundPosition = `${pos}% 0`;
+            } else {
+                heroTitle.style.backgroundPosition = '30% 0';
+            }
+
+            // — Title fade —
+            if (y <= TITLE_START) {
+                heroTitleWrap.style.opacity   = '1';
+                heroTitleWrap.style.transform = 'translateY(0)';
+            } else if (y < TITLE_END) {
+                const p = (y - TITLE_START) / (TITLE_END - TITLE_START);
+                heroTitleWrap.style.opacity   = String(1 - p);
+                heroTitleWrap.style.transform = `translateY(${-p * 12}px)`;
+            } else {
+                heroTitleWrap.style.opacity   = '0';
+                heroTitleWrap.style.transform = 'translateY(-12px)';
+            }
+
+            // — Nav text fade —
+            if (y <= NAV_SOLID) {
+                if (y <= 0) {
+                    navName.style.opacity  = '1';
+                    navLinks.style.opacity = '1';
+                } else if (y < FADE_END) {
+                    const p = y / FADE_END;
+                    navName.style.opacity  = String(1 - p);
+                    navLinks.style.opacity = String(1 - p);
+                } else {
+                    navName.style.opacity  = '0';
+                    navLinks.style.opacity = '0';
+                }
+            }
+
+            // — Top cover —
+            topCover.style.background = y > NAV_SOLID ? '#ffffff' : '#000000';
+
+            // — Nav goes solid —
+            if (y > NAV_SOLID) {
+                nav.classList.add('is-solid');
+                nav.style.background         = '#ffffff';
+                nav.style.borderBottom       = '0.5px solid #ebebeb';
+                nav.style.alignItems         = 'center';
+                nav.style.paddingTop         = isMobile ? '1rem' : '2rem';
+                nav.style.paddingBottom      = isMobile ? '0.8rem' : '1rem';
+                nav.style.minHeight          = isMobile ? '60px' : 'auto';
+                navLeft.style.height         = 'auto';
+                navLeft.style.justifyContent = 'flex-start';
+                navLeft.style.gap            = '0';
+                navName.style.opacity        = '1';
+                navLinks.style.opacity       = '1';
+                heroTitleWrap.style.display  = 'none';
+                nav.querySelectorAll('a:not(.dropdown-content a)').forEach(a => a.style.color = '#000');
+            } else {
+                nav.classList.remove('is-solid');
+                nav.style.background         = 'transparent';
+                nav.style.borderBottom       = 'none';
+                nav.style.paddingBottom      = isMobile ? '1rem' : '2rem';
+                nav.style.minHeight          = 'auto';
+                nav.style.alignItems         = 'flex-start';
+                navLeft.style.height         = isMobile ? 'calc(18vh - 2rem)' : 'calc(25vh - 4rem)';
+                navLeft.style.justifyContent = 'space-between';
+                navLeft.style.gap            = '';
+                heroTitleWrap.style.display  = '';
+                nav.querySelectorAll('a:not(.dropdown-content a)').forEach(a => a.style.color = '#fff');
+            }
+        }, { passive: true });
 
     </script>
 </body>
 </html>
+
