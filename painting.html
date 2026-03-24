@@ -326,7 +326,7 @@
             .work-section { margin-bottom: 16rem; }
             .hero-spacer { height: 42vh; }
 
-            /* FIX: dropdown full-width so text never clips */
+            /* FIX: dropdown full-width, no transforms that could shift it */
             .dropdown-content {
                 position: fixed !important;
                 top: 80px !important;
@@ -335,19 +335,29 @@
                 width: 100vw !important;
                 min-width: unset !important;
                 max-width: 100vw !important;
+                transform: none !important;
                 background: #000000 !important;
                 border: none !important;
-                border-radius: 8px !important;
+                border-radius: 0 !important;
                 mix-blend-mode: normal !important;
                 backdrop-filter: none !important;
+                overflow: hidden !important;
+            }
+            .dropdown:hover .dropdown-content {
+                transform: none !important;
             }
             .dropdown-content a {
                 color: #ffffff !important;
                 text-align: left !important;
-                border-left: 3px solid transparent !important;
+                border-left: none !important;
+                padding: 0.6rem 0 0.6rem 1.5rem !important;
+                letter-spacing: 0.04em !important;
+                white-space: nowrap !important;
             }
             .dropdown-content a:hover {
-                border-left: 3px solid #ffffff !important;
+                border-left: none !important;
+                padding-left: 1.5rem !important;
+                background: rgba(255,255,255,0.08) !important;
             }
         }
     </style>
