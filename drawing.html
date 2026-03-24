@@ -5,18 +5,18 @@
     <link rel="apple-touch-icon" href="images_2/favicon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Painting - Brad Sherman</title>
+    <title>Drawing - Brad Sherman</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
             font-family: 'Inter', sans-serif;
-            background: 
-#ffffff;
-            color: 
-#000000;
-            overflow-x: hidden; /* FIX: kills horizontal scrollbar */
+            background: #ffffff;
+            color: #000000;
+            overflow-x: hidden;
         }
+
         /* ── GRAIN OVERLAY ────────────────────────────────── */
         body::after {
             content: '';
@@ -29,6 +29,7 @@
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
             background-size: 200px 200px;
         }
+
         /* ── MODAL ────────────────────────────────────────── */
         .image-modal {
             display: none;
@@ -66,66 +67,73 @@
         .prev-btn { left: 20px; }
         .prev-btn::before { transform: translate(-50%, -50%) rotate(-135deg); }
         .next-btn { right: 20px; }
-        /* ── TOP COVER ────────────────────────────────────── */
+
+        /* ── SAFE AREA TOP COVER ──────────────────────────── */
+        /* Always white behind the status bar / dynamic island */
         .top-cover {
             position: fixed;
-            top: 0;
-            left: 0;
+            top: 0; left: 0;
             width: 100%;
-            height: env(safe-area-inset-top);
-            background: 
-#000000;
-            z-index: 999;
+            height: env(safe-area-inset-top, 50px);
+            background: #ffffff;
+            z-index: 600;
             pointer-events: none;
         }
+        .header-panel {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            height: 25vh;
+            background: #000000;
+            z-index: 490;
+            transition: opacity 0.5s ease;
+            padding-top: env(safe-area-inset-top);
+        }
+
         /* ── NAV ──────────────────────────────────────────── */
         nav {
             position: fixed;
             top: 0; left: 0; width: 100%;
-            padding: 2rem;
+            padding: 2rem 2rem 2rem 2rem;
+            padding-top: max(2rem, env(safe-area-inset-top));
             z-index: 500;
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             transition: background 0.4s ease, border-bottom 0.4s ease;
         }
-        nav.is-solid {
-            background: 
-#ffffff;
-            padding-top: calc(env(safe-area-inset-top) + 1rem) !important;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-        }
-        /* ── BLACK HEADER PANEL ───────────────────────────── */
-        .header-panel {
+
+        /* solid white cover that sits behind nav text but above everything else */
+        nav.nav-solid-cover::before {
+            content: '';
             position: fixed;
             top: 0; left: 0;
             width: 100%;
-            height: 25vh;
-            background: 
-#000000;
-            z-index: 490;
-            transition: opacity 0.5s ease;
+            height: 100%;
+            background: rgba(255,255,255,0.97);
+            z-index: -1;
         }
+
         .nav-left {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             height: calc(25vh - 4rem);
         }
+
         .nav-name {
             font-family: 'Futura', 'Futura PT', 'Century Gothic', 'Trebuchet MS', sans-serif;
             font-weight: 900;
             font-size: 1.05rem;
             letter-spacing: 0.08em;
             text-transform: uppercase;
-            color: 
-#ffffff;
+            color: #ffffff;
             opacity: 0;
             transform: translateX(-28px);
             animation: slideInLeft 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.5s forwards;
             transition: opacity 0.5s ease, transform 0.5s ease;
         }
+
         .hero-title {
             font-family: 'Futura', 'Futura PT', 'Century Gothic', 'Trebuchet MS', sans-serif;
             font-weight: 900;
@@ -138,26 +146,16 @@
             will-change: opacity, transform;
             background: linear-gradient(
                 90deg,
-                
-#ffffff 0%,
-                
-#ffffff 5%,
-                
-#b91c1c 18%,
-                
-#d97706 30%,
-                
-#92400e 42%,
-                
-#b45309 54%,
-                
-#b91c1c 66%,
-                
-#d97706 74%,
-                
-#ffffff 82%,
-                
-#ffffff 100%
+                #ffffff 0%,
+                #ffffff 5%,
+                #c2410c 18%,
+                #92400e 30%,
+                #1e40af 42%,
+                #0f766e 54%,
+                #c2410c 66%,
+                #92400e 74%,
+                #ffffff 82%,
+                #ffffff 100%
             );
             background-size: 600% 100%;
             background-position: 100% 0;
@@ -165,6 +163,7 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
+
         .nav-links {
             display: flex;
             gap: 2rem;
@@ -173,12 +172,14 @@
             animation: fadeUp 0.9s ease 0.65s forwards;
             transition: opacity 0.5s ease, transform 0.5s ease;
         }
+
         .nav-links a, .dropdown > a {
             line-height: 1;
             display: inline-block;
         }
-        nav a { color: 
-#ffffff; text-decoration: none; font-weight: 600; }
+
+        nav a { color: #ffffff; text-decoration: none; font-weight: 600; }
+
         @keyframes slideInLeft {
             from { opacity: 0; transform: translateX(-28px); }
             to   { opacity: 1; transform: translateX(0); }
@@ -191,15 +192,14 @@
             from { opacity: 0; }
             to   { opacity: 1; }
         }
+
         /* ── DROPDOWN ─────────────────────────────────────── */
         .dropdown { position: relative; display: inline-block; }
         .dropdown-content {
             position: absolute;
             top: 35px; left: 0;
-            background: 
-#ffffff;
-            border: 1px solid 
-#e8e8e8;
+            background: #ffffff;
+            border: 1px solid #e8e8e8;
             border-radius: 8px;
             padding: 1rem 0;
             min-width: 200px;
@@ -213,8 +213,7 @@
         .dropdown-content a {
             display: block;
             padding: 0.5rem 1.5rem;
-            color: 
-#000000 !important;
+            color: #000000 !important;
             text-decoration: none;
             transition: all 0.3s ease;
             border-left: 3px solid transparent;
@@ -227,88 +226,76 @@
             border-left: 3px solid #000;
             padding-left: 2rem;
         }
+
         /* ── HERO SPACER ──────────────────────────────────── */
         .hero-spacer { height: 55vh; }
+
         /* ── WORK GRID ────────────────────────────────────── */
         .work-container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 5% 12rem 5%;
         }
+
         .work-section {
             margin-bottom: 18rem;
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 1.4s ease, transform 1.4s ease;
+            position: relative;
         }
-        .single-image { width: 100%; }
+        .work-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .img-wrap { width: 100%; }
+
         .work-img {
             width: 100%;
             display: block;
             height: auto;
-            max-height: 80vh;
-            object-fit: contain;
             cursor: pointer;
             transition: opacity 0.3s ease;
         }
         .work-img:hover { opacity: 0.9; }
-        /* ── SECTION DIVIDER TITLE ────────────────────────── */
-        .section-title {
-            font-family: 'Futura', 'Futura PT', 'Century Gothic', 'Trebuchet MS', sans-serif;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: 
-#000000;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            margin-bottom: 8rem;
-            padding-top: 2rem;
-            border-top: 0.5px solid 
-#e0e0e0;
-        }
-        /* ── CAPTIONS ─────────────────────────────────────── */
+
         .work-info {
             margin-top: 1.8rem;
             padding-top: 1.4rem;
-            border-top: 0.5px solid 
-#e0e0e0;
+            border-top: 0.5px solid #e0e0e0;
         }
+
         .work-item-title {
             font-family: 'Futura', 'Futura PT', 'Century Gothic', 'Trebuchet MS', sans-serif;
             font-size: 0.85rem;
             font-weight: 700;
             margin-bottom: 0.45rem;
-            color: 
-#000000;
+            color: #000000;
             letter-spacing: 0.1em;
             text-transform: uppercase;
         }
+
         .project-year {
             font-family: 'Futura', 'Futura PT', 'Century Gothic', 'Trebuchet MS', sans-serif;
             font-size: 0.75rem;
-            color: 
-#999999;
+            color: #999999;
             font-weight: 400;
             letter-spacing: 0.08em;
             margin-bottom: 0.15rem;
         }
+
         .project-institution {
             font-family: 'Futura', 'Futura PT', 'Century Gothic', 'Trebuchet MS', sans-serif;
             font-size: 0.75rem;
-            color: 
-#999999;
+            color: #999999;
             font-weight: 400;
             letter-spacing: 0.1em;
             text-transform: uppercase;
-            margin-bottom: 0.15rem;
         }
-        .project-description {
-            font-family: 'Futura', 'Futura PT', 'Century Gothic', 'Trebuchet MS', sans-serif;
-            font-size: 0.72rem;
-            color: 
-#bbbbbb;
-            font-weight: 400;
-            letter-spacing: 0.06em;
-        }
+
         /* ── MOBILE ───────────────────────────────────────── */
-          @media (max-width: 768px) {
+           @media (max-width: 768px) {
             .header-panel { height: 18vh; }
             nav { padding: 1rem; }
             .nav-left { height: calc(18vh - 2.8rem); }
@@ -363,6 +350,7 @@
     </style>
 </head>
 <body>
+
     <!-- Modal -->
     <div id="imageModal" class="image-modal">
         <button class="close-modal">&times;</button>
@@ -372,25 +360,26 @@
             <img class="modal-image" src="" alt="">
         </div>
     </div>
-    <!-- Safe area top cover -->
+
+    <!-- Safe area top cover - always white above dynamic island -->
     <div class="top-cover" id="topCover"></div>
+
     <!-- Black header panel -->
     <div class="header-panel" id="headerPanel"></div>
+
     <!-- Nav -->
     <nav id="mainNav">
         <div class="nav-left">
             <div class="nav-name" id="navName">
-                <a href="index.html" style="color:
-#ffffff;text-decoration:none;">Brad Sherman</a>
+                <a href="index.html" style="color:#ffffff;text-decoration:none;">Brad Sherman</a>
             </div>
             <div id="heroTitleWrap" style="will-change:opacity;">
-                <h1 class="hero-title" id="heroTitle">Paintings</h1>
+                <h1 class="hero-title" id="heroTitle">Drawings</h1>
             </div>
         </div>
         <div class="nav-links" id="navLinks">
             <div class="dropdown">
-                <a href="#" style="color:
-#ffffff;text-decoration:none;font-weight:600;cursor:pointer;">Work</a>
+                <a href="#" style="color:#ffffff;text-decoration:none;font-weight:600;cursor:pointer;">Work</a>
                 <div class="dropdown-content">
                     <a href="index.html">Home</a>
                     <a href="painting.html">Painting</a>
@@ -400,172 +389,104 @@
                     <a href="photography.html">Photography</a>
                 </div>
             </div>
-            <a href="Contacts.html" style="color:
-#ffffff;text-decoration:none;font-weight:600;">Contact</a>
+            <a href="Contacts.html" style="color:#ffffff;text-decoration:none;font-weight:600;">Contact</a>
         </div>
     </nav>
+
     <div class="hero-spacer"></div>
+
     <!-- Work -->
     <section class="work-container">
+
         <div class="work-section">
             <div class="single-image">
                 <picture>
-                    <source media="(max-width: 768px)" srcset="images_2/p1-mobile.jpg">
-                    <img class="work-img" src="images_2/p1-desktop.jpg" alt="Giardino Di Augusto, Capri" loading="eager" decoding="async"/>
+                    <source media="(max-width: 768px)" srcset="images_2/1-mobile.jpg">
+                    <source media="(min-width: 769px)" srcset="images_2/1-desktop.jpg">
+                    <img class="work-img" src="images_2/1-desktop.jpg" alt="Still Life" loading="eager" decoding="async"/>
                 </picture>
             </div>
             <div class="work-info">
-                <h3 class="work-item-title">Giardino Di Augusto, Capri</h3>
-                <p class="project-year">2025</p>
-                <p class="project-institution">Acrylic on Canvas</p>
-                <p class="project-description">30 × 40 cm</p>
+                <h3 class="work-item-title">Still Life</h3>
+                <p class="project-year">2022</p>
             </div>
         </div>
+
         <div class="work-section">
             <div class="single-image">
                 <picture>
-                    <source media="(max-width: 768px)" srcset="images_2/p2-mobile.jpg">
-                    <img class="work-img" src="images_2/p2-desktop.jpg" alt="Memorial Union, Madison" loading="lazy" decoding="async"/>
+                    <source media="(max-width: 768px)" srcset="images_2/2-mobile.jpg">
+                    <source media="(min-width: 769px)" srcset="images_2/2-desktop.jpg">
+                    <img class="work-img" src="images_2/2-desktop.jpg" alt="Martha's Vineyard" loading="lazy" decoding="async"/>
                 </picture>
             </div>
             <div class="work-info">
-                <h3 class="work-item-title">Memorial Union, Madison</h3>
-                <p class="project-year">2025</p>
-                <p class="project-institution">Acrylic on Canvas</p>
-                <p class="project-description">30 × 40 cm</p>
+                <h3 class="work-item-title">Martha's Vineyard</h3>
+                <p class="project-year">2023</p>
+                <p class="project-institution">UW–Madison</p>
             </div>
         </div>
+
         <div class="work-section">
             <div class="single-image">
                 <picture>
-                    <source media="(max-width: 768px)" srcset="images_2/p3-mobile.jpg">
-                    <img class="work-img" src="images_2/p3-desktop.jpg" alt="An Evening in Paris" loading="lazy" decoding="async"/>
+                    <source media="(max-width: 768px)" srcset="images_2/3-mobile.jpg">
+                    <source media="(min-width: 769px)" srcset="images_2/3-desktop.jpg">
+                    <img class="work-img" src="images_2/3-desktop.jpg" alt="Still Life — Rope" loading="lazy" decoding="async"/>
                 </picture>
             </div>
             <div class="work-info">
-                <h3 class="work-item-title">An Evening in Paris</h3>
-                <p class="project-year">2026</p>
-                <p class="project-institution">Acrylic on Canvas</p>
-                <p class="project-description">20 × 16 in</p>
+                <h3 class="work-item-title">Still Life</h3>
+                <p class="project-year">2023</p>
+                <p class="project-institution">UW–Madison</p>
             </div>
         </div>
+
         <div class="work-section">
             <div class="single-image">
                 <picture>
-                    <source media="(max-width: 768px)" srcset="images_2/p4-mobile.jpg">
-                    <img class="work-img" src="images_2/p4-desktop.jpg" alt="Ponte Vecchio, Firenze" loading="lazy" decoding="async"/>
+                    <source media="(max-width: 768px)" srcset="images_2/4-mobile.jpg">
+                    <source media="(min-width: 769px)" srcset="images_2/4-desktop.jpg">
+                    <img class="work-img" src="images_2/4-desktop.jpg" alt="Grandad Portrait" loading="lazy" decoding="async"/>
                 </picture>
             </div>
             <div class="work-info">
-                <h3 class="work-item-title">Ponte Vecchio, Firenze</h3>
-                <p class="project-year">2025</p>
-                <p class="project-institution">Acrylic on Canvas</p>
-                <p class="project-description">30 × 40 cm</p>
+                <h3 class="work-item-title">Grandad Portrait</h3>
+                <p class="project-year">2022</p>
             </div>
         </div>
+
         <div class="work-section">
             <div class="single-image">
                 <picture>
-                    <source media="(max-width: 768px)" srcset="images_2/p5-mobile.jpg">
-                    <img class="work-img" src="images_2/p5-desktop.jpg" alt="Ponte Vecchio, Firenze II" loading="lazy" decoding="async"/>
+                    <source media="(max-width: 768px)" srcset="images_2/5-mobile.jpg">
+                    <source media="(min-width: 769px)" srcset="images_2/5-desktop.jpg">
+                    <img class="work-img" src="images_2/5-desktop.jpg" alt="Mountains" loading="lazy" decoding="async"/>
                 </picture>
             </div>
             <div class="work-info">
-                <h3 class="work-item-title">Ponte Vecchio, Firenze</h3>
-                <p class="project-year">2025</p>
-                <p class="project-institution">Acrylic on Canvas</p>
-                <p class="project-description">25 × 35 cm</p>
+                <h3 class="work-item-title">Mountains</h3>
+                <p class="project-year">2023</p>
+                <p class="project-institution">UW–Madison</p>
             </div>
         </div>
+
         <div class="work-section">
             <div class="single-image">
                 <picture>
-                    <source media="(max-width: 768px)" srcset="images_2/p6-mobile.jpg">
-                    <img class="work-img" src="images_2/p6-desktop.jpg" alt="Warm Surreal" loading="lazy" decoding="async"/>
+                    <source media="(max-width: 768px)" srcset="images_2/6-mobile.jpg">
+                    <source media="(min-width: 769px)" srcset="images_2/6-desktop.jpg">
+                    <img class="work-img" src="images_2/6-desktop.jpg" alt="Still Life — Egg" loading="lazy" decoding="async"/>
                 </picture>
             </div>
             <div class="work-info">
-                <h3 class="work-item-title">Warm Surreal</h3>
-                <p class="project-year">2026</p>
-                <p class="project-institution">Acrylic on Canvas</p>
-                <p class="project-description">10 × 16 in</p>
+                <h3 class="work-item-title">Still Life</h3>
+                <p class="project-year">2022</p>
             </div>
         </div>
-        <div class="work-section">
-            <div class="single-image">
-                <picture>
-                    <source media="(max-width: 768px)" srcset="images_2/p7-mobile.jpg">
-                    <img class="work-img" src="images_2/p7-desktop.jpg" alt="Old City, Monopoli" loading="lazy" decoding="async"/>
-                </picture>
-            </div>
-            <div class="work-info">
-                <h3 class="work-item-title">Old City, Monopoli</h3>
-                <p class="project-year">2026</p>
-                <p class="project-institution">Acrylic on Paper</p>
-                <p class="project-description">21 × 28 cm</p>
-            </div>
-        </div>
-        <!-- Still Lifes divider -->
-        <div class="work-section" style="margin-bottom:6rem;">
-            <p class="section-title">Still Lifes</p>
-        </div>
-        <div class="work-section">
-            <div class="single-image">
-                <picture>
-                    <source media="(max-width: 768px)" srcset="images_2/p8-mobile.jpg">
-                    <img class="work-img" src="images_2/p8-desktop.jpg" alt="Farfalle" loading="lazy" decoding="async"/>
-                </picture>
-            </div>
-            <div class="work-info">
-                <h3 class="work-item-title">Farfalle</h3>
-                <p class="project-year">2025</p>
-                <p class="project-institution">Acrylic on Canvas</p>
-                <p class="project-description">25 × 35 cm</p>
-            </div>
-        </div>
-        <div class="work-section">
-            <div class="single-image">
-                <picture>
-                    <source media="(max-width: 768px)" srcset="images_2/p9-mobile.jpg">
-                    <img class="work-img" src="images_2/p9-desktop.jpg" alt="Wine Opener" loading="lazy" decoding="async"/>
-                </picture>
-            </div>
-            <div class="work-info">
-                <h3 class="work-item-title">Wine Opener</h3>
-                <p class="project-year">2025</p>
-                <p class="project-institution">Acrylic on Canvas</p>
-                <p class="project-description">25 × 35 cm</p>
-            </div>
-        </div>
-        <div class="work-section">
-            <div class="single-image">
-                <picture>
-                    <source media="(max-width: 768px)" srcset="images_2/p10-mobile.jpg">
-                    <img class="work-img" src="images_2/p10-desktop.jpg" alt="Coffee Grinder" loading="lazy" decoding="async"/>
-                </picture>
-            </div>
-            <div class="work-info">
-                <h3 class="work-item-title">Coffee Grinder</h3>
-                <p class="project-year">2025</p>
-                <p class="project-institution">Acrylic on Canvas</p>
-                <p class="project-description">25 × 35 cm</p>
-            </div>
-        </div>
-        <div class="work-section">
-            <div class="single-image">
-                <picture>
-                    <source media="(max-width: 768px)" srcset="images_2/p11-mobile.jpg">
-                    <img class="work-img" src="images_2/p11-desktop.jpg" alt="Still Life Black & White" loading="lazy" decoding="async"/>
-                </picture>
-            </div>
-            <div class="work-info">
-                <h3 class="work-item-title">Still Life Black &amp; White</h3>
-                <p class="project-year">2025</p>
-                <p class="project-institution">Acrylic on Canvas</p>
-                <p class="project-description">40 × 30 cm</p>
-            </div>
-        </div>
+
     </section>
+
     <script>
         // ── Modal ──────────────────────────────────────────
         const modal      = document.getElementById('imageModal');
@@ -575,6 +496,7 @@
         const nextBtn    = document.querySelector('.next-btn');
         const allImgs    = [...document.querySelectorAll('.work-img')];
         let currentIdx   = 0;
+
         function openModal(idx) {
             currentIdx = idx;
             modalImage.src = allImgs[idx].src;
@@ -593,6 +515,7 @@
             currentIdx = (currentIdx - 1 + allImgs.length) % allImgs.length;
             modalImage.src = allImgs[currentIdx].src;
         }
+
         allImgs.forEach((img, i) => img.addEventListener('click', () => openModal(i)));
         closeBtn.addEventListener('click', closeModal);
         nextBtn.addEventListener('click', showNext);
@@ -604,6 +527,7 @@
             if (e.key === 'ArrowRight')  showNext();
             if (e.key === 'ArrowLeft')   showPrev();
         });
+
         // ── Scroll ────────────────────────────────────────
         const nav           = document.getElementById('mainNav');
         const headerPanel   = document.getElementById('headerPanel');
@@ -613,6 +537,7 @@
         const navName       = document.getElementById('navName');
         const navLinks      = document.getElementById('navLinks');
         const navLeft       = document.querySelector('.nav-left');
+
         const vh          = window.innerHeight;
         const isMobile    = window.innerWidth <= 768;
         const panelH      = isMobile ? 0.18 : 0.25;
@@ -622,8 +547,10 @@
         const TITLE_END   = vh * (isMobile ? 0.32 : 0.42);
         const NAV_SOLID   = vh * (isMobile ? 0.38 : 0.50);
         const COLOR_END   = vh * (isMobile ? 0.12 : 0.18);
+
         window.addEventListener('scroll', () => {
             const y = window.scrollY;
+
             // — Black panel fade —
             if (y <= 0) {
                 headerPanel.style.opacity = '1';
@@ -632,16 +559,18 @@
             } else {
                 headerPanel.style.opacity = '0';
             }
+
             // — Color sweep —
             heroTitle.style.transition = 'none';
             if (y <= 0) {
                 heroTitle.style.backgroundPosition = '100% 0';
             } else if (y < COLOR_END) {
                 const pos = 100 - ((y / COLOR_END) * 70);
-                heroTitle.style.backgroundPosition = ${pos}% 0;
+                heroTitle.style.backgroundPosition = `${pos}% 0`;
             } else {
                 heroTitle.style.backgroundPosition = '30% 0';
             }
+
             // — Title fade —
             if (y <= TITLE_START) {
                 heroTitleWrap.style.opacity   = '1';
@@ -649,11 +578,12 @@
             } else if (y < TITLE_END) {
                 const p = (y - TITLE_START) / (TITLE_END - TITLE_START);
                 heroTitleWrap.style.opacity   = String(1 - p);
-                heroTitleWrap.style.transform = translateY(${-p * 12}px);
+                heroTitleWrap.style.transform = `translateY(${-p * 12}px)`;
             } else {
                 heroTitleWrap.style.opacity   = '0';
                 heroTitleWrap.style.transform = 'translateY(-12px)';
             }
+
             // — Nav text fade —
             if (y <= NAV_SOLID) {
                 if (y <= 0) {
@@ -668,21 +598,16 @@
                     navLinks.style.opacity = '0';
                 }
             }
-            // — Top cover —
-            topCover.style.background = y > NAV_SOLID ? '
-#ffffff' : '
-#000000';
+
+            // — Top cover color matches nav state —
+            topCover.style.background = y > NAV_SOLID ? '#ffffff' : '#000000';
+
             // — Nav goes solid —
             if (y > NAV_SOLID) {
-                nav.classList.add('is-solid');
-                nav.style.background         = '
-#ffffff';
-                nav.style.borderBottom       = '0.5px solid 
-#ebebeb';
+                nav.style.background         = 'rgba(255,255,255,0.97)';
+                nav.style.borderBottom       = '0.5px solid #ebebeb';
                 nav.style.alignItems         = 'center';
-                nav.style.paddingTop         = isMobile ? '1rem' : '2rem';
-                nav.style.paddingBottom      = isMobile ? '0.8rem' : '1rem';
-                nav.style.minHeight          = isMobile ? '60px' : 'auto';
+                nav.style.paddingTop         = isMobile ? 'max(1rem, env(safe-area-inset-top))' : '2rem';
                 navLeft.style.height         = 'auto';
                 navLeft.style.justifyContent = 'flex-start';
                 navLeft.style.gap            = '0';
@@ -691,11 +616,9 @@
                 heroTitleWrap.style.display  = 'none';
                 nav.querySelectorAll('a:not(.dropdown-content a)').forEach(a => a.style.color = '#000');
             } else {
-                nav.classList.remove('is-solid');
                 nav.style.background         = 'transparent';
                 nav.style.borderBottom       = 'none';
                 nav.style.paddingBottom      = isMobile ? '1rem' : '2rem';
-                nav.style.minHeight          = 'auto';
                 nav.style.alignItems         = 'flex-start';
                 navLeft.style.height         = isMobile ? 'calc(18vh - 2rem)' : 'calc(25vh - 4rem)';
                 navLeft.style.justifyContent = 'space-between';
@@ -704,6 +627,18 @@
                 nav.querySelectorAll('a:not(.dropdown-content a)').forEach(a => a.style.color = '#fff');
             }
         }, { passive: true });
+
+        // ── Work sections fade in ──────────────────────────
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.05, rootMargin: '0px 0px -120px 0px' });
+
+        document.querySelectorAll('.work-section').forEach(s => observer.observe(s));
     </script>
 </body>
 </html>
