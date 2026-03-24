@@ -313,6 +313,16 @@
 
         /* ── MOBILE ───────────────────────────────────────── */
         @media (max-width: 768px) {
+              .top-cover {
+    height: 18vh !important; /* match your mobile header-panel height */
+    background: #ffffff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999; /* above everything */
+    pointer-events: none;
+  }
             .header-panel { height: 18vh; }
             nav {
     padding: 1rem;
@@ -686,7 +696,7 @@
             }
 
             // — Top cover —
-            topCover.style.background = y > NAV_SOLID ? '#ffffff' : '#000000';
+            topCover.style.background = '#ffffff';
 
             // — Nav goes solid —
             if (y > NAV_SOLID) {
