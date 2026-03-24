@@ -69,7 +69,17 @@
         .next-btn { right: 20px; }
 
         /* ── TOP COVER ────────────────────────────────────── */
-        .top-cover { display: none; }
+       .top-cover {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(env(safe-area-inset-top) + 30px);
+    background: #000000;
+    z-index: 2000;
+    pointer-events: none;
+    transition: background 0.3s ease;
+}
 
         /* ── NAV ──────────────────────────────────────────── */
         nav {
@@ -83,19 +93,14 @@
             transition: background 0.4s ease, border-bottom 0.4s ease;
         }
 
-       nav.is-solid::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: calc(100px + env(safe-area-inset-top)); /* increased buffer */
-    background: #ffffff;
-    z-index: -1;
-}
+     
 
-nav.is-solid {
+
+       nav.is-solid {
+    background: #ffffff;
     padding-top: calc(env(safe-area-inset-top) + 1rem) !important;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
         /* ── BLACK HEADER PANEL ───────────────────────────── */
