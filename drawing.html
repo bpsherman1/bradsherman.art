@@ -5,7 +5,7 @@
     <link rel="apple-touch-icon" href="images_2/favicon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Drawing - Brad Sherman</title>
+    <title>Painting - Brad Sherman</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -14,7 +14,7 @@
             font-family: 'Inter', sans-serif;
             background: #ffffff;
             color: #000000;
-            overflow-x: hidden;
+            overflow-x: hidden; /* FIX: kills horizontal scrollbar */
         }
 
         /* ── GRAIN OVERLAY ────────────────────────────────── */
@@ -68,17 +68,38 @@
         .prev-btn::before { transform: translate(-50%, -50%) rotate(-135deg); }
         .next-btn { right: 20px; }
 
-        /* ── SAFE AREA TOP COVER ──────────────────────────── */
-        /* Always white behind the status bar / dynamic island */
+        /* ── TOP COVER ────────────────────────────────────── */
         .top-cover {
             position: fixed;
-            top: 0; left: 0;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: env(safe-area-inset-top, 50px);
-            background: #ffffff;
-            z-index: 600;
+            height: env(safe-area-inset-top);
+            background: #000000;
+            z-index: 999;
             pointer-events: none;
         }
+
+        /* ── NAV ──────────────────────────────────────────── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            padding: 2rem;
+            z-index: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            transition: background 0.4s ease, border-bottom 0.4s ease;
+        }
+
+        nav.is-solid {
+            background: #ffffff;
+            padding-top: calc(env(safe-area-inset-top) + 1rem) !important;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        /* ── BLACK HEADER PANEL ───────────────────────────── */
         .header-panel {
             position: fixed;
             top: 0; left: 0;
@@ -87,31 +108,6 @@
             background: #000000;
             z-index: 490;
             transition: opacity 0.5s ease;
-            padding-top: env(safe-area-inset-top);
-        }
-
-        /* ── NAV ──────────────────────────────────────────── */
-        nav {
-            position: fixed;
-            top: 0; left: 0; width: 100%;
-            padding: 2rem 2rem 2rem 2rem;
-            padding-top: max(2rem, env(safe-area-inset-top));
-            z-index: 500;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            transition: background 0.4s ease, border-bottom 0.4s ease;
-        }
-
-        /* solid white cover that sits behind nav text but above everything else */
-        nav.nav-solid-cover::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255,255,255,0.97);
-            z-index: -1;
         }
 
         .nav-left {
@@ -148,12 +144,12 @@
                 90deg,
                 #ffffff 0%,
                 #ffffff 5%,
-                #c2410c 18%,
-                #92400e 30%,
-                #1e40af 42%,
-                #0f766e 54%,
-                #c2410c 66%,
-                #92400e 74%,
+                #b91c1c 18%,
+                #d97706 30%,
+                #92400e 42%,
+                #b45309 54%,
+                #b91c1c 66%,
+                #d97706 74%,
                 #ffffff 82%,
                 #ffffff 100%
             );
@@ -239,27 +235,35 @@
 
         .work-section {
             margin-bottom: 18rem;
-            opacity: 0;
-            transform: translateY(28px);
-            transition: opacity 1.4s ease, transform 1.4s ease;
-            position: relative;
-        }
-        .work-section.visible {
-            opacity: 1;
-            transform: translateY(0);
         }
 
-        .img-wrap { width: 100%; }
+        .single-image { width: 100%; }
 
         .work-img {
             width: 100%;
             display: block;
             height: auto;
+            max-height: 80vh;
+            object-fit: contain;
             cursor: pointer;
             transition: opacity 0.3s ease;
         }
         .work-img:hover { opacity: 0.9; }
 
+        /* ── SECTION DIVIDER TITLE ────────────────────────── */
+        .section-title {
+            font-family: 'Futura', 'Futura PT', 'Century Gothic', 'Trebuchet MS', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #000000;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            margin-bottom: 8rem;
+            padding-top: 2rem;
+            border-top: 0.5px solid #e0e0e0;
+        }
+
+        /* ── CAPTIONS ─────────────────────────────────────── */
         .work-info {
             margin-top: 1.8rem;
             padding-top: 1.4rem;
@@ -292,10 +296,19 @@
             font-weight: 400;
             letter-spacing: 0.1em;
             text-transform: uppercase;
+            margin-bottom: 0.15rem;
+        }
+
+        .project-description {
+            font-family: 'Futura', 'Futura PT', 'Century Gothic', 'Trebuchet MS', sans-serif;
+            font-size: 0.72rem;
+            color: #bbbbbb;
+            font-weight: 400;
+            letter-spacing: 0.06em;
         }
 
         /* ── MOBILE ───────────────────────────────────────── */
-        @media (max-width: 768px) {
+          @media (max-width: 768px) {
             .header-panel { height: 18vh; }
             nav { padding: 1rem; }
             .nav-left { height: calc(18vh - 2.8rem); }
@@ -313,22 +326,38 @@
             .work-section { margin-bottom: 16rem; }
             .hero-spacer { height: 42vh; }
 
+            /* FIX: dropdown full-width, no transforms that could shift it */
             .dropdown-content {
                 position: fixed !important;
                 top: 80px !important;
-                right: 1rem !important;
+                right: -4rem !important;
                 left: auto !important;
-                width: 50% !important;
+                width: 44vw !important;
                 min-width: unset !important;
+                max-width: 100vw !important;
+                transform: none !important;
                 background: #000000 !important;
                 border: none !important;
+                border-radius: 12px !important;
                 mix-blend-mode: normal !important;
                 backdrop-filter: none !important;
+                overflow: hidden !important;
+            }
+            .dropdown:hover .dropdown-content {
+                transform: none !important;
             }
             .dropdown-content a {
                 color: #ffffff !important;
-                text-align: right !important;
+                text-align: left !important;
                 border-left: none !important;
+                padding: 0.6rem 0 0.6rem 1.5rem !important;
+                letter-spacing: 0.04em !important;
+                white-space: nowrap !important;
+            }
+            .dropdown-content a:hover {
+                border-left: none !important;
+                padding-left: 1.5rem !important;
+                background: rgba(255,255,255,0.08) !important;
             }
         }
     </style>
@@ -345,7 +374,7 @@
         </div>
     </div>
 
-    <!-- Safe area top cover - always white above dynamic island -->
+    <!-- Safe area top cover -->
     <div class="top-cover" id="topCover"></div>
 
     <!-- Black header panel -->
@@ -358,7 +387,7 @@
                 <a href="index.html" style="color:#ffffff;text-decoration:none;">Brad Sherman</a>
             </div>
             <div id="heroTitleWrap" style="will-change:opacity;">
-                <h1 class="hero-title" id="heroTitle">Drawings</h1>
+                <h1 class="hero-title" id="heroTitle">Paintings</h1>
             </div>
         </div>
         <div class="nav-links" id="navLinks">
@@ -385,87 +414,170 @@
         <div class="work-section">
             <div class="single-image">
                 <picture>
-                    <source media="(max-width: 768px)" srcset="images_2/1-mobile.jpg">
-                    <source media="(min-width: 769px)" srcset="images_2/1-desktop.jpg">
-                    <img class="work-img" src="images_2/1-desktop.jpg" alt="Still Life" loading="eager" decoding="async"/>
+                    <source media="(max-width: 768px)" srcset="images_2/p1-mobile.jpg">
+                    <img class="work-img" src="images_2/p1-desktop.jpg" alt="Giardino Di Augusto, Capri" loading="eager" decoding="async"/>
                 </picture>
             </div>
             <div class="work-info">
-                <h3 class="work-item-title">Still Life</h3>
-                <p class="project-year">2022</p>
+                <h3 class="work-item-title">Giardino Di Augusto, Capri</h3>
+                <p class="project-year">2025</p>
+                <p class="project-institution">Acrylic on Canvas</p>
+                <p class="project-description">30 × 40 cm</p>
             </div>
         </div>
 
         <div class="work-section">
             <div class="single-image">
                 <picture>
-                    <source media="(max-width: 768px)" srcset="images_2/2-mobile.jpg">
-                    <source media="(min-width: 769px)" srcset="images_2/2-desktop.jpg">
-                    <img class="work-img" src="images_2/2-desktop.jpg" alt="Martha's Vineyard" loading="lazy" decoding="async"/>
+                    <source media="(max-width: 768px)" srcset="images_2/p2-mobile.jpg">
+                    <img class="work-img" src="images_2/p2-desktop.jpg" alt="Memorial Union, Madison" loading="lazy" decoding="async"/>
                 </picture>
             </div>
             <div class="work-info">
-                <h3 class="work-item-title">Martha's Vineyard</h3>
-                <p class="project-year">2023</p>
-                <p class="project-institution">UW–Madison</p>
+                <h3 class="work-item-title">Memorial Union, Madison</h3>
+                <p class="project-year">2025</p>
+                <p class="project-institution">Acrylic on Canvas</p>
+                <p class="project-description">30 × 40 cm</p>
             </div>
         </div>
 
         <div class="work-section">
             <div class="single-image">
                 <picture>
-                    <source media="(max-width: 768px)" srcset="images_2/3-mobile.jpg">
-                    <source media="(min-width: 769px)" srcset="images_2/3-desktop.jpg">
-                    <img class="work-img" src="images_2/3-desktop.jpg" alt="Still Life — Rope" loading="lazy" decoding="async"/>
+                    <source media="(max-width: 768px)" srcset="images_2/p3-mobile.jpg">
+                    <img class="work-img" src="images_2/p3-desktop.jpg" alt="An Evening in Paris" loading="lazy" decoding="async"/>
                 </picture>
             </div>
             <div class="work-info">
-                <h3 class="work-item-title">Still Life</h3>
-                <p class="project-year">2023</p>
-                <p class="project-institution">UW–Madison</p>
+                <h3 class="work-item-title">An Evening in Paris</h3>
+                <p class="project-year">2026</p>
+                <p class="project-institution">Acrylic on Canvas</p>
+                <p class="project-description">20 × 16 in</p>
             </div>
         </div>
 
         <div class="work-section">
             <div class="single-image">
                 <picture>
-                    <source media="(max-width: 768px)" srcset="images_2/4-mobile.jpg">
-                    <source media="(min-width: 769px)" srcset="images_2/4-desktop.jpg">
-                    <img class="work-img" src="images_2/4-desktop.jpg" alt="Grandad Portrait" loading="lazy" decoding="async"/>
+                    <source media="(max-width: 768px)" srcset="images_2/p4-mobile.jpg">
+                    <img class="work-img" src="images_2/p4-desktop.jpg" alt="Ponte Vecchio, Firenze" loading="lazy" decoding="async"/>
                 </picture>
             </div>
             <div class="work-info">
-                <h3 class="work-item-title">Grandad Portrait</h3>
-                <p class="project-year">2022</p>
+                <h3 class="work-item-title">Ponte Vecchio, Firenze</h3>
+                <p class="project-year">2025</p>
+                <p class="project-institution">Acrylic on Canvas</p>
+                <p class="project-description">30 × 40 cm</p>
             </div>
         </div>
 
         <div class="work-section">
             <div class="single-image">
                 <picture>
-                    <source media="(max-width: 768px)" srcset="images_2/5-mobile.jpg">
-                    <source media="(min-width: 769px)" srcset="images_2/5-desktop.jpg">
-                    <img class="work-img" src="images_2/5-desktop.jpg" alt="Mountains" loading="lazy" decoding="async"/>
+                    <source media="(max-width: 768px)" srcset="images_2/p5-mobile.jpg">
+                    <img class="work-img" src="images_2/p5-desktop.jpg" alt="Ponte Vecchio, Firenze II" loading="lazy" decoding="async"/>
                 </picture>
             </div>
             <div class="work-info">
-                <h3 class="work-item-title">Mountains</h3>
-                <p class="project-year">2023</p>
-                <p class="project-institution">UW–Madison</p>
+                <h3 class="work-item-title">Ponte Vecchio, Firenze</h3>
+                <p class="project-year">2025</p>
+                <p class="project-institution">Acrylic on Canvas</p>
+                <p class="project-description">25 × 35 cm</p>
             </div>
         </div>
 
         <div class="work-section">
             <div class="single-image">
                 <picture>
-                    <source media="(max-width: 768px)" srcset="images_2/6-mobile.jpg">
-                    <source media="(min-width: 769px)" srcset="images_2/6-desktop.jpg">
-                    <img class="work-img" src="images_2/6-desktop.jpg" alt="Still Life — Egg" loading="lazy" decoding="async"/>
+                    <source media="(max-width: 768px)" srcset="images_2/p6-mobile.jpg">
+                    <img class="work-img" src="images_2/p6-desktop.jpg" alt="Warm Surreal" loading="lazy" decoding="async"/>
                 </picture>
             </div>
             <div class="work-info">
-                <h3 class="work-item-title">Still Life</h3>
-                <p class="project-year">2022</p>
+                <h3 class="work-item-title">Warm Surreal</h3>
+                <p class="project-year">2026</p>
+                <p class="project-institution">Acrylic on Canvas</p>
+                <p class="project-description">10 × 16 in</p>
+            </div>
+        </div>
+
+        <div class="work-section">
+            <div class="single-image">
+                <picture>
+                    <source media="(max-width: 768px)" srcset="images_2/p7-mobile.jpg">
+                    <img class="work-img" src="images_2/p7-desktop.jpg" alt="Old City, Monopoli" loading="lazy" decoding="async"/>
+                </picture>
+            </div>
+            <div class="work-info">
+                <h3 class="work-item-title">Old City, Monopoli</h3>
+                <p class="project-year">2026</p>
+                <p class="project-institution">Acrylic on Paper</p>
+                <p class="project-description">21 × 28 cm</p>
+            </div>
+        </div>
+
+        <!-- Still Lifes divider -->
+        <div class="work-section" style="margin-bottom:6rem;">
+            <p class="section-title">Still Lifes</p>
+        </div>
+
+        <div class="work-section">
+            <div class="single-image">
+                <picture>
+                    <source media="(max-width: 768px)" srcset="images_2/p8-mobile.jpg">
+                    <img class="work-img" src="images_2/p8-desktop.jpg" alt="Farfalle" loading="lazy" decoding="async"/>
+                </picture>
+            </div>
+            <div class="work-info">
+                <h3 class="work-item-title">Farfalle</h3>
+                <p class="project-year">2025</p>
+                <p class="project-institution">Acrylic on Canvas</p>
+                <p class="project-description">25 × 35 cm</p>
+            </div>
+        </div>
+
+        <div class="work-section">
+            <div class="single-image">
+                <picture>
+                    <source media="(max-width: 768px)" srcset="images_2/p9-mobile.jpg">
+                    <img class="work-img" src="images_2/p9-desktop.jpg" alt="Wine Opener" loading="lazy" decoding="async"/>
+                </picture>
+            </div>
+            <div class="work-info">
+                <h3 class="work-item-title">Wine Opener</h3>
+                <p class="project-year">2025</p>
+                <p class="project-institution">Acrylic on Canvas</p>
+                <p class="project-description">25 × 35 cm</p>
+            </div>
+        </div>
+
+        <div class="work-section">
+            <div class="single-image">
+                <picture>
+                    <source media="(max-width: 768px)" srcset="images_2/p10-mobile.jpg">
+                    <img class="work-img" src="images_2/p10-desktop.jpg" alt="Coffee Grinder" loading="lazy" decoding="async"/>
+                </picture>
+            </div>
+            <div class="work-info">
+                <h3 class="work-item-title">Coffee Grinder</h3>
+                <p class="project-year">2025</p>
+                <p class="project-institution">Acrylic on Canvas</p>
+                <p class="project-description">25 × 35 cm</p>
+            </div>
+        </div>
+
+        <div class="work-section">
+            <div class="single-image">
+                <picture>
+                    <source media="(max-width: 768px)" srcset="images_2/p11-mobile.jpg">
+                    <img class="work-img" src="images_2/p11-desktop.jpg" alt="Still Life Black & White" loading="lazy" decoding="async"/>
+                </picture>
+            </div>
+            <div class="work-info">
+                <h3 class="work-item-title">Still Life Black &amp; White</h3>
+                <p class="project-year">2025</p>
+                <p class="project-institution">Acrylic on Canvas</p>
+                <p class="project-description">40 × 30 cm</p>
             </div>
         </div>
 
@@ -583,15 +695,18 @@
                 }
             }
 
-            // — Top cover color matches nav state —
+            // — Top cover —
             topCover.style.background = y > NAV_SOLID ? '#ffffff' : '#000000';
 
             // — Nav goes solid —
             if (y > NAV_SOLID) {
-                nav.style.background         = 'rgba(255,255,255,0.97)';
+                nav.classList.add('is-solid');
+                nav.style.background         = '#ffffff';
                 nav.style.borderBottom       = '0.5px solid #ebebeb';
                 nav.style.alignItems         = 'center';
-                nav.style.paddingTop         = isMobile ? 'max(1rem, env(safe-area-inset-top))' : '2rem';
+                nav.style.paddingTop         = isMobile ? '1rem' : '2rem';
+                nav.style.paddingBottom      = isMobile ? '0.8rem' : '1rem';
+                nav.style.minHeight          = isMobile ? '60px' : 'auto';
                 navLeft.style.height         = 'auto';
                 navLeft.style.justifyContent = 'flex-start';
                 navLeft.style.gap            = '0';
@@ -600,9 +715,11 @@
                 heroTitleWrap.style.display  = 'none';
                 nav.querySelectorAll('a:not(.dropdown-content a)').forEach(a => a.style.color = '#000');
             } else {
+                nav.classList.remove('is-solid');
                 nav.style.background         = 'transparent';
                 nav.style.borderBottom       = 'none';
                 nav.style.paddingBottom      = isMobile ? '1rem' : '2rem';
+                nav.style.minHeight          = 'auto';
                 nav.style.alignItems         = 'flex-start';
                 navLeft.style.height         = isMobile ? 'calc(18vh - 2rem)' : 'calc(25vh - 4rem)';
                 navLeft.style.justifyContent = 'space-between';
@@ -612,17 +729,6 @@
             }
         }, { passive: true });
 
-        // ── Work sections fade in ──────────────────────────
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.05, rootMargin: '0px 0px -120px 0px' });
-
-        document.querySelectorAll('.work-section').forEach(s => observer.observe(s));
     </script>
 </body>
 </html>
