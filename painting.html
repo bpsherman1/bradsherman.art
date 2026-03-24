@@ -69,16 +69,15 @@
         .next-btn { right: 20px; }
 
         /* ── TOP COVER ────────────────────────────────────── */
-       .top-cover {
+     .top-cover {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: calc(env(safe-area-inset-top) + 30px);
+    height: env(safe-area-inset-top);
     background: #000000;
-    z-index: 2000;
+    z-index: 999;
     pointer-events: none;
-    transition: background 0.3s ease;
 }
 
         /* ── NAV ──────────────────────────────────────────── */
@@ -315,7 +314,10 @@
         /* ── MOBILE ───────────────────────────────────────── */
         @media (max-width: 768px) {
             .header-panel { height: 18vh; }
-            nav { padding: 1rem; }
+            nav {
+    padding: 1rem;
+    padding-top: calc(1rem + env(safe-area-inset-top));
+}
             .nav-left { height: calc(18vh - 2.8rem); }
             .nav-name { font-size: 1.05rem; }
             .nav-links {
