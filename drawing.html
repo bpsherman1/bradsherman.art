@@ -296,6 +296,23 @@
 
         /* ── MOBILE ───────────────────────────────────────── */
            @media (max-width: 768px) {
+
+               nav.nav-solid-cover::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.97);
+    z-index: -1;
+}
+
+/* Ensure nav covers top when scrolled */
+nav.nav-solid-cover {
+    background: rgba(255,255,255,0.97) !important;
+    padding-top: env(safe-area-inset-top) !important;
+}
             .header-panel { height: 18vh; }
             nav { padding: 1rem; }
             .nav-left { height: calc(18vh - 2.8rem); }
@@ -528,105 +545,118 @@
             if (e.key === 'ArrowLeft')   showPrev();
         });
 
-        // ── Scroll ────────────────────────────────────────
-        const nav           = document.getElementById('mainNav');
-        const headerPanel   = document.getElementById('headerPanel');
-        const topCover      = document.getElementById('topCover');
-        const heroTitle     = document.getElementById('heroTitle');
-        const heroTitleWrap = document.getElementById('heroTitleWrap');
-        const navName       = document.getElementById('navName');
-        const navLinks      = document.getElementById('navLinks');
-        const navLeft       = document.querySelector('.nav-left');
+       // ── Scroll ────────────────────────────────────────
+const nav           = document.getElementById('mainNav');
+const headerPanel   = document.getElementById('headerPanel');
+const topCover      = document.getElementById('topCover');
+const heroTitle     = document.getElementById('heroTitle');
+const heroTitleWrap = document.getElementById('heroTitleWrap');
+const navName       = document.getElementById('navName');
+const navLinks      = document.getElementById('navLinks');
+const navLeft       = document.querySelector('.nav-left');
 
-        const vh          = window.innerHeight;
-        const isMobile    = window.innerWidth <= 768;
-        const panelH      = isMobile ? 0.18 : 0.25;
-        const FADE_START  = 0;
-        const FADE_END    = vh * panelH;
-        const TITLE_START = vh * (isMobile ? 0.12 : 0.18);
-        const TITLE_END   = vh * (isMobile ? 0.32 : 0.42);
-        const NAV_SOLID   = vh * (isMobile ? 0.38 : 0.50);
-        const COLOR_END   = vh * (isMobile ? 0.12 : 0.18);
+const vh          = window.innerHeight;
+const isMobile    = window.innerWidth <= 768;
+const panelH      = isMobile ? 0.18 : 0.25;
+const FADE_START  = 0;
+const FADE_END    = vh * panelH;
+const TITLE_START = vh * (isMobile ? 0.12 : 0.18);
+const TITLE_END   = vh * (isMobile ? 0.32 : 0.42);
+const NAV_SOLID   = vh * (isMobile ? 0.38 : 0.50);
+const COLOR_END   = vh * (isMobile ? 0.12 : 0.18);
 
-        window.addEventListener('scroll', () => {
-            const y = window.scrollY;
+window.addEventListener('scroll', () => {
+    const y = window.scrollY;
 
-            // — Black panel fade —
-            if (y <= 0) {
-                headerPanel.style.opacity = '1';
-            } else if (y < FADE_END) {
-                headerPanel.style.opacity = String(1 - y / FADE_END);
-            } else {
-                headerPanel.style.opacity = '0';
-            }
+    // — Black panel fade —
+    if (y <= 0) {
+        headerPanel.style.opacity = '1';
+    } else if (y < FADE_END) {
+        headerPanel.style.opacity = String(1 - y / FADE_END);
+    } else {
+        headerPanel.style.opacity = '0';
+    }
 
-            // — Color sweep —
-            heroTitle.style.transition = 'none';
-            if (y <= 0) {
-                heroTitle.style.backgroundPosition = '100% 0';
-            } else if (y < COLOR_END) {
-                const pos = 100 - ((y / COLOR_END) * 70);
-                heroTitle.style.backgroundPosition = `${pos}% 0`;
-            } else {
-                heroTitle.style.backgroundPosition = '30% 0';
-            }
+    // — Color sweep —
+    heroTitle.style.transition = 'none';
+    if (y <= 0) {
+        heroTitle.style.backgroundPosition = '100% 0';
+    } else if (y < COLOR_END) {
+        const pos = 100 - ((y / COLOR_END) * 70);
+        heroTitle.style.backgroundPosition = `${pos}% 0`;
+    } else {
+        heroTitle.style.backgroundPosition = '30% 0';
+    }
 
-            // — Title fade —
-            if (y <= TITLE_START) {
-                heroTitleWrap.style.opacity   = '1';
-                heroTitleWrap.style.transform = 'translateY(0)';
-            } else if (y < TITLE_END) {
-                const p = (y - TITLE_START) / (TITLE_END - TITLE_START);
-                heroTitleWrap.style.opacity   = String(1 - p);
-                heroTitleWrap.style.transform = `translateY(${-p * 12}px)`;
-            } else {
-                heroTitleWrap.style.opacity   = '0';
-                heroTitleWrap.style.transform = 'translateY(-12px)';
-            }
+    // — Title fade —
+    if (y <= TITLE_START) {
+        heroTitleWrap.style.opacity   = '1';
+        heroTitleWrap.style.transform = 'translateY(0)';
+    } else if (y < TITLE_END) {
+        const p = (y - TITLE_START) / (TITLE_END - TITLE_START);
+        heroTitleWrap.style.opacity   = String(1 - p);
+        heroTitleWrap.style.transform = `translateY(${-p * 12}px)`;
+    } else {
+        heroTitleWrap.style.opacity   = '0';
+        heroTitleWrap.style.transform = 'translateY(-12px)';
+    }
 
-            // — Nav text fade —
-            if (y <= NAV_SOLID) {
-                if (y <= 0) {
-                    navName.style.opacity  = '1';
-                    navLinks.style.opacity = '1';
-                } else if (y < FADE_END) {
-                    const p = y / FADE_END;
-                    navName.style.opacity  = String(1 - p);
-                    navLinks.style.opacity = String(1 - p);
-                } else {
-                    navName.style.opacity  = '0';
-                    navLinks.style.opacity = '0';
-                }
-            }
+    // — Nav text fade —
+    if (y <= NAV_SOLID) {
+        if (y <= 0) {
+            navName.style.opacity  = '1';
+            navLinks.style.opacity = '1';
+        } else if (y < FADE_END) {
+            const p = y / FADE_END;
+            navName.style.opacity  = String(1 - p);
+            navLinks.style.opacity = String(1 - p);
+        } else {
+            navName.style.opacity  = '0';
+            navLinks.style.opacity = '0';
+        }
+    }
 
-            // — Top cover color matches nav state —
-            topCover.style.background = y > NAV_SOLID ? '#ffffff' : '#000000';
+    // — Top cover color matches nav state —
+    topCover.style.background = y > NAV_SOLID ? '#ffffff' : '#000000';
 
-            // — Nav goes solid —
-            if (y > NAV_SOLID) {
-                nav.style.background         = 'rgba(255,255,255,0.97)';
-                nav.style.borderBottom       = '0.5px solid #ebebeb';
-                nav.style.alignItems         = 'center';
-                nav.style.paddingTop         = isMobile ? 'max(1rem, env(safe-area-inset-top))' : '2rem';
-                navLeft.style.height         = 'auto';
-                navLeft.style.justifyContent = 'flex-start';
-                navLeft.style.gap            = '0';
-                navName.style.opacity        = '1';
-                navLinks.style.opacity       = '1';
-                heroTitleWrap.style.display  = 'none';
-                nav.querySelectorAll('a:not(.dropdown-content a)').forEach(a => a.style.color = '#000');
-            } else {
-                nav.style.background         = 'transparent';
-                nav.style.borderBottom       = 'none';
-                nav.style.paddingBottom      = isMobile ? '1rem' : '2rem';
-                nav.style.alignItems         = 'flex-start';
-                navLeft.style.height         = isMobile ? 'calc(18vh - 2rem)' : 'calc(25vh - 4rem)';
-                navLeft.style.justifyContent = 'space-between';
-                navLeft.style.gap            = '';
-                heroTitleWrap.style.display  = '';
-                nav.querySelectorAll('a:not(.dropdown-content a)').forEach(a => a.style.color = '#fff');
-            }
-        }, { passive: true });
+    // — Nav goes solid with full top coverage —
+    if (y > NAV_SOLID) {
+        nav.style.background         = 'rgba(255,255,255,0.97)';
+        nav.style.borderBottom       = '0.5px solid #ebebeb';
+        nav.style.alignItems         = 'center';
+        nav.style.paddingTop         = isMobile ? 'max(1rem, env(safe-area-inset-top))' : '2rem';
+        
+        // CRITICAL FIX: Extend white background to cover top of screen
+        nav.style.position           = 'fixed';
+        nav.style.top                = '0';
+        nav.style.left               = '0';
+        nav.style.width              = '100%';
+        nav.style.paddingBottom      = isMobile ? '0.75rem' : '1.25rem';
+        
+        navLeft.style.height         = 'auto';
+        navLeft.style.justifyContent = 'flex-start';
+        navLeft.style.gap            = '0';
+        navName.style.opacity        = '1';
+        navLinks.style.opacity       = '1';
+        heroTitleWrap.style.display  = 'none';
+        nav.querySelectorAll('a:not(.dropdown-content a)').forEach(a => a.style.color = '#000');
+        
+        // Ensure the nav's pseudo-element (if any) also covers top
+        nav.classList.add('nav-solid-cover');
+    } else {
+        nav.style.background         = 'transparent';
+        nav.style.borderBottom       = 'none';
+        nav.style.paddingTop         = isMobile ? 'max(1rem, env(safe-area-inset-top))' : '2rem';
+        nav.style.paddingBottom      = isMobile ? '1rem' : '2rem';
+        nav.style.alignItems         = 'flex-start';
+        navLeft.style.height         = isMobile ? 'calc(18vh - 2rem)' : 'calc(25vh - 4rem)';
+        navLeft.style.justifyContent = 'space-between';
+        navLeft.style.gap            = '';
+        heroTitleWrap.style.display  = '';
+        nav.querySelectorAll('a:not(.dropdown-content a)').forEach(a => a.style.color = '#fff');
+        nav.classList.remove('nav-solid-cover');
+    }
+}, { passive: true });
 
         // ── Work sections fade in ──────────────────────────
         const observer = new IntersectionObserver((entries) => {
