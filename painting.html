@@ -326,28 +326,30 @@
     nav {
     padding: 1rem 1rem 1rem 1.5rem;
     padding-top: calc(1rem + env(safe-area-inset-top));
+    padding-right: max(1rem, env(safe-area-inset-right));
 }
             .nav-left { height: calc(18vh - 2.8rem); }
             .nav-name { font-size: 1.05rem; }
             .nav-links {
-                gap: 0.5rem;
-                align-items: baseline;
-                align-self: flex-start;
-                margin-top: 0;
-            }
+    gap: 0.4rem;
+    align-items: baseline;
+    align-self: flex-start;
+    margin-top: 0;
+    flex-shrink: 0;
+}
             .nav-links a { font-size: 0.78rem; }
             .hero-title { font-size: clamp(2.5rem, 10vw, 3.6rem); }
             .work-container { padding: 0 5% 8rem 5%; }
             .work-section { margin-bottom: 16rem; }
             .hero-spacer { height: 42vh; }
-
-            .dropdown-content {
+.dropdown-content {
     position: fixed !important;
     top: 80px !important;
-    left: 1rem !important;
+    left: 1.5rem !important;
     right: auto !important;
     width: auto !important;
     min-width: 160px !important;
+    max-width: calc(100vw - 3rem) !important;
     background: #000000 !important;
     border: none !important;
     mix-blend-mode: normal !important;
@@ -357,6 +359,7 @@
     color: #ffffff !important;
     text-align: left !important;
     border-left: none !important;
+    white-space: nowrap !important;
 }
         }
     </style>
