@@ -68,38 +68,17 @@
         .prev-btn::before { transform: translate(-50%, -50%) rotate(-135deg); }
         .next-btn { right: 20px; }
 
-        /* ── TOP COVER (safe area, color changes with scroll) ── */
-        .top-cover {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: env(safe-area-inset-top);
-            background: #000000;
-            z-index: 1200;  /* above everything */
-            pointer-events: none;
-            transition: background 0.3s ease;
-        }
-
-        /* ── NOTCH BLOCKER — mobile only ─────────────────────
-           Has nothing to do with the nav height or padding.
-           Transparent while on the black hero, white after scroll. */
-        @media (max-width: 768px) {
-            .notch-blocker {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 60px;
-                background: transparent;
-                z-index: 1199;
-                pointer-events: none;
-                transition: background 0.3s ease;
-            }
-            .notch-blocker.is-white {
-                background: #ffffff;
-            }
-        }
+        /* ── TOP COVER ────────────────────────────────────── */
+     .top-cover {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: env(safe-area-inset-top);
+    background: #000000;
+    z-index: 999;
+    pointer-events: none;
+}
 
         /* ── NAV ──────────────────────────────────────────── */
         nav {
@@ -113,12 +92,15 @@
             transition: background 0.4s ease, border-bottom 0.4s ease;
         }
 
-        nav.is-solid {
-            background: #ffffff;
-            padding-top: calc(env(safe-area-inset-top) + 1rem) !important;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-        }
+     
+
+
+       nav.is-solid {
+    background: #ffffff;
+    padding-top: calc(env(safe-area-inset-top) + 1rem) !important;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
 
         /* ── BLACK HEADER PANEL ───────────────────────────── */
         .header-panel {
@@ -161,6 +143,7 @@
             opacity: 0;
             animation: fadeTitle 1.2s ease 0.2s forwards;
             will-change: opacity, transform;
+            /* Painting gradient: warm golds, deep reds, rich burgundy */
             background: linear-gradient(
                 90deg,
                 #ffffff 0%,
@@ -330,14 +313,13 @@
 
         /* ── MOBILE ───────────────────────────────────────── */
         @media (max-width: 768px) {
+              
             .header-panel { height: 18vh; }
             nav {
-                padding: 1rem;
-                padding-top: calc(1rem + env(safe-area-inset-top));
-                align-items: flex-start;
-                position: relative;
-            }
-            .nav-left { height: calc(18vh - 2.8rem); justify-content: space-between; }
+    padding: 1rem;
+    padding-top: calc(1rem + env(safe-area-inset-top));
+}
+            .nav-left { height: calc(18vh - 2.8rem); }
             .nav-name { font-size: 1.05rem; }
             .nav-links {
                 gap: 0.5rem;
@@ -383,11 +365,8 @@
         </div>
     </div>
 
-    <!-- Safe area top cover (color-synced with scroll state) -->
+    <!-- Safe area top cover -->
     <div class="top-cover" id="topCover"></div>
-
-    <!-- Independent notch/island blocker — no connection to nav -->
-    <div class="notch-blocker" id="notchBlocker"></div>
 
     <!-- Black header panel -->
     <div class="header-panel" id="headerPanel"></div>
@@ -640,7 +619,6 @@
         const nav           = document.getElementById('mainNav');
         const headerPanel   = document.getElementById('headerPanel');
         const topCover      = document.getElementById('topCover');
-        const notchBlocker  = document.getElementById('notchBlocker');
         const heroTitle     = document.getElementById('heroTitle');
         const heroTitleWrap = document.getElementById('heroTitleWrap');
         const navName       = document.getElementById('navName');
@@ -708,14 +686,8 @@
                 }
             }
 
-            // — Top cover & notch blocker color sync —
-            if (y > NAV_SOLID) {
-                topCover.style.background = '#ffffff';
-                notchBlocker.classList.add('is-white');
-            } else {
-                topCover.style.background = '#000000';
-                notchBlocker.classList.remove('is-white');
-            }
+            // — Top cover —
+            topCover.style.background = y > NAV_SOLID ? '#ffffff' : '#000000';
 
             // — Nav goes solid —
             if (y > NAV_SOLID) {
