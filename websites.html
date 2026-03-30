@@ -1,916 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-     <link rel="icon" type="image/png" href="images_2/favicon.png">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="icon" type="image/png" href="images_2/favicon.png">
     <link rel="apple-touch-icon" href="images_2/favicon.png">
-
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Websites - Brad Sherman Design</title>
-    <link href="https://fonts.googleapis.com/css2?family=Futura:wght@700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Websites - Brad Sherman</title>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <link rel="stylesheet" href="main.css">
     <style>
-        /* Base Reset */
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-        }
-        
-        /* White background for entire page below hero */
-        body {
-            font-family: 'Inter', sans-serif; 
-            background: #ffffff; /* Change body to white */
-            color: #000000; /* Default text color black */
-            overflow-x: hidden;
-          cursor:auto;
+        /* ── Page: Websites ───────────────────────────────── */
+        .hero-title {
+            background-image: linear-gradient(
+                90deg,
+                #ffffff 0%,  #ffffff 5%,
+                #2563eb 18%, #1d4ed8 30%,
+                #0891b2 42%, #0e7490 54%,
+                #2563eb 66%, #0891b2 74%,
+                #ffffff 82%, #ffffff 100%
+            );
         }
 
-           .project-details {
-    margin-top: 1rem;
-}
-
-.project-year {
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    color: #939598;
-    margin-bottom: 1.5rem;
-    font-weight: 600;
-}
-
-.project-institution {
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    color: #939598;
-    margin-bottom: 1.5rem;
-    font-style: italic; /* Makes it italic */
-    font-weight: 400;
-}
-
-.project-description {
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    color: #939598;
-    line-height: 1.6;
-    max-width: 600px;
-}
-        /* Hero section keeps dark background */
-        .hero {
-            background: #0a0a0a; /* Ensure hero stays dark */
-        }
-
-        /* Work container inherits white background */
         .work-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 12rem 5% 10rem 5%;
-            background: #ffffff;
+            padding: 0 5% 12rem 5%;
         }
 
-        /* Ensure text in work area is black */
-        .work-info,
-        .work-item-title,
-        .work-item-description {
-            color: #000000 !important;
-        }
-
-        .work-item-description {
-            color: #8F8F8F !important;
-        }
-
-        /* Lighter image boxes - OFF WHITE */
-        .work-image {
-            background-color: #ffffff !important; /* Off-white instead of dark gray */
-            
-        }
-
-        /* Navigation Styles */
-        nav { 
-            position: fixed; 
-            top: 0; 
-            width: 100%; 
-            padding: 2rem; 
-            z-index: 100; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            mix-blend-mode: difference;
-        }
-        
-        .nav-links { 
-            display: flex; 
-            gap: 2rem; 
-            align-items: center; 
-        }
-        
-        nav a { 
-            color: white; 
-            text-decoration: none; 
-            font-weight: 600; 
-            position: relative; 
-        }
-        
-        /* Dropdown Styles */
-        .dropdown { position: relative; display: inline-block; }
-        .dropdown-content { 
-            position: absolute; 
-            top: 35px;
-            left: 0; 
-            background: rgba(255, 255, 255, 0.95); 
-            backdrop-filter: blur(20px); 
-            border: 1px solid #fff; 
-            border-radius: 8px; 
-            padding: 1rem 0; 
-            min-width: 200px; 
-            opacity: 0; 
-            visibility: hidden; 
-            transform: translateY(-10px); 
-            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1); 
-            mix-blend-mode: difference;
-        }
-        .dropdown:hover .dropdown-content { opacity: 1; visibility: visible; transform: translateY(0); }
-        .dropdown-content a { 
-            display: block; 
-            padding: 0.5rem 1.5rem; 
-            color: black; 
-            text-decoration: none; 
-            transition: all 0.3s ease; 
-            border-left: 3px solid transparent; 
-            font-weight: 700;
-            font-size: 0.9rem;
-        }
-        .dropdown-content a:hover { 
-            background: rgba(0, 0, 0, 0.1); 
-            border-left: 3px solid #ff0055; 
-            padding-left: 2rem; 
-        }
-
-        /* Hero Slideshow */
-        .hero {
-            height: 100vh;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .animated-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, #ff0055, #00ffff, #ffaa00);
-            opacity: 0.1;
-            filter: blur(100px);
-        }
-
-        /* Mobile static image - shown by default */
-        .mobile-static-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-image: url('images_2/fors.png');
-        }
-
-        .horizontal-slideshow {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 400%; /* Single wide image - 400% width */
-            height: 100%;
-            display: flex;
-            transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        .horizontal-slide {
-            width: 100%; /* Single image takes full width of slideshow */
-            height: 100%;
-            background-size: auto 100%; /* Stretch width automatically, maintain 100% height */
-            background-position: 0% center; /* Explicitly position at left edge */
-            background-repeat: no-repeat;
-            flex-shrink: 0;
-        }
-
-        .name-container {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 66%;
-            display: flex;
-            align-items: flex-end;
-            padding: 0 5%;
-            pointer-events: none;
-        }
-
-        .page-title {
-            font-family: 'Futura', sans-serif;
-            font-size: 10.5vw;
-            font-weight: 900;
-            color: white;
-            line-height: 0.8;
-            margin: 0;
-            text-transform: uppercase;
-            letter-spacing: -3px;
-            mix-blend-mode: difference;
-            text-align: center; /* Center the text */
-            position: absolute; /* If it needs to be positioned absolutely */
-            left: 50%; /* Center horizontally */
-            bottom: 0.05rem;
-            transform: translateX(-50%); /* Adjust for true centering */
-            width: 100%; /* Ensure it takes full width for proper centering */
-        }
-
-        /* Work Grid */
-        .work-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 12rem 5% 10rem 5%;
-        }
-
-        .work-section {
-            margin-bottom: 12rem; /* INCREASED from 8rem to 12rem - more space after images */
-        }
-
-        .single-image {
-            width: 100%;
-            margin: 0 auto 0 auto; /* Remove bottom margin since work-section handles it */
-        }
+        .work-section { margin-bottom: 12rem; }
 
         .work-image {
             width: 100%;
-            height: 610px;
+            height: 580px;
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
-            margin-bottom: 2rem;
-            border-radius: 0;
-            overflow: hidden;
-            background-color: #ffffff; /* Off-white */
+            background-color: #f5f5f5;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
         }
+        .work-image:hover { opacity: 0.9; }
+        .shorter-containers .work-image { height: 420px; }
 
-        /* Shorter containers for wide images */
-        .shorter-containers .work-image {
-            height: 440px; /* Short height for wide images */
+        @media (max-width: 768px) {
+            .work-container { padding: 0 5% 8rem 5%; }
+            .work-section   { margin-bottom: 8rem; }
+            .work-image     { height: 280px; }
+            .shorter-containers .work-image { height: 220px; }
         }
-
-        /* Project last row spacing */
-        .project-last-row {
-            margin-bottom: 15rem !important; /* INCREASED space after last image */
-        }
-
-        .work-info {
-            text-align: left;
-            margin-bottom: 3rem; /* Titles close to their images */
-        }
-
-        .work-item-title {
-            font-family: 'Futura', sans-serif;
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: #000000; /* Black text */
-        }
-
-        .work-item-description {
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            color: #8F8F8F; /* Dark gray text */
-            line-height: 1.6;
-            max-width: 600px;
-        }
-
-        /* Hide mobile image and show slideshow on desktop */
-       /* Mobile Styles */
-@media (max-width: 768px) {
-    /* Hide desktop slideshow on mobile */
-    .horizontal-slideshow {
-        display: none !important;
-    }
-    
-    /* Show mobile static image */
-    .mobile-static-image {
-        display: block !important;
-    }
-}
-
-/* Desktop Styles */
-@media (min-width: 769px) {
-    /* Show desktop slideshow */
-    .horizontal-slideshow {
-        display: flex !important;
-    }
-    
-    /* Hide mobile static image */
-    .mobile-static-image {
-        display: none !important;
-    }
-}
-
-        /* Mobile Responsive */
-      /* Mobile Responsive */
-@media (max-width: 768px) {
-    /* Hero adjustments for mobile - SMALLER HERO */
-    .hero {
-        height: 40vh !important; /* Smaller hero section to fit full image */
-    }
-    
-    .horizontal-slideshow {
-        height: 40vh !important; /* Match the smaller hero */
-        display: none !important;
-    }
-    
-    /* POSITION TEXT AT BOTTOM OF SMALLER IMAGE */
-    .name-container {
-        height: 85% !important; /* Higher height to position text at bottom */
-        bottom: 5% !important; /* Position near bottom of the image */
-        align-items: flex-end !important;
-    }
-    
-    /* Single-line title styling - WHITE TEXT (no invert) */
-    .page-title {
-        font-size: 18.25vw !important;
-        position: relative !important;
-        bottom: auto !important;
-        transform: translateX(-50%) !important;
-        margin-bottom: 0 !important;
-        mix-blend-mode: normal !important; /* Remove difference blend mode */
-        color: white !important; /* Ensure white color */
-    }
-
-    /* Show mobile static image */
-    .mobile-static-image {
-        display: block !important;
-    }
-    
-    /* ========== WORK TITLE & DESCRIPTION STYLING ========== */
-  
-    /* ... keep all your hero and navigation styles ... */
-
-    /* ========== WORK TITLE & DESCRIPTION STYLING ========== */
-    .work-info {
-        text-align: left !important;
-        margin-bottom: 2rem !important;
-        margin-left: 2rem;
-        max-width: 85%;
-        margin-top: -5rem;
-    }
-
-    .work-item-title {
-        font-family: 'Futura', sans-serif !important;
-        font-size: 1.5rem !important;
-        font-weight: 700 !important;
-        margin-bottom: 1rem !important;
-        color: #000000 !important;
-        margin-top: 5rem;
-    }
-
-    .work-item-description {
-        font-family: 'Inter', sans-serif !important;
-        font-size: 0.9rem !important;
-        color: #ccc !important;
-        line-height: 1.6 !important;
-        max-width: 100% !important;
-    }
-
-    .project-details {
-        margin-top: 1rem !important;
-    }
-
-    .project-year,
-    .project-institution,
-    .project-description {
-        font-size: 0.85rem !important;
-        margin-bottom: 1rem !important;
-    }
-
-    /* ========== LARGE MARGIN UNDER ALL IMAGES ========== */
-    .single-image,
-    .double-images {
-        margin-bottom: 12rem !important; /* HUGE space after every image */
-    }
-
-    
-    /* Rest of your mobile CSS */
-   
-    
-    .dropdown-content { 
-        position: fixed !important; 
-        top: 90px !important;
-        right: 1rem !important;
-        left: auto !important;
-        transform: translateY(-10px) !important;
-        width: 45% !important;
-        min-width: unset !important;
-        background: #000000 !important;
-        border: none !important;
-        padding: 0.5rem 0 !important;
-        max-height: 60vh;
-        overflow-y: auto;
-        mix-blend-mode: normal !important;
-        backdrop-filter: none !important;
-        opacity: 1 !important;
-        z-index: 1000 !important;
-    }
-    
-    .dropdown:hover .dropdown-content {
-        transform: translateY(0) !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-    }
-    
-    .dropdown-content a {
-        padding: 0.4rem 1rem !important;
-        font-size: 0.8rem !important;
-        color: #ffffff !important;
-        text-align: right !important;
-        mix-blend-mode: normal !important;
-        border-left: none !important;
-        font-weight: 600 !important;
-        background: transparent !important;
-        display: block !important;
-    }
-    
-    .dropdown-content a:hover {
-        background: rgba(255, 255, 255, 0.2) !important;
-        padding-right: 1.5rem !important;
-    }
-    
-    .cursor, .cursor-follower {
-        display: none;
-    }
-    
-    .single-image {
-        width: 90%;
-    }
-    
-    .work-image {
-        height: 300px;
-    }
-    
-    .shorter-containers .work-image {
-        height: 250px;
-    }
-    
-    /* NAVIGATION - MATCH BRANDS PAGE */
-    nav {
-        padding: 1rem;
-    }
-    
-    .nav-links {
-        gap: 1rem;
-    }
-    
-    .work-container {
-        padding: 8rem 5% 10rem 5%; /* Adjusted top padding for smaller hero */
-    }
-    
-    .work-section {
-        margin-bottom: 8rem;
-    }
-    
-    .project-last-row {
-        margin-bottom: 12rem !important;
-    }
-    .work-info {
-        text-align: left !important;
-        margin-bottom: 2rem !important; /* REDUCED: from 5rem to 2rem - moves first image closer to description */
-        margin-left: 2rem;
-        max-width: 85%;
-        margin-top: -5rem;
-    }
-
-    .work-item-title {
-        font-family: 'Futura', sans-serif !important;
-        font-size: 1.5rem !important;
-        font-weight: 700 !important;
-        margin-bottom: 1rem !important;
-        color: #000000 !important;
-        margin-top: 5rem;
-    }
-
-    .work-item-description {
-        font-family: 'Inter', sans-serif !important;
-        font-size: 0.9rem !important;
-        color: #ccc !important;
-        line-height: 1.6 !important;
-        max-width: 100% !important;
-    }
-
-    .project-details {
-        margin-top: 1rem !important;
-    }
-
-    .project-year,
-    .project-institution,
-    .project-description {
-        font-size: 0.85rem !important;
-        margin-bottom: 1rem !important;
-    }
-
-    /* ========== SPACING ADJUSTMENTS ========== */
-    /* Make space under first image much larger */
-    .work-section:first-child .single-image:first-child,
-    .work-section:first-child .double-images:first-child {
-        margin-bottom: 12rem !important; /* LARGE space after first image */
-    }
-    
-    /* Make space under second image much larger */
-    .work-section:nth-child(2) .single-image:first-child,
-    .work-section:nth-child(2) .double-images:first-child {
-        margin-bottom: 12rem !important; /* LARGE space after second image */
-    }
-    
-    /* Regular spacing for other images */
-    .single-image,
-    .double-images {
-        margin-bottom: 15rem !important;
-    }
-}
-
-/* Small mobile screens */
-@media (max-width: 480px) {
-    /* Even smaller hero for small screens */
-    .hero {
-        height: 35vh !important;
-    }
-    
-    .horizontal-slideshow {
-        height: 35vh !important;
-    }
-    
-    .name-container {
-        height: 90% !important; /* Even higher to position text at bottom */
-        bottom: 3% !important; /* Slightly adjusted for small screens */
-    }
-    
-    .page-title {
-        font-size: 18.5vw !important;
-    }
-    
-    /* ========== WORK TITLE & DESCRIPTION STYLING FOR SMALL SCREENS ========== */
-    .work-info {
-        margin-bottom: 1.5rem !important; /* Small space between description and first image */
-        margin-left: 1rem;
-        max-width: 90%;
-    }
-
-    .work-item-title {
-        font-size: 1.3rem !important;
-        margin-bottom: 0.8rem !important;
-    }
-
-    .work-item-description {
-        font-size: 0.8rem !important;
-    }
-
-    /* ========== LARGE SPACING UNDER ALL IMAGES FOR SMALL SCREENS ========== */
-    .single-image,
-    .double-images {
-        margin-bottom: 14rem !important; /* Large space after EVERY image */
-    }
-
-    .project-year,
-    .project-institution,
-    .project-description {
-        font-size: 0.8rem !important;
-        margin-bottom: 0.8rem !important;
-    }
-    
-    .work-container {
-        padding: 6rem 5% 10rem 5%;
-    }
-    
-    .single-image {
-        width: 95%;
-    }
-    
-    .work-image {
-        height: 250px;
-    }
-    
-    .shorter-containers .work-image {
-        height: 200px;
-    }
-    
-    /* NAVIGATION - MATCH BRANDS PAGE */
-    nav {
-        padding: 0.4rem 0.8rem !important;
-    }
-    
-    .nav-links {
-        gap: 1rem !important;
-    }
-    
-    .dropdown-content {
-        top: 85px !important;
-        width: 50% !important;
-        padding: 0.4rem 0 !important;
-    }
-    
-    .dropdown-content a {
-        padding: 0.3rem 0.8rem !important;
-        font-size: 0.75rem !important;
-    }
-    
-    .work-section {
-        margin-bottom: 6rem;
-    }
-    
-    .project-last-row {
-        margin-bottom: 10rem !important;
-    }
-    .work-info {
-        margin-bottom: 1.5rem !important;
-        margin-left: 1rem;
-        max-width: 90%;
-    }
-
-    .work-item-title {
-        font-size: 1.3rem !important;
-    }
-
-    .work-item-description {
-        font-size: 0.8rem !important;
-    }
-
-    .project-year,
-    .project-institution,
-    .project-description {
-        font-size: 0.8rem !important;
-    }
-
-    /* LARGE MARGIN UNDER ALL IMAGES */
-    .single-image,
-    .double-images {
-        margin-bottom: 10rem !important; /* Still huge but slightly smaller */
-    }
-    .project-last-row {
-        margin-bottom: 12rem !important;
-    }
-}
-
-@media (max-width: 360px) {
-    .hero {
-        height: 30vh !important;
-    }
-    
-    .horizontal-slideshow {
-        height: 30vh !important;
-    }
-    
-    .name-container {
-        height: 92% !important;
-        bottom: 2% !important;
-    }
-    
-    .page-title {
-        font-size: 18vw !important;
-    }
-    
-    /* ========== WORK TITLE & DESCRIPTION STYLING FOR SMALLEST SCREENS ========== */
-    .work-info {
-        margin-bottom: 3rem !important;
-    }
-
-    .work-item-title {
-        font-size: 1.1rem !important;
-    }
-
-    .work-item-description {
-        font-size: 0.75rem !important;
-    }
-
-    .project-year,
-    .project-institution,
-    .project-description {
-        font-size: 0.75rem !important;
-    }
-    
-    .nav-links {
-        gap: 1rem !important;
-    }
-    
-    .dropdown-content {
-        top: 80px !important;
-        width: 55% !important;
-    }
-    
-    .work-container {
-        padding: 5rem 5% 8rem 5%;
-    }
-    
-    .work-section {
-        margin-bottom: 5rem;
-    }
-    
-    .project-last-row {
-        margin-bottom: 11rem !important;
-    }
-    .work-info {
-        margin-bottom: 1rem !important;
-    }
-
-    .work-item-title {
-        font-size: 1.1rem !important;
-    }
-
-    .work-item-description {
-        font-size: 0.75rem !important;
-    }
-
-    .project-year,
-    .project-institution,
-    .project-description {
-        font-size: 0.75rem !important;
-    }
-
-    /* LARGE MARGIN UNDER ALL IMAGES */
-    .single-image,
-    .double-images {
-        margin-bottom: 8rem !important; /* Still large but smaller for tiny screens */
-    }
-    /* ========== SPACING ADJUSTMENTS FOR SMALLEST SCREENS ========== */
-    .work-section:first-child .single-image:first-child,
-    .work-section:first-child .double-images:first-child {
-        margin-bottom: 5rem !important; /* Even less on smallest screens */
-    }
-    
-    .work-section:nth-child(2) .single-image:first-child,
-    .work-section:nth-child(2) .double-images:first-child {
-        margin-bottom: 5rem !important; /* Even less on smallest screens */
-    }
-    
-    .single-image,
-    .double-images {
-        margin-bottom: 2rem !important;
-    }
-}
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div style="font-family: 'Futura', sans-serif; font-weight: 900; font-size: 1.2rem; color: white;">
-            <a href="index.html" style="color: white; text-decoration: none;">PORTFOLIO 2025</a>
+
+    <!-- Safe area top cover -->
+    <div class="top-cover" id="topCover"></div>
+
+    <!-- Black header panel -->
+    <div class="header-panel" id="headerPanel"></div>
+
+    <!-- Nav -->
+    <nav id="mainNav">
+        <div class="nav-left">
+            <div class="nav-name" id="navName">
+                <a href="index.html" style="color:#ffffff;text-decoration:none;">Brad Sherman</a>
+            </div>
+            <div id="heroTitleWrap" style="will-change:opacity;">
+                <h1 class="hero-title" id="heroTitle">Websites</h1>
+            </div>
         </div>
-        <div class="nav-links">
+        <div class="nav-links" id="navLinks">
             <div class="dropdown">
-                <a href="#work" style="color: white; text-decoration: none; font-weight: 600; position: relative; cursor: pointer;">
-                    WORK
-                    <span style="position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #ff0055; transition: width 0.3s;"></span>
-                </a>
+                <a href="#" style="color:#ffffff;text-decoration:none;font-weight:600;cursor:pointer;">Work</a>
                 <div class="dropdown-content">
                     <a href="index.html">Home</a>
-                      <a href="painting.html">Painting</a>
-                      <a href="drawing.html">Drawing</a>
-                      <a href="woodworking.html">Woodworking</a>
+                    <a href="painting.html">Painting</a>
+                    <a href="drawing.html">Drawing</a>
+                    <a href="woodworking.html">Woodworking</a>
                     <a href="websites.html">Websites</a>
                     <a href="photography.html">Photography</a>
-                 
                 </div>
             </div>
-          <a href="Contacts.html" style="color: white; text-decoration: none; font-weight: 600; position: relative;">
-    CONTACT
-</a>
+            <a href="contacts.html" style="color:#ffffff;text-decoration:none;font-weight:600;">Contact</a>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <!-- Animated Background -->
-        <div class="animated-bg"></div>
-        
-        <!-- Mobile Static Image (shown on mobile) -->
-        <div class="mobile-static-image"></div>
-        
-        <!-- Horizontal Slideshow - Single Wide Image (shown on desktop) -->
-        <div class="horizontal-slideshow">
-            <div class="horizontal-slide" style="background-image: url('images_2/gal.jpg');"></div>
-        </div>
+    <div class="hero-spacer"></div>
 
-        <!-- Websites Title -->
-        <div class="name-container">
-            <h1 class="page-title">WEBSITES</h1>
-        </div>
-    </section>
-
-    <!-- Work Content -->
+    <!-- Work -->
     <section class="work-container">
-        <!-- First Project: The Food Gallery 2 -->
-    <div class="work-info">
-    <h3 class="work-item-title">The Food Gallery</h3>
-    <div class="project-details">
-        <p class="project-year">2025</p>
-        <p class="project-institution">html & css</p>
-        <p class="project-description">
-            <a href="https://TheFoodGallery.art" target="_blank" style="font-weight: bold; color: #939598; text-decoration: none;">
-                Open
-            </a>
-        </p>
-    </div>
-</div>
 
-        <!-- Short and wide image -->
-        <div class="work-section project-last-row">
+        <div class="cs-header" style="border-top:none;padding-top:0;">
+            <span class="cs-index">01</span>
+            <h2 class="cs-title">The Food Gallery</h2>
+            <p class="cs-meta">2025 · HTML &amp; CSS · <a href="https://TheFoodGallery.art" target="_blank" style="color:#aaaaaa;text-decoration:none;letter-spacing:0.2em;">TheFoodGallery.art ↗</a></p>
+            <p class="cs-lede">A redesign of the original UW–Madison project, built as a standalone site on a custom domain. The goal was to strip the food-blog aesthetic down to something closer to a fine-art gallery: minimal color, generous white space, and typography that steps back to let the photographs lead.</p>
+        </div>
+
+        <div class="work-section shorter-containers">
             <div class="single-image shorter-containers">
-                <div class="work-image" style="background-image: url('images_2/stop.jpg');"></div>
+                <div class="work-image" style="background-image: url('images_2/stop.webp');"></div>
             </div>
         </div>
 
-        <!-- Second Project: The Food Gallery -->
-     <div class="work-info">
-    <h3 class="work-item-title">The Food Gallery Original</h3>
-    <div class="project-details">
-        <p class="project-year">2024</p>
-        <p class="project-institution">html & css</p>
-        <p class="project-description">
-            <a href="https://art309.art.wisc.edu/~bpsherman/" target="_blank" style="font-weight: bold; color: #939598; text-decoration: none;">
-                Open
-            </a>
-        </p>
-    </div>
-</div>
-
-        <!-- Short and wide image -->
-        <div class="work-section ">
-            <div class="single-image ">
-                <div class="work-image" style="background-image: url('images_2/old.png');"></div>
-            </div>
+        <div class="cs-header">
+            <span class="cs-index">02</span>
+            <h2 class="cs-title">The Food Gallery Original</h2>
+            <p class="cs-meta">2024 · HTML &amp; CSS · UW–Madison · <a href="https://art309.art.wisc.edu/~bpsherman/" target="_blank" style="color:#aaaaaa;text-decoration:none;letter-spacing:0.2em;">art309.art.wisc.edu ↗</a></p>
+            <p class="cs-lede">Built for a digital art course at UW–Madison. The brief was open-ended: create a web-based artwork. I treated food photography as fine art, applying museum-style presentation — sparse layout, large images, minimal labels — to something people usually see in recipe feeds.</p>
         </div>
 
-        <!-- Third Project: Portfolio -->
-            <div class="work-info">
-        <h3 class="work-item-title">Portfolio</h3>
-        <div class="project-details">
-            <p class="project-year">2025</p>
-            <p class="project-institution">html & css</p>
-            <p class="project-description">
-                
-            </p>
-        </div>
-    </div>
-
-        <!-- Normal height image -->
-        <div class="work-section project-last-row"> <!-- Added project-last-row to the section -->
+        <div class="work-section">
             <div class="single-image">
-                <div class="work-image" style="background-image: url('images_2/front.jpg');"></div>
+                <div class="work-image" style="background-image: url('images_2/old.webp');"></div>
             </div>
         </div>
+
+        <div class="cs-header">
+            <span class="cs-index">03</span>
+            <h2 class="cs-title">Portfolio</h2>
+            <p class="cs-meta">2025 · HTML &amp; CSS</p>
+            <p class="cs-lede">This site. The design brief was self-imposed: present work across five different disciplines — painting, drawing, woodworking, photography, and web — without the site itself competing with any of it. Black nav, white pages, Futura throughout. The hero slideshow on the homepage is driven by mouse position on desktop and touch-drag on mobile.</p>
+        </div>
+
+        <div class="work-section">
+            <div class="single-image">
+                <div class="work-image" style="background-image: url('images_2/front.webp');"></div>
+            </div>
+        </div>
+
     </section>
 
+    <script src="main.js"></script>
     <script>
-        // Horizontal Slideshow Scroll Control
-        const slideshow = document.querySelector('.horizontal-slideshow');
-
-        // Scroll-based movement ONLY for desktop
-        window.addEventListener('scroll', () => {
-            const scrollY = window.scrollY;
-            const maxScroll = window.innerHeight * 1.5;
-            const scrollPercent = Math.min(scrollY / maxScroll, 1);
-            const slideshowPosition = -(scrollPercent * 115);
-            
-            if (window.innerWidth > 768) {
-                slideshow.style.transform = `translateX(${slideshowPosition}%)`;
-            }
-        });
-
-        // Reset on scroll to top
-        window.addEventListener('scroll', () => {
-            if (window.scrollY === 0) {
-                slideshow.style.transform = 'translateX(0%)';
-            }
-        });
-
-        // Navigation hover effects
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('mouseenter', () => {
-                if (link.querySelector('span')) {
-                    link.querySelector('span').style.width = '100%';
-                }
-            });
-            link.addEventListener('mouseleave', () => {
-                if (link.querySelector('span')) {
-                    link.querySelector('span').style.width = '0';
-                }
-            });
-        });
-
-        // Add keyframes for animations
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes float {
-                0%, 100% { transform: translateY(0) rotate(0deg); }
-                25% { transform: translateY(-10px) rotate(90deg); }
-                50% { transform: translateY(0) rotate(180deg); }
-                75% { transform: translateY(10px) rotate(270deg); }
-            }
-        `;
-        document.head.appendChild(style);
+        initScrollNav();
     </script>
 </body>
 </html>

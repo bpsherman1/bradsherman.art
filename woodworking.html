@@ -1,1180 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Page Title</title>
-    
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="icon" type="image/png" href="images_2/favicon.png">
     <link rel="apple-touch-icon" href="images_2/favicon.png">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Futura:wght@700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- Your existing styles and fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Futura:wght@700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Woodworking - Brad Sherman Design</title>
-    <link href="https://fonts.googleapis.com/css2?family=Futura:wght@700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Woodworking - Brad Sherman</title>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <link rel="stylesheet" href="main.css">
     <style>
-        /* Base Reset */
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-        }
-        
-        /* White background for entire page below hero */
-        body {
-            font-family: 'Inter', sans-serif; 
-            background: #ffffff; /* Change body to white */
-            color: #000000; /* Default text color black */
-            overflow-x: hidden;
+        /* ── Page: Woodworking ────────────────────────────── */
+        .hero-title {
+            background-image: linear-gradient(
+                90deg,
+                #ffffff 0%,  #ffffff 5%,
+                #92400e 18%, #78350f 30%,
+                #b45309 42%, #d97706 54%,
+                #92400e 66%, #78350f 74%,
+                #ffffff 82%, #ffffff 100%
+            );
         }
 
-        .image-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #ffffff;
-    z-index: 1000;
-    justify-content: center;
-    align-items: center;
-}
+        .hero-spacer { height: 41vh; }
 
-.modal-content {
-    max-width: 90%;
-    max-height: 90%;
-    position: relative;
-}
-
-.modal-image {
-    max-width: 100%;
-    max-height: 90vh;
-    object-fit: contain;
-}
-
-.close-modal {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    color: #000000; /* Changed to black */
-    font-size: 40px;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 1001;
-    background: none;
-    border: none;
-}
-
-.nav-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    width: 60px;
-    height: 60px;
-    cursor: pointer;
-    opacity: 0.7;
-    transition: opacity 0.3s;
-    color: transparent; /* Add this to hide the text arrows */
-    font-size: 0; /* Add this to hide the text arrows */
-}
-
-.nav-btn:hover {
-    opacity: 1;
-}
-
-.nav-btn::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 20px;
-    height: 20px;
-    border: 3px solid #000000; /* Changed to black */
-    border-width: 3px 3px 0 0;
-    transform: translate(-50%, -50%) rotate(45deg);
-}
-
-.prev-btn {
-    left: 30px;
-}
-
-.prev-btn::before {
-    transform: translate(-50%, -50%) rotate(-135deg);
-}
-
-.next-btn {
-    right: 30px;
-}
-
-.next-btn::before {
-    transform: translate(-50%, -50%) rotate(45deg);
-}
-
-/* Make work images clickable */
-.work-image {
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.work-image:hover {
-    transform: scale(1.02);
-}
-        .works-image {
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.works-image:hover {
-    transform: scale(1.02);
-}
-        
-.project-year {
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    color: #939598;
-    margin-bottom: 1.5rem;
-    font-weight: 600;
-}
-
-.project-institution {
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    color: #939598;
-    margin-bottom: 1.5rem;
-    font-style: italic; /* Makes it italic */
-    font-weight: 400;
-}
-
-.project-description {
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    color: #939598;
-    line-height: 1.6;
-    max-width: 600px;
-}
-        /* Hero section keeps dark background */
-        .hero {
-            background: #0a0a0a; /* Ensure hero stays dark */
-        }
-
-        /* Work container inherits white background */
         .work-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 12rem 5% 10rem 5%;
-            background: #ffffff;
+            padding: 0 5% 12rem 5%;
         }
 
-        /* Ensure text in work area is black */
-        .work-info,
-        .work-item-title,
-        .work-item-description {
-            color: #000000 !important;
+        .work-section { margin-bottom: 8rem; }
+
+        .project-divider {
+            border: none;
+            border-top: 0.5px solid #e0e0e0;
+            margin: 12rem 0 8rem 0;
         }
 
-        .work-item-description {
-            color: #333333 !important;
-        }
+        .double-images { display: flex; gap: 1rem; }
 
-        /* Lighter image boxes - OFF WHITE */
-        .work-image {
-            background-color: #f8f8f8 !important; /* Off-white instead of dark gray */
-            
-        }
-         .works-image {
-            background-color: #ffffff !important; /* Off-white instead of dark gray */
-            
-        }
-
-        /* Navigation Styles */
-        nav { 
-            position: fixed; 
-            top: 0; 
-            width: 100%; 
-            padding: 2rem; 
-            z-index: 100; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            mix-blend-mode: difference;
-        }
-        
-        .nav-links { 
-            display: flex; 
-            gap: 2rem; 
-            align-items: center; 
-        }
-        
-        nav a { 
-            color: white; 
-            text-decoration: none; 
-            font-weight: 600; 
-            position: relative; 
-        }
-        
-        /* Dropdown Styles */
-        .dropdown { position: relative; display: inline-block; }
-        .dropdown-content { 
-            position: absolute; 
-            top: 35px;
-            left: 0; 
-            background: rgba(255, 255, 255, 0.95); 
-            backdrop-filter: blur(20px); 
-            border: 1px solid #fff; 
-            border-radius: 8px; 
-            padding: 1rem 0; 
-            min-width: 200px; 
-            opacity: 0; 
-            visibility: hidden; 
-            transform: translateY(-10px); 
-            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1); 
-            mix-blend-mode: difference;
-        }
-        .dropdown:hover .dropdown-content { opacity: 1; visibility: visible; transform: translateY(0); }
-        .dropdown-content a { 
-            display: block; 
-            padding: 0.5rem 1.5rem; 
-            color: black; 
-            text-decoration: none; 
-            transition: all 0.3s ease; 
-            border-left: 3px solid transparent; 
-            font-weight: 700;
-            font-size: 0.9rem;
-        }
-        .dropdown-content a:hover { 
-            background: rgba(0, 0, 0, 0.1); 
-            border-left: 3px solid #ff0055; 
-            padding-left: 2rem; 
-        }
-
-        /* Hero Slideshow */
-        .hero {
-            height: 100vh;
+        .full-width {
+            width: 92vw;
             position: relative;
-            overflow: hidden;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
-        .animated-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .work-image, .works-image {
             width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, #ff0055, #00ffff, #ffaa00);
-            opacity: 0.1;
-            filter: blur(100px);
-        }
-
-        /* Mobile static image - shown by default */
-        .mobile-static-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-image: url('images_2/doggy.png');
-        }
-
-        .horizontal-slideshow {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 400%; /* Single wide image - 400% width */
-            height: 100%;
-            display: flex;
-            transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        .horizontal-slide {
-            width: 100%; /* Single image takes full width of slideshow */
-            height: 100%;
-            background-size: auto 100%; /* Stretch width automatically, maintain 100% height */
-            background-position: 0% center; /* Explicitly position at left edge */
-            background-repeat: no-repeat;
-            flex-shrink: 0;
-        }
-
-        .name-container {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 66%;
-            display: flex;
-            align-items: flex-end;
-            padding: 0 5%;
-            pointer-events: none;
-        }
-
-        .page-title {
-            font-family: 'Futura', sans-serif;
-            font-size: 10.5vw;
-            font-weight: 900;
-            color: white;
-            line-height: 0.8;
-            margin: 0;
-            text-transform: uppercase;
-            letter-spacing: -3px;
-            mix-blend-mode: difference;
-            text-align: center; /* Center the text */
-            position: absolute; /* If it needs to be positioned absolutely */
-            left: 50%; /* Center horizontally */
-            bottom: 0.05rem;
-            transform: translateX(-50%); /* Adjust for true centering */
-            width: 100%; /* Ensure it takes full width for proper centering */
-        }
-
-        /* Work Grid */
-        .work-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 12rem 5% 10rem 5%;
-        }
-
-        .work-section {
-            margin-bottom: 8rem;
-        }
-
-        .single-image {
-            width: 100%;
-            margin: 0 auto 5rem auto;
-        }
-
-        .double-images {
-            width: 100%;
-            margin: 0 auto 5rem auto;
-            display: flex;
-            gap: 0;
-        }
-
-        .double-images .work-image {
-            width: 50%;
-        }
-
-        .work-image {
-            width: 100%;
-            height: 700px;
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
-            margin-bottom: 2rem;
-            border-radius: 0;
-            overflow: hidden;
-            background-color: #f8f8f8; /* Off-white */
+            background-color: #f5f5f5;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
         }
-.works-image {
-            width: 100%;
-           height: 800px; 
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-            margin-bottom: 2rem;
-            border-radius: 0;
-            overflow: hidden;
-            background-color: #ffffff; /* Off-white */
-        }
-        /* Taller containers */
-        .taller-containers .work-image {
-            height: 800px; /* Taller height */
-        }
+        .work-image:hover, .works-image:hover { opacity: 0.9; }
 
-        /* Shorter containers for wide images */
-        .shorter-containers .work-image {
-            height: 400px; /* Short height for wide images */
-        }
+        .single-image .work-image,
+        .single-image .works-image { height: 600px; }
 
-        /* Project last row spacing */
-        .project-last-row {
-            margin-bottom: 15rem !important;
+        .taller-containers .work-image,
+        .taller-containers .works-image { height: 700px; }
+
+        .shorter-containers .work-image,
+        .shorter-containers .works-image { height: 440px; }
+
+        .double-images .work-image { height: 500px; width: 50%; }
+
+        @media (min-width: 769px) {
+            .nav-links {
+                position: absolute;
+                right: 2rem;
+                top: 2rem;
+            }
         }
 
-        .work-info {
-            text-align: left;
-            margin-bottom: 10rem;
+        @media (max-width: 768px) {
+            .work-container { padding: 0 5% 8rem 5%; }
+            .work-section   { margin-bottom: 5rem; }
+
+            .single-image .work-image,
+            .single-image .works-image  { height: 350px; }
+            .taller-containers .work-image,
+            .taller-containers .works-image { height: 420px; }
+            .shorter-containers .work-image { height: 250px; }
+            .double-images              { flex-direction: column; }
+            .double-images .work-image  { width: 100%; height: 300px; }
         }
-
-        .work-item-title {
-            font-family: 'Futura', sans-serif;
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: #000000; /* Black text */
-        }
-
-        .work-item-description {
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            color: #333333; /* Dark gray text */
-            line-height: 1.6;
-            max-width: 600px;
-        }
-
-        /* Hide mobile image and show slideshow on desktop */
-      /* Mobile Styles */
-@media (max-width: 768px) {
-    /* Hide desktop slideshow on mobile */
-    .horizontal-slideshow {
-        display: none !important;
-    }
-    
-    /* Show mobile static image */
-    .mobile-static-image {
-        display: block !important;
-    }
-}
-
-/* Desktop Styles */
-@media (min-width: 769px) {
-    /* Show desktop slideshow */
-    .horizontal-slideshow {
-        display: flex !important;
-    }
-    
-    /* Hide mobile static image */
-    .mobile-static-image {
-        display: none !important;
-    }
-}
-
-        /* Mobile Responsive */
-      /* Mobile Responsive */
-/* Mobile Responsive */
-@media (max-width: 768px) {
-    /* Hero adjustments for mobile - SMALLER HERO */
-    .hero {
-        height: 40vh !important; /* Smaller hero section to fit full image */
-    }
-    .work-section .single-image,
-.work-section .double-images {
-    width: 100%;
-    margin: 0 auto 5rem auto;
-}
-
-/* Specifically target the Yankee Stadium section if needed */
-.work-section:has(.works-image) .single-image {
-    width: 100%;
-    margin: 0 auto 5rem auto;
-}
-    .work-info {
-        text-align: left !important;
-        margin-bottom: 2rem !important;
-        margin-left: 2rem;
-        max-width: 85%;
-        margin-top: -5rem;
-    }
-.shorter-containers .works-image {
-    height: 400px; /* Short height for wide images */
-    margin-bottom: -5rem;
-}
-    .work-item-title {
-        font-family: 'Futura', sans-serif !important;
-        font-size: 1.5rem !important;
-        font-weight: 700 !important;
-        margin-bottom: 1rem !important;
-        color: #000000 !important;
-        margin-top: 5rem;
-    }
-
-    .work-item-description {
-        font-family: 'Inter', sans-serif !important;
-        font-size: 0.9rem !important;
-        color: #ccc !important;
-        line-height: 1.6 !important;
-        max-width: 100% !important;
-    }
-
-    .project-details {
-        margin-top: 1rem !important;
-    }
-
-    .project-year,
-    .project-institution,
-    .project-description {
-        font-size: 0.85rem !important;
-        margin-bottom: 1rem !important;
-    }
-
-    /* ========== SMALLER GAPS BETWEEN IMAGES ========== */
-    .work-section {
-        margin-bottom: 3rem !important; /* REDUCED from 6rem to 3rem */
-    }
-    
-    .single-image,
-    .double-images {
-        margin-bottom: 2rem !important; /* Small gap between images */
-    }
-
-    /* Keep the same distance from titles and text */
-    .work-info {
-        margin-bottom: 2rem !important; /* Same as before */
-    }
-    .horizontal-slideshow {
-        height: 40vh !important; /* Match the smaller hero */
-        display: none !important;
-    }
-    
-    /* POSITION TEXT AT BOTTOM OF SMALLER IMAGE */
-    .name-container {
-        height: 85% !important; /* Higher height to position text at bottom */
-        bottom: 5% !important; /* Position near bottom of the image */
-        align-items: flex-end !important;
-        padding-bottom: 1rem !important; /* Add some bottom padding */
-    }
-    
-    /* Single-line title styling - WHITE TEXT (no invert) - SMALLER FOR LONG WORDS */
-    .page-title {
-        font-size: 16vw !important; /* Smaller for long words */
-        position: relative !important;
-        bottom: auto !important;
-        transform: translateX(-50%) !important;
-        margin-bottom: 0 !important;
-        mix-blend-mode: difference !important; /* Remove difference blend mode */
-        color: white !important; /* Ensure white color */
-        line-height: 0.9 !important; /* Tighter line height */
-        letter-spacing: -1px !important; /* Reduce letter spacing */
-        width: 95% !important; /* Slightly narrower to prevent edge cutting */
-        word-wrap: break-word !important; /* Allow breaking if needed */
-        text-align:left;
-    }
-
-    /* Show mobile static image */
-    .mobile-static-image {
-        display: block !important;
-    }
-    
-    /* Rest of your mobile CSS */
-    
-    
-    .dropdown-content { 
-        position: fixed !important; 
-        top: 90px !important;
-        right: 1rem !important;
-        left: auto !important;
-        transform: translateY(-10px) !important;
-        width: 45% !important;
-        min-width: unset !important;
-        background: #000000 !important;
-        border: none !important;
-        padding: 0.5rem 0 !important;
-        max-height: 60vh;
-        overflow-y: auto;
-        mix-blend-mode: normal !important;
-        backdrop-filter: none !important;
-        opacity: 1 !important;
-        z-index: 1000 !important;
-    }
-    
-    .dropdown:hover .dropdown-content {
-        transform: translateY(0) !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-    }
-    
-    .dropdown-content a {
-        padding: 0.4rem 1rem !important;
-        font-size: 0.8rem !important;
-        color: #ffffff !important;
-        text-align: right !important;
-        mix-blend-mode: normal !important;
-        border-left: none !important;
-        font-weight: 600 !important;
-        background: transparent !important;
-        display: block !important;
-    }
-    
-    .dropdown-content a:hover {
-        background: rgba(255, 255, 255, 0.2) !important;
-        padding-right: 1.5rem !important;
-    }
-    
-    .cursor, .cursor-follower {
-        display: none;
-    }
-    
-    .single-image,
-    .double-images {
-        width: 90%;
-    }
-    
-    .double-images {
-        flex-direction: column;
-    }
-    
-    .double-images .work-image {
-        width: 100%;
-        height: 300px;
-    }
-    
-    .work-image {
-        height: 300px;
-    }
-    
-    .works-image {
-        height: 300px;
-    }
-    
-    .taller-containers .work-image {
-        height: 400px;
-    }
-    
-    .taller-containers .works-image {
-        height: 400px;
-    }
-    
-    .shorter-containers .work-image {
-        height: 250px;
-    }
-    
-    .work-info {
-        margin-bottom: 6rem;
-    }
-    
-    .work-item-title {
-        font-size: 1.5rem;
-        color: #000000 !important;
-    }
-    
-    /* NAVIGATION - MATCH BRANDS PAGE */
-    nav {
-        padding: 1rem;
-    }
-    
-    .nav-links {
-        gap: 1rem;
-    }
-    
-    .work-container {
-        padding: 8rem 5% 10rem 5%; /* Adjusted top padding for smaller hero */
-    }
-    
-    .work-section {
-        margin-bottom: 6rem;
-    }
-    
-    .project-last-row {
-        margin-bottom: 16rem !important;
-    }
-}
-
-/* Small mobile screens */
-@media (max-width: 480px) {
-    /* Even smaller hero for small screens */
-    .hero {
-        height: 35vh !important;
-    }
-    .work-section .single-image,
-.work-section .double-images {
-    width: 100%;
-    margin: 0 auto 5rem auto;
-}
-
-/* Specifically target the Yankee Stadium section if needed */
-.work-section:has(.works-image) .single-image {
-    width: 100%;
-    margin: 0 auto 5rem auto;
-}
-    .work-info {
-        margin-bottom: 2.5rem !important;
-        margin-left: 1rem;
-        max-width: 90%;
-
-    }
-
-    .work-item-title {
-        font-size: 1.3rem !important;
-        margin-bottom: 0.8rem !important;
-    }
-
-    .work-item-description {
-        font-size: 0.8rem !important;
-    }
-
-    .project-year,
-    .project-institution,
-    .project-description {
-        font-size: 0.8rem !important;
-        margin-bottom: 0.8rem !important;
-    }
-
-    /* ========== SMALLER GAPS BETWEEN IMAGES FOR SMALL SCREENS ========== */
-    .work-section {
-        margin-bottom: 2rem !important; /* REDUCED from 5rem to 2rem */
-    }
-    
-    .single-image,
-    .double-images {
-        margin-bottom: 1.5rem !important; /* Even smaller gap on small screens */
-    }
-    .horizontal-slideshow {
-        height: 35vh !important;
-    }
-    
-    .name-container {
-        height: 90% !important; /* Even higher to position text at bottom */
-        bottom: 3% !important; /* Slightly adjusted for small screens */
-        padding-bottom: 0.8rem !important; /* Less padding on smaller screens */
-    }
-    
-    .page-title {
-        font-size: 16vw !important; /* Even smaller for small screens */
-        letter-spacing: -0.5px !important; /* Even tighter letter spacing */
-        line-height: 0.95 !important; /* Slightly looser line height */
-    }
-    
-    .work-container {
-        padding: 6rem 5% 10rem 5%;
-    }
-    
-    .single-image,
-    .double-images {
-        width: 95%;
-    }
-    
-    .work-image {
-        height: 250px;
-    }
-    
-    .works-image {
-        height: 250px;
-    }
-    
-    .taller-containers .work-image {
-        height: 350px;
-    }
-    
-    .taller-containers .works-image {
-        height: 350px;
-    }
-    
-    .shorter-containers .work-image {
-        height: 200px;
-    }
-    
-    /* NAVIGATION - MATCH BRANDS PAGE */
-    nav {
-        padding: 0.4rem 0.8rem !important;
-    }
-    
-    .nav-links {
-        gap: 1rem !important;
-    }
-    
-    .dropdown-content {
-        top: 85px !important;
-        width: 50% !important;
-        padding: 0.4rem 0 !important;
-    }
-    
-    .dropdown-content a {
-        padding: 0.3rem 0.8rem !important;
-        font-size: 0.75rem !important;
-    }
-    
-    .work-section {
-        margin-bottom: 5rem;
-    }
-    
-    .work-item-title {
-        font-size: 1.3rem;
-    }
-    
-    .project-last-row {
-        margin-bottom: 14rem !important;
-    }
-}
-
-@media (max-width: 360px) {
-    .hero {
-        height: 30vh !important;
-    }
-     .work-info {
-        margin-bottom: 1rem !important;
-    }
-
-    .work-item-title {
-        font-size: 1.1rem !important;
-    }
-
-    .work-item-description {
-        font-size: 0.75rem !important;
-    }
-
-    .project-year,
-    .project-institution,
-    .project-description {
-        font-size: 0.75rem !important;
-    }
-
-    /* ========== SMALLER GAPS BETWEEN IMAGES FOR SMALLEST SCREENS ========== */
-    .work-section {
-        margin-bottom: 1.5rem !important; /* REDUCED from 4rem to 1.5rem */
-    }
-    
-    .single-image,
-    .double-images {
-        margin-bottom: 1rem !important; /* Smallest gap on tiny screens */
-    }
-    .horizontal-slideshow {
-        height: 30vh !important;
-    }
-    
-    .name-container {
-        height: 92% !important;
-        bottom: 2% !important;
-        padding-bottom: 0.5rem !important; /* Minimal padding for very small screens */
-    }
-    
-    .page-title {
-        font-size: 15vw !important; /* Smallest size for very small screens */
-        letter-spacing: 0px !important; /* No negative letter spacing */
-        line-height: 1 !important; /* Normal line height */
-    }
-    
-    .nav-links {
-        gap: 1rem !important;
-    }
-    
-    .dropdown-content {
-        top: 80px !important;
-        width: 55% !important;
-    }
-    
-    .work-container {
-        padding: 5rem 5% 8rem 5%;
-    }
-    
-    .work-section {
-        margin-bottom: 4rem;
-    }
-    
-    .project-last-row {
-        margin-bottom: 12rem !important;
-    }
-}
     </style>
 </head>
 <body>
 
-    <!-- Full Screen Image Modal -->
-<div id="imageModal" class="image-modal">
-    <button class="close-modal">&times;</button>
-    <button class="nav-btn prev-btn">&lt;</button>
-    <button class="nav-btn next-btn">&gt;</button>
-    <div class="modal-content">
-        <img class="modal-image" src="" alt="">
-    </div>
-</div>
-    <!-- Navigation -->
-    <nav>
-        <div style="font-family: 'Futura', sans-serif; font-weight: 900; font-size: 1.2rem; color: white;">
-            <a href="index.html" style="color: white; text-decoration: none;">PORTFOLIO 2025</a>
+    <!-- Modal -->
+    <div id="imageModal" class="image-modal">
+        <button class="close-modal">&times;</button>
+        <button class="nav-btn prev-btn"></button>
+        <button class="nav-btn next-btn"></button>
+        <div class="modal-content">
+            <img class="modal-image" src="" alt="">
         </div>
-        <div class="nav-links">
+    </div>
+
+    <!-- Safe area top cover -->
+    <div class="top-cover" id="topCover"></div>
+
+    <!-- Black header panel -->
+    <div class="header-panel" id="headerPanel"></div>
+
+    <!-- Nav -->
+    <nav id="mainNav">
+        <div class="nav-left">
+            <div class="nav-name" id="navName">
+                <a href="index.html" style="color:#ffffff;text-decoration:none;">Brad Sherman</a>
+            </div>
+            <div id="heroTitleWrap" style="will-change:opacity;">
+                <h1 class="hero-title" id="heroTitle">Woodworking</h1>
+            </div>
+        </div>
+        <div class="nav-links" id="navLinks">
             <div class="dropdown">
-                <a href="#work" style="color: white; text-decoration: none; font-weight: 600; position: relative; cursor: pointer;">
-                    WORK
-                    <span style="position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #ff0055; transition: width 0.3s;"></span>
-                </a>
+                <a href="#" style="color:#ffffff;text-decoration:none;font-weight:600;cursor:pointer;">Work</a>
                 <div class="dropdown-content">
                     <a href="index.html">Home</a>
-                   <a href="painting.html">Painting</a>
-                      <a href="drawing.html">Drawing</a>
-                      <a href="woodworking.html">Woodworking</a>
+                    <a href="painting.html">Painting</a>
+                    <a href="drawing.html">Drawing</a>
+                    <a href="woodworking.html">Woodworking</a>
                     <a href="websites.html">Websites</a>
                     <a href="photography.html">Photography</a>
-                 
                 </div>
             </div>
-           <a href="Contacts.html" style="color: white; text-decoration: none; font-weight: 600; position: relative;">
-    CONTACT
-</a>
+            <a href="contacts.html" style="color:#ffffff;text-decoration:none;font-weight:600;">Contact</a>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <!-- Animated Background -->
-        <div class="animated-bg"></div>
-        
-        <!-- Mobile Static Image (shown on mobile) -->
-        <div class="mobile-static-image"></div>
-        
-        <!-- Horizontal Slideshow - Single Wide Image (shown on desktop) -->
-        <div class="horizontal-slideshow">
-            <div class="horizontal-slide" style="background-image: url('images_2/ds.jpg');"></div>
-        </div>
+    <div class="hero-spacer"></div>
 
-        <!-- Woodworking Title -->
-        <div class="name-container">
-            <h1 class="page-title">WOOD PIECES</h1>
-        </div>
-    </section>
-
-    <!-- Work Content -->
+    <!-- Work -->
     <section class="work-container">
-        <!-- First Project: Splined Miter Joint Box -->
-      <div class="work-info">
-        <h3 class="work-item-title">Splined Miter Joint Box</h3>
-        <div class="project-details">
-            <p class="project-year">2025</p>
-            <p class="project-institution">Cherry box, walnut & poplar veneer top</p>
-              <p class="project-year">10 x 5 x 5 in</p>
-            <p class="project-description">
-                This box features a river-design veneer inlay on the lid and a hidden sliding drawer built into the side. It has
-                walnut splines and is finished with coconut oil to bring out the grain in the wood.
-            </p>
-        </div>
-    </div>
 
-        <!-- Single Image -->
-        <div class="work-section">
+        <!-- Splined Miter Joint Box -->
+        <div class="cs-header">
+            <span class="cs-index">01</span>
+            <h2 class="cs-title">Splined Miter Joint Box</h2>
+            <p class="cs-meta">2025 · Cherry · Walnut Spline · Poplar Veneer · 10 × 5 × 5 in</p>
+            <p class="cs-lede">A river-design veneer inlay covers the lid, and a hidden sliding drawer is built into the side. The walnut splines turn a structural joint into a visible design detail, and the whole piece is finished with coconut oil to bring out the grain.</p>
+        </div>
+
+        <div style="background-color: #f5f5f5; overflow: hidden;">
+            <div class="work-section">
+                <div class="single-image taller-containers">
+                    <div class="works-image" style="background-image: url('images_2/box.webp');"></div>
+                </div>
+            </div>
+
+            <div class="work-section">
+                <div class="double-images taller-containers">
+                    <div class="work-image" style="background-image: url('images_2/dra.webp');"></div>
+                    <div class="work-image" style="background-image: url('images_2/rivt.webp');"></div>
+                </div>
+            </div>
+
+            <div class="work-section">
+                <div class="single-image taller-containers">
+                    <div class="work-image" style="background-image: url('images_2/eag.webp');"></div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="project-divider">
+
+        <!-- Veneer Yankee Stadium -->
+        <div class="cs-header">
+            <span class="cs-index">02</span>
+            <h2 class="cs-title">Veneer Yankee Stadium</h2>
+            <p class="cs-meta">2025 · Walnut &amp; Poplar · 20 × 12 in</p>
+            <p class="cs-lede">The baseball field is veneered in alternating walnut strips on a poplar base — assembled like a parquet floor, the seams mirroring the mowing patterns of an actual outfield. The field is drawn to the exact dimensions of Yankee Stadium: 314 ft down the right-field line, 408 ft to center.</p>
+        </div>
+
+        <div class="work-section" style="margin-bottom: 0;">
             <div class="single-image taller-containers">
-                <div class="works-image" style="background-image: url('images_2/box.jpg');"></div>
+                <div class="works-image" style="background-image: url('images_2/vene.webp');"></div>
             </div>
         </div>
 
-        <!-- Row of 2 Images - Taller -->
-        <div class="work-section">
-            <div class="double-images taller-containers">
-                <div class="work-image" style="background-image: url('images_2/dra.jpg');"></div>
-                <div class="work-image" style="background-image: url('images_2/rivt.jpg');"></div>
+        <div class="work-section" style="margin-top: 0;">
+            <div class="double-images" style="gap: 0;">
+                <div class="works-image" style="background-image: url('images_2/angle.webp'); height: 480px; background-position: center 105%;"></div>
+                <div class="works-image" style="background-image: url('images_2/crop.webp'); height: 480px; background-position: center 105%;"></div>
             </div>
         </div>
 
-        <!-- Single Image - Taller -->
-        <div class="work-section">
-            <div class="single-image taller-containers project-last-row">
-                <div class="work-image" style="background-image: url('images_2/eag.jpg');"></div>
+        <hr class="project-divider">
+
+        <!-- Key Table -->
+        <div class="cs-header">
+            <span class="cs-index">03</span>
+            <h2 class="cs-title">Key Table</h2>
+            <p class="cs-meta">2024 · Poplar · 30 × 20 × 8 in</p>
+            <p class="cs-lede">The first furniture piece I designed. I selected boards for high contrast and pronounced grain — knots included. The two bolted steel cross-braces are structurally unnecessary, but they give the piece an over-built, industrial character that feels intentional rather than accidental.</p>
+        </div>
+
+        <div class="work-section" style="margin-bottom: 0;">
+            <div class="double-images" style="gap: 0;">
+                <div class="work-image" style="background-image: url('images_2/fds.webp'); height: 480px;"></div>
+                <div class="work-image" style="background-image: url('images_2/tos.webp'); height: 480px;"></div>
             </div>
         </div>
 
-        <!-- Second Project: Veneer Yankee Stadium -->
-            <div class="work-info">
-        <h3 class="work-item-title">Veneer Yankee Stadium</h3>
-        <div class="project-details">
-            <p class="project-year">2025</p>
-            <p class="project-institution">Walnut & poplar</p>
-              <p class="project-year">20 x 12 in</p>
-            <p class="project-description">
-                This piece is composed of a poplar base with the baseball field veneered, pieced together like a basketball
-                court. The small strips resemble the lines of lawnmower marks. The field has the exact dimensions of Yankee
-                Stadium, as home to right is 314 cm, and home to center is 408 cm.​​​​​​​
-            </p>
-        </div>
-    </div>
-
-      <!-- Three Normal Images -->
-<div class="work-section">
-    <div class="single-image taller-containers">
-        <div class="works-image" style="background-image: url('images_2/vene.jpg');"></div>
-    </div>
-</div>
-
-<div class="work-section">
-    <div class="single-image taller-containers">
-        <div class="works-image" style="background-image: url('images_2/angle.jpg');"></div>
-    </div>
-</div>
-
-<div class="work-section">
-    <div class="single-image taller-containers project-last-row">
-        <div class="works-image" style="background-image: url('images_2/crop.jpg');"></div>
-    </div>
-</div>
-
-        <!-- Third Project: Key Table -->
-             <div class="work-info">
-        <h3 class="work-item-title">Key Table</h3>
-        <div class="project-details">
-            <p class="project-year">2024</p>
-            <p class="project-institution">Poplar</p>
-              <p class="project-year">30 x 20 x 8 in</p>
-            <p class="project-description">
-                The first furniture piece I designed was an industrial-style key table. I chose wood with strong contrast along with
-                beautiful grain patterns and knots. The table is clearly over-engineered, featuring two bolted cross braces that
-                reinforce the legs and give the piece a rugged look.​​​​​​​
-            </p>
-        </div>
-    </div>
-
-
-        <!-- Three Taller Images -->
-        <div class="work-section">
-            <div class="single-image taller-containers">
-                <div class="work-image" style="background-image: url('images_2/fds.jpg');"></div>
+        <div class="work-section" style="margin-top: 2rem;">
+            <div class="single-image taller-containers" style="margin-top: -2rem;">
+                <div class="work-image" style="background-image: url('images_2/tab.webp'); background-position: center 65%;"></div>
             </div>
+        </div>
+
+        <hr class="project-divider">
+
+        <!-- Baseball Bat Spoon -->
+        <div class="cs-header">
+            <span class="cs-index">04</span>
+            <h2 class="cs-title">Baseball Bat Spoon</h2>
+            <p class="cs-meta">2023 · Poplar · 18 × 2 in</p>
+            <p class="cs-lede">Made for a class brief called <em>Not a Spoon</em> — the object had to be hand-carved from a non-spoon form and still function as one. The bat shape was chosen for the challenge: carving a functional bowl into a round taper without splitting the narrow stock. Finished with coconut oil.</p>
         </div>
 
         <div class="work-section">
-            <div class="single-image taller-containers">
-                <div class="work-image" style="background-image: url('images_2/tos.jpg');"></div>
+            <div class="double-images taller-containers full-width" style="gap: 0;">
+                <div class="work-image" style="background-image: url('images_2/gfd.webp');"></div>
+                <div class="work-image" style="background-image: url('images_2/bw.webp');"></div>
             </div>
         </div>
 
-        <div class="work-section">
-            <div class="single-image taller-containers project-last-row">
-                <div class="work-image" style="background-image: url('images_2/tab.png');"></div>
-            </div>
-        </div>
-
-        <!-- Fourth Project: Baseball Bat Spoon -->
-        <div class="work-info">
-        <h3 class="work-item-title">Baseball Bat Spoon</h3>
-        <div class="project-details">
-            <p class="project-year">2023</p>
-            <p class="project-institution">Poplar</p>
-              <p class="project-year">18 x 2 in</p>
-            <p class="project-description">
-                This bat was for a project called Not a Spoon, where we had to create a spoon out of a random object. The only
-                guidelines were that it needed to be hand-carved and function as a spoon. The bat is hand-carved and finished
-                with coconut oil.
-            </p>
-        </div>
-    </div>
-
-        <!-- Short and Wide Image -->
-        <div class="work-section">
-            <div class="single-image shorter-containers">
-                <div class="work-image" style="background-image: url('images_2/gfd.png');"></div>
-            </div>
-        </div>
-
-        <!-- Normal Image -->
-        <div class="work-section">
-            <div class="single-image">
-                <div class="work-image" style="background-image: url('images_2/bw.png');"></div>
-            </div>
-        </div>
     </section>
 
+    <script src="main.js"></script>
     <script>
-        // Full Screen Image Viewer
-// Full Screen Image Viewer
-const modal = document.getElementById('imageModal');
-const modalImage = document.querySelector('.modal-image');
-const closeModal = document.querySelector('.close-modal');
-const prevBtn = document.querySelector('.prev-btn');
-const nextBtn = document.querySelector('.next-btn');
-
-// Get all images on the page (both .work-image and .works-image)
-const workImages = document.querySelectorAll('.work-image');
-const worksImages = document.querySelectorAll('.works-image');
-const allImages = [...workImages, ...worksImages]; // Combine both arrays
-let currentImageIndex = 0;
-let images = [];
-
-// Extract image URLs from background images
-allImages.forEach((img, index) => {
-    const bgImage = img.style.backgroundImage;
-    console.log(`Image ${index}:`, bgImage); // Debug log
-    
-    // Extract URL from background-image: url('...')
-    if (bgImage && bgImage !== 'none') {
-        const imageUrl = bgImage.replace(/url\(['"]?(.*?)['"]?\)/i, '$1');
-        images.push(imageUrl);
-        
-        // Make image clickable
-        img.addEventListener('click', () => {
-            currentImageIndex = index;
-            openModal();
-        });
-        
-        console.log(`Added image ${index}:`, imageUrl); // Debug log
-    }
-});
-
-console.log('Total images found:', images.length); // Debug log
-
-function openModal() {
-    if (images.length === 0) {
-        console.log('No images found'); // Debug log
-        return;
-    }
-    modal.style.display = 'flex';
-    modalImage.src = images[currentImageIndex];
-    document.body.style.overflow = 'hidden'; // Prevent scrolling
-}
-
-function closeModalFunc() {
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto'; // Re-enable scrolling
-}
-
-function showNextImage() {
-    currentImageIndex = (currentImageIndex + 1) % images.length;
-    modalImage.src = images[currentImageIndex];
-}
-
-function showPrevImage() {
-    currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
-    modalImage.src = images[currentImageIndex];
-}
-
-// Event listeners
-closeModal.addEventListener('click', closeModalFunc);
-nextBtn.addEventListener('click', showNextImage);
-prevBtn.addEventListener('click', showPrevImage);
-
-// Close modal when clicking outside image
-modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-        closeModalFunc();
-    }
-});
-
-// Keyboard navigation
-document.addEventListener('keydown', (e) => {
-    if (modal.style.display === 'flex') {
-        if (e.key === 'Escape') closeModalFunc();
-        if (e.key === 'ArrowRight') showNextImage();
-        if (e.key === 'ArrowLeft') showPrevImage();
-    }
-});
-        // Horizontal Slideshow Scroll Control
-        const slideshow = document.querySelector('.horizontal-slideshow');
-
-        // Scroll-based movement ONLY for desktop
-        window.addEventListener('scroll', () => {
-            const scrollY = window.scrollY;
-            const maxScroll = window.innerHeight * 1.5;
-            const scrollPercent = Math.min(scrollY / maxScroll, 1);
-            const slideshowPosition = -(scrollPercent * 115);
-            
-            if (window.innerWidth > 768) {
-                slideshow.style.transform = `translateX(${slideshowPosition}%)`;
-            }
-        });
-
-        // Reset on scroll to top
-        window.addEventListener('scroll', () => {
-            if (window.scrollY === 0) {
-                slideshow.style.transform = 'translateX(0%)';
-            }
-        });
-
-        // Navigation hover effects
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('mouseenter', () => {
-                if (link.querySelector('span')) {
-                    link.querySelector('span').style.width = '100%';
-                }
-            });
-            link.addEventListener('mouseleave', () => {
-                if (link.querySelector('span')) {
-                    link.querySelector('span').style.width = '0';
-                }
-            });
-        });
+        initScrollNav();
+        initDivModal();
     </script>
 </body>
 </html>

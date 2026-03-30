@@ -1,1112 +1,329 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-     <link rel="icon" type="image/png" href="images_2/favicon.png">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="icon" type="image/png" href="images_2/favicon.png">
     <link rel="apple-touch-icon" href="images_2/favicon.png">
-
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photography - Brad Sherman Design</title>
-    <link href="https://fonts.googleapis.com/css2?family=Futura:wght@700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Photography - Brad Sherman</title>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <link rel="preload" as="image" href="images_2/piccap.webp" fetchpriority="high">
+    <link rel="stylesheet" href="main.css">
     <style>
-        /* Base Reset */
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-        }
-        
-        /* White background for entire page below hero */
-        body {
-            font-family: 'Inter', sans-serif; 
-            background: #ffffff; /* Change body to white */
-            color: #000000; /* Default text color black */
-            overflow-x: hidden;
-        }
-/* Full Screen Image Viewer */
-.image-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #ffffff;
-    z-index: 1000;
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    max-width: 90%;
-    max-height: 90%;
-    position: relative;
-}
-
-.modal-image {
-    max-width: 100%;
-    max-height: 90vh;
-    object-fit: contain;
-}
-
-.close-modal {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    color: #000000;
-    font-size: 40px;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 1001;
-    background: none;
-    border: none;
-}
-
-.nav-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    width: 60px;
-    height: 60px;
-    cursor: pointer;
-    opacity: 0.7;
-    transition: opacity 0.3s;
-    color: transparent;
-    font-size: 0;
-}
-
-.nav-btn:hover {
-    opacity: 1;
-}
-
-.nav-btn::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 20px;
-    height: 20px;
-    border: 3px solid #000000;
-    border-width: 3px 3px 0 0;
-    transform: translate(-50%, -50%) rotate(45deg);
-}
-
-.prev-btn {
-    left: 30px;
-}
-
-.prev-btn::before {
-    transform: translate(-50%, -50%) rotate(-135deg);
-}
-
-.next-btn {
-    right: 30px;
-}
-
-.next-btn::before {
-    transform: translate(-50%, -50%) rotate(45deg);
-}
-
-/* Make work images clickable */
-.work-image, .works-image {
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.work-image:hover, .works-image:hover {
-    transform: scale(1.02);
-}
-        /* Hero section keeps dark background */
-        .hero {
-            background: #0a0a0a; /* Ensure hero stays dark */
+        /* ── Page: Photography ────────────────────────────── */
+        .hero-title {
+            background-image: linear-gradient(
+                90deg,
+                #ffffff 0%,  #ffffff 5%,
+                #6b7280 18%, #374151 30%,
+                #9ca3af 42%, #4b5563 54%,
+                #6b7280 66%, #9ca3af 74%,
+                #ffffff 82%, #ffffff 100%
+            );
         }
 
-        /* Work container inherits white background */
         .work-container {
-            max-width: 1200px;
+            max-width: 2200px;
             margin: 0 auto;
-            padding: 18rem 5% 10rem 5%; /* Same spacing as painting page */
-            background: #ffffff;
+            padding: 0 4% 12rem 4%;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 7rem 5rem;
+            align-items: start;
         }
 
-        /* Ensure text in work area is black */
-        .work-info,
-        .work-item-title,
-        .work-item-description {
-            color: #000000 !important;
+        /* Pull content up — smaller hero spacer on this page */
+        .hero-spacer { height: 38vh; }
+
+        /* Caption spacing */
+        .work-info {
+            margin-top: 1rem;
+            padding-top: 0.9rem;
         }
 
-        .work-item-description {
-            color: #939598 !important;
+        /* Page intro — push first row of images down */
+        .page-intro {
+            padding-bottom: 2.5rem;
+            margin-bottom: 0;
         }
 
-        /* Lighter image boxes - OFF WHITE */
-        .work-image {
-            background-color: #f8f8f8 !important; /* Off-white instead of dark gray */
-            
-        }
-         .works-image {
-            background-color: #ffffff !important; /* Off-white instead of dark gray */
-            
-        }
+        .img-wrap { width: 100%; }
 
-        /* Navigation Styles */
-        nav { 
-            position: fixed; 
-            top: 0; 
-            width: 100%; 
-            padding: 2rem; 
-            z-index: 100; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            mix-blend-mode: difference;
-        }
-        
-        .nav-links { 
-            display: flex; 
-            gap: 2rem; 
-            align-items: center; 
-        }
-        
-        nav a { 
-            color: white; 
-            text-decoration: none; 
-            font-weight: 600; 
-            position: relative; 
-        }
-        
-        /* Dropdown Styles */
-        .dropdown { position: relative; display: inline-block; }
-        .dropdown-content { 
-            position: absolute; 
-            top: 35px;
-            left: 0; 
-            background: rgba(255, 255, 255, 0.95); 
-            backdrop-filter: blur(20px); 
-            border: 1px solid #fff; 
-            border-radius: 8px; 
-            padding: 1rem 0; 
-            min-width: 200px; 
-            opacity: 0; 
-            visibility: hidden; 
-            transform: translateY(-10px); 
-            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1); 
-            mix-blend-mode: difference;
-        }
-        .dropdown:hover .dropdown-content { opacity: 1; visibility: visible; transform: translateY(0); }
-        .dropdown-content a { 
-            display: block; 
-            padding: 0.5rem 1.5rem; 
-            color: black; 
-            text-decoration: none; 
-            transition: all 0.3s ease; 
-            border-left: 3px solid transparent; 
-            font-weight: 700;
-            font-size: 0.9rem;
-        }
-        .dropdown-content a:hover { 
-            background: rgba(0, 0, 0, 0.1); 
-            border-left: 3px solid #ff0055; 
-            padding-left: 2rem; 
-        }
-
-        /* Hero Slideshow */
-        .hero {
-            height: 100vh;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .animated-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .work-img {
             width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, #ff0055, #00ffff, #ffaa00);
-            opacity: 0.1;
-            filter: blur(100px);
+            height: auto;
+            display: block;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+        .work-img:hover { opacity: 0.9; }
+
+        @media (min-width: 769px) {
+            .nav-links {
+                position: absolute;
+                right: 2rem;
+                top: 2rem;
+            }
         }
 
-        /* Mobile static image - shown by default */
-        .mobile-static-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-image: url('images_2/phots1.png');
+        @media (min-width: 769px) and (max-width: 1100px) {
+            .work-container {
+                grid-template-columns: repeat(2, 1fr);
+                padding: 0 6% 10rem 6%;
+                gap: 6rem 3rem;
+            }
         }
 
-        .horizontal-slideshow {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 400%; /* Single wide image - 400% width */
-            height: 100%;
-            display: flex;
-            transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        @media (max-width: 768px) {
+            .work-container {
+                padding: 0 6% 8rem 6%;
+                grid-template-columns: 1fr;
+                gap: 3.5rem 0;
+            }
         }
 
-        .horizontal-slide {
-            width: 100%; /* Single image takes full width of slideshow */
-            height: 100%;
-            background-size: auto 100%; /* Stretch width automatically, maintain 100% height */
-            background-position: 0% center; /* Explicitly position at left edge */
-            background-repeat: no-repeat;
-            flex-shrink: 0;
-        }
-
-        .name-container {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 66%;
-            display: flex;
-            align-items: flex-end;
-            padding: 0 5%;
-            pointer-events: none;
-        }
-
-        .page-title {
-            font-family: 'Futura', sans-serif;
-            font-size: 10.5vw;
-            font-weight: 900;
-            color: white;
-            line-height: 0.8;
-            margin: 0;
-            text-transform: uppercase;
-            letter-spacing: -3px;
-            mix-blend-mode: difference;
-            text-align: center; /* Center the text */
-            position: absolute; /* If it needs to be positioned absolutely */
-            left: 50%; /* Center horizontally */
-            bottom: 0.05rem;
-            transform: translateX(-50%); /* Adjust for true centering */
-            width: 100%; /* Ensure it takes full width for proper centering */
-        }
-
-        /* Work Grid */
-        .work-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 18rem 5% 10rem 5%; /* Same spacing as painting page */
-        }
-
-        .work-section {
-            margin-bottom: 8rem;
-        }
-
-        .single-image {
-            width: 100%;
-            margin: 0 auto 0 auto; /* Remove bottom margin since text goes below */
-        }
-
-        .work-image {
-            width: 100%;
-            height: 700px;
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-            margin-bottom: 0; /* Remove margin since text goes below */
-            border-radius: 0;
-            overflow: hidden;
-            background-color: #f8f8f8; /* Off-white */
-        }
-        .works-image {
-            width: 100%;
-            height: 700px;
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-            margin-bottom: 0; /* Remove margin since text goes below */
-            border-radius: 0;
-            overflow: hidden;
-            background-color: #ffffff; /* Off-white */
-        }
-
-        /* Taller containers */
-        .taller-containers .work-image {
-            height: 800px; /* Taller height */
-        }
-
-        /* Short and wide containers */
-        .short-wide-containers .work-image {
-            height: 400px; /* Short and wide height */
-        }
-
-        /* Text below image styling */
-        .image-text-below {
-            margin-top: 2rem; /* Small margin between image and title */
-            margin-bottom: 12rem; /* Large margin after description */
-            text-align: left;
-        }
-
-        .image-text-below .work-item-title {
-            margin-bottom: 1rem;
-        }
-
-        .work-item-title {
-            font-family: 'Futura', sans-serif;
-            font-size: 1.25rem; /* Same smaller size as painting page */
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: #000000; /* Black text */
-        }
-
-        .work-item-description {
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            color: #333333; /* Dark gray text */
-            line-height: 1.6;
-            max-width: 600px;
-        }
-
-        /* Hide mobile image and show slideshow on desktop */
-       /* Mobile Styles */
-@media (max-width: 768px) {
-    /* Hide desktop slideshow on mobile */
-    .horizontal-slideshow {
-        display: none !important;
-    }
-    
-    /* Show mobile static image */
-    .mobile-static-image {
-        display: block !important;
-    }
-}
-
-/* Desktop Styles */
-@media (min-width: 769px) {
-    /* Show desktop slideshow */
-    .horizontal-slideshow {
-        display: flex !important;
-    }
-    
-    /* Hide mobile static image */
-    .mobile-static-image {
-        display: none !important;
-    }
-}
-
-        /* Mobile Responsive */
-        /* Mobile Responsive */
-/* Mobile Responsive */
-/* Mobile Responsive */
-/* Mobile Responsive */
-@media (max-width: 768px) {
-    /* Hero adjustments for mobile - FULL SCREEN HERO */
-    .hero {
-        height: 90vh !important; /* Full screen hero like index page */
-    }
-    
-    .horizontal-slideshow {
-        height: 90vh !important; /* Match the hero height */
-        display: none !important;
-    }
-    
-    /* POSITION TEXT AT BOTTOM LEFT CORNER - LIKE INDEX PAGE */
-    .name-container {
-        height: 70% !important; /* Adjusted height for bottom positioning */
-        bottom: 2% !important; /* Position near bottom */
-        align-items: flex-end !important;
-        justify-content: flex-start !important; /* Align to left */
-        padding: 0 5% !important;
-    }
-    
-    /* Title styling - BOTTOM LEFT CORNER - WHITE TEXT - SMALLER FOR PHOTOGRAPHY */
-    .page-title {
-        font-size: 11vw !important; /* SMALLER to prevent cutoff */
-        position: relative !important;
-        bottom: auto !important;
-        left: 0 !important;
-        transform: none !important; /* Remove centering transform */
-        margin-bottom: 0 !important;
-        mix-blend-mode: difference !important;
-        color: white !important;
-        line-height: 0.9 !important;
-        letter-spacing: -0.5px !important; /* Slightly tighter */
-        width: auto !important;
-        white-space: nowrap !important;
-        text-align: left !important; /* Left aligned */
-        margin-left: 0 !important;
-    }
-
-    /* Show mobile static image */
-    .mobile-static-image {
-        display: block !important;
-    }
-    
-    .dropdown-content { 
-        position: fixed !important; 
-        top: 90px !important;
-        right: 1rem !important;
-        left: auto !important;
-        transform: translateY(-10px) !important;
-        width: 45% !important;
-        min-width: unset !important;
-        background: #000000 !important;
-        border: none !important;
-        padding: 0.5rem 0 !important;
-        max-height: 60vh;
-        overflow-y: auto;
-        mix-blend-mode: normal !important;
-        backdrop-filter: none !important;
-        opacity: 1 !important;
-        z-index: 1000 !important;
-    }
-    
-    .dropdown:hover .dropdown-content {
-        transform: translateY(0) !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-    }
-    
-    .dropdown-content a {
-        padding: 0.4rem 1rem !important;
-        font-size: 0.8rem !important;
-        color: #ffffff !important;
-        text-align: right !important;
-        mix-blend-mode: normal !important;
-        border-left: none !important;
-        font-weight: 600 !important;
-        background: transparent !important;
-        display: block !important;
-    }
-    
-    .dropdown-content a:hover {
-        background: rgba(255, 255, 255, 0.2) !important;
-        padding-right: 1.5rem !important;
-    }
-    
-    .cursor, .cursor-follower {
-        display: none;
-    }
-    
-    .single-image {
-        width: 90%;
-    }
-    
-   .image-text-below {
-    text-align: left !important;
-    margin: 40px auto 200px auto !important; /* Fixed pixel values for consistency */
-    max-width: 90% !important;
-    padding: 0 5% !important;
-}
-.work-info {
-        text-align: left !important;
-        margin-bottom: 2rem !important;
-        margin-left: -1rem;
-        max-width: 85%;
-        margin-top: 2rem;
-    }
-
-.work-item-title {
-    font-family: 'Futura', sans-serif !important;
-    font-size: 1.5rem !important;
-    font-weight: 700 !important;
-    margin-bottom: 16px !important; /* Fixed pixel value */
-    color: #000000 !important;
-    margin-top: 0 !important;
-     margin-left: -1rem;
-}
-
-.work-item-description {
-    font-family: 'Inter', sans-serif !important;
-    font-size: 0.9rem !important;
-    color: #333333 !important;
-    line-height: 1.6 !important;
-    max-width: 100% !important;
-     margin-left: -1rem;
-}
-
-/* ========== IMAGE HEIGHT CONTROLS - ADJUST THESE VALUES ========== */
-/* Normal image heights */
-.work-image {
-    height: 300px; /* ← ADJUST THIS FOR NORMAL IMAGES */
-}
-
-.works-image {
-    height: 300px; /* ← ADJUST THIS FOR WORKS IMAGES */
-}
-
-/* Taller containers - for vertical photos */
-.taller-containers .work-image {
-    height: 450px; /* ← ADJUST THIS FOR TALLER IMAGES */
-}
-
-/* Short and wide containers - for landscape photos */
-.short-wide-containers .work-image {
-    height: 300px; /* ← ADJUST THIS FOR WIDE IMAGES */
-}
-    .image-text-below {
-        margin-top: 1.5rem;
-        margin-bottom: 8rem;
-    }
-    
-    .work-item-title {
-        font-size: 1.1rem;
-        color: #000000 !important;
-    }
-    
-    /* NAVIGATION */
-    nav {
-        padding: 1rem;
-    }
-    
-    .nav-links {
-        gap: 1rem;
-    }
-    
-    .work-container {
-        padding: 8rem 5% 10rem 5%; /* Adjusted top padding */
-    }
-    
-    .work-section {
-        margin-bottom: 6rem;
-    }
-}
-
-/* Small mobile screens */
-@media (max-width: 480px) {
-    /* Full screen hero for small screens */
-    .hero {
-        height: 90vh !important;
-    }
-    
-    .horizontal-slideshow {
-        height: 90vh !important;
-    }
-    
-    .name-container {
-        height: 75% !important;
-        bottom: 3% !important;
-    }
-    
-    .page-title {
-        font-size: 10.5vw !important; /* Smaller for small screens */
-        letter-spacing: 0px !important;
-    }
-    
-    .work-container {
-        padding: 6rem 5% 10rem 5%;
-    }
-    
-    .single-image {
-        width: 95%;
-    }
-    
-    .image-text-below {
-        margin: 32px auto 160px auto !important; /* Slightly smaller fixed values */
-        max-width: 90% !important;
-        padding: 0 5% !important;
-    }
-
-    .work-item-title {
-        font-size: 1.3rem !important;
-        margin-bottom: 12px !important;
-    }
-
-    .work-item-description {
-        font-size: 0.8rem !important;
-    }
-    
-    /* ========== IMAGE HEIGHT ADJUSTMENTS FOR 480px ========== */
-    .work-image {
-        height: 250px; /* ← ADJUST THIS FOR NORMAL IMAGES AT 480px */
-    }
-    
-    .works-image {
-        height: 250px; /* ← ADJUST THIS FOR WORKS IMAGES AT 480px */
-    }
-    
-    .taller-containers .work-image {
-        height: 350px; /* ← ADJUST THIS FOR TALLER IMAGES AT 480px */
-    }
-    
-    .short-wide-containers .work-image {
-        height: 200px; /* ← ADJUST THIS FOR WIDE IMAGES AT 480px */
-    }
-
-    
-    /* NAVIGATION */
-    nav {
-        padding: 0.4rem 0.8rem !important;
-    }
-    
-    .nav-links {
-        gap: 1rem !important;
-    }
-    
-    .dropdown-content {
-        top: 85px !important;
-        width: 50% !important;
-        padding: 0.4rem 0 !important;
-    }
-    
-    .dropdown-content a {
-        padding: 0.3rem 0.8rem !important;
-        font-size: 0.75rem !important;
-    }
-    
-    .work-section {
-        margin-bottom: 5rem;
-    }
-    
-    .work-item-title {
-        font-size: 1rem;
-    }
-    
-    .image-text-below {
-        margin-bottom: 6rem;
-    }
-}
-
-@media (max-width: 360px) {
-    .hero {
-        height: 90vh !important;
-    }
-    .image-text-below {
-        margin: 24px auto 120px auto !important; /* Even smaller fixed values */
-    }
-
-    .work-item-title {
-        font-size: 1.1rem !important;
-    }
-
-    .work-item-description {
-        font-size: 0.75rem !important;
-    }
-    
-    .horizontal-slideshow {
-        height: 90vh !important;
-    }
-    
-    .name-container {
-        height: 80% !important;
-        bottom: 2% !important;
-    }
-    
-    .page-title {
-        font-size: 10.5vw !important; /* Smallest size */
-        letter-spacing: 0px !important;
-    }
-    
-    .nav-links {
-        gap: 1rem !important;
-    }
-    
-    .dropdown-content {
-        top: 80px !important;
-        width: 55% !important;
-    }
-    
-    .work-container {
-        padding: 5rem 5% 8rem 5%;
-    }
-    
-    .work-section {
-        margin-bottom: 4rem;
-    }
-    
-    .image-text-below {
-        margin-bottom: 5rem;
-    }
-}
     </style>
 </head>
 <body>
-    <!-- Full Screen Image Modal -->
-<div id="imageModal" class="image-modal">
-    <button class="close-modal">&times;</button>
-    <button class="nav-btn prev-btn">&lt;</button>
-    <button class="nav-btn next-btn">&gt;</button>
-    <div class="modal-content">
-        <img class="modal-image" src="" alt="">
-    </div>
-</div>
-    <!-- Navigation -->
-    <nav>
-        <div style="font-family: 'Futura', sans-serif; font-weight: 900; font-size: 1.2rem; color: white;">
-            <a href="index.html" style="color: white; text-decoration: none;">PORTFOLIO 2025</a>
+
+    <!-- Modal -->
+    <div id="imageModal" class="image-modal">
+        <button class="close-modal">&times;</button>
+        <button class="nav-btn prev-btn"></button>
+        <button class="nav-btn next-btn"></button>
+        <div class="modal-content">
+            <img class="modal-image" src="" alt="">
         </div>
-        <div class="nav-links">
+    </div>
+
+    <!-- Safe area top cover -->
+    <div class="top-cover" id="topCover"></div>
+
+    <!-- Black header panel -->
+    <div class="header-panel" id="headerPanel"></div>
+
+    <!-- Nav -->
+    <nav id="mainNav">
+        <div class="nav-left">
+            <div class="nav-name" id="navName">
+                <a href="index.html" style="color:#ffffff;text-decoration:none;">Brad Sherman</a>
+            </div>
+            <div id="heroTitleWrap" style="will-change:opacity;">
+                <h1 class="hero-title" id="heroTitle">Photography</h1>
+            </div>
+        </div>
+        <div class="nav-links" id="navLinks">
             <div class="dropdown">
-                <a href="#work" style="color: white; text-decoration: none; font-weight: 600; position: relative; cursor: pointer;">
-                    WORK
-                    <span style="position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #ff0055; transition: width 0.3s;"></span>
-                </a>
+                <a href="#" style="color:#ffffff;text-decoration:none;font-weight:600;cursor:pointer;">Work</a>
                 <div class="dropdown-content">
                     <a href="index.html">Home</a>
-                       <a href="painting.html">Painting</a>
-                      <a href="drawing.html">Drawing</a>
-                      <a href="woodworking.html">Woodworking</a>
+                    <a href="painting.html">Painting</a>
+                    <a href="drawing.html">Drawing</a>
+                    <a href="woodworking.html">Woodworking</a>
                     <a href="websites.html">Websites</a>
                     <a href="photography.html">Photography</a>
-                 
                 </div>
             </div>
-            <a href="Contacts.html" style="color: white; text-decoration: none; font-weight: 600; position: relative;">
-    CONTACT
-</a>
+            <a href="contacts.html" style="color:#ffffff;text-decoration:none;font-weight:600;">Contact</a>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <!-- Animated Background -->
-        <div class="animated-bg"></div>
-        
-        <!-- Mobile Static Image (shown on mobile) -->
-        <div class="mobile-static-image"></div>
-        
-        <!-- Horizontal Slideshow - Single Wide Image (shown on desktop) -->
-        <div class="horizontal-slideshow">
-            <div class="horizontal-slide" style="background-image: url('images_2/try1.jpg');"></div>
-        </div>
+    <div class="hero-spacer"></div>
 
-        <!-- Photography Title -->
-        <div class="name-container">
-            <h1 class="page-title">PHOTOGRAPHY</h1>
-        </div>
-    </section>
-
-    <!-- Work Content -->
+    <!-- Work -->
     <section class="work-container">
-        <!-- First 8 photos - Normal -->
-        <div class="work-section">
-            <div class="single-image">
-                <div class="works-image" style="background-image: url('images_2/piccap.jpg');"></div>
+
+        <div class="page-intro">
+            <p class="cs-lede">Shot on iPhone during travel to Italy, France, and the American West. Documentary and landscape work.</p>
+        </div>
+
+        <div class="work-section landscape">
+            <div class="img-wrap">
+                <img class="work-img" src="images_2/piccap.webp" alt="Giardino Di Augusto, Capri" loading="eager" decoding="async" width="1800" height="1193"/>
             </div>
-            <div class="image-text-below">
+            <div class="work-info">
                 <h3 class="work-item-title">Giardino Di Augusto, Capri</h3>
-                <p class="work-item-description">
-                    2025
-                </p>
+                <p class="project-year">2025</p>
             </div>
         </div>
 
-        <div class="work-section">
-            <div class="single-image">
-                <div class="work-image" style="background-image: url('images_2/0002.jpg');"></div>
+        <div class="work-section landscape">
+            <div class="img-wrap">
+                <img class="work-img" src="images_2/0002.webp" alt="Pantheon, Rome" loading="lazy" decoding="async" width="1800" height="1350"/>
             </div>
-            <div class="image-text-below">
+            <div class="work-info">
                 <h3 class="work-item-title">Pantheon, Rome</h3>
-                <p class="work-item-description">
-                    2025
-                </p>
+                <p class="project-year">2025</p>
             </div>
         </div>
 
-        <div class="work-section">
-            <div class="single-image">
-                <div class="work-image" style="background-image: url('images_2/0003.jpg');"></div>
+        <div class="work-section landscape">
+            <div class="img-wrap">
+                <img class="work-img" src="images_2/0003.webp" alt="Palm Tree, Rome" loading="lazy" decoding="async" width="1800" height="1350"/>
             </div>
-            <div class="image-text-below">
+            <div class="work-info">
                 <h3 class="work-item-title">Palm Tree, Rome</h3>
-                <p class="work-item-description">
-                    2025
-                </p>
+                <p class="project-year">2025</p>
             </div>
         </div>
 
-        <div class="work-section">
-            <div class="single-image">
-                <div class="work-image" style="background-image: url('images_2/0004.jpg');"></div>
+        <div class="work-section landscape">
+            <div class="img-wrap">
+                <img class="work-img" src="images_2/0004.webp" alt="Vatican, Rome" loading="lazy" decoding="async" width="1800" height="1350"/>
             </div>
-            <div class="image-text-below">
+            <div class="work-info">
                 <h3 class="work-item-title">Vatican, Rome</h3>
-                <p class="work-item-description">
-                    2025
-                </p>
+                <p class="project-year">2025</p>
             </div>
         </div>
 
-        <div class="work-section">
-            <div class="single-image">
-                <div class="work-image" style="background-image: url('images_2/0005.jpg');"></div>
+        <div class="work-section landscape">
+            <div class="img-wrap">
+                <img class="work-img" src="images_2/0005.webp" alt="Monte Solaro, Capri" loading="lazy" decoding="async" width="1800" height="1350"/>
             </div>
-            <div class="image-text-below">
+            <div class="work-info">
                 <h3 class="work-item-title">Monte Solaro, Capri</h3>
-                <p class="work-item-description">
-                   2025
-                </p>
+                <p class="project-year">2025</p>
             </div>
         </div>
 
-        <div class="work-section">
-            <div class="single-image">
-                <div class="work-image" style="background-image: url('images_2/0006.jpg');"></div>
+        <div class="work-section landscape">
+            <div class="img-wrap">
+                <img class="work-img" src="images_2/0006.webp" alt="Old City, Polignano a Mare" loading="lazy" decoding="async" width="1800" height="1350"/>
             </div>
-            <div class="image-text-below">
+            <div class="work-info">
                 <h3 class="work-item-title">Old City, Polignano a Mare</h3>
-                <p class="work-item-description">
-                  2025
-                </p>
+                <p class="project-year">2025</p>
             </div>
         </div>
 
-        <div class="work-section">
-            <div class="single-image">
-                <div class="work-image" style="background-image: url('images_2/0007.jpg');"></div>
+        <div class="work-section landscape">
+            <div class="img-wrap">
+                <img class="work-img" src="images_2/0007.webp" alt="Les Passages Couverts, Paris" loading="lazy" decoding="async" width="1800" height="1350"/>
             </div>
-            <div class="image-text-below">
+            <div class="work-info">
                 <h3 class="work-item-title">Les Passages Couverts, Paris</h3>
-                <p class="work-item-description">
-                    2025
-                </p>
+                <p class="project-year">2025</p>
             </div>
         </div>
 
-        <div class="work-section">
-            <div class="single-image">
-                <div class="work-image" style="background-image: url('images_2/0008.jpg');"></div>
+        <div class="work-section landscape">
+            <div class="img-wrap">
+                <img class="work-img" src="images_2/0008.webp" alt="Jardin du Palais Royal, Paris" loading="lazy" decoding="async" width="1800" height="1350"/>
             </div>
-            <div class="image-text-below">
+            <div class="work-info">
                 <h3 class="work-item-title">Jardin du Palais Royal, Paris</h3>
-                <p class="work-item-description">
-                    2025
-                </p>
+                <p class="project-year">2025</p>
             </div>
         </div>
 
-        <!-- Next 2 photos - Taller -->
-        <div class="work-section">
-            <div class="single-image taller-containers">
-                <div class="work-image" style="background-image: url('images_2/0009.jpg');"></div>
+        <div class="work-section portrait">
+            <div class="img-wrap">
+                <img class="work-img" src="images_2/0009.webp" alt="Chiesa di Santa Maria Maddalena, Rome" loading="lazy" decoding="async" width="1350" height="1800"/>
             </div>
-            <div class="image-text-below">
+            <div class="work-info">
                 <h3 class="work-item-title">Chiesa di Santa Maria Maddalena, Rome</h3>
-                <p class="work-item-description">
-                    2025
-                </p>
+                <p class="project-year">2025</p>
             </div>
         </div>
 
-        <div class="work-section">
-            <div class="single-image taller-containers">
-                <div class="work-image" style="background-image: url('images_2/0010.jpg');"></div>
+        <div class="work-section portrait">
+            <div class="img-wrap">
+                <img class="work-img" src="images_2/0010.webp" alt="Ponte Vecchio, Florence" loading="lazy" decoding="async" width="1350" height="1800"/>
             </div>
-            <div class="image-text-below">
+            <div class="work-info">
                 <h3 class="work-item-title">Ponte Vecchio, Florence</h3>
-                <p class="work-item-description">
-                   2025
-                </p>
+                <p class="project-year">2025</p>
             </div>
         </div>
 
-         <div class="work-section">
-            <div class="single-image">
-                <div class="work-image" style="background-image: url('images_2/011.jpg');"></div>
+        <div class="work-section landscape">
+            <div class="img-wrap">
+                <img class="work-img" src="images_2/011.webp" alt="Mount Vesuvius, Naples" loading="lazy" decoding="async" width="1800" height="1350"/>
             </div>
-            <div class="image-text-below">
+            <div class="work-info">
                 <h3 class="work-item-title">Mount Vesuvius, Naples</h3>
-                <p class="work-item-description">
-                    2025
-                </p>
+                <p class="project-year">2025</p>
             </div>
         </div>
 
-        <div class="work-section">
-            <div class="single-image">
-                <div class="work-image" style="background-image: url('images_2/012.png');"></div>
+        <div class="work-section landscape">
+            <div class="img-wrap">
+                <img class="work-img" src="images_2/012.webp" alt="Mount Vesuvius, Pompei" loading="lazy" decoding="async" width="1334" height="750"/>
             </div>
-            <div class="image-text-below">
+            <div class="work-info">
                 <h3 class="work-item-title">Mount Vesuvius, Pompei</h3>
-                <p class="work-item-description">
-                    2019
-                </p>
+                <p class="project-year">2019</p>
             </div>
         </div>
 
-          <div class="work-section">
-            <div class="single-image">
-                <div class="work-image" style="background-image: url('images_2/013.jpg');"></div>
+        <div class="work-section landscape">
+            <div class="img-wrap">
+                <img class="work-img" src="images_2/013.webp" alt="Piazzale Michelangelo, Florence" loading="lazy" decoding="async" width="1800" height="1350"/>
             </div>
-            <div class="image-text-below">
+            <div class="work-info">
                 <h3 class="work-item-title">Piazzale Michelangelo, Florence</h3>
-                <p class="work-item-description">
-                    2025
-                </p>
-            </div>
-        </div>
-        
-        <div class="work-section">
-            <div class="single-image ">
-                <div class="work-image" style="background-image: url('images_2/0014.jpg');"></div>
-            </div>
-            <div class="image-text-below">
-                <h3 class="work-item-title">Green River, Utah</h3>
-                <p class="work-item-description">
-                    2022
-                </p>
+                <p class="project-year">2025</p>
             </div>
         </div>
 
-        <div class="work-section">
-            <div class="single-image ">
-                <div class="work-image" style="background-image: url('images_2/0015.jpg');"></div>
+        <div class="work-section landscape">
+            <div class="img-wrap">
+                <img class="work-img" src="images_2/0014.webp" alt="Green River, Utah" loading="lazy" decoding="async" width="1440" height="813"/>
             </div>
-            <div class="image-text-below">
+            <div class="work-info">
                 <h3 class="work-item-title">Green River, Utah</h3>
-                <p class="work-item-description">
-                    2022
-                </p>
+                <p class="project-year">2022</p>
             </div>
         </div>
 
-        <div class="work-section">
-            <div class="single-image">
-                <div class="work-image" style="background-image: url('images_2/0001.jpg');"></div>
+        <div class="work-section landscape">
+            <div class="img-wrap">
+                <img class="work-img" src="images_2/0015.webp" alt="Green River, Utah" loading="lazy" decoding="async" width="1800" height="1012"/>
             </div>
-            <div class="image-text-below">
+            <div class="work-info">
                 <h3 class="work-item-title">Green River, Utah</h3>
-                <p class="work-item-description">
-                    2022
-                </p>
+                <p class="project-year">2022</p>
             </div>
         </div>
 
-        <div class="work-section">
-            <div class="single-image">
-                <div class="work-image" style="background-image: url('images_2/0016.jpg');"></div>
+        <div class="work-section landscape">
+            <div class="img-wrap">
+                <img class="work-img" src="images_2/0001.webp" alt="Green River, Utah" loading="lazy" decoding="async" width="1440" height="813"/>
             </div>
-            <div class="image-text-below">
+            <div class="work-info">
+                <h3 class="work-item-title">Green River, Utah</h3>
+                <p class="project-year">2022</p>
+            </div>
+        </div>
+
+        <div class="work-section landscape">
+            <div class="img-wrap">
+                <img class="work-img" src="images_2/0016.webp" alt="Golden Gate Bridge, Sausalito" loading="lazy" decoding="async" width="1800" height="1012"/>
+            </div>
+            <div class="work-info">
                 <h3 class="work-item-title">Golden Gate Bridge, Sausalito</h3>
-                <p class="work-item-description">
-                    2022
-                </p>
-            </div>
-               <div class="work-section">
-            <div class="single-image">
-                <div class="work-image" style="background-image: url('images_2/0017.jpg');"></div>
-            </div>
-            <div class="image-text-below">
-                <h3 class="work-item-title">Louvre, Paris</h3>
-                <p class="work-item-description">
-                    2025
-                </p>
+                <p class="project-year">2022</p>
             </div>
         </div>
+
+        <div class="work-section landscape">
+            <div class="img-wrap">
+                <img class="work-img" src="images_2/0017.webp" alt="Louvre, Paris" loading="lazy" decoding="async" width="1800" height="1350"/>
+            </div>
+            <div class="work-info">
+                <h3 class="work-item-title">Louvre, Paris</h3>
+                <p class="project-year">2025</p>
+            </div>
+        </div>
+
     </section>
 
+    <script src="main.js"></script>
     <script>
-        // Full Screen Image Viewer
-const modal = document.getElementById('imageModal');
-const modalImage = document.querySelector('.modal-image');
-const closeModal = document.querySelector('.close-modal');
-const prevBtn = document.querySelector('.prev-btn');
-const nextBtn = document.querySelector('.next-btn');
-
-// Get all images on the page (both .work-image and .works-image)
-const workImages = document.querySelectorAll('.work-image');
-const worksImages = document.querySelectorAll('.works-image');
-const allImages = [...workImages, ...worksImages];
-let currentImageIndex = 0;
-let images = [];
-
-// Extract image URLs from background images
-allImages.forEach((img, index) => {
-    const bgImage = img.style.backgroundImage;
-    
-    // Extract URL from background-image: url('...')
-    if (bgImage && bgImage !== 'none') {
-        const imageUrl = bgImage.replace(/url\(['"]?(.*?)['"]?\)/i, '$1');
-        images.push(imageUrl);
-        
-        // Make image clickable
-        img.addEventListener('click', () => {
-            currentImageIndex = index;
-            openModal();
-        });
-    }
-});
-
-function openModal() {
-    if (images.length === 0) return;
-    modal.style.display = 'flex';
-    modalImage.src = images[currentImageIndex];
-    document.body.style.overflow = 'hidden';
-}
-
-function closeModalFunc() {
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
-}
-
-function showNextImage() {
-    currentImageIndex = (currentImageIndex + 1) % images.length;
-    modalImage.src = images[currentImageIndex];
-}
-
-function showPrevImage() {
-    currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
-    modalImage.src = images[currentImageIndex];
-}
-
-// Event listeners
-closeModal.addEventListener('click', closeModalFunc);
-nextBtn.addEventListener('click', showNextImage);
-prevBtn.addEventListener('click', showPrevImage);
-
-// Close modal when clicking outside image
-modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-        closeModalFunc();
-    }
-});
-
-// Keyboard navigation
-document.addEventListener('keydown', (e) => {
-    if (modal.style.display === 'flex') {
-        if (e.key === 'Escape') closeModalFunc();
-        if (e.key === 'ArrowRight') showNextImage();
-        if (e.key === 'ArrowLeft') showPrevImage();
-    }
-});
-        // Horizontal Slideshow Scroll Control
-        const slideshow = document.querySelector('.horizontal-slideshow');
-
-        // Scroll-based movement ONLY for desktop
-        window.addEventListener('scroll', () => {
-            const scrollY = window.scrollY;
-            const maxScroll = window.innerHeight * 1.5;
-            const scrollPercent = Math.min(scrollY / maxScroll, 1);
-            const slideshowPosition = -(scrollPercent * 115);
-            
-            if (window.innerWidth > 768) {
-                slideshow.style.transform = `translateX(${slideshowPosition}%)`;
-            }
-        });
-
-        // Reset on scroll to top
-        window.addEventListener('scroll', () => {
-            if (window.scrollY === 0) {
-                slideshow.style.transform = 'translateX(0%)';
-            }
-        });
-
-        // Navigation hover effects
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('mouseenter', () => {
-                if (link.querySelector('span')) {
-                    link.querySelector('span').style.width = '100%';
-                }
-            });
-            link.addEventListener('mouseleave', () => {
-                if (link.querySelector('span')) {
-                    link.querySelector('span').style.width = '0';
-                }
-            });
-        });
+        initScrollNav();
+        initImgModal();
     </script>
 </body>
 </html>

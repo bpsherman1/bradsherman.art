@@ -1,363 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="icon" type="image/png" href="images_2/favicon.png">
     <link rel="apple-touch-icon" href="images_2/favicon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Painting - Brad Sherman</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <link rel="preload" as="image" href="images_2/p1-desktop.webp" media="(min-width: 769px)" fetchpriority="high">
+    <link rel="preload" as="image" href="images_2/p1-mobile.webp"  media="(max-width: 768px)"  fetchpriority="high">
+    <link rel="stylesheet" href="main.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #ffffff;
-            color: #000000;
-            overflow-x: hidden; /* FIX: kills horizontal scrollbar */
-        }
-
-        /* ── GRAIN OVERLAY ────────────────────────────────── */
-        body::after {
-            content: '';
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 9999;
-            opacity: 0.025;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-            background-size: 200px 200px;
-        }
-
-        /* ── MODAL ────────────────────────────────────────── */
-        .image-modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(255,255,255,0.98);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-        .modal-content { max-width: 90%; max-height: 90%; position: relative; }
-        .modal-image { max-width: 100%; max-height: 90vh; object-fit: contain; }
-        .close-modal {
-            position: fixed; top: 20px; right: 30px;
-            color: #000; font-size: 36px; font-weight: 300;
-            cursor: pointer; z-index: 1001;
-            background: none; border: none; line-height: 1;
-        }
-        .nav-btn {
-            position: fixed; top: 50%; transform: translateY(-50%);
-            background: none; border: none;
-            width: 60px; height: 60px; cursor: pointer;
-            opacity: 0.25; transition: opacity 0.3s;
-        }
-        .nav-btn:hover { opacity: 1; }
-        .nav-btn::before {
-            content: ''; position: absolute;
-            top: 50%; left: 50%;
-            width: 14px; height: 14px;
-            border: 1.5px solid #000;
-            border-width: 1.5px 1.5px 0 0;
-            transform: translate(-50%, -50%) rotate(45deg);
-        }
-        .prev-btn { left: 20px; }
-        .prev-btn::before { transform: translate(-50%, -50%) rotate(-135deg); }
-        .next-btn { right: 20px; }
-
-        /* ── TOP COVER ────────────────────────────────────── */
-        .top-cover {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: env(safe-area-inset-top);
-            background: #000000;
-            z-index: 999;
-            pointer-events: none;
-        }
-
-        /* ── NAV ──────────────────────────────────────────── */
-        nav {
-            position: fixed;
-            top: 0; left: 0; width: 100%;
-            padding: 2rem;
-            z-index: 500;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            transition: background 0.4s ease, border-bottom 0.4s ease;
-        }
-
-        nav.is-solid {
-            background: #ffffff;
-            padding-top: calc(env(safe-area-inset-top) + 1rem) !important;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-        }
-
-        /* ── BLACK HEADER PANEL ───────────────────────────── */
-        .header-panel {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%;
-            height: 25vh;
-            background: #000000;
-            z-index: 490;
-            transition: opacity 0.5s ease;
-        }
-
-        .nav-left {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            height: calc(25vh - 4rem);
-        }
-
-        .nav-name {
-            font-family: 'Futura', 'Futura PT', 'Century Gothic', 'Trebuchet MS', sans-serif;
-            font-weight: 900;
-            font-size: 1.05rem;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: #ffffff;
-            opacity: 0;
-            transform: translateX(-28px);
-            animation: slideInLeft 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.5s forwards;
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-
+        /* ── Page: Paintings ──────────────────────────────── */
         .hero-title {
-            font-family: 'Futura', 'Futura PT', 'Century Gothic', 'Trebuchet MS', sans-serif;
-            font-weight: 900;
-            font-size: clamp(4rem, 11vw, 7.5rem);
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            line-height: 1;
-            opacity: 0;
-            animation: fadeTitle 1.2s ease 0.2s forwards;
-            will-change: opacity, transform;
-            background: linear-gradient(
+            background-image: linear-gradient(
                 90deg,
-                #ffffff 0%,
-                #ffffff 5%,
-                #b91c1c 18%,
-                #d97706 30%,
-                #92400e 42%,
-                #b45309 54%,
-                #b91c1c 66%,
-                #d97706 74%,
-                #ffffff 82%,
-                #ffffff 100%
+                #ffffff 0%,  #ffffff 5%,
+                #b91c1c 18%, #d97706 30%,
+                #92400e 42%, #b45309 54%,
+                #b91c1c 66%, #d97706 74%,
+                #ffffff 82%, #ffffff 100%
             );
-            background-size: 600% 100%;
-            background-position: 100% 0;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            align-items: baseline;
-            opacity: 0;
-            animation: fadeUp 0.9s ease 0.65s forwards;
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-
-        .nav-links a, .dropdown > a {
-            line-height: 1;
-            display: inline-block;
-        }
-
-        nav a { color: #ffffff; text-decoration: none; font-weight: 600; }
-
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-28px); }
-            to   { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(10px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeTitle {
-            from { opacity: 0; }
-            to   { opacity: 1; }
-        }
-
-        /* ── DROPDOWN ─────────────────────────────────────── */
-        .dropdown { position: relative; display: inline-block; }
-        .dropdown-content {
-            position: absolute;
-            top: 35px; left: 0;
-            background: #ffffff;
-            border: 1px solid #e8e8e8;
-            border-radius: 8px;
-            padding: 1rem 0;
-            min-width: 200px;
-            opacity: 0; visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-            mix-blend-mode: normal;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
-        }
-        .dropdown:hover .dropdown-content { opacity: 1; visibility: visible; transform: translateY(0); }
-        .dropdown-content a {
-            display: block;
-            padding: 0.5rem 1.5rem;
-            color: #000000 !important;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border-left: 3px solid transparent;
-            font-weight: 600;
-            font-size: 0.85rem;
-            letter-spacing: 0.02em;
-        }
-        .dropdown-content a:hover {
-            background: rgba(0,0,0,0.04);
-            border-left: 3px solid #000;
-            padding-left: 2rem;
-        }
-
-        /* ── HERO SPACER ──────────────────────────────────── */
-        .hero-spacer { height: 55vh; }
-
-        /* ── WORK GRID ────────────────────────────────────── */
         .work-container {
-            max-width: 1200px;
+            max-width: 2200px;
             margin: 0 auto;
-            padding: 0 5% 12rem 5%;
+            padding: 2rem 4% 12rem 4%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6.5rem 4rem;
+            align-items: start;
         }
 
-        .work-section {
-            margin-bottom: 18rem;
+        /* Pull content up — smaller hero spacer on this page */
+        .hero-spacer { height: 38vh; }
+
+        /* Tighten caption to image */
+        .work-container .work-info {
+            margin-top: 0.6rem;
+            padding-top: 0.6rem;
         }
 
-        .single-image { width: 100%; }
+        /* Compact page intro */
+        .page-intro {
+            padding-bottom: 4rem;
+            margin-bottom: 0;
+        }
 
         .work-img {
             width: 100%;
-            display: block;
             height: auto;
-            max-height: 80vh;
-            object-fit: contain;
+            display: block;
             cursor: pointer;
             transition: opacity 0.3s ease;
         }
         .work-img:hover { opacity: 0.9; }
 
-        /* ── SECTION DIVIDER TITLE ────────────────────────── */
-        .section-title {
-            font-family: 'Futura', 'Futura PT', 'Century Gothic', 'Trebuchet MS', sans-serif;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: #000000;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            margin-bottom: 8rem;
-            padding-top: 2rem;
-            border-top: 0.5px solid #e0e0e0;
+        @media (min-width: 769px) and (max-width: 1100px) {
+            .work-container {
+                grid-template-columns: repeat(2, 1fr);
+                padding: 0 6% 10rem 6%;
+                gap: 6rem 3rem;
+            }
         }
 
-        /* ── CAPTIONS ─────────────────────────────────────── */
-        .work-info {
-            margin-top: 1.8rem;
-            padding-top: 1.4rem;
-            border-top: 0.5px solid #e0e0e0;
-        }
-
-        .work-item-title {
-            font-family: 'Futura', 'Futura PT', 'Century Gothic', 'Trebuchet MS', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 700;
-            margin-bottom: 0.45rem;
-            color: #000000;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-        }
-
-        .project-year {
-            font-family: 'Futura', 'Futura PT', 'Century Gothic', 'Trebuchet MS', sans-serif;
-            font-size: 0.75rem;
-            color: #999999;
-            font-weight: 400;
-            letter-spacing: 0.08em;
-            margin-bottom: 0.15rem;
-        }
-
-        .project-institution {
-            font-family: 'Futura', 'Futura PT', 'Century Gothic', 'Trebuchet MS', sans-serif;
-            font-size: 0.75rem;
-            color: #999999;
-            font-weight: 400;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            margin-bottom: 0.15rem;
-        }
-
-        .project-description {
-            font-family: 'Futura', 'Futura PT', 'Century Gothic', 'Trebuchet MS', sans-serif;
-            font-size: 0.72rem;
-            color: #bbbbbb;
-            font-weight: 400;
-            letter-spacing: 0.06em;
-        }
-
-        /* ── MOBILE ───────────────────────────────────────── */
         @media (max-width: 768px) {
-            .header-panel { height: 18vh; }
-            nav { padding: 1rem; }
-            .nav-left { height: calc(18vh - 2.8rem); }
-            .nav-name { font-size: 1.05rem; }
-            .nav-links {
-                gap: 0.4rem;
-                align-items: baseline;
-                align-self: flex-start;
-                margin-top: 0;
-                padding-right: 0;
-            }
-            .nav-links a { font-size: 0.68rem; letter-spacing: 0.02em; }
-            .hero-title { font-size: clamp(2.5rem, 10vw, 3.6rem); }
-            .work-container { padding: 0 5% 8rem 5%; }
-            .work-section { margin-bottom: 16rem; }
-            .hero-spacer { height: 42vh; }
-
-            /* FIX: dropdown full-width, no transforms that could shift it */
-            .dropdown-content {
-                position: fixed !important;
-                top: 80px !important;
-                right: -4rem !important;
-                left: auto !important;
-                width: 44vw !important;
-                min-width: unset !important;
-                max-width: 100vw !important;
-                transform: none !important;
-                background: #000000 !important;
-                border: none !important;
-                border-radius: 12px !important;
-                mix-blend-mode: normal !important;
-                backdrop-filter: none !important;
-                overflow: hidden !important;
-            }
-            .dropdown:hover .dropdown-content {
-                transform: none !important;
-            }
-            .dropdown-content a {
-                color: #ffffff !important;
-                text-align: left !important;
-                border-left: none !important;
-                padding: 0.6rem 0 0.6rem 1.5rem !important;
-                letter-spacing: 0.04em !important;
-                white-space: nowrap !important;
-            }
-            .dropdown-content a:hover {
-                border-left: none !important;
-                padding-left: 1.5rem !important;
-                background: rgba(255,255,255,0.08) !important;
+            .work-container {
+                padding: 0 6% 8rem 6%;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 3.5rem 1.5rem;
             }
         }
     </style>
@@ -411,11 +124,16 @@
     <!-- Work -->
     <section class="work-container">
 
-        <div class="work-section">
+        <div class="page-intro">
+            <p class="cs-lede">Painted in acrylic on canvas or paper. The landscapes are observational — all painted from photographs taken during travel to Italy, Paris, and Madison. The still lifes are studio exercises focused on value and light.</p>
+        </div>
+
+        <!-- Row 1: portrait -->
+        <div class="work-section portrait">
             <div class="single-image">
                 <picture>
-                    <source media="(max-width: 768px)" srcset="images_2/p1-mobile.jpg">
-                    <img class="work-img" src="images_2/p1-desktop.jpg" alt="Giardino Di Augusto, Capri" loading="eager" decoding="async"/>
+                    <source media="(max-width: 768px)" srcset="images_2/p1-mobile.webp">
+                    <img class="work-img" src="images_2/p1-desktop.webp" alt="Giardino Di Augusto, Capri" loading="eager" decoding="async" width="900" height="1200"/>
                 </picture>
             </div>
             <div class="work-info">
@@ -426,11 +144,11 @@
             </div>
         </div>
 
-        <div class="work-section">
+        <div class="work-section portrait">
             <div class="single-image">
                 <picture>
-                    <source media="(max-width: 768px)" srcset="images_2/p2-mobile.jpg">
-                    <img class="work-img" src="images_2/p2-desktop.jpg" alt="Memorial Union, Madison" loading="lazy" decoding="async"/>
+                    <source media="(max-width: 768px)" srcset="images_2/p2-mobile.webp">
+                    <img class="work-img" src="images_2/p2-desktop.webp" alt="Memorial Union, Madison" loading="lazy" decoding="async" width="900" height="1200"/>
                 </picture>
             </div>
             <div class="work-info">
@@ -441,26 +159,11 @@
             </div>
         </div>
 
-        <div class="work-section">
+        <div class="work-section portrait">
             <div class="single-image">
                 <picture>
-                    <source media="(max-width: 768px)" srcset="images_2/p3-mobile.jpg">
-                    <img class="work-img" src="images_2/p3-desktop.jpg" alt="An Evening in Paris" loading="lazy" decoding="async"/>
-                </picture>
-            </div>
-            <div class="work-info">
-                <h3 class="work-item-title">An Evening in Paris</h3>
-                <p class="project-year">2026</p>
-                <p class="project-institution">Acrylic on Canvas</p>
-                <p class="project-description">20 × 16 in</p>
-            </div>
-        </div>
-
-        <div class="work-section">
-            <div class="single-image">
-                <picture>
-                    <source media="(max-width: 768px)" srcset="images_2/p4-mobile.jpg">
-                    <img class="work-img" src="images_2/p4-desktop.jpg" alt="Ponte Vecchio, Firenze" loading="lazy" decoding="async"/>
+                    <source media="(max-width: 768px)" srcset="images_2/p4-mobile.webp">
+                    <img class="work-img" src="images_2/p4-desktop.webp" alt="Ponte Vecchio, Firenze" loading="lazy" decoding="async" width="900" height="1200"/>
                 </picture>
             </div>
             <div class="work-info">
@@ -471,11 +174,27 @@
             </div>
         </div>
 
-        <div class="work-section">
+        <!-- Row 2: landscape -->
+        <div class="work-section landscape">
             <div class="single-image">
                 <picture>
-                    <source media="(max-width: 768px)" srcset="images_2/p5-mobile.jpg">
-                    <img class="work-img" src="images_2/p5-desktop.jpg" alt="Ponte Vecchio, Firenze II" loading="lazy" decoding="async"/>
+                    <source media="(max-width: 768px)" srcset="images_2/p3-mobile.webp">
+                    <img class="work-img" src="images_2/p3-desktop.webp" alt="An Evening in Paris" loading="lazy" decoding="async" width="1200" height="900"/>
+                </picture>
+            </div>
+            <div class="work-info">
+                <h3 class="work-item-title">An Evening in Paris</h3>
+                <p class="project-year">2026</p>
+                <p class="project-institution">Acrylic on Canvas</p>
+                <p class="project-description">20 × 16 in</p>
+            </div>
+        </div>
+
+        <div class="work-section landscape">
+            <div class="single-image">
+                <picture>
+                    <source media="(max-width: 768px)" srcset="images_2/p5-mobile.webp">
+                    <img class="work-img" src="images_2/p5-desktop.webp" alt="Ponte Vecchio, Firenze II" loading="lazy" decoding="async" width="1200" height="900"/>
                 </picture>
             </div>
             <div class="work-info">
@@ -486,26 +205,11 @@
             </div>
         </div>
 
-        <div class="work-section">
+        <div class="work-section landscape">
             <div class="single-image">
                 <picture>
-                    <source media="(max-width: 768px)" srcset="images_2/p6-mobile.jpg">
-                    <img class="work-img" src="images_2/p6-desktop.jpg" alt="Warm Surreal" loading="lazy" decoding="async"/>
-                </picture>
-            </div>
-            <div class="work-info">
-                <h3 class="work-item-title">Warm Surreal</h3>
-                <p class="project-year">2026</p>
-                <p class="project-institution">Acrylic on Canvas</p>
-                <p class="project-description">10 × 16 in</p>
-            </div>
-        </div>
-
-        <div class="work-section">
-            <div class="single-image">
-                <picture>
-                    <source media="(max-width: 768px)" srcset="images_2/p7-mobile.jpg">
-                    <img class="work-img" src="images_2/p7-desktop.jpg" alt="Old City, Monopoli" loading="lazy" decoding="async"/>
+                    <source media="(max-width: 768px)" srcset="images_2/p7-mobile.webp">
+                    <img class="work-img" src="images_2/p7-desktop.webp" alt="Old City, Monopoli" loading="lazy" decoding="async" width="1200" height="900"/>
                 </picture>
             </div>
             <div class="work-info">
@@ -516,16 +220,12 @@
             </div>
         </div>
 
-        <!-- Still Lifes divider -->
-        <div class="work-section" style="margin-bottom:6rem;">
-            <p class="section-title">Still Lifes</p>
-        </div>
-
-        <div class="work-section">
+        <!-- Row 3: portrait -->
+        <div class="work-section portrait">
             <div class="single-image">
                 <picture>
-                    <source media="(max-width: 768px)" srcset="images_2/p8-mobile.jpg">
-                    <img class="work-img" src="images_2/p8-desktop.jpg" alt="Farfalle" loading="lazy" decoding="async"/>
+                    <source media="(max-width: 768px)" srcset="images_2/p8-mobile.webp">
+                    <img class="work-img" src="images_2/p8-desktop.webp" alt="Farfalle" loading="lazy" decoding="async" width="900" height="1200"/>
                 </picture>
             </div>
             <div class="work-info">
@@ -536,11 +236,11 @@
             </div>
         </div>
 
-        <div class="work-section">
+        <div class="work-section portrait">
             <div class="single-image">
                 <picture>
-                    <source media="(max-width: 768px)" srcset="images_2/p9-mobile.jpg">
-                    <img class="work-img" src="images_2/p9-desktop.jpg" alt="Wine Opener" loading="lazy" decoding="async"/>
+                    <source media="(max-width: 768px)" srcset="images_2/p9-mobile.webp">
+                    <img class="work-img" src="images_2/p9-desktop.webp" alt="Wine Opener" loading="lazy" decoding="async" width="900" height="1200"/>
                 </picture>
             </div>
             <div class="work-info">
@@ -551,11 +251,11 @@
             </div>
         </div>
 
-        <div class="work-section">
+        <div class="work-section portrait">
             <div class="single-image">
                 <picture>
-                    <source media="(max-width: 768px)" srcset="images_2/p10-mobile.jpg">
-                    <img class="work-img" src="images_2/p10-desktop.jpg" alt="Coffee Grinder" loading="lazy" decoding="async"/>
+                    <source media="(max-width: 768px)" srcset="images_2/p10-mobile.webp">
+                    <img class="work-img" src="images_2/p10-desktop.webp" alt="Coffee Grinder" loading="lazy" decoding="async" width="900" height="1200"/>
                 </picture>
             </div>
             <div class="work-info">
@@ -566,11 +266,12 @@
             </div>
         </div>
 
-        <div class="work-section">
+        <!-- Row 5: landscape (lone) -->
+        <div class="work-section landscape">
             <div class="single-image">
                 <picture>
-                    <source media="(max-width: 768px)" srcset="images_2/p11-mobile.jpg">
-                    <img class="work-img" src="images_2/p11-desktop.jpg" alt="Still Life Black & White" loading="lazy" decoding="async"/>
+                    <source media="(max-width: 768px)" srcset="images_2/p11-mobile.webp">
+                    <img class="work-img" src="images_2/p11-desktop.webp" alt="Still Life Black & White" loading="lazy" decoding="async" width="1200" height="900"/>
                 </picture>
             </div>
             <div class="work-info">
@@ -583,152 +284,10 @@
 
     </section>
 
+    <script src="main.js"></script>
     <script>
-        // ── Modal ──────────────────────────────────────────
-        const modal      = document.getElementById('imageModal');
-        const modalImage = document.querySelector('.modal-image');
-        const closeBtn   = document.querySelector('.close-modal');
-        const prevBtn    = document.querySelector('.prev-btn');
-        const nextBtn    = document.querySelector('.next-btn');
-        const allImgs    = [...document.querySelectorAll('.work-img')];
-        let currentIdx   = 0;
-
-        function openModal(idx) {
-            currentIdx = idx;
-            modalImage.src = allImgs[idx].src;
-            modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
-        function closeModal() {
-            modal.style.display = 'none';
-            document.body.style.overflow = '';
-        }
-        function showNext() {
-            currentIdx = (currentIdx + 1) % allImgs.length;
-            modalImage.src = allImgs[currentIdx].src;
-        }
-        function showPrev() {
-            currentIdx = (currentIdx - 1 + allImgs.length) % allImgs.length;
-            modalImage.src = allImgs[currentIdx].src;
-        }
-
-        allImgs.forEach((img, i) => img.addEventListener('click', () => openModal(i)));
-        closeBtn.addEventListener('click', closeModal);
-        nextBtn.addEventListener('click', showNext);
-        prevBtn.addEventListener('click', showPrev);
-        modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-        document.addEventListener('keydown', e => {
-            if (modal.style.display !== 'flex') return;
-            if (e.key === 'Escape')      closeModal();
-            if (e.key === 'ArrowRight')  showNext();
-            if (e.key === 'ArrowLeft')   showPrev();
-        });
-
-        // ── Scroll ────────────────────────────────────────
-        const nav           = document.getElementById('mainNav');
-        const headerPanel   = document.getElementById('headerPanel');
-        const topCover      = document.getElementById('topCover');
-        const heroTitle     = document.getElementById('heroTitle');
-        const heroTitleWrap = document.getElementById('heroTitleWrap');
-        const navName       = document.getElementById('navName');
-        const navLinks      = document.getElementById('navLinks');
-        const navLeft       = document.querySelector('.nav-left');
-
-        const vh          = window.innerHeight;
-        const isMobile    = window.innerWidth <= 768;
-        const panelH      = isMobile ? 0.18 : 0.25;
-        const FADE_START  = 0;
-        const FADE_END    = vh * panelH;
-        const TITLE_START = vh * (isMobile ? 0.12 : 0.18);
-        const TITLE_END   = vh * (isMobile ? 0.32 : 0.42);
-        const NAV_SOLID   = vh * (isMobile ? 0.38 : 0.50);
-        const COLOR_END   = vh * (isMobile ? 0.12 : 0.18);
-
-        window.addEventListener('scroll', () => {
-            const y = window.scrollY;
-
-            // — Black panel fade —
-            if (y <= 0) {
-                headerPanel.style.opacity = '1';
-            } else if (y < FADE_END) {
-                headerPanel.style.opacity = String(1 - y / FADE_END);
-            } else {
-                headerPanel.style.opacity = '0';
-            }
-
-            // — Color sweep —
-            heroTitle.style.transition = 'none';
-            if (y <= 0) {
-                heroTitle.style.backgroundPosition = '100% 0';
-            } else if (y < COLOR_END) {
-                const pos = 100 - ((y / COLOR_END) * 70);
-                heroTitle.style.backgroundPosition = `${pos}% 0`;
-            } else {
-                heroTitle.style.backgroundPosition = '30% 0';
-            }
-
-            // — Title fade —
-            if (y <= TITLE_START) {
-                heroTitleWrap.style.opacity   = '1';
-                heroTitleWrap.style.transform = 'translateY(0)';
-            } else if (y < TITLE_END) {
-                const p = (y - TITLE_START) / (TITLE_END - TITLE_START);
-                heroTitleWrap.style.opacity   = String(1 - p);
-                heroTitleWrap.style.transform = `translateY(${-p * 12}px)`;
-            } else {
-                heroTitleWrap.style.opacity   = '0';
-                heroTitleWrap.style.transform = 'translateY(-12px)';
-            }
-
-            // — Nav text fade —
-            if (y <= NAV_SOLID) {
-                if (y <= 0) {
-                    navName.style.opacity  = '1';
-                    navLinks.style.opacity = '1';
-                } else if (y < FADE_END) {
-                    const p = y / FADE_END;
-                    navName.style.opacity  = String(1 - p);
-                    navLinks.style.opacity = String(1 - p);
-                } else {
-                    navName.style.opacity  = '0';
-                    navLinks.style.opacity = '0';
-                }
-            }
-
-            // — Top cover —
-            topCover.style.background = y > NAV_SOLID ? '#ffffff' : '#000000';
-
-            // — Nav goes solid —
-            if (y > NAV_SOLID) {
-                nav.classList.add('is-solid');
-                nav.style.background         = '#ffffff';
-                nav.style.borderBottom       = '0.5px solid #ebebeb';
-                nav.style.alignItems         = 'center';
-                nav.style.paddingTop         = isMobile ? '1rem' : '2rem';
-                nav.style.paddingBottom      = isMobile ? '0.8rem' : '1rem';
-                nav.style.minHeight          = isMobile ? '60px' : 'auto';
-                navLeft.style.height         = 'auto';
-                navLeft.style.justifyContent = 'flex-start';
-                navLeft.style.gap            = '0';
-                navName.style.opacity        = '1';
-                navLinks.style.opacity       = '1';
-                heroTitleWrap.style.display  = 'none';
-                nav.querySelectorAll('a:not(.dropdown-content a)').forEach(a => a.style.color = '#000');
-            } else {
-                nav.classList.remove('is-solid');
-                nav.style.background         = 'transparent';
-                nav.style.borderBottom       = 'none';
-                nav.style.paddingBottom      = isMobile ? '1rem' : '2rem';
-                nav.style.minHeight          = 'auto';
-                nav.style.alignItems         = 'flex-start';
-                navLeft.style.height         = isMobile ? 'calc(18vh - 2rem)' : 'calc(25vh - 4rem)';
-                navLeft.style.justifyContent = 'space-between';
-                navLeft.style.gap            = '';
-                heroTitleWrap.style.display  = '';
-                nav.querySelectorAll('a:not(.dropdown-content a)').forEach(a => a.style.color = '#fff');
-            }
-        }, { passive: true });
-
+        initScrollNav();
+        initImgModal();
     </script>
 </body>
 </html>
