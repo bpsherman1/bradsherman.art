@@ -1,428 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - Brad Sherman Design</title>
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    
-    <!-- FAVICON -->
     <link rel="icon" type="image/png" href="images_2/favicon.png">
     <link rel="apple-touch-icon" href="images_2/favicon.png">
-    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Contact - Brad Sherman</title>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <link rel="stylesheet" href="main.css">
     <style>
-        /* Base Reset */
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-        }
-        
-        body {
-            font-family: 'Futura', 'Futura PT', 'Century Gothic', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif; 
-            background: #0a0a0a;
-            color: white;
-            overflow-x: hidden;
-            min-height: 100vh;
+        /* ── Page: Contact ────────────────────────────────── */
+        .hero-title {
+            background-image: linear-gradient(
+                90deg,
+                #ffffff 0%,  #ffffff 5%,
+                #111111 18%, #444444 30%,
+                #222222 42%, #555555 54%,
+                #111111 66%, #333333 74%,
+                #ffffff 82%, #ffffff 100%
+            );
         }
 
-        /* Animated Background */
-        .animated-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, #ff0055, #00ffff, #ffaa00);
-            opacity: 0.03;
-            filter: blur(100px);
-            z-index: -1;
-        }
+        .hero-spacer { height: 38vh; }
 
-        /* Navigation Styles */
-        nav { 
-            position: fixed; 
-            top: 0; 
-            width: 100%; 
-            padding: 2rem; 
-            z-index: 100; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            mix-blend-mode: difference;
-        }
-        
-        .nav-links { 
-            display: flex; 
-            gap: 2rem; 
-            align-items: center; 
-        }
-        
-        nav a { 
-            color: white; 
-            text-decoration: none; 
-            font-weight: 600; 
-            position: relative; 
-        }
-
-        /* Dropdown Styles */
-        .dropdown { position: relative; display: inline-block; }
-        .dropdown-content { 
-            position: absolute; 
-            top: 35px;
-            left: 0; 
-            background: rgba(255, 255, 255, 0.95); 
-            backdrop-filter: blur(20px); 
-            border: 1px solid #fff; 
-            border-radius: 8px; 
-            padding: 1rem 0; 
-            min-width: 200px; 
-            opacity: 0; 
-            visibility: hidden; 
-            transform: translateY(-10px); 
-            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1); 
-            mix-blend-mode: difference;
-        }
-        .dropdown:hover .dropdown-content { opacity: 1; visibility: visible; transform: translateY(0); }
-        .dropdown-content a { 
-            display: block; 
-            padding: 0.5rem 1.5rem; 
-            color: black; 
-            text-decoration: none; 
-            transition: all 0.3s ease; 
-            border-left: 3px solid transparent; 
-            font-weight: 700;
-            font-size: 0.9rem;
-        }
-        .dropdown-content a:hover { 
-            background: rgba(0, 0, 0, 0.1); 
-            border-left: 3px solid #ff0055; 
-            padding-left: 2rem; 
-            color: #ffffff !important;
-        }
-
-        /* Contact Layout - CLEAN VERSION */
         .contact-container {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 0 10%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 5rem 5% 12rem 5%;
         }
 
-        .contact-title {
-            font-family: 'Futura', sans-serif;
-            font-size: 9vw;
-            font-weight: 600;
-            color: white;
-            text-transform: uppercase;
-            margin-bottom: 4rem;
-            line-height: 0.85;
-            letter-spacing: -0px;
-            mix-blend-mode: difference;
-        }
-
-        .contact-content {
+        .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 6rem;
+            gap: 8rem;
             align-items: start;
-            
         }
 
-        .contact-info {
+        /* Left: info */
+        .contact-info-col {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .contact-info-col .cs-lede {
+            max-width: 380px;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            border-top: 0.5px solid #e0e0e0;
+            padding-top: 2rem;
+        }
+
+        .contact-detail-label {
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: #cccccc;
+            margin-bottom: 0.2rem;
+        }
+
+        .contact-detail-value {
+            font-size: 0.85rem;
+            color: #333333;
+            letter-spacing: 0.04em;
+            font-weight: 600;
+        }
+
+        /* Right: form */
+        .contact-form-col {
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
-            margin-top: 5rem;
         }
 
-        .contact-item {
-            font-family: 'Futura', 'Futura PT', 'Century Gothic', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
-            font-size: 1.1rem;
-            color: #ccc;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-        }
-
-        .contact-item:hover {
-            color: white;
-            transform: translateX(10px);
-        }
-
-        .contact-form {
+        .form-group {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
-             margin-top: 5rem;
+            gap: 0.5rem;
+        }
+
+        .form-label {
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: #aaaaaa;
         }
 
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.05);
+            padding: 0.85rem 0;
+            background: transparent;
             border: none;
-            border-radius: 0;
-            color: white;
+            border-bottom: 0.5px solid #e0e0e0;
             font-family: 'Futura', 'Futura PT', 'Century Gothic', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.9rem;
+            color: #000000;
+            letter-spacing: 0.03em;
+            transition: border-color 0.2s ease;
+            outline: none;
         }
 
         .form-group input:focus,
         .form-group textarea:focus {
-            outline: none;
-            border-bottom-color: #ff0055;
-            background: rgba(255, 255, 255, 0.08);
+            border-bottom-color: #000000;
         }
 
         .form-group textarea {
             height: 120px;
-            resize: vertical;
+            resize: none;
         }
 
         .submit-btn {
-            background: #ff0055;
-            color: white;
+            background: #000000;
+            color: #ffffff;
             border: none;
-            padding: 1.2rem 2rem;
+            padding: 1rem 2.5rem;
             font-family: 'Futura', 'Futura PT', 'Century Gothic', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
-            font-size: 1rem;
-            font-weight: 600;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
             cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-            margin-top: 1rem;
+            transition: background 0.2s ease;
+            margin-top: 0.5rem;
+            align-self: flex-start;
         }
+        .submit-btn:hover { background: #333333; }
 
-        .submit-btn:hover {
-            background: #e0004a;
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-
-             .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-             margin-top: 2rem;
-             max-width: 85%;
-             margin-left: 2rem
-        }
-            .contact-container {
-                padding: 8rem 5% 3rem 5%;
-            }
-
-            .contact-title {
-                font-size: 14.25vw;
-                margin-bottom: 3rem;
-                margin-left: 1.8rem;
-            }
-
-            .contact-content {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .contact-item {
-                font-size: 1.0rem;
-                text-align: left;
-                margin-left: 2rem;
-                width:80%;
-                margin-bottom: 1rem;
-            }
-
-            .contact-item:hover {
-                transform: translateX(5px);
-            }
-
-            /* Mobile dropdown styling */
-            nav {
-                padding: 1rem;
-            }
-            
+        @media (min-width: 769px) {
             .nav-links {
-                gap: 1rem;
+                position: absolute;
+                right: 2rem;
+                top: 2rem;
             }
-            .dropdown-content { 
-        position: fixed !important; 
-        top: 90px !important;
-        right: 1rem !important;
-        left: auto !important;
-        transform: translateY(-10px) !important;
-        width: 45% !important;
-        min-width: unset !important;
-        background: #000000 !important;
-        border: none !important;
-        padding: 0.5rem 0 !important;
-        max-height: 60vh;
-        overflow-y: auto;
-        mix-blend-mode: normal !important;
-        backdrop-filter: none !important;
-        opacity: 1 !important;
-        z-index: 1000 !important;
-    }
-    
-    .dropdown:hover .dropdown-content {
-        transform: translateY(0) !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-    }
-    
-    .dropdown-content a {
-        padding: 0.4rem 1rem !important;
-        font-size: 0.8rem !important;
-        color: #ffffff !important;
-        text-align: right !important;
-        mix-blend-mode: normal !important;
-        border-left: none !important;
-        font-weight: 600 !important;
-        background: transparent !important;
-        display: block !important;
-    }
-    
-    .dropdown-content a:hover {
-        background: rgba(255, 255, 255, 0.2) !important;
-        padding-right: 1.5rem !important;
-    }
-    
-    .cursor, .cursor-follower {
-        display: none;
-    }
-
         }
 
- @media (max-width: 480px) {
-        .contact-item {
-                font-size: 1.0rem;
-                text-align: left;
-                margin-left: 2rem;
-                width:80%;
-                margin-bottom: .5rem;
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 4rem;
             }
+            .contact-container { padding: 3rem 5% 8rem 5%; }
+            .submit-btn { width: 100%; text-align: center; }
         }
     </style>
 </head>
 <body>
-    <!-- Animated Background -->
-    <div class="animated-bg"></div>
 
-    <!-- Navigation -->
-    <nav>
-        <div style="font-family: 'Futura', sans-serif; font-weight: 900; font-size: 1.2rem; color: white;">
-            <a href="index.html" style="color: white; text-decoration: none;">PORTFOLIO 2025</a>
+    <!-- Safe area top cover -->
+    <div class="top-cover" id="topCover"></div>
+
+    <!-- Black header panel -->
+    <div class="header-panel" id="headerPanel"></div>
+
+    <!-- Nav -->
+    <nav id="mainNav">
+        <div class="nav-left">
+            <div class="nav-name" id="navName">
+                <a href="index.html" style="color:#ffffff;text-decoration:none;">Brad Sherman</a>
+            </div>
+            <div id="heroTitleWrap" style="will-change:opacity;">
+                <h1 class="hero-title" id="heroTitle">Contact</h1>
+            </div>
         </div>
-        <div class="nav-links">
+        <div class="nav-links" id="navLinks">
             <div class="dropdown">
-                <a href="#work" style="color: white; text-decoration: none; font-weight: 600; position: relative; cursor: pointer;">
-                    WORK
-                    <span style="position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #ff0055; transition: width 0.3s;"></span>
-                </a>
+                <a href="#" style="color:#ffffff;text-decoration:none;font-weight:600;cursor:pointer;">Work</a>
                 <div class="dropdown-content">
                     <a href="index.html">Home</a>
-                    <a href="campaigns.html">Campaigns</a>
-                    <a href="typography.html">Typography</a>
-                    <a href="brands.html">Brands</a>
-                    <a href="graphics-italy-2025.html">Graphics Italy 2025</a>
-                    <a href="graphics.html">Graphics</a>
-                    <a href="websites.html">Websites</a>
                     <a href="painting.html">Painting</a>
-                    <a href="woodworking.html">Woodworking</a>
                     <a href="drawing.html">Drawing</a>
+                    <a href="woodworking.html">Woodworking</a>
+                    <a href="websites.html">Websites</a>
                     <a href="photography.html">Photography</a>
-                    <a href="3d.html">3D</a>
                 </div>
             </div>
-            <a href="contacts.html" style="color: white; text-decoration: none; font-weight: 600; position: relative;">
-                CONTACT
-                <span style="position: absolute; bottom: -5px; left: 0; width: 100%; height: 2px; background: #ffaa00;"></span>
-            </a>
+            <a href="contacts.html" style="color:#ffffff;text-decoration:none;font-weight:600;">Contact</a>
         </div>
     </nav>
 
-    <!-- Contact Content -->
+    <div class="hero-spacer"></div>
+
     <section class="contact-container">
-        <h1 class="contact-title">CONTACT</h1>
-        
-        <div class="contact-content">
-            <div class="contact-info">
-                <div class="contact-item">Brad Sherman</div>
-            
-                <div class="contact-item">bpsherm04@hotmail.com</div>
-               
-                 <div class="contact-item">Montclair, NJ</div>
+        <div class="contact-grid">
+
+            <div class="contact-info-col">
+                <p class="cs-lede">Have a project in mind, or just want to connect? Send a message or reach out directly.</p>
+                <div class="contact-details">
+                    <div>
+                        <p class="contact-detail-label">Email</p>
+                        <p class="contact-detail-value">bpsherm04@hotmail.com</p>
+                    </div>
+                    <div>
+                        <p class="contact-detail-label">Location</p>
+                        <p class="contact-detail-value">Montclair, NJ</p>
+                    </div>
+                    <div>
+                        <p class="contact-detail-label">LinkedIn</p>
+                        <p class="contact-detail-value">
+                            <a href="https://www.linkedin.com/in/brad-sherman-428a28217/" target="_blank" rel="noopener" style="color:#333333;text-decoration:none;">brad-sherman-428a28217</a>
+                        </p>
+                    </div>
+                </div>
             </div>
 
-            <div class="contact-form">
-                <form action="https://formsubmit.co/bpsherm04@hotmail.com" method="POST">
+            <div class="contact-form-col">
+                <form action="https://formsubmit.co/bpsherm04@hotmail.com" method="POST" style="display:flex;flex-direction:column;gap:1.5rem;">
                     <div class="form-group">
-                        <input type="text" name="name" placeholder="Your Name" required>
+                        <label class="form-label">Name</label>
+                        <input type="text" name="name" placeholder="Your name" required>
                     </div>
-                    
                     <div class="form-group">
-                        <input type="email" name="email" placeholder="Your Email" required>
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email" placeholder="your@email.com" required>
                     </div>
-                    
                     <div class="form-group">
-                        <textarea name="message" placeholder="Your Message" required></textarea>
+                        <label class="form-label">Message</label>
+                        <textarea name="message" placeholder="What's on your mind?" required></textarea>
                     </div>
-                    
                     <input type="hidden" name="_subject" value="New message from your portfolio!">
                     <input type="hidden" name="_template" value="table">
-                    
                     <button type="submit" class="submit-btn">Send Message</button>
                 </form>
             </div>
+
         </div>
     </section>
 
-    <footer style="background:#111111;border-top:0.5px solid #2a2a2a;padding:4rem 5% 2rem 5%;">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;max-width:1200px;margin:0 auto;padding-bottom:3rem;border-bottom:0.5px solid #2a2a2a;">
-            <div>
-                <p style="font-size:0.9rem;font-weight:900;letter-spacing:0.15em;text-transform:uppercase;color:#ffffff;margin-bottom:0.45rem;">Brad Sherman</p>
-                <p style="font-size:0.68rem;color:#555555;letter-spacing:0.12em;text-transform:uppercase;">Artist &amp; Designer</p>
-                <img src="images_2/favicon2.png" alt="Brad Sherman" style="width:34px;height:34px;display:block;margin-top:1.2rem;border-radius:4px;">
-                <a href="https://bradsherman.design" target="_blank" rel="noopener" style="display:block;margin-top:0.6rem;font-size:0.68rem;color:#888888;text-decoration:none;letter-spacing:0.07em;font-weight:600;">bradsherman.design</a>
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <p class="footer-name">Brad Sherman</p>
+                <p class="footer-tagline">Artist &amp; Designer</p>
+                <img class="footer-logo" src="images_2/favicon2.png" alt="Brad Sherman">
+                <a class="footer-design-link" href="https://bradsherman.design" target="_blank" rel="noopener">bradsherman.design</a>
             </div>
-            <nav style="display:flex;gap:5rem;">
-                <div style="display:flex;flex-direction:column;gap:0.65rem;">
-                    <p style="font-size:0.62rem;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;color:#444444;margin-bottom:0.4rem;">Work</p>
-                    <a href="painting.html" style="font-size:0.72rem;color:#888888;text-decoration:none;letter-spacing:0.06em;font-weight:600;">Painting</a>
-                    <a href="drawing.html" style="font-size:0.72rem;color:#888888;text-decoration:none;letter-spacing:0.06em;font-weight:600;">Drawing</a>
-                    <a href="woodworking.html" style="font-size:0.72rem;color:#888888;text-decoration:none;letter-spacing:0.06em;font-weight:600;">Woodworking</a>
-                    <a href="photography.html" style="font-size:0.72rem;color:#888888;text-decoration:none;letter-spacing:0.06em;font-weight:600;">Photography</a>
-                    <a href="websites.html" style="font-size:0.72rem;color:#888888;text-decoration:none;letter-spacing:0.06em;font-weight:600;">Websites</a>
+            <nav class="footer-nav">
+                <div class="footer-col">
+                    <p class="footer-col-title">Work</p>
+                    <a href="painting.html">Painting</a>
+                    <a href="drawing.html">Drawing</a>
+                    <a href="woodworking.html">Woodworking</a>
+                    <a href="photography.html">Photography</a>
+                    <a href="websites.html">Websites</a>
                 </div>
-                <div style="display:flex;flex-direction:column;gap:0.65rem;">
-                    <p style="font-size:0.62rem;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;color:#444444;margin-bottom:0.4rem;">Connect</p>
-                    <a href="contacts.html" style="font-size:0.72rem;color:#888888;text-decoration:none;letter-spacing:0.06em;font-weight:600;">Contact</a>
-                    <a href="https://www.linkedin.com/in/brad-sherman-428a28217/" target="_blank" rel="noopener" style="font-size:0.72rem;color:#888888;text-decoration:none;letter-spacing:0.06em;font-weight:600;">LinkedIn</a>
-                    <a href="aboutme.html" style="font-size:0.72rem;color:#888888;text-decoration:none;letter-spacing:0.06em;font-weight:600;">About</a>
+                <div class="footer-col">
+                    <p class="footer-col-title">Connect</p>
+                    <a href="contacts.html">Contact</a>
+                    <a href="https://www.linkedin.com/in/brad-sherman-428a28217/" target="_blank" rel="noopener">LinkedIn</a>
+                    <a href="aboutme.html">About</a>
                 </div>
             </nav>
         </div>
-        <div style="max-width:1200px;margin:0 auto;padding-top:1.5rem;">
-            <p style="font-size:0.62rem;color:#444444;letter-spacing:0.12em;text-transform:uppercase;">&copy; 2026 Brad Sherman</p>
+        <div class="footer-bottom">
+            <p class="footer-copy">&copy; 2026 Brad Sherman</p>
         </div>
     </footer>
 
+    <script src="main.js"></script>
     <script>
-        // Navigation hover effects
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('mouseenter', () => {
-                if (link.querySelector('span')) {
-                    link.querySelector('span').style.width = '100%';
-                }
-            });
-            link.addEventListener('mouseleave', () => {
-                if (link.querySelector('span')) {
-                    link.querySelector('span').style.width = '0';
-                }
-            });
-        });
+        initScrollNav();
     </script>
 </body>
 </html>
