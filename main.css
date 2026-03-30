@@ -440,6 +440,26 @@ picture { display: block; width: 100%; }
     text-transform: uppercase;
 }
 
+.footer-logo {
+    width: 34px;
+    height: 34px;
+    display: block;
+    margin-top: 1.2rem;
+    border-radius: 4px;
+}
+
+.footer-design-link {
+    display: block;
+    margin-top: 0.6rem;
+    font-size: 0.68rem;
+    color: #888888;
+    text-decoration: none;
+    letter-spacing: 0.07em;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+.footer-design-link:hover { color: #000000; }
+
 .footer-nav {
     display: flex;
     gap: 5rem;
