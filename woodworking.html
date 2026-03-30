@@ -77,6 +77,57 @@
             }
         }
 
+        /* ── Project Preview Bar ─────────────────────────── */
+        .project-preview-bar {
+            display: flex;
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 220px;
+            margin-bottom: 8rem;
+            overflow: hidden;
+        }
+
+        .preview-item {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            transition: flex 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .preview-item:hover { flex: 2.5; }
+
+        .preview-img {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .preview-item:hover .preview-img { transform: scale(1.04); }
+
+        .preview-label {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 1.5rem 1.2rem 0.9rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.55));
+            color: #ffffff;
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .preview-item:hover .preview-label { opacity: 1; }
+
+        /* Offset anchor targets below fixed nav */
+        .cs-header[id] { scroll-margin-top: 5rem; }
+
         @media (max-width: 768px) {
             .work-container { padding: 0 5% 8rem 5%; }
             .work-section   { margin-bottom: 5rem; }
@@ -88,6 +139,7 @@
             .shorter-containers .work-image { height: 250px; }
             .double-images              { flex-direction: column; }
             .double-images .work-image  { width: 100%; height: 300px; }
+            .project-preview-bar        { height: 140px; margin-bottom: 5rem; }
         }
     </style>
 </head>
@@ -140,8 +192,32 @@
     <!-- Work -->
     <section class="work-container">
 
+        <!-- Project Preview Bar -->
+        <div class="project-preview-bar">
+            <a href="#project-1" class="preview-item">
+                <div class="preview-img" style="background-image: url('images_2/box.webp');"></div>
+                <div class="preview-label">Splined Miter Box</div>
+            </a>
+            <a href="#project-2" class="preview-item">
+                <div class="preview-img" style="background-image: url('images_2/vene.webp');"></div>
+                <div class="preview-label">Yankee Stadium</div>
+            </a>
+            <a href="#project-3" class="preview-item">
+                <div class="preview-img" style="background-image: url('images_2/w1.jpg');"></div>
+                <div class="preview-label">Ponte Vecchio Cabinet</div>
+            </a>
+            <a href="#project-4" class="preview-item">
+                <div class="preview-img" style="background-image: url('images_2/tab.webp');"></div>
+                <div class="preview-label">Key Table</div>
+            </a>
+            <a href="#project-5" class="preview-item">
+                <div class="preview-img" style="background-image: url('images_2/gfd.webp');"></div>
+                <div class="preview-label">Baseball Bat Spoon</div>
+            </a>
+        </div>
+
         <!-- Splined Miter Joint Box -->
-        <div class="cs-header">
+        <div class="cs-header" id="project-1">
             <span class="cs-index">01</span>
             <h2 class="cs-title">Splined Miter Joint Box</h2>
             <p class="cs-meta">2025 · Cherry · Walnut Spline · Poplar Veneer · 10 × 5 × 5 in</p>
@@ -172,7 +248,7 @@
         <hr class="project-divider">
 
         <!-- Veneer Yankee Stadium -->
-        <div class="cs-header">
+        <div class="cs-header" id="project-2">
             <span class="cs-index">02</span>
             <h2 class="cs-title">Veneer Yankee Stadium</h2>
             <p class="cs-meta">2025 · Walnut &amp; Poplar · 20 × 12 in</p>
@@ -195,7 +271,7 @@
         <hr class="project-divider">
 
         <!-- Ponte Vecchio Cabinet -->
-        <div class="cs-header">
+        <div class="cs-header" id="project-3">
             <span class="cs-index">03</span>
             <h2 class="cs-title">Ponte Vecchio Cabinet</h2>
             <p class="cs-meta">2025 · Maple &amp; Cherry · 16 × 12 in</p>
@@ -220,7 +296,7 @@
         <hr class="project-divider">
 
         <!-- Key Table -->
-        <div class="cs-header">
+        <div class="cs-header" id="project-4">
             <span class="cs-index">04</span>
             <h2 class="cs-title">Key Table</h2>
             <p class="cs-meta">2024 · Poplar · 30 × 20 × 8 in</p>
@@ -243,7 +319,7 @@
         <hr class="project-divider">
 
         <!-- Baseball Bat Spoon -->
-        <div class="cs-header">
+        <div class="cs-header" id="project-5">
             <span class="cs-index">05</span>
             <h2 class="cs-title">Baseball Bat Spoon</h2>
             <p class="cs-meta">2023 · Poplar · 18 × 2 in</p>
@@ -293,6 +369,15 @@
     <script>
         initScrollNav();
         initDivModal();
+
+        // Smooth scroll for preview bar links
+        document.querySelectorAll('.preview-item').forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
     </script>
 </body>
 </html>
