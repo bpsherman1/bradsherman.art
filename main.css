@@ -392,6 +392,22 @@ picture { display: block; width: 100%; }
 }
 
 /* ── FOOTER ─────────────────────────────────────────────────── */
+
+/* Reset the global `nav` fixed-positioning inside the footer */
+.site-footer nav {
+    position: static;
+    top: auto;
+    left: auto;
+    width: auto;
+    padding: 0;
+    z-index: auto;
+    background: transparent;
+    border-bottom: none;
+    transition: none;
+    animation: none;
+    opacity: 1;
+}
+
 .site-footer {
     background: #f3f3f3;
     border-top: 0.5px solid #e0e0e0;
