@@ -346,7 +346,7 @@ picture { display: block; width: 100%; }
 /* ── MOBILE ─────────────────────────────────────────────────── */
 @media (max-width: 768px) {
     .header-panel { height: 18vh; }
-    nav { padding: 1rem; padding-top: env(safe-area-inset-top); }
+    nav { padding: 1rem; }
     .nav-left { height: calc(18vh - 2.8rem); }
     .nav-name { font-size: 1.05rem; }
     .nav-links {
