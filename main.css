@@ -347,6 +347,10 @@ picture { display: block; width: 100%; }
 @media (max-width: 768px) {
     .header-panel { height: 18vh; }
     nav { padding: 1rem; }
+    /* Mobile: don't show the white scrolled nav. Black nav still fades on scroll
+       via header-panel opacity; once it's gone, nothing replaces it. Tap back to
+       top to bring nav back. */
+    nav.is-solid { display: none !important; }
     .nav-left { height: calc(18vh - 2.8rem); }
     .nav-name { font-size: 1.05rem; }
     .nav-links {
