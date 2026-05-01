@@ -389,14 +389,6 @@ picture { display: block; width: 100%; }
         padding-left: 1.5rem !important;
         background: rgba(255,255,255,0.08) !important;
     }
-
-    /* iOS Safari: env(safe-area-inset-top) can briefly report 0 while the URL bar
-       is collapsing, leaving the notch / Dynamic Island area uncovered. Force a
-       minimum height so the top-cover always seals the notch when scrolled. */
-    .top-cover {
-        height: 60px;
-        height: max(env(safe-area-inset-top), 60px);
-    }
 }
 
 /* ── FOOTER ─────────────────────────────────────────────────── */
