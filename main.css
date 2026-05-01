@@ -363,7 +363,7 @@ picture { display: block; width: 100%; }
     .dropdown-content {
         position: fixed !important;
         top: 80px !important;
-        right: -4rem !important;
+        right: 1rem !important;
         left: auto !important;
         width: 44vw !important;
         min-width: unset !important;
