@@ -9,7 +9,7 @@
     <title>Photography - Brad Sherman</title>
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <link rel="preload" as="image" href="images_2/piccap.webp" fetchpriority="high">
-    <link rel="stylesheet" href="main.css?v=2">
+    <link rel="stylesheet" href="main.css?v=4">
     <style>
         /* ── Page: Photography ────────────────────────────── */
         .hero-title {
@@ -64,6 +64,11 @@
                 position: absolute;
                 right: 2rem;
                 top: 2rem;
+            }
+            /* When nav shrinks to its scrolled (white) state, sit the links at the
+               same y as the BRAD SHERMAN logo (matches nav.is-solid padding-top). */
+            nav.is-solid .nav-links {
+                top: calc(env(safe-area-inset-top) + 1rem);
             }
         }
 
