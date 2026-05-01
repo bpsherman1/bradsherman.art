@@ -7,6 +7,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Painting - Brad Sherman</title>
+    <meta name="description" content="Paintings by Brad Sherman — oil and acrylic landscapes, cityscapes, and still life work.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Brad Sherman">
+    <meta property="og:title" content="Painting — Brad Sherman">
+    <meta property="og:description" content="Paintings by Brad Sherman — oil and acrylic landscapes, cityscapes, and still life work.">
+    <meta property="og:image" content="https://bradsherman.art/images_2/p1-desktop.webp">
+    <meta property="og:url" content="https://bradsherman.art/painting.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Painting — Brad Sherman">
+    <meta name="twitter:description" content="Paintings by Brad Sherman — oil and acrylic landscapes, cityscapes, and still life work.">
+    <meta name="twitter:image" content="https://bradsherman.art/images_2/p1-desktop.webp">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <link rel="preload" as="image" href="images_2/p1-desktop.webp" media="(min-width: 769px)" fetchpriority="high">
     <link rel="preload" as="image" href="images_2/p1-mobile.webp"  media="(max-width: 768px)"  fetchpriority="high">
@@ -69,8 +80,8 @@
         @media (max-width: 768px) {
             .work-container {
                 padding: 0 6% 8rem 6%;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 3.5rem 1.5rem;
+                grid-template-columns: 1fr;
+                gap: 3.5rem;
             }
         }
     </style>
@@ -79,9 +90,9 @@
 
     <!-- Modal -->
     <div id="imageModal" class="image-modal">
-        <button class="close-modal">&times;</button>
-        <button class="nav-btn prev-btn"></button>
-        <button class="nav-btn next-btn"></button>
+        <button class="close-modal" aria-label="Close image">&times;</button>
+        <button class="nav-btn prev-btn" aria-label="Previous image"></button>
+        <button class="nav-btn next-btn" aria-label="Next image"></button>
         <div class="modal-content">
             <img class="modal-image" src="" alt="">
         </div>
@@ -113,9 +124,10 @@
                     <a href="woodworking.html">Woodworking</a>
                     <a href="websites.html">Websites</a>
                     <a href="photography.html">Photography</a>
+
                 </div>
             </div>
-            <a href="Contacts.html" style="color:#ffffff;text-decoration:none;font-weight:600;">Contact</a>
+            <a href="contacts.html" style="color:#ffffff;text-decoration:none;font-weight:600;">Contact</a>
         </div>
     </nav>
 
@@ -289,7 +301,7 @@
             <div class="footer-brand">
                 <p class="footer-name">Brad Sherman</p>
                 <p class="footer-tagline">Artist &amp; Designer</p>
-                <img class="footer-logo" src="images_2/bs-logo.png" alt="Brad Sherman">
+                <img class="footer-logo" src="gallery/fav.png" alt="Brad Sherman">
                 <a class="footer-design-link" href="https://bradsherman.design" target="_blank" rel="noopener">bradsherman.design</a>
             </div>
             <div class="footer-nav">
@@ -300,6 +312,7 @@
                     <a href="woodworking.html">Woodworking</a>
                     <a href="photography.html">Photography</a>
                     <a href="websites.html">Websites</a>
+
                 </div>
                 <div class="footer-col">
                     <p class="footer-col-title">Connect</p>

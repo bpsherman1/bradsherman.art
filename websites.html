@@ -7,6 +7,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Websites - Brad Sherman</title>
+    <meta name="description" content="Web design case studies by Brad Sherman — selected projects in interface, identity, and front-end build.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Brad Sherman">
+    <meta property="og:title" content="Websites — Brad Sherman">
+    <meta property="og:description" content="Web design case studies by Brad Sherman — selected projects in interface, identity, and front-end build.">
+    <meta property="og:image" content="https://bradsherman.art/images_1/cap.webp">
+    <meta property="og:url" content="https://bradsherman.art/websites.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Websites — Brad Sherman">
+    <meta name="twitter:description" content="Web design case studies by Brad Sherman.">
+    <meta name="twitter:image" content="https://bradsherman.art/images_1/cap.webp">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <link rel="stylesheet" href="main.css?v=2">
     <style>
@@ -45,9 +56,13 @@
 
         @media (max-width: 768px) {
             .work-container { padding: 0 5% 8rem 5%; }
-            .work-section   { margin-bottom: 8rem; }
-            .work-image     { height: 280px; }
-            .shorter-containers .work-image { height: 220px; }
+            .work-section   { margin-bottom: 6rem; }
+            .work-image     {
+                height: auto;
+                aspect-ratio: 1800 / 1080;
+                background-size: cover;
+            }
+            .shorter-containers .work-image { aspect-ratio: 1800 / 1080; }
         }
     </style>
 </head>
@@ -79,6 +94,7 @@
                     <a href="woodworking.html">Woodworking</a>
                     <a href="websites.html">Websites</a>
                     <a href="photography.html">Photography</a>
+
                 </div>
             </div>
             <a href="contacts.html" style="color:#ffffff;text-decoration:none;font-weight:600;">Contact</a>
@@ -136,7 +152,7 @@
             <div class="footer-brand">
                 <p class="footer-name">Brad Sherman</p>
                 <p class="footer-tagline">Artist &amp; Designer</p>
-                <img class="footer-logo" src="images_2/bs-logo.png" alt="Brad Sherman">
+                <img class="footer-logo" src="gallery/fav.png" alt="Brad Sherman">
                 <a class="footer-design-link" href="https://bradsherman.design" target="_blank" rel="noopener">bradsherman.design</a>
             </div>
             <div class="footer-nav">
@@ -147,6 +163,7 @@
                     <a href="woodworking.html">Woodworking</a>
                     <a href="photography.html">Photography</a>
                     <a href="websites.html">Websites</a>
+
                 </div>
                 <div class="footer-col">
                     <p class="footer-col-title">Connect</p>
