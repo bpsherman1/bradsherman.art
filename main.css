@@ -347,30 +347,18 @@ picture { display: block; width: 100%; }
 @media (max-width: 768px) {
     .header-panel { height: 18vh; }
     nav { padding: 1rem; }
-    .nav-left {
-        height: calc(18vh - 2.8rem);
-        max-width: calc(100% - 100px);
-        min-width: 0;
-    }
-    .nav-name { font-size: 1rem; letter-spacing: 0.06em; }
-    /* Anchor nav-links to top-right so wide hero titles cannot push them offscreen */
+    .nav-left { height: calc(18vh - 2.8rem); }
+    .nav-name { font-size: 1.05rem; }
     .nav-links {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        gap: 0.75rem;
+        gap: 0.4rem;
         align-items: baseline;
+        align-self: flex-start;
         margin-top: 0;
-        padding: 0.4rem 0;
+        padding-right: 0;
     }
-    .nav-links a { font-size: 0.7rem; letter-spacing: 0.04em; padding: 0.3rem 0; }
-    .hero-title {
-        font-size: clamp(1.3rem, 5.6vw, 2.1rem);
-        letter-spacing: 0.01em;
-        max-width: 100%;
-        white-space: nowrap;
-    }
-    .hero-spacer { height: 32vh; }
+    .nav-links a { font-size: 0.68rem; letter-spacing: 0.02em; }
+    .hero-title { font-size: clamp(2.5rem, 10vw, 3.6rem); }
+    .hero-spacer { height: 42vh; }
 
     .dropdown-content {
         position: fixed !important;
@@ -464,13 +452,13 @@ picture { display: block; width: 100%; }
     display: block;
     margin-top: 0.6rem;
     font-size: 0.68rem;
-    color: #d92027;
+    color: #888888;
     text-decoration: none;
     letter-spacing: 0.07em;
     font-weight: 600;
     transition: color 0.2s ease;
 }
-.footer-design-link:hover { color: #b01a1f; }
+.footer-design-link:hover { color: #000000; }
 
 .footer-nav {
     display: flex;

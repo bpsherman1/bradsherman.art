@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+     <link rel="icon" type="image/png" href="images_2/favicon.png">
+    <link rel="apple-touch-icon" href="images_2/favicon.png">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graphics - Brad Sherman Design</title>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <style>
+        /* Base Reset */
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            cursor: auto
+        }
+/* Full Screen Image Viewer - Black Background */
+.image-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    max-width: 90%;
+    max-height: 90%;
+    position: relative;
+}
+
+.modal-image {
+    max-width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+}
+
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: #ffffff; /* White for dark background */
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1001;
+    background: none;
+    border: none;
+}
+
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+    color: transparent; /* Hide text arrows */
+    font-size: 0; /* Hide text arrows */
+}
+
+.nav-btn:hover {
+    opacity: 1;
+}
+
+.nav-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #ffffff; /* White for dark background */
+    border-width: 3px 3px 0 0;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.prev-btn {
+    left: 30px;
+}
+
+.prev-btn::before {
+    transform: translate(-50%, -50%) rotate(-135deg);
+}
+
+.next-btn {
+    right: 30px;
+}
+
+.next-btn::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+/* Make work images clickable */
+.work-image {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.work-image:hover {
+    transform: scale(1.02);
+}
+        
+.triple-images-container {
+    background-color: #333333; /* Your gray background */
+    border-radius: 0; /* Remove rounded corners if you want */
+    padding: 20px; /* Padding inside the container */
+    width: 100%;
+    margin-top: 100px;
+    height: 540px; 
+    margin-bottom: 2rem;
+    
+}
+
+.triple-images {
+    display: flex;
+    gap: 20px; /* 20px padding between images */
+    width: 100%;
+     height: 100%;
+    /* Your taller container height */
+}
+
+.triple-images .work-image {
+    width: calc(33.333% - 13.333px); /* Adjust width to account for gap */
+    height: 100%;
+     height: 500px;/* Fill the container height */
+    margin-bottom: 0; /* Remove individual margins */
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .triple-images {
+        flex-direction: column;
+        gap: 2rem;
+        height: auto; /* Let height be natural on mobile */
+    }
+    
+    .triple-images .work-image {
+        width: 100%;
+        height: 300px; /* Adjust for mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .triple-images .work-image {
+        height: 250px; /* Adjust for small mobile */
+    }
+}
+        
+.scrollable-image-container {
+    background-color: #333333;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    display: flex; /* Added */
+    flex-direction: column; /* Added */
+    height: 560px; /* Added - adjust as needed */
+}
+
+.image-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 4px;
+    position: relative;
+    scrollbar-width: thin;
+    scrollbar-color: #ADAC9E #f1f1f1;
+    flex: 1; /* Added - makes image area take available space */
+    display: flex; /* Added */
+    align-items: center; /* Added - center vertically */
+}
+
+.image-wrapper::-webkit-scrollbar {
+    height: 8px;
+}
+
+.image-wrapper::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.image-wrapper::-webkit-scrollbar-thumb {
+    background: #3498db;
+    border-radius: 4px;
+}
+
+.wide-image {
+    height: 500px;
+    display: block;
+    cursor: grab;
+    margin: 0 auto; /* Added - center horizontally */
+}
+
+.wide-image:active {
+    cursor: grabbing;
+}
+
+.scroll-hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    flex-shrink: 0; /* Added - prevent shrinking */
+}
+
+.scroll-hint svg {
+    margin-right: 8px;
+}
+
+@media (max-width: 768px) {
+    .scrollable-image-container {
+        height: auto; /* Added - natural height on mobile */
+        padding: 15px; /* Added */
+    }
+    
+    .wide-image {
+        height: 300px;
+    }
+    
+    .scroll-hint {
+        display: none;
+    }
+    
+    .image-wrapper {
+        align-items: flex-start; /* Added - reset to top on mobile */
+    }
+}
+
+.taller-images .work-image {
+    height:820px;
+
+}
+ .sho-containers .work-image {
+            height: 350px;
+        }
+         .sh-containers .work-image {
+            height: 340px;
+        }
+        
+        
+        /* Taller containers for specific images */
+.taller-containers .work-image {
+    height: 800px; /* Taller than the default 700px */
+}
+
+/* Make sure shorter containers override doesn't affect taller ones */
+.taller-containers .work-image.shorter-containers {
+    height: 800px !important;
+}
+
+/* Mobile responsive for taller containers */
+@media (max-width: 768px) {
+    .taller-containers .work-image {
+        height: 400px; /* Taller than mobile default 300px */
+    }
+}
+
+@media (max-width: 480px) {
+    .taller-containers .work-image {
+        height: 300px; /* Taller than small mobile default 250px */
+    }
+}
+        
+        /* White background for entire page below hero */
+        body {
+            font-family: 'Futura', 'Futura PT', 'Century Gothic', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif; 
+            background: #000000; /* Change body to white */
+            color: #000000; /* Default text color black */
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Hero section keeps dark background */
+        .hero {
+            background: #0a0a0a; /* Ensure hero stays dark */
+        }
+
+        /* Work container inherits white background */
+        .work-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 12rem 5% 10rem 5%;
+            background: #000000;
+        }
+
+        /* Ensure text in work area is black */
+        .work-info,
+        .work-item-title,
+        .work-item-description {
+            color: #ffffff !important;
+        }
+
+        .work-item-description {
+            color: #ffffff !important;
+        }
+
+        /* Lighter image boxes - OFF WHITE */
+        .work-image {
+            background-color: #333333 !important; /* Off-white instead of dark gray */
+            
+        }
+
+      
+
+        /* Navigation Styles */
+        nav { 
+            position: fixed; 
+            top: 0; 
+            width: 100%; 
+            padding: 2rem; 
+            z-index: 100; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            mix-blend-mode: difference;
+        }
+        
+        .nav-links { 
+            display: flex; 
+            gap: 2rem; 
+            align-items: center; 
+        }
+        
+        nav a { 
+            color: white; 
+            text-decoration: none; 
+            font-weight: 600; 
+            position: relative; 
+        }
+        
+        /* Dropdown Styles */
+        .dropdown { position: relative; display: inline-block; }
+        .dropdown-content { 
+            position: absolute; 
+            top: 35px;
+            left: 0; 
+            background: rgba(255, 255, 255, 0.95); 
+            backdrop-filter: blur(20px); 
+            border: 1px solid #fff; 
+            border-radius: 8px; 
+            padding: 1rem 0; 
+            min-width: 200px; 
+            opacity: 0; 
+            visibility: hidden; 
+            transform: translateY(-10px); 
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1); 
+            mix-blend-mode: difference;
+        }
+        .dropdown:hover .dropdown-content { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-content a { 
+            display: block; 
+            padding: 0.5rem 1.5rem; 
+            color: black; 
+            text-decoration: none; 
+            transition: all 0.3s ease; 
+            border-left: 3px solid transparent; 
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        .dropdown-content a:hover { 
+            background: rgba(0, 0, 0, 0.1); 
+            border-left: 3px solid #ff0055; 
+            padding-left: 2rem; 
+        }
+
+        /* Hero Slideshow */
+        .hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .animated-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff0055, #00ffff, #ffaa00);
+            opacity: 0.1;
+            filter: blur(100px);
+        }
+
+        /* Mobile static image - shown by default */
+        .mobile-static-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-image: url('images_2/graph1.png');
+        }
+
+        .horizontal-slideshow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 400%; /* Single wide image - 400% width */
+            height: 100%;
+            display: flex;
+            transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .horizontal-slide {
+            width: 100%; /* Single image takes full width of slideshow */
+            height: 100%;
+            background-size: auto 100%; /* Stretch width automatically, maintain 100% height */
+            background-position: 0% center; /* Explicitly position at left edge */
+            background-repeat: no-repeat;
+            flex-shrink: 0;
+        }
+
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .name-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 66%;
+            display: flex;
+            align-items: flex-end;
+            padding: 0 5%;
+            pointer-events: none;
+        }
+
+        .page-title {
+            font-family: 'Futura', sans-serif;
+            font-size: 10.5vw;
+            font-weight: 900;
+            color: white;
+            line-height: 0.8;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: -3px;
+            mix-blend-mode: difference;
+            text-align: center; /* Center the text */
+            position: absolute; /* If it needs to be positioned absolutely */
+            left: 50%; /* Center horizontally */
+            bottom: 0.05rem;
+            transform: translateX(-50%); /* Adjust for true centering */
+            width: 100%; /* Ensure it takes full width for proper centering */
+        }
+
+        /* Work Grid */
+        .work-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 12rem 5% 10rem 5%;
+        }
+
+        .work-section {
+            margin-bottom: 8rem;
+        }
+
+        .single-image {
+            width: 100%;
+            margin: 0 auto 5rem auto;
+        }
+
+        .double-images {
+            width: 100%;
+            margin: 0 auto 5rem auto;
+            display: flex;
+            gap: 0;
+        }
+
+        .double-images .work-image {
+            width: 50%;
+        }
+
+        .work-image {
+            width: 100%;
+            height: 700px;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin-bottom: 2rem;
+            border-radius: 0;
+            overflow: hidden;
+            background-color: #333333; /* Off-white */
+          
+        }
+
+        /* Shorter containers for wide images */
+        .shorter-containers .work-image {
+            height: 400px; /* Shorter height for wide images */
+        }
+
+        /* Tighter spacing for wide images */
+        .wide-images-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem; /* Space between wide images */
+            margin-bottom: 5rem;
+        }
+
+        .wide-images-grid .work-image {
+            height: 400px; /* Short height for wide images */
+            margin-bottom: 0; /* Remove individual margins */
+        }
+
+        /* Project last row spacing */
+        .project-last-row {
+            margin-bottom: 12rem !important;
+        }
+
+        .work-info {
+            text-align: left;
+            margin-bottom: 10rem;
+        }
+
+        .work-item-title {
+            font-family: 'Futura', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #ffffff; /* Black text */
+        }
+
+        .work-item-description {
+            font-family: 'Futura', 'Futura PT', 'Century Gothic', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+            font-size: 1rem;
+            color: #ffffff; /* Dark gray text */
+            line-height: 1.6;
+            max-width: 600px;
+        }
+
+        /* Hide mobile image and show slideshow on desktop */
+       /* Mobile Styles */
+@media (max-width: 768px) {
+    /* Hide desktop slideshow on mobile */
+    .horizontal-slideshow {
+        display: none !important;
+    }
+    
+    /* Show mobile static image */
+    .mobile-static-image {
+        display: block !important;
+    }
+}
+
+/* Desktop Styles */
+@media (min-width: 769px) {
+    /* Show desktop slideshow */
+    .horizontal-slideshow {
+        display: flex !important;
+    }
+    
+    /* Hide mobile static image */
+    .mobile-static-image {
+        display: none !important;
+    }
+}
+
+        /* Mobile Responsive */
+       /* Mobile Responsive */
+/* Mobile Responsive */
+/* Mobile Responsive */
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    /* ========== HERO SECTION - KEEPING ORIGINAL FULL HEIGHT ========== */
+    .hero {
+        height: 90vh !important;
+    }
+    
+    .horizontal-slideshow {
+        height: 90vh !important;
+        display: none !important;
+    }
+    
+    /* KEEP ORIGINAL TEXT POSITIONING */
+    .name-container {
+        height: 70% !important;
+        bottom: 2% !important;
+        align-items: flex-end !important;
+        justify-content: flex-start !important;
+        padding: 0 5% !important;
+    }
+    
+    /* KEEP ORIGINAL TITLE STYLING */
+    .page-title {
+        font-size: 16.5vw !important;
+        position: relative !important;
+        bottom: auto !important;
+        left: 0 !important;
+        transform: none !important;
+        margin-bottom: 0 !important;
+        mix-blend-mode: normal !important;
+        color: white !important;
+        line-height: 0.95 !important;
+        letter-spacing: -0.5px !important;
+        width: auto !important;
+        white-space: normal !important;
+        text-align: left !important;
+        margin-left: 0 !important;
+        word-wrap: break-word !important;
+        max-width: 90% !important;
+    }
+
+    .mobile-static-image {
+        display: block !important;
+    }
+
+    /* ========== CONTAINER HEIGHT CONTROLS ========== */
+    /* Control container heights - images will be 100% within them */
+    
+    /* ========== SINGLE IMAGE CONTAINERS ========== */
+    /* TALLEST single images - main project showcase images */
+    .single-image.taller-containers {
+        height: 500px !important;
+    }
+    
+    /* TALL single images - regular project images */
+    .single-image.taller-container {
+        height: 450px !important;
+    }
+    
+    /* MEDIUM single images - shorter supporting images */
+    .single-image.sho-containers {
+        height: 280px !important;
+    }
+    
+    /* SHORT single images - smallest supporting images */
+    .single-image.sh-containers {
+        height: 270px !important;
+    }
+
+    /* ========== DOUBLE IMAGE CONTAINERS ========== */
+    /* TALL double images - taller side-by-side images */
+    .double-images.taller-images {
+        height: 520px !important;
+        flex-direction: row !important;
+        gap: 0.3rem !important;
+        background-color: #333333 !important;
+        padding: 0.5rem !important;
+        border-radius: 0 !important;
+        overflow: hidden !important;
+    }
+
+    /* ========== SPECIAL CONTAINERS ========== */
+    /* SCROLLABLE CONTAINER - horizontal scroll images */
+    .scrollable-image-container {
+        height: 300px !important;
+        padding: 1rem !important;
+        margin-bottom: 1rem !important;
+        margin-left: 2rem;
+        margin-top: 4rem;
+    }
+    
+    .scrollable-image-container .wide-image {
+        height: 250px !important;
+    }
+
+    /* TRIPLE IMAGES CONTAINER - grid of three images */
+    .triple-images-container {
+        height: 700px !important;
+        padding: 1rem !important;
+        margin-top: 2rem !important;
+        margin-bottom: 1rem !important;
+        margin-left: 2rem;
+    }
+    
+    .triple-images {
+        flex-direction: column !important;
+        gap: 1rem !important;
+        height: 100% !important;
+    }
+    
+    .triple-images .work-image {
+        width: 100% !important;
+        height: calc(33.333% - 0.666rem) !important;
+    }
+
+    .double-images.taller-images {
+        margin-bottom: 8rem !important; /* Extra space under yanks images */
+    }
+    
+    /* Move the first Work Graphics image down further */
+    .work-section:nth-child(2) .single-image:first-child {
+        margin-top: 6rem !important; /* Even more space above first Work Graphics image */
+    }
+
+    /* ========== IMAGE SIZING ========== */
+    /* Make all images fill their containers */
+    .work-image {
+        height: 100% !important;
+        width: 100% !important;
+        background-size: contain !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        margin-bottom: 0 !important;
+        background-color: #333333 !important;
+    }
+
+    /* Double images individual sizing */
+    .double-images .work-image {
+        width: 50% !important;
+        height: 100% !important;
+        background-color: transparent !important;
+    }
+
+    /* ========== LAYOUT FIXES ========== */
+    .single-image,
+    .double-images,
+    .scrollable-image-container,
+    .triple-images-container {
+        width: 90% !important;
+        margin-bottom: 4rem !important; /* Consistent spacing between images */
+    }
+
+    /* ========== FIX SPACING BETWEEN PROJECT SECTIONS ========== */
+    /* Add more space between School Graphics last image and Work Graphics title */
+    .work-section:first-child .project-last-row {
+        margin-bottom: 8rem !important; /* INCREASED: from 4rem to 8rem */
+    }
+    
+    /* Add more space between Work Graphics description and its first image */
+    .work-section:nth-child(2) .work-info {
+        margin-bottom: 6rem !important; /* INCREASED: from 4rem to 6rem */
+    }
+    
+    /* Ensure Work Graphics first image has proper spacing */
+    .work-section:nth-child(2) .single-image:first-child,
+    .work-section:nth-child(2) .double-images:first-child {
+        margin-top: 2rem !important; /* Extra space above first image */
+    }
+
+    /* ========== REDUCED SPACING BETWEEN PROJECTS AND IMAGES ========== */
+    .work-section {
+        margin-bottom: 3rem !important;
+    }
+    
+    /* Move project images closer to descriptions */
+    .work-info {
+        margin-bottom: 2rem !important;
+    }
+
+    /* ========== TEXT STYLING - MATCHING CAMPAIGNS PAGE ========== */
+    .work-info {
+        text-align: left !important;
+        margin-left: 2rem;
+        max-width: 85%;
+        margin-top: -5rem;
+    }
+
+    .work-item-title {
+        font-family: 'Futura', sans-serif !important;
+        font-size: 1.5rem !important;
+        font-weight: 700 !important;
+        margin-bottom: 1rem !important;
+        color: #ffffff !important;
+        margin-top: 5rem;
+    }
+
+    .work-item-description {
+        font-family: 'Futura', 'Futura PT', 'Century Gothic', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif !important;
+        font-size: 0.9rem !important;
+        color: #ccc !important;
+        line-height: 1.6 !important;
+        max-width: 100% !important;
+    }
+
+    /* ========== NAVIGATION & LAYOUT ========== */
+    nav {
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+            .dropdown-content { 
+        position: fixed !important; 
+        top: 90px !important;
+        right: 1rem !important;
+        left: auto !important;
+        transform: translateY(-10px) !important;
+        width: 45% !important;
+        min-width: unset !important;
+        background: #000000 !important;
+        border: none !important;
+        padding: 0.5rem 0 !important;
+        max-height: 60vh;
+        overflow-y: auto;
+        mix-blend-mode: normal !important;
+        backdrop-filter: none !important;
+        opacity: 1 !important;
+        z-index: 1000 !important;
+    }
+    
+    .dropdown:hover .dropdown-content {
+        transform: translateY(0) !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    
+    .dropdown-content a {
+        padding: 0.4rem 1rem !important;
+        font-size: 0.8rem !important;
+        color: #ffffff !important;
+        text-align: right !important;
+        mix-blend-mode: normal !important;
+        border-left: none !important;
+        font-weight: 600 !important;
+        background: transparent !important;
+        display: block !important;
+    }
+    
+    .dropdown-content a:hover {
+        background: rgba(255, 255, 255, 0.2) !important;
+        padding-right: 1.5rem !important;
+    }
+    
+    .cursor, .cursor-follower {
+        display: none;
+    }
+
+    
+    .work-container {
+        padding: 8rem 5% 10rem 5%;
+    }
+    
+    .project-last-row {
+        margin-bottom: 12rem !important;
+    }
+    
+    .double-images.taller-images {
+        margin-bottom: 10rem !important; /* Extra space under yanks images */
+    }
+    
+    /* Move the first Work Graphics image down further - TARGET THE SPECIFIC IMAGE */
+    .work-section:nth-child(2) .single-image.taller-containers:first-child {
+        margin-top: 4rem !important; /* Even more space above first Work Graphics image */
+    }
+    
+    /* Alternative: Target by the specific image background if needed */
+    .work-image[style*="images_2/print.png"] {
+        margin-top: 4rem !important;
+    }
+}
+
+/* ========== SMALL MOBILE SCREENS (480px) ========== */
+@media (max-width: 480px) {
+    /* KEEP ORIGINAL HERO HEIGHT */
+    .hero {
+        height: 90vh !important;
+    }
+    
+    .horizontal-slideshow {
+        height: 90vh !important;
+    }
+    
+    /* KEEP ORIGINAL TEXT POSITIONING */
+    .name-container {
+        height: 75% !important;
+        bottom: 3% !important;
+    }
+    
+    /* KEEP ORIGINAL TITLE STYLING */
+    .page-title {
+        font-size: 14.5vw !important;
+        letter-spacing: 0px !important;
+        line-height: 1 !important;
+    }
+
+    /* ========== ADJUSTED CONTAINER HEIGHTS FOR SMALL SCREENS ========== */
+    /* TALLEST single images */
+    .double-images.taller-images {
+        margin-bottom: 5rem !important; /* Slightly less on small screens */
+    }
+    
+    .work-section:nth-child(2) .single-image:first-child {
+        margin-top: 5rem !important; /* Slightly less on small screens */
+    }
+    
+    .single-image.taller-containers {
+        height: 380px !important;
+    }
+    
+    /* TALL single images */
+    .single-image.taller-container {
+        height: 350px !important;
+    }
+    
+    /* MEDIUM single images */
+    .single-image.sho-containers {
+        height: 230px !important;
+    }
+    
+    .work-section:nth-child(2) .single-image:first-child {
+        margin-bottom: -8rem !important; /* Slightly less on small screens */
+    }
+    
+    .double-images.taller-images {
+        margin-bottom: 10rem !important;
+    }
+    
+    .work-section:nth-child(2) .single-image.taller-containers:first-child {
+        margin-top: 5rem !important;
+    }
+    
+    .work-image[style*="images_2/print.png"] {
+        margin-top: 3rem !important;
+    }
+    
+    /* SHORT single images */
+    .single-image.sh-containers {
+        height: 220px !important;
+    }
+
+    /* TALL double images */
+    .double-images.taller-images {
+        height: 320px !important;
+        gap: 0.25rem !important;
+    }
+    
+    .double-images.taller-images {
+        margin-bottom: 10rem !important; /* Slightly less on small screens */
+    }
+    
+    /* SCROLLABLE CONTAINER */
+    .scrollable-image-container {
+        height: 250px !important;
+        margin-left: 1.2rem;
+    }
+    
+    .scrollable-image-container .wide-image {
+        height: 200px !important;
+    }
+
+    /* TRIPLE IMAGES CONTAINER */
+    .triple-images-container {
+        height: 700px !important;
+        margin-left: 1.2rem;
+        margin-top: 4rem !important;
+        margin-bottom: 4rem !important;
+    }
+
+    /* ========== ADJUSTED SPACING FOR SMALLER SCREENS ========== */
+    .single-image,
+    .double-images,
+    .scrollable-image-container,
+    .triple-images-container {
+        margin-bottom: 3rem !important; /* Slightly less on small screens */
+    }
+
+    .work-section:first-child .project-last-row {
+        margin-bottom: 6rem !important; /* INCREASED: from 6rem to 6rem */
+    }
+    
+    .work-section:nth-child(2) .work-info {
+        margin-bottom: 5rem !important; /* INCREASED: from 3rem to 5rem */
+    }
+    
+    .work-section:nth-child(2) .single-image:first-child,
+    .work-section:nth-child(2) .double-images:first-child {
+        margin-top: 1.5rem !important; /* Slightly less on small screens */
+    }
+
+    .work-section {
+        margin-bottom: 2rem !important;
+    }
+    
+    .work-info {
+        margin-bottom: 1.5rem !important;
+    }
+
+    /* ========== TEXT ADJUSTMENTS ========== */
+    .work-info {
+        margin-left: 1rem;
+        max-width: 90%;
+    }
+
+    .work-item-title {
+        font-size: 1.3rem !important;
+        margin-bottom: 0.8rem !important;
+    }
+
+    .work-item-description {
+        font-size: 0.8rem !important;
+    }
+
+    .work-container {
+        padding: 6rem 5% 10rem 5%;
+    }
+    
+    .project-last-row {
+        margin-bottom: 10rem !important;
+    }
+}
+
+/* ========== SMALLEST MOBILE SCREENS (360px) ========== */
+@media (max-width: 360px) {
+    /* KEEP ORIGINAL HERO HEIGHT */
+    .hero {
+        height: 90vh !important;
+    }
+    
+    .horizontal-slideshow {
+        height: 90vh !important;
+    }
+    
+    /* KEEP ORIGINAL TEXT POSITIONING */
+    .name-container {
+        height: 80% !important;
+        bottom: 2% !important;
+    }
+    
+    /* KEEP ORIGINAL TITLE STYLING */
+    .page-title {
+        font-size: 13vw !important;
+        letter-spacing: 0px !important;
+        line-height: 1.05 !important;
+    }
+
+    /* ========== FINAL CONTAINER HEIGHT ADJUSTMENTS ========== */
+    /* TALLEST single images */
+    .single-image.taller-containers {
+        height: 280px !important;
+    }
+    
+    /* TALL single images */
+    .single-image.taller-container {
+        height: 250px !important;
+    }
+    
+    /* MEDIUM single images */
+    .single-image.sho-containers {
+        height: 180px !important;
+    }
+    
+    /* SHORT single images */
+    .single-image.sh-containers {
+        height: 170px !important;
+    }
+
+    /* TALL double images */
+    .double-images.taller-images {
+        height: 250px !important;
+        gap: 0.2rem !important;
+    }
+
+    /* SCROLLABLE CONTAINER */
+    .scrollable-image-container {
+        height: 200px !important;
+    }
+    
+    .scrollable-image-container .wide-image {
+        height: 160px !important;
+    }
+
+    /* TRIPLE IMAGES CONTAINER */
+    .triple-images-container {
+        height: 550px !important;
+    }
+
+    /* ========== FINAL SPACING ADJUSTMENTS FOR SMALLEST SCREENS ========== */
+    .single-image,
+    .double-images,
+    .scrollable-image-container,
+    .triple-images-container {
+        margin-bottom: 2rem !important; /* Even less on smallest screens */
+    }
+
+    .work-section:first-child .project-last-row {
+        margin-bottom: 5rem !important; /* INCREASED: from 5rem to 5rem */
+    }
+    
+    .work-section:nth-child(2) .work-info {
+        margin-bottom: 4rem !important; /* INCREASED: from 2.5rem to 4rem */
+    }
+    
+    .work-section:nth-child(2) .single-image:first-child,
+    .work-section:nth-child(2) .double-images:first-child {
+        margin-top: 1rem !important; /* Even less on smallest screens */
+    }
+
+    .work-section {
+        margin-bottom: 1.5rem !important;
+    }
+    
+    .work-info {
+        margin-bottom: 1rem !important;
+    }
+
+    .work-item-title {
+        font-size: 1.1rem !important;
+    }
+
+    .work-item-description {
+        font-size: 0.75rem !important;
+    }
+
+    .work-container {
+        padding: 5rem 5% 8rem 5%;
+    }
+    
+    .project-last-row {
+        margin-bottom: 8rem !important;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <!-- Full Screen Image Modal -->
+<div id="imageModal" class="image-modal">
+    <button class="close-modal">&times;</button>
+    <button class="nav-btn prev-btn">&lt;</button>
+    <button class="nav-btn next-btn">&gt;</button>
+    <div class="modal-content">
+        <img class="modal-image" src="" alt="">
+    </div>
+</div>
+<!-- Simple White Circle Cursor -->
+
+
+    <!-- Navigation -->
+    <nav>
+        <div style="font-family: 'Futura', sans-serif; font-weight: 900; font-size: 1.2rem; color: white;">
+            <a href="index.html" style="color: white; text-decoration: none;">PORTFOLIO 2025</a>
+        </div>
+        <div class="nav-links">
+            <div class="dropdown">
+                <a href="#work" style="color: white; text-decoration: none; font-weight: 600; position: relative; cursor: pointer;">
+                    WORK
+                    <span style="position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #ff0055; transition: width 0.3s;"></span>
+                </a>
+                <div class="dropdown-content">
+                    <a href="index.html">Home</a>
+                    <a href="campaigns.html">Campaigns</a>
+                    <a href="typography.html">Typography</a>
+                    <a href="brands.html">Brands</a>
+                    <a href="graphics-italy-2025.html">Graphics Italy 2025</a>
+                    <a href="graphics.html">Graphics</a>
+                    <a href="websites.html">Websites</a>
+                    <a href="painting.html">Painting</a>
+                    <a href="woodworking.html">Woodworking</a>
+                    <a href="drawing.html">Drawing</a>
+                    <a href="photography.html">Photography</a>
+                    <a href="3d.html">3D</a>
+                </div>
+            </div>
+            <a href="Contacts.html" style="color: white; text-decoration: none; font-weight: 600; position: relative;">
+    CONTACT
+</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <!-- Animated Background -->
+        <div class="animated-bg"></div>
+        
+        <!-- Mobile Static Image (shown on mobile) -->
+        <div class="mobile-static-image"></div>
+        
+        <!-- Horizontal Slideshow - Single Wide Image (shown on desktop) -->
+        <div class="horizontal-slideshow">
+            <div class="horizontal-slide" style="background-image: url('images_2/sli.png');"></div>
+        </div>
+
+        <!-- Floating Particles -->
+        <div class="particles"></div>
+
+        <!-- Graphics Work Title -->
+        <div class="name-container">
+            <h1 class="page-title">GRAPHIC WORK</h1>
+        </div>
+    </section>
+
+    <!-- Work Content -->
+    <section class="work-container">
+        <!-- First Project: School Graphics -->
+        <div class="work-info">
+            <h3 class="work-item-title">School Graphics</h3>
+            <p class="work-item-description">
+                Graphic design work created for academic projects and school assignments, 
+                showcasing various design techniques, software skills, and creative concepts 
+                developed during my design education.
+            </p>
+        </div>
+
+        <!-- Wide images grid (similar to graphics italy layout) -->
+          <!-- Regular single images -->
+            <div class="work-section">
+            <div class="single-image taller-containers project-last-row">
+                <div class="work-image" style="background-image: url('images_2/blue.png');"></div>
+            </div>
+        </div>
+        
+
+<div class="scrollable-image-container">
+    <div class="image-wrapper">
+        <img src="images_2/york.png" alt="Your image description" class="wide-image">
+    </div>
+</div>
+<!-- Add this swipe text below the container -->
+
+        
+<div class="work-section">
+    <div class="triple-images-container  project-last-row">
+        <div class="triple-images">
+            <div class="work-image" style="background-image: url('images_2/maf.png');"></div>
+            <div class="work-image" style="background-image: url('images_2/boxing.png');"></div>
+            <div class="work-image" style="background-image: url('images_2/war.png');"></div>
+        </div>
+    </div>
+</div>
+
+  <div class="work-section">
+            <div class="single-image taller-containers project-last-row">
+                <div class="work-image" style="background-image: url('images_2/731.png');"></div>
+            </div>
+        </div>
+         
+        <div class="work-section">
+            <div class="single-image sho-containers project-last-row">
+                <div class="work-image" style="background-image: url('images_2/1.png');"></div>
+            </div>
+        </div>
+        <!-- Regular single images -->
+    
+
+         <div class="work-section">
+            <div class="single-image taller-containers project-last-row">
+                <div class="work-image" style="background-image: url('images_2/damn.png');"></div>
+            </div>
+        </div>
+
+     
+
+   <!-- Regular single images -->
+      
+        <div class="work-section">
+            <div class="single-image taller-container project-last-row">
+                <div class="work-image" style="background-image: url('images_2/2.png');"></div>
+            </div>
+        </div>
+
+          <div class="work-section">
+            <div class="single-image sh-containers project-last-row">
+                <div class="work-image" style="background-image: url('images_2/maddy.png');"></div>
+            </div>
+        </div>
+        
+
+        <!-- Row of 2 Images -->
+        <div class="work-section">
+            <div class="double-images taller-images taller-containers ">
+                <div class="work-image" style="background-image: url('images_2/yank1.png');"></div>
+                <div class="work-image" style="background-image: url('images_2/yank2.png');"></div>
+            </div>
+        </div>
+
+        <!-- Final single image -->
+        <div class="work-section">
+            <div class="single-image taller-containers  project-last-row">
+                <div class="work-image" style="background-image: url('images_2/bag.png');"></div>
+            </div>
+        </div>
+
+        <!-- Second Project: Work Graphics -->
+        <div class="work-info">
+            <h3 class="work-item-title">Work Graphics</h3>
+            <p class="work-item-description">
+                Professional graphic design work created for clients and real-world projects, 
+                demonstrating practical application of design principles and client collaboration.
+            </p>
+        </div>
+
+        <!-- Two images for work graphics -->
+        <div class="work-section">
+            <div class="single-image taller-containers project-last-row">
+                <div class="work-image" style="background-image: url('images_2/print.png');"></div>
+            </div>
+        </div>
+
+        <div class="work-section">
+            <div class="single-image taller-containers project-last-row">
+                <div class="work-image" style="background-image: url('images_2/hot.png');"></div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+
+// Full Screen Image Viewer
+const modal = document.getElementById('imageModal');
+const modalImage = document.querySelector('.modal-image');
+const closeModal = document.querySelector('.close-modal');
+const prevBtn = document.querySelector('.prev-btn');
+const nextBtn = document.querySelector('.next-btn');
+
+// Get all images on the page
+const workImages = document.querySelectorAll('.work-image');
+let currentImageIndex = 0;
+let images = [];
+
+// Extract image URLs from background images
+workImages.forEach((img, index) => {
+    const bgImage = img.style.backgroundImage;
+    // Extract URL from background-image: url('...')
+    const imageUrl = bgImage.replace(/url\(['"]?(.*?)['"]?\)/i, '$1');
+    images.push(imageUrl);
+    
+    // Make image clickable
+    img.addEventListener('click', () => {
+        currentImageIndex = index;
+        openModal();
+    });
+});
+
+function openModal() {
+    modal.style.display = 'flex';
+    modalImage.src = images[currentImageIndex];
+    document.body.style.overflow = 'hidden'; // Prevent scrolling
+}
+
+function closeModalFunc() {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto'; // Re-enable scrolling
+}
+
+function showNextImage() {
+    currentImageIndex = (currentImageIndex + 1) % images.length;
+    modalImage.src = images[currentImageIndex];
+}
+
+function showPrevImage() {
+    currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+    modalImage.src = images[currentImageIndex];
+}
+
+// Event listeners
+closeModal.addEventListener('click', closeModalFunc);
+nextBtn.addEventListener('click', showNextImage);
+prevBtn.addEventListener('click', showPrevImage);
+
+// Close modal when clicking outside image
+modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+        closeModalFunc();
+    }
+});
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+    if (modal.style.display === 'flex') {
+        if (e.key === 'Escape') closeModalFunc();
+        if (e.key === 'ArrowRight') showNextImage();
+        if (e.key === 'ArrowLeft') showPrevImage();
+    }
+});
+  
+
+        // Horizontal Slideshow Scroll Control
+        const slideshow = document.querySelector('.horizontal-slideshow');
+
+        // Scroll-based movement ONLY for desktop
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const maxScroll = window.innerHeight * 1.5;
+            const scrollPercent = Math.min(scrollY / maxScroll, 1);
+            const slideshowPosition = -(scrollPercent * 115);
+            
+            if (window.innerWidth > 768) {
+                slideshow.style.transform = `translateX(${slideshowPosition}%)`;
+            }
+        });
+
+        // Reset on scroll to top
+        window.addEventListener('scroll', () => {
+            if (window.scrollY === 0) {
+                slideshow.style.transform = 'translateX(0%)';
+            }
+        });
+
+      
+
+        // Navigation hover effects
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                if (link.querySelector('span')) {
+                    link.querySelector('span').style.width = '100%';
+                }
+            });
+            link.addEventListener('mouseleave', () => {
+                if (link.querySelector('span')) {
+                    link.querySelector('span').style.width = '0';
+                }
+            });
+        });
+
+        // Add keyframes for animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float {
+                0%, 100% { transform: translateY(0) rotate(0deg); }
+                25% { transform: translateY(-20px) rotate(90deg); }
+                50% { transform: translateY(0) rotate(180deg); }
+                75% { transform: translateY(20px) rotate(270deg); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize
+        createParticles();
+
+        // Hide cursor on mobile
+        if (window.innerWidth <= 768) {
+            cursor.style.display = 'none';
+            follower.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
