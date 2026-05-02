@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Woodworking - Brad Sherman</title>
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <link rel="stylesheet" href="main.css?v=8">
+    <link rel="stylesheet" href="main.css?v=9">
     <style>
         /* ── Page: Woodworking ────────────────────────────── */
         .hero-title {
@@ -139,6 +139,15 @@
             .work-container { padding: 0 5% 8rem 5%; }
             .work-section   { margin-bottom: 2.5rem; }
 
+            /* Yankee Stadium images are 4:3 landscape — make their containers
+               match that aspect on mobile so contained images fill them with
+               no letterbox bars. !important to beat inline height: 480px. */
+            .landscape-43 .work-image,
+            .landscape-43 .works-image {
+                height: auto !important;
+                aspect-ratio: 4 / 3;
+            }
+
             .single-image .work-image,
             .single-image .works-image  { height: 350px; }
             .taller-containers .work-image,
@@ -261,13 +270,13 @@
             <p class="cs-lede">The baseball field is veneered in alternating walnut strips on a poplar base — assembled like a parquet floor, the seams mirroring the mowing patterns of an actual outfield. The field is drawn to the exact dimensions of Yankee Stadium: 314 ft down the right-field line, 408 ft to center.</p>
         </div>
 
-        <div class="work-section" style="margin-bottom: 0;">
+        <div class="work-section landscape-43" style="margin-bottom: 0;">
             <div class="single-image taller-containers">
                 <div class="works-image" style="background-image: url('images_2/vene.webp');"></div>
             </div>
         </div>
 
-        <div class="work-section" style="margin-top: 0;">
+        <div class="work-section landscape-43" style="margin-top: 0;">
             <div class="double-images">
                 <div class="works-image" style="background-image: url('images_2/angle.webp'); height: 480px; background-position: center 105%;"></div>
                 <div class="works-image" style="background-image: url('images_2/crop.webp'); height: 480px; background-position: center 105%;"></div>
