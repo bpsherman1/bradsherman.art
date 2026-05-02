@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Woodworking - Brad Sherman</title>
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <link rel="stylesheet" href="main.css?v=10">
+    <link rel="stylesheet" href="main.css?v=11">
     <style>
         /* ── Page: Woodworking ────────────────────────────── */
         .hero-title {
@@ -154,8 +154,13 @@
                 height: auto !important;
                 aspect-ratio: 4 / 3;
             }
-            /* Small gap between angle and crop when the pair stacks on mobile */
-            .landscape-43 .double-images { gap: 1rem; }
+            /* Yankee Stadium: a touch more breathing room between the 3 images
+               on mobile (vene -> pair, and stacked angle -> crop). */
+            .work-section.landscape-43 { margin-bottom: 1.5rem; }
+            .landscape-43 .double-images { gap: 1.5rem; }
+            /* Splined Miter Box: tighter gap between the box image and the
+               drawer pair below it on mobile only. */
+            .work-section.tight-gap-mobile { margin-bottom: 0.4rem; }
 
             .single-image .work-image,
             .single-image .works-image  { height: 350px; }
@@ -249,7 +254,7 @@
         </div>
 
         <div style="background-color: #f5f5f5; overflow: hidden;">
-            <div class="work-section">
+            <div class="work-section tight-gap-mobile">
                 <div class="single-image taller-containers">
                     <div class="works-image" style="background-image: url('images_2/box.webp');"></div>
                 </div>
