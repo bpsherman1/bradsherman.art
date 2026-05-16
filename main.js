@@ -6,6 +6,13 @@
    initScrollFadeIn()  — drawing only
    ============================================================ */
 
+// ── Service worker (PWA / offline support) ────────────────────
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(() => {});
+    });
+}
+
 // ── Scroll Nav ────────────────────────────────────────────────
 function initScrollNav() {
     const nav           = document.getElementById('mainNav');
