@@ -94,6 +94,9 @@ nav {
     position: fixed;
     top: 0; left: 0; width: 100%;
     padding: 2rem;
+    /* In standalone PWA mode, viewport-fit=cover lets content extend under
+       the iPhone notch. Add safe-area-inset-top so the nav text clears it. */
+    padding-top: calc(env(safe-area-inset-top) + 2rem);
     z-index: 500;
     display: flex;
     justify-content: space-between;
@@ -112,7 +115,9 @@ nav.is-solid {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: calc(25vh - 4rem);
+    /* Subtract safe-area inset so the hero title stays at the same absolute
+       position once the nav top-padding accounts for the notch. */
+    height: calc(25vh - 4rem - env(safe-area-inset-top));
 }
 
 .nav-name {
@@ -348,13 +353,14 @@ picture { display: block; width: 100%; }
     .header-panel { height: 18vh; }
     /* Slightly larger top padding so BRAD SHERMAN / Work / Contact don't sit
        glued to the top edge. !important so it also wins over the home page's
-       inline padding-top: 2rem (which sat 8px lower than other pages). */
-    nav { padding: 1rem; padding-top: 1.5rem !important; }
+       inline padding-top: 2rem (which sat 8px lower than other pages).
+       safe-area-inset-top clears the iPhone notch in standalone PWA mode. */
+    nav { padding: 1rem; padding-top: calc(env(safe-area-inset-top) + 1.5rem) !important; }
     /* Mobile: don't show the white scrolled nav. Black nav still fades on scroll
        via header-panel opacity; once it's gone, nothing replaces it. Tap back to
        top to bring nav back. */
     nav.is-solid { display: none !important; }
-    .nav-left { height: calc(18vh - 2.8rem); }
+    .nav-left { height: calc(18vh - 2.8rem - env(safe-area-inset-top)); }
     .nav-name { font-size: 1.05rem; }
     .nav-links {
         gap: 0.4rem;

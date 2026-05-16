@@ -28,7 +28,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Brad Sherman</title>
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <link rel="stylesheet" href="main.css?v=11">
+    <link rel="stylesheet" href="main.css?v=12">
     <style>
         /* ── Homepage: Hero ─────────────────────────────────── */
         .home-hero {
@@ -381,26 +381,10 @@
                     prevTranslate = pos;
                 }
 
-                // Nav: transparent → solid white at the hero boundary
-                const threshold = heroH - 80;
-                if (y >= threshold) {
-                    nav.style.background    = '#ffffff';
-                    nav.style.borderBottom  = '0.5px solid #ebebeb';
-                    nav.style.alignItems    = 'center';
-                    nav.style.paddingTop    = isMobile ? '1rem' : '1.2rem';
-                    nav.style.paddingBottom = isMobile ? '0.8rem' : '1rem';
-                    navLeft.style.justifyContent = 'flex-start';
-                    topCover.style.background    = '#ffffff';
-                    nav.querySelectorAll('a:not(.dropdown-content a)').forEach(a => a.style.color = '#000000');
-                } else {
-                    nav.style.background    = 'transparent';
-                    nav.style.borderBottom  = 'none';
-                    nav.style.alignItems    = 'flex-start';
-                    nav.style.paddingTop    = '2rem';
-                    nav.style.paddingBottom = '2rem';
-                    topCover.style.background = '#000000';
-                    nav.querySelectorAll('a:not(.dropdown-content a)').forEach(a => a.style.color = '#ffffff');
-                }
+                // Nav scrolls up with the hero — disappears off-screen
+                nav.style.transform = `translateY(${-y}px)`;
+                // Top cover: black over the hero, white once past it (matches body bg)
+                topCover.style.background = y >= heroH - 80 ? '#ffffff' : '#000000';
 
                 // Work items fade in as they enter the viewport
                 workItems.forEach(item => {
